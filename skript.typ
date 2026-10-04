@@ -30,6 +30,7 @@
     it
   }
   #set par(justify: true)
+  #show figure.where(kind: "thm-env"): if folienModus { it => block(above: 3pt, below: 3pt, it) } else { it }
 
 
 // Functionality
@@ -123,19 +124,18 @@
 
 // Farben für Folienmodus
 #let satzFarbe = rgb("#ddddff")
-#let defFarbe = rgb("#ddffdd")
 #let uebungFarbe = rgb("#ffdddd")
 
 // Benannte Umgebungen
 #let theorem = makeEnv("Theorem", colour: satzFarbe)
 #let satz = makeEnv("Satz", colour: satzFarbe)
 #let lemma = makeEnv("Lemma", colour: satzFarbe)
-#let definition = makeEnv("Definition", colour: defFarbe, slidesStandard: "titel")
+#let definition = makeEnv("Definition", slidesStandard: 1)
 #let beispiel = makeEnv("Beispiel", slidesStandard: 0)
 #let korollar = makeEnv("Korollar", colour: satzFarbe)
 #let uebung = makeEnv("Übung", colour: uebungFarbe)
-#let notation = makeEnv("Notation", colour: defFarbe, slidesStandard: "titel")
-#let konvention = makeEnv("Konvention", slidesStandard: "titel")
+#let notation = makeEnv("Notation", slidesStandard: 1)
+#let konvention = makeEnv("Konvention", slidesStandard: 1)
 #let bemerkung = makeEnv("Bemerkung", slidesStandard: 0)
 #let technik = makeEnv("Technik")
 
@@ -416,7 +416,7 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
   Die *leere Menge* $emptyset := {}$ enthält kein Element.
 ]
 
-#notation(kurz: [$ℕ₀$, $ℕ⁺$, $ℤ$])[
+#notation(kurz: [$ℕ$, $ℕ₀$, $ℕ⁺$, $ℤ$])[
   Wir definieren
   - die Menge $ℕ := ℕ₀ := {0,1,2,3,…}$ der *natürlichen Zahlen*,
   - die Menge $ℕ⁺ := {1,2,3,…}$ der positiven natürlichen Zahlen, und
