@@ -1,4 +1,4 @@
-#let folienModus = false
+#let folienModus = true
 
 // imports
   #import "@preview/ctheorems:2.0.0": *
@@ -265,8 +265,28 @@
 
   Technisch ist das Skript ein #link("https://typst.app/", [Typst])-Dokument. Die zugrundeliegende Textdatei `skript.typ` können Sie in einem beliebigen Texteditor lesen. Mit entsprechender Software wird aus der Textdatei ein PDF-Dokument generiert. Wenn Sie oben `#let slides = true` setzen, entsteht die gekürzte Form, die in der Vorlesung per Beamer angeworfen wird.
 
-  Es gibt ein öffentliches Repository auf github [todo: Link], wo sie alle Dateien finden. Wenn Sie Fehler finden, können Sie diese dort als _Issues_ melden (alternativ auch persönlich nach der Vorlesung oder über Ilias).
+  Es gibt ein öffentliches Repository auf #link("https://github.com/sekti/logik-und-diskrete-strukturen-skript", [GitHub]), wo sie alle Dateien finden. Wenn Sie Fehler finden, können Sie diese dort als #link("https://github.com/sekti/logik-und-diskrete-strukturen-skript/issues",[Issues]) melden (alternativ auch persönlich nach der Vorlesung oder über Ilias).
 ]
+#folien[
+  - #link("Typst.app")
+  - #link("https://github.com/sekti/logik-und-diskrete-strukturen-skript")
+  - _Issues_ auch gerne über GitHub.
+]
+
+=== Was steht wo?
+
+Für schwierige Inhalte nehmen wir uns Zeit an der Tafel. Einfache Inhalte werden mit dem Beamer angeworfen und schneller besprochen. Im Skript können Sie alles nachlesen.
+
+#table(
+  columns: 5,
+  align: right,
+  stroke: none,
+  [],[*mündlich*],[*Skript*],[*Projektion*],[*Tafel*],
+  table.hline(),
+  [*schwieriges Zeug*],[✓],[✓],[],[✓],
+  [*einfaches Zeug*],[✓],[✓],[✓],[],
+  [*Bemerkungen*],[✓],[✓],[],[],
+)
 
 == Organisatorisches
 
@@ -289,7 +309,8 @@
   [Übungen],[14-täglich],[Universität 38],[?],
 )
 
-- Die Vorlesung hat nominell 3 SWS (nicht SWS 4). Nur rund 21 Termine werden genutzt.
+- Die Vorlesung hat nominell 3 SWS (nicht SWS 4).\
+Nur rund 21 Termine werden genutzt.
 - Übungsanmeldung über Campus [todo: ab wann?]
 
 === Schein
