@@ -1,4 +1,4 @@
-#let folienModus = true
+#let folienModus = false
 
 // imports
   #import "@preview/ctheorems:2.0.0": *
@@ -30,7 +30,7 @@
     it
   }
   #set par(justify: true)
-  #show figure.where(kind: "thm-env"): if folienModus { it => block(above: 3pt, below: 3pt, it) } else { it }
+  #show figure.where(kind: "thm-env"): if folienModus { it => block(above: 3pt, below: 3pt, it) } else { it => it }
 
 
 // Functionality
@@ -215,12 +215,13 @@
 == Was soll das alles?
 
 #skript[
-  Die Informatik ist im Umbruch. Wichtige Aufgaben von der Programmierung bis hin zur Spitzenforschung können ganz oder in Teilen von KI-Systemen übernommen werden. Es ist unklar, wie sich das Feld in den kommenden Jahren wandeln wird.#footnote([Wenn Sie die Perspektive des wohl bekanntesten lebenden Mathematikers interessiert, dann sei Ihnen ein #link("https://www.youtube.com/watch?v=M0--ZH1lOzg", "Wortbeitrag von Terence Tao") zum Thema „Mathematics in the Age of AI“ ans Herz gelegt.])
+  Sie haben eine turbulente Zeit erwischt um ein Informatikstudium zu beginnen. Die Informatik ist im Umbruch. Wichtige Aufgaben von der Programmierung bis hin zur Spitzenforschung können ganz oder in Teilen von KI-Systemen übernommen werden. Es ist unklar, wie sich das Feld in den kommenden Jahren wandeln wird.#footnote([Wenn Sie die Perspektive des wohl bekanntesten lebenden Mathematikers interessiert, dann sei Ihnen ein #link("https://www.youtube.com/watch?v=M0--ZH1lOzg", "Wortbeitrag von Terence Tao") zum Thema „Mathematics in the Age of AI“ ans Herz gelegt.])
 ]
 
 === Was soll ein Informatikstudium?
 
 #skript[
+  Im Informatikstudium lernen Sie informationsverarbeitende Systeme zu verstehen, zu verwenden und zu entwickeln.
   Lange Zeit galt ein Informatikstudium vor allem als Eintrittskarte in die Softwareindustrie. Wie sich das Berufsbild des Informatikers durch KI-Systeme verändert, ist offen.
 
   Vermutlich werden sich die Anforderungen verschieben: weg vom bloßen Schreiben von Code, hin zum Modellieren von Problemen, und zum Verstehen und Überprüfen von Lösungen.
@@ -283,8 +284,8 @@ Für schwierige Inhalte nehmen wir uns Zeit an der Tafel. Einfache Inhalte werde
   stroke: none,
   [],[*mündlich*],[*Skript*],[*Projektion*],[*Tafel*],
   table.hline(),
-  [*schwieriges Zeug*],[✓],[✓],[],[✓],
-  [*einfaches Zeug*],[✓],[✓],[✓],[],
+  [*schwierige Inhalte*],[✓],[✓],[],[✓],
+  [*einfache Inhalte*],[✓],[✓],[✓],[],
   [*Bemerkungen*],[✓],[✓],[],[],
 )
 
@@ -310,7 +311,7 @@ Für schwierige Inhalte nehmen wir uns Zeit an der Tafel. Einfache Inhalte werde
 )
 
 - Die Vorlesung hat nominell 3 SWS (nicht SWS 4).\
-Nur rund 21 Termine werden genutzt.
+  Nur rund 21 Termine werden genutzt.
 - Übungsanmeldung über Campus [todo: ab wann?]
 
 === Schein
@@ -375,7 +376,7 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
 #uebung[
   Welche der folgenden Ausdrücke beschreibt eine Menge?
   + Der Dreck an meinem Schuh.
-  + Die Studenten, die dieses Modul bestehen.
+  + Die Studierenden, die im WS26/27 dieses Modul bestehen.
   + Die großen Fußballspieler.
   + Die natürlichen Zahlen, also 0,1,2,3,….
 ]
@@ -388,10 +389,6 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
 ]
 
 == Notation
-
-#notation(kurz: [$x∈M, x∉M$])[
-  Wir schreiben *$x ∈ M$* für die Aussage „$x$ ist Element der Menge $M$“ und schreiben *$x ∉ M$* für die Aussage „$x$ ist nicht Element der Menge $M$“.
-]
 
 #notation(kurz: [„:=“])[
   Wir schreiben *„A := B“*, um auszudrücken, dass das Symbol $A$ im Folgenden durch den Ausdruck $B$ _definiert_ ist. Dann gilt selbstverständlich auch $A = B$. Der Doppelpunkt weist darauf hin, dass es an der Gleichheit nichts zu hinterfragen gibt.
@@ -414,6 +411,10 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
 
 #notation(kurz: [$∅$])[
   Die *leere Menge* $emptyset := {}$ enthält kein Element.
+]
+
+#notation(kurz: [$x∈M, x∉M$])[
+  Wir schreiben *$x ∈ M$* für die Aussage „$x$ ist Element der Menge $M$“ und schreiben *$x ∉ M$* für die Aussage „$x$ ist nicht Element der Menge $M$“.
 ]
 
 #notation(kurz: [$ℕ$, $ℕ₀$, $ℕ⁺$, $ℤ$])[
@@ -450,22 +451,6 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
 ]
 
 #abbildung(slides: 0, caption: [Differenz $A without B$])[#venn("differenz")]
-
-#beispiel(slides: 0)[
-  Sei $U := {1,2,3,4,5}$ die Grundmenge, $A := {1,2,3}$ und $B := {3,4}$. Dann ergibt sich:
-
-  #table(
-    columns: 2,
-    stroke: none,
-    table.header[*Sprechweise*][*Schreibweise und Ergebnis*],
-    table.hline(),
-    [Vereinigung von $A$ und $B$], [$A ∪ B = {1,2,3,4}$],
-    [Schnitt von $A$ und $B$], [$A ∩ B = {3}$],
-    [Differenz "$A$ ohne $B$"], [$A ∖ B = {1,2}$],
-    [Differenz "$B$ ohne $A$"], [$B ∖ A = {4}$],
-    [Komplement von $A$], [$A^C = {4,5}$],
-  )
-]
 
 #definition("Disjunkt", kurz: [$A ∩ B = ∅$])[
   Wir sagen $A$ und $B$ sind *disjunkt*, falls $A ∩ B = ∅$.
@@ -505,6 +490,23 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
   Für eine endliche Menge $A$ schreiben wir $|A|$ für die Anzahl ihrer Elemente und nennen diese Anzahl die *Kardinalität* von $A$.
 ]
 
+#beispiel(slides: 0)[
+  Sei $U := {1,2,3,4,5}$ die Grundmenge, $A := {1,2,3}$ und $B := {3,4}$. Dann ergibt sich:
+
+  #table(
+    columns: 2,
+    stroke: none,
+    table.header[*Sprechweise*][*Schreibweise und Ergebnis*],
+    table.hline(),
+    [Vereinigung von $A$ und $B$], [$A ∪ B = {1,2,3,4}$],
+    [Schnitt von $A$ und $B$], [$A ∩ B = {3}$],
+    [Differenz "$A$ ohne $B$"], [$A ∖ B = {1,2}$],
+    [Differenz "$B$ ohne $A$"], [$B ∖ A = {4}$],
+    [Komplement von $A$], [$A^C = {4,5}$],
+    [Kardinalität von $A$], [$|A| = 3$],
+  )
+]
+
 #bemerkung([Unendliche Mengen], kurz: $|ℕ| = ∞.$)[
   Für eine unendliche Menge $A$ schreiben wir $|A| = ∞$. In @sec:cardinality haben wir mehr dazu zu sagen.
 ]
@@ -512,12 +514,13 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
 #uebung[
   Begründen Sie die Richtigkeit folgender Gleichungen.
   + ${2⋅n | n ∈ ℕ} ∩ {3⋅n | n ∈ ℕ} = {6⋅n | n ∈ ℕ}$
-  + ${1,3,5,7,…}^C = {…,-2,-1,0} ∪ {2⋅n | n ∈ ℕ}$ wenn das Komplement bezüglich $U := ℤ$ gebildet wird
+  + ${1,3,5,7,…}^C = {…,-2,-1,0} ∪ {2⋅n | n ∈ ℕ}$\
+    wenn das Komplement bezüglich $U := ℤ$ gebildet wird
   + $abs(lr({A ⊆ {1,2,3,4,5} mid(|) |A| = 2}, size: #120%)) = 10$
 ]
 #loesung[
   + Beide Seiten beschreiben die Menge der durch sechs teilbaren natürlichen Zahlen. Hier kommt die Einsicht zum Tragen, dass eine Zahl genau dann durch sechs teilbar ist, wenn sie sowohl durch zwei als auch durch drei teilbar ist (was wir hier ohne Beweis glauben wollen).
-  + Auf der linken Seite wird das Komplement der ungeraden natürlichen Zahlen gebildet. Da wir das Komplement in $ℤ$ bilden sollen, sind im Komplement neben den geraden natürlichen Zahlen auch die negativen ganzen Zahlen vertreten. Dass wir die 0 auf beiden Seiten der Vereinigung hingeschrieben haben, spielt keine Rolle.
+  + Auf der linken Seite wird das Komplement der ungeraden natürlichen Zahlen gebildet. Da wir das Komplement in $ℤ$ bilden sollen, sind im Komplement neben den geraden natürlichen Zahlen auch die negativen ganzen Zahlen vertreten. Dass die 0 auf beiden Seiten der Vereinigung auftritt, spielt keine Rolle.
   + Hier werden alle Teilmengen von ${1,2,3,4,5}$ der Größe $2$ zu einer Menge zusammengefasst. Diese sind ${1,2}$, ${1,3}$, ${1,4}$, ${1,5}$, ${2,3}$, ${2,4}$, ${2,5}$, ${3,4}$, ${3,5}$, ${4,5}$. Die Kardinalität dieser Menge ist $10$.
 ]
 
@@ -550,7 +553,7 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
 ]<mengeAllerMengen>
 
 #bemerkung(slides: "titel")[Sind Zahlen auch Mengen?][
-  Mathematiker neigen zuweilen dazu, die Dinge, über die sie sprechen wollen, innerhalb der axiomatischen Mengenlehre nachzubilden, das heißt Mengen zu bilden, die sich so verhalten wie die Dinge, um die es geht.
+  Die axiomatische Mengenlehre ist ein bewährtes Fundament der Mathematik. Daher bilden Mathematiker zuweilen auch solche Objekte in der Mengenlehre nach, die viel älter als die Mengenlehre sind, um diese in der Mengenlehre zu _fundieren_.
 
   Die _Konstruktion_ der natürlichen Zahlen gemäß John von Neumann kommt mit einer Schachtelung von Mengen ausgehend von der leeren Menge aus. Die 0 entspricht ∅, und entspricht die Menge $M$ der Zahl $n$, so entspricht $M ∪ {M}$ der Zahl $n+1$. Dann gilt#footnote[Wir schreiben $hat(=)$ für „entspricht“. Die Vorstellung ist nicht, dass wir die natürlichen Zahlen _definieren_. Die natürlichen Zahlen gibt es bereits. Vielmehr identifizieren wir Mengen, die sich wie die natürlichen Zahlen verhalten.]:
   - $0 hat(=) ∅$
@@ -559,7 +562,7 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
   - $3 hat(=) {∅,{∅},{∅,{∅}}}$
   - $4 hat(=) {∅,{∅},{∅,{∅}},{∅,{∅},{∅,{∅}}}}$
   - …
-  In dieser Vorlesung werden wir die Existenz der Zahlen nicht weiter hinterfragen. Wir werden aber sehr wohl Konzepte wie Funktionen oder Relationen mengentheoretisch fundieren.
+  In dieser Vorlesung werden wir die Existenz der Zahlen nicht weiter hinterfragen und auf der Schulmathematik aufbauen. Wir werden aber sehr wohl Konzepte wie Funktionen oder Relationen mengentheoretisch fundieren.
 ]
 
 #slidebreak()
@@ -625,7 +628,7 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
   Wenn wir mit einem Graphen $G = (V,E)$ arbeiten, bezeichnen wir in der Regel mit $n := |V|$ die Knotenzahl und mit $m := |E|$ die Kantenzahl.
 ]<graph-nm>
 
-#definition("Nachbar, Grad, adjazent", kurz: $deg(v)$)[
+#definition("Nachbar, Grad, adjazent, isoliert", slides: "titel")[
   Sei $G = (V,E)$ ein Graph und $v,w ∈ V$. Falls ${v,w} ∈ E$ gilt, nennt man $v$ und $w$ *adjazent* oder *Nachbarn*. Der *Grad* $deg(v)$ von $v$ ist die Anzahl seiner Nachbarn:
   $ deg(v) := |{w ∈ V | {v, w} ∈ E}|. $
   Ein Knoten von Grad 0 heißt *isoliert*.
@@ -1793,7 +1796,7 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
 #definition("Relation", kurz: $R ⊆ A_1 × … × A_k$)[
   Sei $k ∈ ℕ⁺$. Eine *$k$-stellige Relation* ist gegeben durch Mengen $A_1, …, A_k$ sowie eine Teilmenge
   $ R ⊆ A_1 × … × A_k. $
-  Im Fall $k = 2$ sprechen wir von einer *binären Relation zwischen $A_1$ und $A_2$*. Gilt zusätzlich $A_1 = A_2 = A$, so heißt $R$ eine *Relation auf $A$*.#footnote[]
+  Im Fall $k = 2$ sprechen wir von einer *binären Relation zwischen $A_1$ und $A_2$*. Siehe auch @relationAufA.
 ]
 
 #beispiel[Eine dreistellige Relation][
@@ -2109,27 +2112,54 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
   Ist $R ⊆ A × B$ eine binäre Relation, so schreiben wir statt $(a,b) ∈ R$ auch $a R b$. Bei vertrauten Relationen benutzen wir das gewohnte Zeichen, etwa $3 ≤ 5$ statt $(3,5) ∈ ≤$.
 ]
 
+#definition[Relation auf einer Menge][
+  Ist $A$ eine Menge und $R ⊆ A × A$ eine binäre Relation, nennen wir $R$ auch Relation auf $A$.
+]<relationAufA>
 
-- Beispiele für Relationen auf einer Menge
-  - Teilbarkeit,
-  - Gleichheit,
-  - kleiner,
-  - Teilmenge
-  - ist direkt verwandt mit
+#beispiel[][
+  Einige Relationen kennen wir bereits.
+  #table(
+    columns: 4
+    stroke: none,
+    [Konzept],[A],[Symbol],[Beispiele],
+    table.hline(),
+    [Teilbarkeit],[$ℕ$],[$|$],[$5 | 15, 3 not | 8, 10 | 0$],
+    [kleiner],[$ℤ$],[$<$],[$5 < 7$, -4 not < -4],
+    [kleiner-gleich],[ℤ],[$≤$],[$5 ≤ 7$, $4 ≤ 4$],
+    [Gleichheit],[ℕ],[$=$][$7 = 7$, $8 ≠ 7$],
+    [Teilmenge],[$2^{1,…,9}$],[$⊆$],[${4,5} ⊆ {3,4,5,7}$],
+  )
+]<bspRelationen>
 
-- Eigenschaften, die Relationen auf einer Menge haben können
-  - reflexiv / irreflexiv
-  - symmetrisch
-  - transitiv
-  - antisymmetrisch
-  - total
+#bemerkung[][
+  Ist “$=$” oder “$∈$” _an sich_ eine Relation?
+]
 
-- Tabelle, die für die Beispiele klärt welche Eigenschaften vorliegen.
-- Ein gerichteter Graph ist also genau dasselbe wie eine binäre Relation auf $V$. Die Zeichnung mit Pfeilen ist eine praktische Darstellung einer Relation.
-- Übung: Welche Arten von Relationen können durch ungerichtete Graphen dargestellt werden?
-  - symmetrische, irreflexive Relation
 
-- Definition: Äquivalenzrelation, Halbordnung, Totale Ordnung
+#definition[Eigenschaften von Relationen][
+  Sei $A$ eine Menge und $R$ eine Relation auf $A$. Eine Relation heißt *reflexiv*, *irreflexiv*, *symmetrisch*, *transitiv*, *antisymmetrisch* bzw. *total* genau dann, wenn folgende Eigenschaft gilt.
+  #table(
+    […]
+  )
+]
+
+#beispiel[][
+  Wir betrachten die Relationen aus @bspRelationen sowie eine Relation $R$ auf Menschen, wobei $m₁ R m₂$ gelte genau dann, wenn $m₁$ direkter Vorfahre oder direkter Nachfahre von $m₂$ ist.
+  #table(
+    [Tabelle, die darstellt, welche Eigenschaften für welche Relation gelten.]
+  )
+]
+
+#bemerkung[][
+  Ein gerichteter Graph (potentiell mit Schleifen) ist nichts anderes als eine Relation.
+]
+
+#uebung[][
+  Welche Arten von Relationen können durch ungerichtete Graphen dargestellt werden?
+]
+#loesung[
+  symmetrische, irreflexive Relation
+]
 
 == Äquivalenzrelationen
 
