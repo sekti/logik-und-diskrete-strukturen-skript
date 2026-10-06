@@ -2161,6 +2161,27 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
   symmetrische, irreflexive Relation
 ]
 
+
+== Ordnungsrelationen
+- Definition: Totale Ordnung, Partielle Ordnung
+- xkcd Bild: Früchte
+- Teilmengenrelation
+
+=== Ordnungen und gerichtete Graphen
+
+- Def: DAG („directed acyclic graph“), also gerichteter Graph ohne gerichtete Kreise.
+#satz[
+  Sei $G = (V,E)$ ein DAG. Dann ist die Erreichbarkeitsrelation
+  $ v ≼ w defiff "es gibt einen gerichteten Weg von" v "nach" w $
+  eine Halbordnung auf $V$.
+]
+
+- Beweis: Reflexivität und Transitivität wie zuvor; die Antisymmetrie folgt aus der Kreisfreiheit.
+- Beispiel: Abhängigkeiten zwischen Modulen im Studienplan, Bauteile in einer Montageanleitung, `make`-Abhängigkeiten.
+- Bemerkung: Umgekehrt lässt sich jede _strikte_ Halbordnung als DAG zeichnen.
+    - man zeichnet nur die „unmittelbaren“ Beziehungen, das heißt *Hasse-Diagramm*.
+    - Beispiel: Hasse-Diagramme der Teilmengenrelation auf $2^{1,2,3}$ und der Teilbarkeit auf ${1,…,12}$.
+- Ausblick: Eine *topologische Sortierung* ist eine totale Ordnung, die eine gegebene Halbordnung fortsetzt (etwa eine Reihenfolge, in der man die Module belegen kann). Dass es sie stets gibt, ist ein Thema für Algorithmen und Datenstrukturen.
 == Äquivalenzrelationen
 
 - Notation [a] Äquivalenzklasse von a.
@@ -2223,27 +2244,6 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
 - Sprechweise: Wir sagen dann „der Graph“ und meinen seine Isomorphieklasse. Genau das tun wir beim Zeichnen ohne Knotennamen und in der Graphengalerie: $P_4$, $C_6$ oder $K_5$ bezeichnen Isomorphieklassen.
 - Bemerkung: Ob zwei gegebene Graphen isomorph sind, ist algorithmisch überraschend schwer. Für die Anzahl der unbeschrifteten Graphen mit $n$ Knoten gibt es keine einfache Formel. (Beschriftete Graphen sind leicht zu zählen, siehe Kapitel „Zählen“.)
 - Übung: Bestimmen Sie alle unbeschrifteten Graphen mit 3 Knoten. Wie viele beschriftete Graphen mit Knotenmenge ${1,2,3}$ gibt es jeweils in einer Klasse? Warum sind die Klassen nicht alle gleich groß?
-
-== Ordnungsrelationen
-- Definition: Totale Ordnung, Partielle Ordnung
-- xkcd Bild: Früchte
-- Teilmengenrelation
-
-=== Ordnungen und gerichtete Graphen
-
-- Def: DAG („directed acyclic graph“), also gerichteter Graph ohne gerichtete Kreise.
-#satz[
-  Sei $G = (V,E)$ ein DAG. Dann ist die Erreichbarkeitsrelation
-  $ v ≼ w defiff "es gibt einen gerichteten Weg von" v "nach" w $
-  eine Halbordnung auf $V$.
-]
-
-- Beweis: Reflexivität und Transitivität wie zuvor; die Antisymmetrie folgt aus der Kreisfreiheit.
-- Beispiel: Abhängigkeiten zwischen Modulen im Studienplan, Bauteile in einer Montageanleitung, `make`-Abhängigkeiten.
-- Bemerkung: Umgekehrt lässt sich jede _strikte_ Halbordnung als DAG zeichnen.
-    - man zeichnet nur die „unmittelbaren“ Beziehungen, das heißt *Hasse-Diagramm*.
-    - Beispiel: Hasse-Diagramme der Teilmengenrelation auf $2^{1,2,3}$ und der Teilbarkeit auf ${1,…,12}$.
-- Ausblick: Eine *topologische Sortierung* ist eine totale Ordnung, die eine gegebene Halbordnung fortsetzt (etwa eine Reihenfolge, in der man die Module belegen kann). Dass es sie stets gibt, ist ein Thema für Algorithmen und Datenstrukturen.
 
 #slidebreak()
 = Exkurs: Abzählbarkeit
