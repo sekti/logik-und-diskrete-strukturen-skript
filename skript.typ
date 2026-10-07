@@ -2153,7 +2153,7 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
     [*symmetrisch*], [falls $∀a,b ∈ A: a R b → b R a$,],
     [*antisymmetrisch*], [falls $∀a,b ∈ A: (a R b ∧ b R a) → a = b$,],
     [*transitiv*], [falls $∀a,b,c ∈ A: (a R b ∧ b R c) → a R c$,],
-    [*total*], [falls $∀a,b ∈ A: a R b ∨ b R a ∨ a = b$.],
+    [*total*], [falls $∀a,b ∈ A: a R b ∨ b R a$.],
   )
 ]<relationseigenschaftenA>
 
@@ -2197,7 +2197,7 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
     [*symmetrisch*], [zu jeder Kante $(u,v)$ gibt es die Gegenkante $(v,u)$,],
     [*antisymmetrisch*], [verschiedene Knoten $u ≠ v$ sind durch höchstens eine Kante verbunden,],
     [*transitiv*], [gibt es einen Weg $u v w$, so gibt es auch die direkte Kante $(u,w)$,],
-    [*total*], [verschiedene Knoten $u ≠ v$ sind durch $(u,v)$ oder $(v,u)$ verbunden.],
+    [*total*], [je zwei Knoten $u$ und $v$ sind durch $(u,v)$ oder $(v,u)$ verbunden; für $u = v$ heißt das, dass an jedem Knoten eine Schlinge liegt.],
   )
 ]
 
