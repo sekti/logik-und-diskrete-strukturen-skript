@@ -1,4 +1,4 @@
-#let folienModus = false
+#let folienModus = true
 
 // imports
   #import "@preview/ctheorems:2.0.0": *
@@ -296,7 +296,7 @@ Für schwierige Inhalte nehmen wir uns Zeit an der Tafel. Einfache Inhalte werde
 #table(
     columns: 3,
     stroke: none,
-    [Dozent],[Stefan Walzer],[(Zi. ????)],
+    [Dozent],[Stefan Walzer],[(Zi 1.101)],
     [Übungsleiter],[Florian Stober],[(Zi 1.112)],
     [Ergänzungen],[Fabian Bühler],[(Zi 2.236)],
   )
@@ -2212,16 +2212,15 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
 == Ordnungsrelationen
 
 - Definition:
-  - Quasiordnung
-  - Halbordnung
-  - Totalordnung
+  - Quasiordnung: reflexiv + transitiv
+  - Halbordnung: Quasiordnung + antisymmetrisch
+  - Totalordnung: Halbordnung + total
 
 - Uebung: Welche 
   - auf 2^ℕ: $ X R Y defiff |X| ≤ |Y| $
-  - auf $ℕ$: ≤
   - auf 2^ℕ: $ ⊆$.
+  - auf $ℕ$: ≤
 - xkcd Bild: Früchte
-- Teilmengenrelation
 
 === Ordnungen und gerichtete Graphen
 
