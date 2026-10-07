@@ -2109,58 +2109,102 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
 <relationenAufEinerMenge>
 
 #notation("Infixschreibweise", kurz: $a R b$)[
-  Ist $R ⊆ A × B$ eine binäre Relation, so schreiben wir statt $(a,b) ∈ R$ auch $a R b$. Bei vertrauten Relationen benutzen wir das gewohnte Zeichen, etwa $3 ≤ 5$ statt $(3,5) ∈ ≤$.
+  Ist $R ⊆ X × Y$ eine binäre Relation, so schreiben wir statt $(a,b) ∈ R$ auch $a R b$, zum Beispiel $3 ≤ 5$ statt $(3,5) ∈ "≤"$.
 ]
 
-#definition[Relation auf einer Menge][
-  Ist $A$ eine Menge und $R ⊆ A × A$ eine binäre Relation, nennen wir $R$ auch Relation auf $A$.
+#definition[Relation auf _einer_ Menge][
+  Ist $A$ eine Menge und $R ⊆ A × A$ eine binäre Relation, so nennen wir $R$ eine *Relation auf $A$*.
 ]<relationAufA>
 
-#beispiel[][
-  Einige Relationen kennen wir bereits.
+#beispiel[
+  Einige Relationen auf einer Menge kennen wir bereits.
   #table(
-    columns: 4
+    columns: 4,
     stroke: none,
-    [Konzept],[A],[Symbol],[Beispiele],
+    column-gutter: 0.8em,
+    align: (left, center, center, left),
+    [Konzept], [Menge], [Symbol], [Beispiele],
     table.hline(),
-    [Teilbarkeit],[$ℕ$],[$|$],[$5 | 15, 3 not | 8, 10 | 0$],
-    [kleiner],[$ℤ$],[$<$],[$5 < 7$, -4 not < -4],
-    [kleiner-gleich],[ℤ],[$≤$],[$5 ≤ 7$, $4 ≤ 4$],
-    [Gleichheit],[ℕ],[$=$][$7 = 7$, $8 ≠ 7$],
-    [Teilmenge],[$2^{1,…,9}$],[$⊆$],[${4,5} ⊆ {3,4,5,7}$],
+    [Teilbarkeit], [$ℕ$], [$divides$], [$5 divides 15$, $3 divides.not 8$, $10 divides 0$],
+    [kleiner], [$ℤ$], [$<$], [$5 < 7$, $-4 lt.not -4$],
+    [kleiner-gleich], [$ℤ$], [$≤$], [$5 ≤ 7$, $4 ≤ 4$],
+    [Gleichheit], [$ℕ$], [$=$], [$7 = 7$, $8 ≠ 7$],
+    [Teilmenge], [$2^({1,…,9})$], [$⊆$], [${4,5} ⊆ {3,4,5,7}$],
   )
 ]<bspRelationen>
 
-#bemerkung[][
-  Ist “$=$” oder “$∈$” _an sich_ eine Relation?
-]
+#bemerkung[Ist „$=$“ eine Relation?][
+  Für jede Menge $A$ ist die Gleichheit auf $A$ die Relation ${(a,a) | a ∈ A} ⊆ A × A$.
 
+  Eine Gleichheit „an sich“ für beliebige Objekte ist keine Relation in unserem Sinne: Die Gesamtheit aller Paare $(a,a)$ für beliebige Objekte $a$ ist keine Menge. Siehe @mengeAllerMengen. Ähnliches gilt für „$∈$“ und „⊆“.
+]
 
 #definition[Eigenschaften von Relationen][
-  Sei $A$ eine Menge und $R$ eine Relation auf $A$. Eine Relation heißt *reflexiv*, *irreflexiv*, *symmetrisch*, *transitiv*, *antisymmetrisch* bzw. *total* genau dann, wenn folgende Eigenschaft gilt.
+  Sei $A$ eine Menge und $R$ eine Relation auf $A$. Dann heißt $R$
   #table(
-    […]
+    columns: 2,
+    stroke: none,
+    align: (right, left),
+    [*reflexiv*], [falls $∀a ∈ A: a R a$,],
+    [*irreflexiv*], [falls $∀a ∈ A: ¬(a R a)$,],
+    [*symmetrisch*], [falls $∀a,b ∈ A: a R b → b R a$,],
+    [*transitiv*], [falls $∀a,b,c ∈ A: (a R b ∧ b R c) → a R c$,],
+    [*antisymmetrisch*], [falls $∀a,b ∈ A: (a R b ∧ b R a) → a = b$,],
+    [*total*], [falls $∀a,b ∈ A: a R b ∨ b R a ∨ a = b$.],
   )
+]<relationseigenschaftenA>
+
+#beispiel[
+  Wir betrachten die Relationen aus @bspRelationen und zusätzlich die Relation $V$ auf der Menge der Menschen, wobei $m₁ V m₂$ genau dann gelte, wenn $m₁$ ein Elternteil oder ein Kind von $m₂$ ist.
+  #align(center, text(size: 0.85em, table(
+    columns: 7,
+    stroke: none,
+    align: (left, center, center, center, center, center, center),
+    column-gutter: 0.5em,
+    [], [refl.], [irrefl.], [symm.], [trans.], [antis.], [total],
+    table.hline(),
+    [$divides$ auf $ℕ$], [✓], [–], [–], [✓], [✓], [–],
+    [$<$ auf $ℤ$], [–], [✓], [–], [✓], [✓], [–],
+    [$≤$ auf $ℤ$], [✓], [–], [–], [✓], [✓], [✓],
+    [$=$ auf $ℕ$], [✓], [–], [✓], [✓], [✓], [–],
+    [$⊆$ auf $2^({1,…,9})$], [✓], [–], [–], [✓], [✓], [–],
+    [$V$ auf Menschen], [–], [✓], [✓], [–], [–], [–],
+  )))
+]<bspEigenschaften>
+
+#bemerkung[Drei Fallen][
+  - *Antisymmetrisch ist nicht das Gegenteil von symmetrisch.* Die Gleichheit ist beides. Und $<$ ist antisymmetrisch, obwohl $a < b$ und $b < a$ nie gleichzeitig gelten — die Implikation ist dann leer erfüllt.
+  - *Irreflexiv ist nicht das Gegenteil von reflexiv.* Eine Relation kann weder das eine noch das andere sein, etwa ${(1,1)}$ auf ${1,2}$: Es gilt $1 R 1$, aber nicht $2 R 2$.
+  - *Total ist stärker als reflexiv.* Setzt man in der Bedingung $b := a$, so ergibt sich $a R a$. Jede totale Relation ist also reflexiv.
 ]
 
-#beispiel[][
-  Wir betrachten die Relationen aus @bspRelationen sowie eine Relation $R$ auf Menschen, wobei $m₁ R m₂$ gelte genau dann, wenn $m₁$ direkter Vorfahre oder direkter Nachfahre von $m₂$ ist.
+#bemerkung[Eigenschaften im Bild][
+  Eine Relation auf $A$ ist dasselbe wie ein gerichteter Graph mit Knotenmenge $A$: Die Kantenmenge eines gerichteten Graphen $(V,E)$ ist mit $E ⊆ V × V$ genau eine Relation auf $V$, und umgekehrt liefert jede Relation einen gerichteten Graphen. Die Eigenschaften lassen sich deshalb an der Zeichnung ablesen:
   #table(
-    [Tabelle, die darstellt, welche Eigenschaften für welche Relation gelten.]
+    columns: 2,
+    stroke: none,
+    align: (right, left),
+    column-gutter: 0.8em,
+    [*reflexiv*], [an jedem Knoten liegt eine Schlinge,],
+    [*irreflexiv*], [es gibt keine Schlinge,],
+    [*symmetrisch*], [zu jeder Kante gibt es die Gegenkante,],
+    [*transitiv*], [zu jedem gerichteten Weg der Länge 2 gibt es die Abkürzung,],
+    [*total*], [je zwei Knoten sind durch mindestens eine Kante verbunden.],
   )
+  Für die Antisymmetrie gibt es kein ebenso knappes Bild; sie besagt, dass es zwischen zwei verschiedenen Knoten nie Kanten in beide Richtungen gibt.
 ]
 
-#bemerkung[][
-  Ein gerichteter Graph (potentiell mit Schleifen) ist nichts anderes als eine Relation.
+#uebung[
+  Welche Relationen lassen sich durch einen _ungerichteten_ Graphen darstellen?
 ]
 
-#uebung[][
-  Welche Arten von Relationen können durch ungerichtete Graphen dargestellt werden?
-]
 #loesung[
-  symmetrische, irreflexive Relation
-]
+  Genau die symmetrischen und irreflexiven. In einem ungerichteten Graphen sind Kanten zweielementige Mengen: Sie haben keine Richtung, was der Symmetrie entspricht, und sie verbinden keinen Knoten mit sich selbst, was der Irreflexivität entspricht.
 
+  Umgekehrt gehört zu jeder symmetrischen, irreflexiven Relation $R$ auf $A$ der ungerichtete Graph
+  $ (A, {{a,b} | a R b}). $
+  Die Relation $V$ aus @bspEigenschaften ist von dieser Art; der zugehörige Graph verbindet genau Eltern mit ihren Kindern.
+]
 
 == Ordnungsrelationen
 - Definition: Totale Ordnung, Partielle Ordnung
