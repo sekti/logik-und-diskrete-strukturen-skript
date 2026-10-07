@@ -137,6 +137,7 @@
 #let notation = makeEnv("Notation", slidesStandard: 1)
 #let konvention = makeEnv("Konvention", slidesStandard: 1)
 #let bemerkung = makeEnv("Bemerkung", slidesStandard: 0)
+#let beobachtung = makeEnv("Bemerkung", slidesStandard: 1)
 #let technik = makeEnv("Technik")
 
 // Beweise tragen keine Nummer
@@ -2123,14 +2124,16 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
     stroke: none,
     column-gutter: 0.8em,
     align: (left, center, center, left),
-    [Konzept], [Menge], [Symbol], [Beispiele],
+    [Relation], [auf], [Symbol], [Beispiele],
     table.hline(),
     [Teilbarkeit], [$ℕ$], [$divides$], [$5 divides 15$, $3 divides.not 8$, $10 divides 0$],
     [kleiner], [$ℤ$], [$<$], [$5 < 7$, $-4 lt.not -4$],
-    [kleiner-gleich], [$ℤ$], [$≤$], [$5 ≤ 7$, $4 ≤ 4$],
+    [kleiner-gleich], [$ℤ$], [$≤$], [$5 ≤ 7$, $-4 ≤ -4$],
     [Gleichheit], [$ℕ$], [$=$], [$7 = 7$, $8 ≠ 7$],
     [Teilmenge], [$2^({1,…,9})$], [$⊆$], [${4,5} ⊆ {3,4,5,7}$],
   )
+  Genau ist die Teilbarkeitsrelation wie folgt definiert. Für $a, b ∈ ℕ$ gilt
+  $ a divides b defiff ∃k ∈ ℕ: a⋅k = b. $
 ]<bspRelationen>
 
 #bemerkung[Ist „$=$“ eine Relation?][
@@ -2148,20 +2151,25 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
     [*reflexiv*], [falls $∀a ∈ A: a R a$,],
     [*irreflexiv*], [falls $∀a ∈ A: ¬(a R a)$,],
     [*symmetrisch*], [falls $∀a,b ∈ A: a R b → b R a$,],
-    [*transitiv*], [falls $∀a,b,c ∈ A: (a R b ∧ b R c) → a R c$,],
     [*antisymmetrisch*], [falls $∀a,b ∈ A: (a R b ∧ b R a) → a = b$,],
+    [*transitiv*], [falls $∀a,b,c ∈ A: (a R b ∧ b R c) → a R c$,],
     [*total*], [falls $∀a,b ∈ A: a R b ∨ b R a ∨ a = b$.],
   )
 ]<relationseigenschaftenA>
 
-#beispiel[
-  Wir betrachten die Relationen aus @bspRelationen und zusätzlich die Relation $V$ auf der Menge der Menschen, wobei $m₁ V m₂$ genau dann gelte, wenn $m₁$ ein Elternteil oder ein Kind von $m₂$ ist.
+#uebung[
+  Betrachten Sie die Relationen aus @bspRelationen und darüber hinaus die Relation $V$ auf der Menge der Menschen, wobei $m₁ V m₂$ genau dann gelte, wenn $m₁$ ein Elternteil oder ein Kind von $m₂$ ist.
+
+  Stellen Sie tabellarisch dar, welche der Relationen welcher Eigenschaften aus @relationseigenschaftenA haben.
+]<uebEigenschaften>
+
+#loesung[
   #align(center, text(size: 0.85em, table(
     columns: 7,
     stroke: none,
     align: (left, center, center, center, center, center, center),
     column-gutter: 0.5em,
-    [], [refl.], [irrefl.], [symm.], [trans.], [antis.], [total],
+    [], [refl.], [irrefl.], [symm.], [antis.], [trans.], [total],
     table.hline(),
     [$divides$ auf $ℕ$], [✓], [–], [–], [✓], [✓], [–],
     [$<$ auf $ℤ$], [–], [✓], [–], [✓], [✓], [–],
@@ -2170,28 +2178,27 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
     [$⊆$ auf $2^({1,…,9})$], [✓], [–], [–], [✓], [✓], [–],
     [$V$ auf Menschen], [–], [✓], [✓], [–], [–], [–],
   )))
-]<bspEigenschaften>
-
-#bemerkung[Drei Fallen][
-  - *Antisymmetrisch ist nicht das Gegenteil von symmetrisch.* Die Gleichheit ist beides. Und $<$ ist antisymmetrisch, obwohl $a < b$ und $b < a$ nie gleichzeitig gelten — die Implikation ist dann leer erfüllt.
-  - *Irreflexiv ist nicht das Gegenteil von reflexiv.* Eine Relation kann weder das eine noch das andere sein, etwa ${(1,1)}$ auf ${1,2}$: Es gilt $1 R 1$, aber nicht $2 R 2$.
-  - *Total ist stärker als reflexiv.* Setzt man in der Bedingung $b := a$, so ergibt sich $a R a$. Jede totale Relation ist also reflexiv.
 ]
 
-#bemerkung[Eigenschaften im Bild][
-  Eine Relation auf $A$ ist dasselbe wie ein gerichteter Graph mit Knotenmenge $A$: Die Kantenmenge eines gerichteten Graphen $(V,E)$ ist mit $E ⊆ V × V$ genau eine Relation auf $V$, und umgekehrt liefert jede Relation einen gerichteten Graphen. Die Eigenschaften lassen sich deshalb an der Zeichnung ablesen:
+#beobachtung[Eigenschaften im Bild][
+  Ist $E$ eine Relation auf $V$, so ist $G = (V,E)$ ein gerichteter Graph (potentiell mit Schlingen) und umgekehrt.#footnote[Man spricht daher auch von der _Kantenrelation_ eines Graphen.]
+]
+
+#uebung[Relationseigenschaften graphisch][
+  Formulieren Sie die Eigenschaften reflexiv, irreflexiv, symmetrisch, transitiv, total einer Relation $E$ auf $V$ als Eigenschaften des Graphen $G = (V,E)$.
+]
+#loesung[
   #table(
     columns: 2,
     stroke: none,
     align: (right, left),
-    column-gutter: 0.8em,
     [*reflexiv*], [an jedem Knoten liegt eine Schlinge,],
     [*irreflexiv*], [es gibt keine Schlinge,],
-    [*symmetrisch*], [zu jeder Kante gibt es die Gegenkante,],
-    [*transitiv*], [zu jedem gerichteten Weg der Länge 2 gibt es die Abkürzung,],
-    [*total*], [je zwei Knoten sind durch mindestens eine Kante verbunden.],
+    [*symmetrisch*], [zu jeder Kante $(u,v)$ gibt es die Gegenkante $(v,u)$,],
+    [*antisymmetrisch*],[verschiedene Knoten $u ≠ v$ sind durch höchstens eine Kanten verbunden]
+    [*transitiv*], [gibt es einen Weg $u v w$ so gibt es auch die direkte Kanten $(u,w)$,],
+    [*total*], [zwei verschiedene Knoten $u ≠ v$ sind durch $(u,v)$ oder $(v,u)$ verbunden.],
   )
-  Für die Antisymmetrie gibt es kein ebenso knappes Bild; sie besagt, dass es zwischen zwei verschiedenen Knoten nie Kanten in beide Richtungen gibt.
 ]
 
 #uebung[
@@ -2199,11 +2206,7 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
 ]
 
 #loesung[
-  Genau die symmetrischen und irreflexiven. In einem ungerichteten Graphen sind Kanten zweielementige Mengen: Sie haben keine Richtung, was der Symmetrie entspricht, und sie verbinden keinen Knoten mit sich selbst, was der Irreflexivität entspricht.
-
-  Umgekehrt gehört zu jeder symmetrischen, irreflexiven Relation $R$ auf $A$ der ungerichtete Graph
-  $ (A, {{a,b} | a R b}). $
-  Die Relation $V$ aus @bspEigenschaften ist von dieser Art; der zugehörige Graph verbindet genau Eltern mit ihren Kindern.
+  Wir können ungerichtete Graphen als _bigerichtete_ Graphen auffassen, wobei eine Kante ${u,v}$ den gerichteten Kanten $(u,v)$ und $(v,u)$ entspricht. Die Kantenrelation ist also notwendig symmtrisch. Weil wir keine Schlingen zugelassen haben ist sie außerdem irreflexiv. Ungerichtete Graphen mit Knotenmenge $V$ entsprechen also genau den irreflexiven, symmetrischen Relationen auf $V$.
 ]
 
 == Ordnungsrelationen
