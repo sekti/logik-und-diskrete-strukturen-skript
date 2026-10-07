@@ -30,7 +30,10 @@
     it
   }
   #set par(justify: true)
-  #show figure.where(kind: "thm-env"): if folienModus { it => block(above: 3pt, below: 3pt, it) } else { it => it }
+  // Enger Abstand zwischen den Umgebungen auf den Folien. Der Abstand gehört
+  // zum Block der Umgebung selbst (siehe blockArgs); eine Hülle per show-Regel
+  // würde für ausgeblendete Umgebungen einen leeren Block mit Abstand erzeugen.
+  #let folienAbstand = if folienModus { (above: 3pt, below: 3pt) } else { (:) }
 
 
 // Functionality
@@ -88,7 +91,7 @@
 /////////////////////////////
 #let makeEnv(name, colour: rgb("#ffffff"), slidesStandard: 1) = {
   let blockArgs = if folienModus {
-    (inset: 5pt, fill: colour, radius: 0.3em)
+    (inset: 5pt, fill: colour, radius: 0.3em, ..folienAbstand)
   } else {
     (inset: 0pt)
   }
@@ -149,6 +152,7 @@
     name-fmt: emph,
     body-fmt: if qed { proof-body-fmt } else { x => x },
     separator: [#h(0.1em):#h(0.2em)],
+    ..folienAbstand,
   )
   if not folienModus {
     return (kurz: none, slides: none, ..args) => locEnv(..args)
