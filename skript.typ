@@ -2132,7 +2132,7 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
     [Gleichheit], [$ℕ$], [$=$], [$7 = 7$, $8 ≠ 7$],
     [Teilmenge], [$2^({1,…,9})$], [$⊆$], [${4,5} ⊆ {3,4,5,7}$],
   )
-  Genau ist die Teilbarkeitsrelation wie folgt definiert. Für $a, b ∈ ℕ$ gilt
+  Genauer ist die Teilbarkeitsrelation wie folgt definiert. Für $a, b ∈ ℕ$ gilt
   $ a divides b defiff ∃k ∈ ℕ: a⋅k = b. $
 ]<bspRelationen>
 
@@ -2160,7 +2160,7 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
 #uebung[
   Betrachten Sie die Relationen aus @bspRelationen und darüber hinaus die Relation $V$ auf der Menge der Menschen, wobei $m₁ V m₂$ genau dann gelte, wenn $m₁$ ein Elternteil oder ein Kind von $m₂$ ist.
 
-  Stellen Sie tabellarisch dar, welche der Relationen welcher Eigenschaften aus @relationseigenschaftenA haben.
+  Stellen Sie tabellarisch dar, welche der Relationen welche Eigenschaften aus @relationseigenschaftenA haben.
 ]<uebEigenschaften>
 
 #loesung[
@@ -2195,9 +2195,9 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
     [*reflexiv*], [an jedem Knoten liegt eine Schlinge,],
     [*irreflexiv*], [es gibt keine Schlinge,],
     [*symmetrisch*], [zu jeder Kante $(u,v)$ gibt es die Gegenkante $(v,u)$,],
-    [*antisymmetrisch*],[verschiedene Knoten $u ≠ v$ sind durch höchstens eine Kanten verbunden]
-    [*transitiv*], [gibt es einen Weg $u v w$ so gibt es auch die direkte Kanten $(u,w)$,],
-    [*total*], [zwei verschiedene Knoten $u ≠ v$ sind durch $(u,v)$ oder $(v,u)$ verbunden.],
+    [*antisymmetrisch*], [verschiedene Knoten $u ≠ v$ sind durch höchstens eine Kante verbunden,],
+    [*transitiv*], [gibt es einen Weg $u v w$, so gibt es auch die direkte Kante $(u,w)$,],
+    [*total*], [verschiedene Knoten $u ≠ v$ sind durch $(u,v)$ oder $(v,u)$ verbunden.],
   )
 ]
 
@@ -2206,10 +2206,15 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
 ]
 
 #loesung[
-  Wir können ungerichtete Graphen als _bigerichtete_ Graphen auffassen, wobei eine Kante ${u,v}$ den gerichteten Kanten $(u,v)$ und $(v,u)$ entspricht. Die Kantenrelation ist also notwendig symmtrisch. Weil wir keine Schlingen zugelassen haben ist sie außerdem irreflexiv. Ungerichtete Graphen mit Knotenmenge $V$ entsprechen also genau den irreflexiven, symmetrischen Relationen auf $V$.
+  Wir können ungerichtete Graphen als _bigerichtete_ Graphen auffassen, wobei eine Kante ${u,v}$ den gerichteten Kanten $(u,v)$ und $(v,u)$ entspricht. Die Kantenrelation ist also notwendig symmetrisch. Weil wir keine Schlingen zugelassen haben, ist sie außerdem irreflexiv. Ungerichtete Graphen mit Knotenmenge $V$ entsprechen also genau den irreflexiven, symmetrischen Relationen auf $V$.
 ]
 
 == Ordnungsrelationen
+
+- Definition:
+  - Quasiordnung
+  - Halbordnung
+  - Totalordnung
 - Definition: Totale Ordnung, Partielle Ordnung
 - xkcd Bild: Früchte
 - Teilmengenrelation
