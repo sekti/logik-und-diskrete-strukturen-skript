@@ -137,7 +137,7 @@
 #let notation = makeEnv("Notation", slidesStandard: 1)
 #let konvention = makeEnv("Konvention", slidesStandard: 1)
 #let bemerkung = makeEnv("Bemerkung", slidesStandard: 0)
-#let beobachtung = makeEnv("Bemerkung", slidesStandard: 1)
+#let beobachtung = makeEnv("Beobachtung", slidesStandard: 1)
 #let technik = makeEnv("Technik")
 
 // Beweise tragen keine Nummer
@@ -2139,7 +2139,7 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
 #bemerkung[Ist „$=$“ eine Relation?][
   Für jede Menge $A$ ist die Gleichheit auf $A$ die Relation ${(a,a) | a ∈ A} ⊆ A × A$.
 
-  Eine Gleichheit „an sich“ für beliebige Objekte ist keine Relation in unserem Sinne: Die Gesamtheit aller Paare $(a,a)$ für beliebige Objekte $a$ ist keine Menge. Siehe @mengeAllerMengen. Ähnliches gilt für „$∈$“ und „⊆“.
+  Eine Gleichheit „an sich“ für beliebige Objekte ist keine Relation in unserem Sinne: Die Gesamtheit aller Paare $(a,a)$ für beliebige Objekte $a$ ist keine Menge. Siehe @mengeAllerMengen. Ähnliches gilt für „$∈$“ und „$⊆$“.
 ]
 
 #definition[Eigenschaften von Relationen][
@@ -2181,11 +2181,11 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
 ]
 
 #beobachtung[Eigenschaften im Bild][
-  Ist $E$ eine Relation auf $V$, so ist $G = (V,E)$ ein gerichteter Graph (potentiell mit Schlingen) und umgekehrt.#footnote[Man spricht daher auch von der _Kantenrelation_ eines Graphen.]
+  Ist $E$ eine Relation auf $V$, so ist $G = (V,E)$ ein gerichteter Graph (potentiell mit Schlingen) und umgekehrt (in beiden Fällen ist nur $E ⊆ V × V$ gefordert).#footnote[Man spricht daher auch von der _Kantenrelation_ eines Graphen.]
 ]
 
 #uebung[Relationseigenschaften graphisch][
-  Formulieren Sie die Eigenschaften reflexiv, irreflexiv, symmetrisch, transitiv, total einer Relation $E$ auf $V$ als Eigenschaften des Graphen $G = (V,E)$.
+  Formulieren Sie die Eigenschaften reflexiv, irreflexiv, symmetrisch, antisymmetrisch, transitiv, total einer Relation $E$ auf $V$ als Eigenschaften des Graphen $G = (V,E)$.
 ]
 #loesung[
   #table(
@@ -2206,7 +2206,7 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
 ]
 
 #loesung[
-  Wir können ungerichtete Graphen als _bigerichtete_ Graphen auffassen, wobei eine Kante ${u,v}$ den gerichteten Kanten $(u,v)$ und $(v,u)$ entspricht. Die Kantenrelation ist also notwendig symmetrisch. Weil wir keine Schlingen zugelassen haben, ist sie außerdem irreflexiv. Ungerichtete Graphen mit Knotenmenge $V$ entsprechen also genau den irreflexiven, symmetrischen Relationen auf $V$.
+  Wir können ungerichtete Graphen als gerichteten Graphen auffassen, wobei eine Kante ${u,v}$ den gerichteten Kanten $(u,v)$ und $(v,u)$ entspricht. Die Kantenrelation ist also notwendig symmetrisch. Weil wir keine Schlingen zugelassen haben, ist sie außerdem irreflexiv. Ungerichtete Graphen mit Knotenmenge $V$ entsprechen also genau den irreflexiven, symmetrischen Relationen auf $V$.
 ]
 
 == Ordnungsrelationen
@@ -2215,7 +2215,11 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
   - Quasiordnung
   - Halbordnung
   - Totalordnung
-- Definition: Totale Ordnung, Partielle Ordnung
+
+- Uebung: Welche 
+  - auf 2^ℕ: $ X R Y defiff |X| ≤ |Y| $
+  - auf $ℕ$: ≤
+  - auf 2^ℕ: $ ⊆$.
 - xkcd Bild: Früchte
 - Teilmengenrelation
 
