@@ -1,4 +1,6 @@
-#let folienModus = true
+// Projektionsfassung (true) oder Skript (false). Der hier gesetzte Wert gilt im
+// Editor; auf der Kommandozeile hat „--input folien=true/false“ Vorrang.
+#let folienModus = if "folien" in sys.inputs { sys.inputs.folien == "true" } else { true }
 
 // imports
   #import "@preview/ctheorems:2.0.0": *
@@ -198,6 +200,13 @@
 #let slidebreak() = {
   if folienModus { pagebreak() }
 }
+
+// Grenze zwischen dem ausformulierten Teil und den bloßen Stichpunkten
+#let stichpunktgrenze = [
+  #block(above: 1.8em, below: 1.2em,line(length: 100%, stroke: 2.5pt))
+  #align(center)[ENDE DES VORBEREITETEN TEILS (es folgen Stichpunkte)]
+  #block(above: 1.2em, below: 1.8em,line(length: 100%, stroke: 2.5pt))
+]
 
 // begin{document}
 
@@ -2212,6 +2221,8 @@ Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird s
 #loesung[
   Wir können ungerichtete Graphen als gerichteten Graphen auffassen, wobei eine Kante ${u,v}$ den gerichteten Kanten $(u,v)$ und $(v,u)$ entspricht. Die Kantenrelation ist also notwendig symmetrisch. Weil wir keine Schlingen zugelassen haben, ist sie außerdem irreflexiv. Ungerichtete Graphen mit Knotenmenge $V$ entsprechen also genau den irreflexiven, symmetrischen Relationen auf $V$.
 ]
+
+#stichpunktgrenze
 
 == Ordnungsrelationen
 

@@ -12,8 +12,12 @@ geklonten Verzeichnis genügt
 
     typst compile skript.typ
 
-Setzt man in der ersten Zeile von `skript.typ` `folienModus` auf `true`,
-entsteht statt des Skripts die Projektionsfassung für die Vorlesung.
+Statt des Skripts entsteht die Projektionsfassung für die Vorlesung mit
+
+    typst compile --input folien=true skript.typ
+
+Ohne `--input` gilt der Wert von `folienModus` aus der ersten Zeile von
+`skript.typ`; den stellt man im Editor ein.
 
 ## Fehler
 
