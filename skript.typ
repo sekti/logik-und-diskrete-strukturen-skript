@@ -292,17 +292,6 @@
 
 Für schwierige Inhalte nehmen wir uns Zeit an der Tafel. Einfache Inhalte werden mit dem Beamer angeworfen und schneller besprochen. Im Skript können Sie alles nachlesen.
 
-#table(
-  columns: 5,
-  align: right,
-  stroke: none,
-  [],[*mündlich*],[*Skript*],[*Projektion*],[*Tafel*],
-  table.hline(),
-  [*schwierige Inhalte*],[✓],[✓],[],[✓],
-  [*einfache Inhalte*],[✓],[✓],[✓],[],
-  [*Bemerkungen*],[✓],[✓],[],[],
-)
-
 == Organisatorisches
 
 === Menschen
@@ -312,6 +301,7 @@ Für schwierige Inhalte nehmen wir uns Zeit an der Tafel. Einfache Inhalte werde
     [Dozent],[Stefan Walzer],[(Zi 1.101)],
     [Übungsleiter],[Florian Stober],[(Zi 1.112)],
     [Ergänzungen],[Fabian Bühler],[(Zi 2.236)],
+    [Modulverantwortlicher],[Manfred Kufleitner],[(Zi 1.160)],
   )
 === Veranstaltungen
 
@@ -330,25 +320,31 @@ Für schwierige Inhalte nehmen wir uns Zeit an der Tafel. Einfache Inhalte werde
 
 === Schein
 
-Eine Klausuranmeldung setzt den Schein vorraus. Scheinbedingungen:
+Eine Klausuranmeldung setzt den Schein vorraus. Für den Schein müssen Sie _Pflichtaufgaben_ abgeben, für übrige Aufgaben _votieren_ und die Scheinklausuren bestehen. Genaue Scheinbedingungen:
 - 50% der Punkte der Pflichtaufgaben
 - für 50% der übrigen Aufgaben „votieren“
-  - dann wird gelost? (wer noch nie vorgerechnet hat, hat Vorrang?)
-  - einmal Vorrechnen
+  - aus denjenigen, die votiert haben, wird gelost, wer vorstellt (wenn es niemand freiwillig tut)
+  - jeder muss mindestens einmal Vorrechnen
 - 50% der Punkte der Scheinklausuren
   - November und Januar
 
 === Ilias
-[todo: Link]
-- Ankündigungen
-- Diskussionsforum
-- Vorlesungsskript
-- Übungsblätter und Lösungen
-- Material für Ergänzungen
-// Videoaufzeichnungen? mag ich nicht
+
+Ilias Kurse:
+- #link("https://ilias3.uni-stuttgart.de/go/crs/4553404", "Vorlesung")
+  - Diskussionsforum
+  - Vorlesungsskript
+  // Videoaufzeichnungen? mag ich nicht
+- [Übung] // todo
+  - Übungsblätter
+  - Lösungen
+  
+- #link("https://ilias3.uni-stuttgart.de/go/crs/4553360", "Ergänzungen")
+  - ?
+
 === Hinweis für Wiederholer
 
-Die Vorlesungsinhalte wurde gegenüber dem Vorjahr angepasst. Die Klausur wird so gestaltet, dass sie auch für Wiederholer passt.
+Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird so gestaltet, dass sie auch für Wiederholer passt.
 /*
   Vorschlag: Wahlaufgabe.
     - Logik aus dem Vorjahr oder
