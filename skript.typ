@@ -2404,36 +2404,37 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
 
 == Äquivalenzrelationen
 
+- Definition: Äquivalenzrelation
 - Notation [a] Äquivalenzklasse von a.
-- Satz: a ∈ [a], [a] ∩ [b] ≠ ∅ ⇒ [a] = [b]
 - Schreibweise A / R "modulo"
-- Bild: Partition der Grundmenge
 - Def: Partitionierung
-  - Satz: Umgekehrt, wenn Partitionierung gegeben, dann ist "im gleichen Teil sein" eine ÄR
-- Modulo Rechnung (Teaser)
+- Bild: Partition der Grundmenge
+- Satz A / R ist eine Partitionierung von A
+  - z.Z: [a] ∩ [b] ≠ ∅ ⇒ [a] = [b]
+- Beispiel: 
+- Beispiele: Sei P = ℤ × ℕ⁺ und (z₁,n₁) ~ (z₂,n₂) defiff z₁n₂ = z₂n₁. Beweise: ~ ist eine Äquivalenzrelation.
+- Bemerkung: ℚ := P / ~ ist eine Konstruktion der rationalen Zahlen. Diese sind gegeben durch Brüche der Form z₁/n₁. Die Relation ~ drückt genau aus, dass zwei Paare (z₁,n₁) und (z₂,n₂) dem selben Bruch entsprechen, dass also z₁/n₁ = z₂/n₂.
+- Bemerkung: Ein wichtiges Beispiel für Quotientenmengen werden die Restklassen modulo n sein (siehe Kapitel ...)
+- Für beliebige Mengen A und B und f : A → B ist a ~ a' defiff f(a) = f(a') eine Äquivalenzrelation. Die Äquivalenzklassen sind {f^(-1)(b) | b ∈ f(A)}.
 
 === Zusammenhangskomponenten
 
 #definition("Erreichbarkeit")[
-  Sei $G = (V,E)$ ein ungerichteter Graph. Für $v,w ∈ V$ schreiben wir $v ↭_G w$, falls es einen Weg von $v$ nach $w$ gibt.
-  Analog für gerichtete Graphen: $⇝_G$. Wenn klar ist, welcher Graph gemeint ist, lassen wir den Index weg.
+  Sei $G = (V,E)$ ein ungerichteter Graph. Für $v,w ∈ V$ schreiben wir $v ↭_G w$, falls es einen Weg von $v$ nach $w$ gibt. Wenn klar ist, welcher Graph gemeint ist, lassen wir den Index weg.
 ]
 
 #satz[
-  Für ungerichteten Graphen $G = (V,E)$ ist
-  $↭_G$
-  ist eine Äquivalenzrelation auf $V$.
+  Für jeden ungerichteten Graphen $G = (V,E)$ ist $↭_G$ eine Äquivalenzrelation auf $V$.
 ]
 - Beweis: Reflexivität (Weg der Länge 0), Symmetrie (Weg umdrehen), Transitivität (Wege aneinanderhängen).
 
 #definition("Zusammenhangskomponente")[
-  Die Äquivalenzklassen von $↭_G$ heißen *Zusammenhangskomponenten* von $G$.
+  Die Äquivalenzklassen $V / ↭_G$ von heißen *Zusammenhangskomponenten* von $G$.
 ]
 
-- Notation für die Menge der Äquivalenzklassen?
+- Abbildung mit einem Graphen. Die Bildunterschrift listet die Zusammenhangskomponenten auf.
 - Bemerkung: $G$ ist zusammenhängend genau dann, wenn es genau eine Äquivalenzklasse bzgl. $↭_G$ gibt.
-- Übung: Bei gerichteten Graphen ist Erreichbarkeit im Allgemeinen keine Äquivalenzrelation. Welche Eigenschaft fehlt?
-- Übung Teil 2: „$⇝ ∩ ⇝^(-1)$ ist eine Äquivalenzrelation (starke Zusammenhangskomponenten).
+- Definition und Satz: Sei $G = (V,E)$ ein gerichteter Graph. Dann ist „$⇝ ∩ ⇝^(-1)$ eine Äquivalenzrelation. Die Äquivalenzklassen heißen *starke Zusammenhangskomponenten*.
 
 === Graphisomorphie
 
@@ -2445,8 +2446,7 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
 
 - Idee: Isomorphe Graphen sind „derselbe Graph mit anderen Knotennamen“.
 - Beispiel: Das Sechseck mit seinen drei langen Diagonalen ist isomorph zu $K_(3,3)$ (Isomorphismus angeben).
-- Beispiel: Zwei Zeichnungen desselben Graphen; zwei nicht-isomorphe Graphen mit gleicher Knoten- und Kantenzahl (Gradfolge als Unterscheidungsmerkmal).
-- Übung: Isomorphe Graphen haben dieselbe Gradfolge. Die Umkehrung gilt nicht.
+- Beispiel: Peterson Graph ist nicht isomorph zu zwei geschachtelten Fünfecken.
 
 #satz[
   Sei $𝒢 := {(V,E) | (V,E) "ist Graph mit" V ⊆ ℕ }$.
@@ -2455,7 +2455,6 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
 - Beweis: Identität, Umkehrabbildung und Komposition von Isomorphismen.
 - Bemerkung: Grund der Einschränkung. „Alle Graphen überhaupt“ bilden wie „alle Mengen“ keine Menge.
 
-
 #definition("Unbeschrifteter Graph")[
   Ein *unbeschrifteter Graph* (englisch „unlabeled graph“) mit $n$ Knoten ist eine Äquivalenzklasse bezüglich Isomorphie, also ein Element von
   $ 𝒢 \/ ≅. $
@@ -2463,7 +2462,7 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
 
 - Sprechweise: Wir sagen dann „der Graph“ und meinen seine Isomorphieklasse. Genau das tun wir beim Zeichnen ohne Knotennamen und in der Graphengalerie: $P_4$, $C_6$ oder $K_5$ bezeichnen Isomorphieklassen.
 - Bemerkung: Ob zwei gegebene Graphen isomorph sind, ist algorithmisch überraschend schwer. Für die Anzahl der unbeschrifteten Graphen mit $n$ Knoten gibt es keine einfache Formel. (Beschriftete Graphen sind leicht zu zählen, siehe Kapitel „Zählen“.)
-- Übung: Bestimmen Sie alle unbeschrifteten Graphen mit 3 Knoten. Wie viele beschriftete Graphen mit Knotenmenge ${1,2,3}$ gibt es jeweils in einer Klasse? Warum sind die Klassen nicht alle gleich groß?
+- Übung: Bestimmen Sie alle unbeschrifteten Graphen mit 3 Knoten. Wie viele beschriftete Graphen mit Knotenmenge ${1,2,3}$ gibt es jeweils in einer Klasse?
 
 #slidebreak()
 = Exkurs: Abzählbarkeit
