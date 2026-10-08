@@ -155,6 +155,45 @@
   for b in rechts { content(pos.at(b), text(size: 9pt, b), anchor: "west") }
 })
 
+// Zeichnet einen kleinen Graphen, dessen Knoten sprechende Namen tragen: Statt
+// eines Kreises wird die Beschriftung selbst gesetzt, und die Kanten enden
+// automatisch an deren Rand. Gedacht für Hasse-Diagramme (gerichtet: false,
+// gelesen wird von unten nach oben) und kleine DAGs.
+//
+//   knoten:       Name -> Position, z.B. ("leer": (0,0), "a": (-1,1))
+//   kanten:       Liste von Paaren daraus
+//   beschriftung: Name -> Inhalt; fehlt ein Eintrag, wird der Name gesetzt
+#let textgraphbild(
+  knoten,
+  kanten,
+  beschriftung: (:),
+  gerichtet: false,
+  groesse: 9pt,
+  luft: 2.5pt,
+) = canvas({
+  import draw: *
+
+  for (name, pos) in knoten.pairs() {
+    content(
+      pos,
+      text(size: groesse, beschriftung.at(name, default: [#name])),
+      name: name, frame: "rect", stroke: none, fill: white, padding: luft,
+    )
+  }
+
+  for e in kanten {
+    for name in e {
+      if not knoten.keys().contains(name) {
+        panic("textgraphbild: Die Kante " + repr(e) + " verweist auf den Knoten "
+          + repr(name) + ", der nicht in der Knotenliste steht. Vorhanden sind: "
+          + repr(knoten.keys()))
+      }
+    }
+    let spitze = if gerichtet { (mark: (end: ">", scale: 0.6, fill: black)) } else { (:) }
+    line(e.at(0), e.at(1), stroke: 0.8pt + black, ..spitze)
+  }
+})
+
 // Aus einer Knotenfolge die Liste der benutzten Kanten machen,
 // z.B. folge-kanten(("1","2","3","1")) für den Kreis 1,2,3,1.
 #let folge-kanten(folge) = range(0, folge.len() - 1).map(i => (folge.at(i), folge.at(i + 1)))

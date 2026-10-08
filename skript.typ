@@ -1745,7 +1745,7 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
   Sei $G = (V,E)$ ein gerichteter Graph. Eine Folge $v₀ … v_ℓ$ von Knoten heißt *gerichteter Weg* / *Pfad* / *Zyklus* / *Kreis* unter denselben Bedingungen wie in @wegpfadkreis, mit zwei Änderungen:
   - Statt ${v_i, v_(i+1)} ∈ E$ wird $(v_i, v_(i+1)) ∈ E$ gefordert. Jede Kante muss also in ihrer Richtung durchlaufen werden.
   - Beim Kreis genügt $ℓ ≥ 1$, d.h. Kreise der Form $u v u$ und $u u$ sind erlaubt, wenn die entsprechenden Kanten $(u,v)$ und $(v,u)$ bzw. die Schlinge $(u,u)$ existieren.
-]
+]<gerichteteWege>
 
 #let dKnoten = ("1": (0, 1), "2": (1.5, 1), "3": (0.75, 0), "4": (-1.4, 0.35))
 #let dKanten = (("1", "2"), ("2", "2"), ("2", "3"), ("3", "1"), ("1", "4"), ("4", "1"))
@@ -2222,28 +2222,190 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
 
 == Ordnungsrelationen
 
-- Definition:
-  - Quasiordnung: reflexiv + transitiv
-  - Halbordnung: Quasiordnung + antisymmetrisch
-  - Totalordnung: Halbordnung + total
+#skript[
+  Ordnungsrelationen verallgemeinern „$≤$“. Der Hauptunterschied zu „$≤$“ ist, dass nicht mehr je zwei Elemente vergleichbar sein müssen.
+]
 
-- Uebung: Um welche Art von Ordnung handelt es sich bei folgenden Relationen?
-  - auf 2^ℕ: $ X R Y defiff |X| ≤ |Y| $
-  - auf 2^ℕ: $ ⊆$.
-  - auf $ℕ$: ≤
+#definition[Quasi-, Halb- und Totalordnung][
+  Sei $A$ eine Menge und $≼$ eine Relation auf $A$. Wir nennen $≼$ eine
+  #table(
+    columns: 2,
+    stroke: none,
+    align: (right, left),
+    [*Quasiordnung*], [falls $≼$ reflexiv und transitiv ist,],
+    [*Halbordnung*], [falls $≼$ zusätzlich antisymmetrisch ist,],
+    [*Totalordnung*], [falls $≼$ zusätzlich total ist.],
+  )
+]<ordnungen>
+
+#konvention[Ordnungssymbole][
+  Für eine beliebige Halbordnung schreiben wir $≼$ statt $R$. Das Symbol erinnert an $≤$, ohne mit der vertrauten Ordnung auf den Zahlen verwechselt zu werden.
+]
+
+#notation(kurz: $a ≺ b$)[
+  Ist $≼$ eine Halbordnung auf $A$ und sind $a,b ∈ A$, so schreiben wir
+  $ a ≺ b defiff (a ≼ b) ∧ (a ≠ b). $
+]<strikt>
+
+#notation[vergleichbar][
+  Zwei Elemente $a,b ∈ A$ heißen *vergleichbar*, falls $a ≼ b$ oder $b ≼ a$ gilt, andernfalls *unvergleichbar*. Eine Halbordnung ist also genau dann eine Totalordnung, wenn je zwei Elemente vergleichbar sind.
+]<vergleichbar>
+
+#uebung[Arten von Ordnungen][
+  Sei $U := {1,…,9}$. Um welche Art von Ordnung handelt es sich jeweils?
+  + $≤$ auf $ℕ$,
+  + $⊆$ auf $2^U$,
+  + $divides$ auf $ℕ$,
+  + $<$ auf $ℕ$,
+  + $R$ auf $2^U$ mit $X R Y defiff |X| ≤ |Y|$.
+]<uebOrdnungen>
+
+#loesung[
+  + Totalordnung.
+  + Halbordnung, aber keine Totalordnung: ${1}$ und ${2}$ sind unvergleichbar.
+  + Halbordnung, aber keine Totalordnung: $2$ und $3$ sind unvergleichbar.
+  + Keine Ordnung im Sinne von @ordnungen, denn $<$ ist nicht reflexiv.
+  + Quasiordnung, aber keine Halbordnung: Es gilt ${1} R {2}$ und ${2} R {1}$, aber ${1} ≠ {2}$.
+]
+
+#bemerkung[Strikte Ordnungen][
+  Punkt 4 der @uebOrdnungen zeigt, dass unsere Definition die Relation $<$ ausschließt. Das ist Konvention: Man kann Ordnungen „reflexiv“ ($≤$, $⊆$) oder „strikt“ ($<$, $⊊$) auffassen, und beide Sichtweisen gehen durch $a ≺ b defiff (a ≼ b) ∧ (a ≠ b)$ bzw. $a ≼ b defiff (a ≺ b) ∨ (a = b)$ ineinander über. Wir legen uns auf die reflexive Variante fest und benutzen $≺$ als abgeleitete Schreibweise.
+]
 
 === Erreichbarkeit in gerichteten Graphen
 
-- Def Erreichbarkeit in gerichteten Graphen $u ⇝_G v$ (oder $u ⇝ v$)
-- Def: DAG („directed acyclic graph“), also gerichteter Graph ohne gerichtete Kreise.
-#satz[
-  Sei $G = (V,E)$ ein DAG. Dann ist die $⇝_G$ eine Halbordnung auf $V$.
+#skript[
+  Die wichtigste Quelle für Halbordnungen in der Informatik sind Abhängigkeiten: „$a$ muss vor $b$ erledigt sein“. Solche Abhängigkeiten zeichnet man als gerichteten Graphen, und die zugehörige Ordnung ist die Erreichbarkeit in diesem Graphen.
 ]
-- Beweis
-- Beispiel: Abhängigkeiten zwischen Modulen im Studienplan, Bauteile in einer Montageanleitung, `make`-Abhängigkeiten. Für mindestens ein Beispiel ein Bild heraussuchen.
-- Bemerkung: Eine *topologische Sortierung* ist eine totale Ordnung, die eine gegebene Halbordnung fortsetzt (etwa eine Reihenfolge, in der man die Module belegen kann). Dass es sie stets gibt, ist ein Thema für Algorithmen und Datenstrukturen.
-- Definition: Hasse Diagram
-- Beispiel: Hasse-Diagramme der Teilmengenrelation auf $2^{1,2,3}$ und der Teilbarkeit auf ${1,…,12}$.
+
+#definition("Erreichbarkeit", kurz: $u ⇝_G v$)[
+  Sei $G = (V,E)$ ein gerichteter Graph und seien $u,v ∈ V$. Wir schreiben
+  $ u ⇝_G v defiff "es gibt einen gerichteten Weg von" u "nach" v $
+  und sagen dann, $v$ ist von $u$ aus *erreichbar*. Ist $G$ aus dem Zusammenhang klar, schreiben wir nur $u ⇝ v$.
+]<erreichbarkeit>
+
+#beobachtung[
+  Für jeden gerichteten Graphen $G = (V,E)$ ist $⇝_G$ eine Quasiordnung auf $V$.
+]<erreichbarkeitQuasi>
+
+#begründung[
+  Reflexivität: Die einelementige Folge $v$ ist ein gerichteter Weg der Länge $0$ von $v$ nach $v$, also gilt $v ⇝ v$.
+  Transitivität: Sind $u … v$ und $v … w$ gerichtete Wege, so ist die Hintereinanderschreibung $u … v … w$ wieder ein gerichteter Weg.
+]
+
+#definition[Azyklisch, DAG][
+  Ein gerichteter Graph ohne gerichtete Kreise heißt *azyklisch* oder kurz *DAG*, nach dem englischen _directed acyclic graph_.
+]<dag>
+
+#satz[
+  Sei $G = (V,E)$ ein DAG. Dann ist $⇝_G$ eine Halbordnung auf $V$.
+]<dagHalbordnung>
+
+#beweis[
+  Nach @erreichbarkeitQuasi ist $⇝_G$ eine Quasiordnung. Zu zeigen bleibt die Antisymmetrie, und zwar in kontraponierter Form: Ist $⇝_G$ nicht antisymmetrisch, so hat $G$ einen gerichteten Kreis.
+
+  Sei also $⇝_G$ nicht antisymmetrisch. Dann gibt es $u ≠ v$ mit $u ⇝ v$ und $v ⇝ u$. Hängen wir einen gerichteten Weg von $u$ nach $v$ und einen von $v$ nach $u$ aneinander, so erhalten wir einen gerichteten Zyklus, der sowohl $u$ als auch $v$ enthält und daher Länge $ℓ ≥ 2$ hat. Insbesondere besitzt $G$ einen gerichteten Zyklus der Länge mindestens $1$.
+
+  Sei nun $w₀ w₁ … w_k$ ein _kürzester_ gerichteter Zyklus der Länge $k ≥ 1$ in $G$; einen solchen gibt es nach dem Extremalprinzip (@extremalprinzip). Wir behaupten, dass er ein Kreis ist, dass also $w₀ = w_k$ die einzige Wiederholung ist. Andernfalls gäbe es nämlich $0 ≤ i < j ≤ k$ mit $w_i = w_j$ und $(i,j) ≠ (0,k)$. Dann wäre $w_i … w_j$ ein gerichteter Zyklus der Länge $j - i$ mit $1 ≤ j - i < k$, im Widerspruch zur Wahl von $k$. Also ist $w₀ … w_k$ ein gerichteter Kreis und $G$ kein DAG.
+]
+
+#uebung[
+  Die Umkehrung von @dagHalbordnung gilt nicht: Finden Sie einen gerichteten Graphen $G$, der kein DAG ist, für den $⇝_G$ aber trotzdem eine Halbordnung ist. Welche Kreise muss man ausschließen, um eine Äquivalenz zu erhalten?
+]
+
+#loesung[
+  Der Graph $G = ({u}, {(u,u)})$ hat den gerichteten Kreis $u u$ der Länge $1$, ist also kein DAG. Es gilt aber $⇝_G = {(u,u)}$, und das ist eine Halbordnung.
+
+  Schlingen sind der einzige Störfall: $⇝_G$ ist genau dann eine Halbordnung, wenn $G$ keinen gerichteten Kreis der Länge $ℓ ≥ 2$ enthält. Die eine Richtung liefert der Beweis von @dagHalbordnung, der ja sogar einen Kreis der Länge $ℓ ≥ 2$ findet. Umgekehrt enthält ein gerichteter Kreis $w₀ … w_ℓ$ der Länge $ℓ ≥ 2$ zwei verschiedene Knoten $u$ und $v$, und für diese gilt $u ⇝ v$ und $v ⇝ u$.
+]
+
+#beispiel[Abhängigkeiten][
+  Abhängigkeiten sind der Normalfall eines DAGs:
+  - die Module eines Studiengangs, wobei eine Kante bedeutet „ist Voraussetzung für“ (siehe @modulDag),
+  - die Teilschritte einer Montageanleitung, wobei eine Kante bedeutet „muss vorher erledigt sein“,
+  - die Dateien eines Softwareprojekts, wobei eine Kante bedeutet „muss vorher übersetzt werden“ — genau diesen Graphen beschreibt man in einem `Makefile`.
+  In allen drei Fällen bedeutet $a ⇝ b$, dass $a$ vor $b$ an der Reihe ist. Ein gerichteter Kreis wäre eine zirkuläre Abhängigkeit und damit unerfüllbar.
+]
+
+#abbildung(slides: 0, caption: [
+  Ein DAG von Modulabhängigkeiten. Eine Kante von $a$ nach $b$ bedeutet „$a$ ist Voraussetzung für $b$“.
+])[#textgraphbild(
+  (
+    "PRG": (-1.9, 2), "LDS": (0.9, 2),
+    "ADS": (-0.7, 1), "THI": (1.7, 1),
+    "CPL": (0.3, 0),
+  ),
+  (("PRG", "ADS"), ("LDS", "ADS"), ("LDS", "THI"), ("ADS", "CPL"), ("THI", "CPL")),
+  beschriftung: (
+    "PRG": [Programmierung], "LDS": [LDS], "ADS": [Algorithmen],
+    "THI": [Theoretische Inf.], "CPL": [Compilerbau],
+  ),
+  gerichtet: true,
+)]<modulDag>
+
+#bemerkung[Topologische Sortierung][
+  Eine *topologische Sortierung* einer Halbordnung $≼$ auf einer endlichen Menge $A$ ist eine Totalordnung $⊑$ auf $A$, die $≼$ fortsetzt, für die also aus $a ≼ b$ stets $a ⊑ b$ folgt. Anschaulich ist das eine Reihenfolge, in der man die Module belegen oder die Montageschritte ausführen kann. Eine solche Reihenfolge gibt es immer; wie man sie effizient berechnet, ist ein Thema für Algorithmen und Datenstrukturen.
+]
+
+#skript[
+  Umgekehrt lässt sich jede Halbordnung auf einer endlichen Menge zeichnen — und zwar sparsam, denn Reflexivität und Transitivität muss man nicht mitzeichnen.
+]
+
+#definition[Hasse-Diagramm][
+  Sei $≼$ eine Halbordnung auf einer endlichen Menge $A$. Wir sagen, $b$ *überdeckt* $a$, falls $a ≺ b$ gilt und es kein $c ∈ A$ mit $a ≺ c ≺ b$ gibt.
+
+  Das *Hasse-Diagramm* von $(A, ≼)$ zeichnet man, indem man jedes Element von $A$ als Punkt zeichnet, dabei $b$ stets oberhalb von $a$ platziert, falls $a ≺ b$ gilt, und $a$ und $b$ genau dann durch eine Strecke verbindet, wenn $b$ das Element $a$ überdeckt.
+]<hassediagramm>
+
+#beobachtung[
+  Aus dem Hasse-Diagramm lässt sich $≼$ zurückgewinnen: Für $a,b ∈ A$ gilt $a ≼ b$ genau dann, wenn man im Diagramm von $a$ aus über aufsteigende Strecken zu $b$ gelangt. Fasst man die Strecken als nach oben gerichtete Kanten auf, so entsteht ein DAG $H$, für den $≼$ und $⇝_H$ dieselbe Relation sind.
+]<hasseRekonstruktion>
+
+#beispiel[
+  @hasseTeilmengen zeigt das Hasse-Diagramm der Teilmengenrelation $⊆$ auf $2^({1,2,3})$ und @hasseTeiler das der Teilbarkeitsrelation $divides$ auf ${1,…,12}$.
+
+  Im ersten Diagramm überdeckt $B$ genau dann $A$, wenn $B$ aus $A$ durch Hinzunahme eines einzelnen Elements entsteht. Im zweiten überdeckt $b$ genau dann $a$, wenn $b = a⋅p$ für eine Primzahl $p$ gilt. Die Primzahlen $7$ und $11$ haben in ${1,…,12}$ kein Vielfaches außer sich selbst und bleiben deshalb isoliert über der $1$ stehen.
+]
+
+#abbildung(slides: 0, caption: [
+  Hasse-Diagramm der Teilmengenrelation $⊆$ auf $2^({1,2,3})$.
+])[#textgraphbild(
+  (
+    "e": (0, 0),
+    "a": (-1.3, 1.1), "b": (0, 1.1), "c": (1.3, 1.1),
+    "ab": (-1.3, 2.2), "ac": (0, 2.2), "bc": (1.3, 2.2),
+    "abc": (0, 3.3),
+  ),
+  (
+    ("e", "a"), ("e", "b"), ("e", "c"),
+    ("a", "ab"), ("a", "ac"), ("b", "ab"), ("b", "bc"), ("c", "ac"), ("c", "bc"),
+    ("ab", "abc"), ("ac", "abc"), ("bc", "abc"),
+  ),
+  beschriftung: (
+    "e": $∅$,
+    "a": ${1}$, "b": ${2}$, "c": ${3}$,
+    "ab": ${1,2}$, "ac": ${1,3}$, "bc": ${2,3}$,
+    "abc": ${1,2,3}$,
+  ),
+)]<hasseTeilmengen>
+
+#abbildung(slides: 0, caption: [
+  Hasse-Diagramm der Teilbarkeitsrelation $divides$ auf ${1,…,12}$.
+])[#textgraphbild(
+  (
+    "1": (0, 0),
+    "2": (-2.1, 1.3), "5": (-1.0, 1.3), "3": (0.5, 1.3), "7": (1.6, 1.3), "11": (2.4, 1.3),
+    "4": (-2.5, 2.6), "10": (-1.3, 2.6), "6": (0.0, 2.6), "9": (1.1, 2.6),
+    "8": (-2.5, 3.9), "12": (-1.2, 3.9),
+  ),
+  (
+    ("1", "2"), ("1", "3"), ("1", "5"), ("1", "7"), ("1", "11"),
+    ("2", "4"), ("2", "6"), ("2", "10"),
+    ("3", "6"), ("3", "9"),
+    ("5", "10"),
+    ("4", "8"), ("4", "12"), ("6", "12"),
+  ),
+)]<hasseTeiler>
 
 == Äquivalenzrelationen
 
