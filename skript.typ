@@ -1163,6 +1163,7 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
     [zu zeigen], [Beweisstruktur],
     table.hline(),
     [$∀x ∈ M: F$], [Führe eine Variable $x ∈ M$ ein und beweise $F$, ohne weitere Annahmen über $x$ zu treffen.],
+    [$A ⊆ B$],[beweise $∀x ∈ A: x ∈ B$],
     [$∃x ∈ M: F$],
     [Definiere $x$ „geschickt“, oft in Abhängigkeit anderer Variablen. Beweise dann, dass für diese Wahl von $x$ sowohl $x ∈ M$ als auch $F$ gelten.],
     [$F ∧ G$], [Beweise $F$ und beweise $G$.],
@@ -2222,61 +2223,54 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
 
 == Ordnungsrelationen
 
-#skript[
-  Ordnungsrelationen verallgemeinern „$≤$“. Der Hauptunterschied zu „$≤$“ ist, dass nicht mehr je zwei Elemente vergleichbar sein müssen.
-]
-
 #definition[Quasi-, Halb- und Totalordnung][
   Sei $A$ eine Menge und $≼$ eine Relation auf $A$. Wir nennen $≼$ eine
   #table(
     columns: 2,
     stroke: none,
     align: (right, left),
-    [*Quasiordnung*], [falls $≼$ reflexiv und transitiv ist,],
-    [*Halbordnung*], [falls $≼$ zusätzlich antisymmetrisch ist,],
-    [*Totalordnung*], [falls $≼$ zusätzlich total ist.],
+    [Begriff],[Anforderungen an $≼$],
+    table.hline(),
+    [*Quasiordnung*], [reflexiv, transitiv],
+    [*Halbordnung*], [reflexiv, transitiv, antisymmetrisch,],
+    [*Totalordnung*], [reflexiv, transitiv, antisymmetrisch, total.],
   )
+  Zwei Elemente $a,b ∈ A$ heißen *vergleichbar*, falls $a ≼ b$ oder $b ≼ a$ oder $a = b$ gilt, andernfalls *unvergleichbar*.#footnote[Eine Halbordnung ist also genau dann eine Totalordnung, wenn je zwei Elemente vergleichbar sind.]
 ]<ordnungen>
 
-#konvention[Ordnungssymbole][
-  Für eine beliebige Halbordnung schreiben wir $≼$ statt $R$. Das Symbol erinnert an $≤$, ohne mit der vertrauten Ordnung auf den Zahlen verwechselt zu werden.
-]
-
-#notation(kurz: $a ≺ b$)[
-  Ist $≼$ eine Halbordnung auf $A$ und sind $a,b ∈ A$, so schreiben wir
-  $ a ≺ b defiff (a ≼ b) ∧ (a ≠ b). $
-]<strikt>
-
-#notation[vergleichbar][
-  Zwei Elemente $a,b ∈ A$ heißen *vergleichbar*, falls $a ≼ b$ oder $b ≼ a$ gilt, andernfalls *unvergleichbar*. Eine Halbordnung ist also genau dann eine Totalordnung, wenn je zwei Elemente vergleichbar sind.
-]<vergleichbar>
-
-#uebung[Arten von Ordnungen][
-  Sei $U := {1,…,9}$. Um welche Art von Ordnung handelt es sich jeweils?
+#uebung[
+  Um welche Art von Ordnung handelt es sich jeweils?
   + $≤$ auf $ℕ$,
-  + $⊆$ auf $2^U$,
-  + $divides$ auf $ℕ$,
   + $<$ auf $ℕ$,
-  + $R$ auf $2^U$ mit $X R Y defiff |X| ≤ |Y|$.
+  + $⊆$ auf $2^ℕ$,
+  + $divides$ auf $ℕ$,
+  + $R$ auf $2^({1,…,9})$ mit $X R Y defiff |X| ≤ |Y|$.
 ]<uebOrdnungen>
 
 #loesung[
-  + Totalordnung.
-  + Halbordnung, aber keine Totalordnung: ${1}$ und ${2}$ sind unvergleichbar.
-  + Halbordnung, aber keine Totalordnung: $2$ und $3$ sind unvergleichbar.
-  + Keine Ordnung im Sinne von @ordnungen, denn $<$ ist nicht reflexiv.
-  + Quasiordnung, aber keine Halbordnung: Es gilt ${1} R {2}$ und ${2} R {1}$, aber ${1} ≠ {2}$.
-]
-
-#bemerkung[Strikte Ordnungen][
-  Punkt 4 der @uebOrdnungen zeigt, dass unsere Definition die Relation $<$ ausschließt. Das ist Konvention: Man kann Ordnungen „reflexiv“ ($≤$, $⊆$) oder „strikt“ ($<$, $⊊$) auffassen, und beide Sichtweisen gehen durch $a ≺ b defiff (a ≼ b) ∧ (a ≠ b)$ bzw. $a ≼ b defiff (a ≺ b) ∨ (a = b)$ ineinander über. Wir legen uns auf die reflexive Variante fest und benutzen $≺$ als abgeleitete Schreibweise.
+  Die Eigenschaften lassen sich leicht prüfen:
+  #align(center, text(size: 0.85em, table(
+    columns: 6,
+    stroke: none,
+    align: (left, center, center, center, center, left),
+    column-gutter: 0.5em,
+    [], [refl.], [trans.], [antis.], [total], [stärkster erfüllter Begriff],
+    table.hline(),
+    [$≤$ auf $ℕ$], [✓], [✓], [✓], [✓], [Totalordnung],
+    [$<$ auf $ℕ$], [–], [✓], [✓], [–], [keine Ordnung#footnote[Man nennt $<$ eine *strikte Totalordnung*, mit den Anforderungen _irreflexiv_, _transitiv_ und _total_. Es gibt auch den Begriff der *strikten Halbordnung*, mit den Anforderungen _irreflexiv_ und _transitiv_. Die Unterschiede zu den nicht-strikten Varianten sind mathematisch uninteressant.]],
+    [$⊆$ auf $2^ℕ$], [✓], [✓], [✓], [–], [Halbordnung],
+    [$divides$ auf $ℕ$], [✓], [✓], [✓], [–], [Halbordnung],
+    [$R$ auf $2^({1,…,9})$], [✓], [✓], [–], [✓], [Quasiordnung],
+  )))
+  Wir begründen nur die überraschenden Einträgen:
+  - „$<$“ ist antisymmetrisch, weil die linke Seite $a < b ∧ b < a$ der Implikation unerfüllbar ist.
+  - „⊆“ ist nicht total weil ${1}$ und ${2}$ unvergleichbar sind.
+  - „|“ ist nicht total weil $2$ und $3$ unvergleichbar sind.
+  - „$divides$“ ist auf $ℕ$ antisymmetrisch: Für $a,b ∈ ℕ⁺$ folgt aus $a divides b$ und $b divides a$ schon $a = b$. Zur Null: $0 divides b$ erzwingt $b = 0$.
+  - $R$ ist nicht antisymmetrisch, denn ${1} R {2}$ und ${2} R {1}$, aber ${1} ≠ {2}$.
 ]
 
 === Erreichbarkeit in gerichteten Graphen
-
-#skript[
-  Die wichtigste Quelle für Halbordnungen in der Informatik sind Abhängigkeiten: „$a$ muss vor $b$ erledigt sein“. Solche Abhängigkeiten zeichnet man als gerichteten Graphen, und die zugehörige Ordnung ist die Erreichbarkeit in diesem Graphen.
-]
 
 #definition("Erreichbarkeit", kurz: $u ⇝_G v$)[
   Sei $G = (V,E)$ ein gerichteter Graph und seien $u,v ∈ V$. Wir schreiben
@@ -2284,39 +2278,43 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
   und sagen dann, $v$ ist von $u$ aus *erreichbar*. Ist $G$ aus dem Zusammenhang klar, schreiben wir nur $u ⇝ v$.
 ]<erreichbarkeit>
 
-#beobachtung[
+#satz[
   Für jeden gerichteten Graphen $G = (V,E)$ ist $⇝_G$ eine Quasiordnung auf $V$.
 ]<erreichbarkeitQuasi>
 
-#begründung[
-  Reflexivität: Die einelementige Folge $v$ ist ein gerichteter Weg der Länge $0$ von $v$ nach $v$, also gilt $v ⇝ v$.
-  Transitivität: Sind $u … v$ und $v … w$ gerichtete Wege, so ist die Hintereinanderschreibung $u … v … w$ wieder ein gerichteter Weg.
+#beweis[
+  / Reflexivität: Sei $v ∈ V$. Die einelementige Folge $v$ ist ein gerichteter Weg der Länge $ℓ = 0$ von $v$ nach $v$. Er bezeugt $v ⇝ v$.
+  / Transitivität: Gelte $u ⇝ v$ und $v ⇝ w$. Also gibt es einen gerichteten Weg $u x₁ … x_k v$ von $u$ nach $v$ und einen gerichteten Weg $v y₁ … y_ℓ w$ von $v$ nach $w$. Durch zusammensetzen ergibt sich ein gerichteter Weg $u x₁ … x_k v y₁ … y_ℓ w$ von $u$ nach $w$. Somit gilt $u ⇝ w$.#qedhere
 ]
 
 #definition[Azyklisch, DAG][
-  Ein gerichteter Graph ohne gerichtete Kreise heißt *azyklisch* oder kurz *DAG*, nach dem englischen _directed acyclic graph_.
+  Ein gerichteter Graph ohne gerichtete Kreise heißt *azyklisch* oder *directed acyclic graph* (kurz *DAG*).
 ]<dag>
 
+#lemma[
+  Sei $G = (V,E)$ ein gerichteter Graph. Wenn $G$ einen Zyklus positiver Länge enthält, dann enthält $G$ auch einen Kreis.
+]<zyklusGibtKreis>
+
+#beweis[
+  Sei nun $v₀ v₁ … v_k$ ein gerichteter Zyklus mit kürzester positiver Länge $k > 0$ (wir verwenden das Extremalprinzip @extremalprinzip). Wir behaupten, dass er ein Kreis ist, dass also $v₀ = v_k$ die einzige Wiederholung ist. Andernfalls gäbe es nämlich $0 ≤ i < j ≤ k$ mit $v_i = v_j$ und $(i,j) ≠ (0,k)$. Dann wäre $v_i … v_j$ ein gerichteter Zyklus der Länge $j - i$ mit $1 ≤ j - i < k$, im Widerspruch zur Wahl von $k$. Also ist $v₀ … v_k$ ein gerichteter Kreis und $G$ kein DAG.
+]
+
 #satz[
-  Sei $G = (V,E)$ ein DAG. Dann ist $⇝_G$ eine Halbordnung auf $V$.
+  Wenn $G = (V,E)$ ein DAG ist, so ist $⇝_G$ eine Halbordnung auf $V$.
 ]<dagHalbordnung>
 
 #beweis[
-  Nach @erreichbarkeitQuasi ist $⇝_G$ eine Quasiordnung. Zu zeigen bleibt die Antisymmetrie, und zwar in kontraponierter Form: Ist $⇝_G$ nicht antisymmetrisch, so hat $G$ einen gerichteten Kreis.
+  Nach @erreichbarkeitQuasi ist $⇝_G$ eine Quasiordnung. Zu zeigen bleibt die Antisymmetrie. Wir zeigen die Kontraposition: Ist $⇝_G$ nicht antisymmetrisch, so hat $G$ einen gerichteten Kreis.
 
-  Sei also $⇝_G$ nicht antisymmetrisch. Dann gibt es $u ≠ v$ mit $u ⇝ v$ und $v ⇝ u$. Hängen wir einen gerichteten Weg von $u$ nach $v$ und einen von $v$ nach $u$ aneinander, so erhalten wir einen gerichteten Zyklus, der sowohl $u$ als auch $v$ enthält und daher Länge $ℓ ≥ 2$ hat. Insbesondere besitzt $G$ einen gerichteten Zyklus der Länge mindestens $1$.
-
-  Sei nun $w₀ w₁ … w_k$ ein _kürzester_ gerichteter Zyklus der Länge $k ≥ 1$ in $G$; einen solchen gibt es nach dem Extremalprinzip (@extremalprinzip). Wir behaupten, dass er ein Kreis ist, dass also $w₀ = w_k$ die einzige Wiederholung ist. Andernfalls gäbe es nämlich $0 ≤ i < j ≤ k$ mit $w_i = w_j$ und $(i,j) ≠ (0,k)$. Dann wäre $w_i … w_j$ ein gerichteter Zyklus der Länge $j - i$ mit $1 ≤ j - i < k$, im Widerspruch zur Wahl von $k$. Also ist $w₀ … w_k$ ein gerichteter Kreis und $G$ kein DAG.
+  Sei also $⇝_G$ nicht antisymmetrisch. Dann gibt es $u,v ∈ V$ mit $u ≠ v$, $u ⇝ v$ sowie $v ⇝ u$. Es ergeben sich also gerichtete Wege von $u$ nach $v$ sowie von $v$ nach $u$. Hängen wir sie zusammen ergibt sich ein gerichteter Zyklus der Länge mindestens $2$. Nach @zyklusGibtKreis enthält $G$ also einen Kreis.
 ]
 
 #uebung[
-  Die Umkehrung von @dagHalbordnung gilt nicht: Finden Sie einen gerichteten Graphen $G$, der kein DAG ist, für den $⇝_G$ aber trotzdem eine Halbordnung ist. Welche Kreise muss man ausschließen, um eine Äquivalenz zu erhalten?
+  Zeigen Sie: Die Umkehrung von @dagHalbordnung gilt nicht (aus spitzfindigen Gründen).
 ]
 
 #loesung[
-  Der Graph $G = ({u}, {(u,u)})$ hat den gerichteten Kreis $u u$ der Länge $1$, ist also kein DAG. Es gilt aber $⇝_G = {(u,u)}$, und das ist eine Halbordnung.
-
-  Schlingen sind der einzige Störfall: $⇝_G$ ist genau dann eine Halbordnung, wenn $G$ keinen gerichteten Kreis der Länge $ℓ ≥ 2$ enthält. Die eine Richtung liefert der Beweis von @dagHalbordnung, der ja sogar einen Kreis der Länge $ℓ ≥ 2$ findet. Umgekehrt enthält ein gerichteter Kreis $w₀ … w_ℓ$ der Länge $ℓ ≥ 2$ zwei verschiedene Knoten $u$ und $v$, und für diese gilt $u ⇝ v$ und $v ⇝ u$.
+  Nehmen wir einen beliebigen DAG (dessen Erreichbarkeitsrelation also eine Ordnungsrelation ist) und fügen Schlingen hinzu, so ist der resultierende Graph kein DAG mehr. Die Erreichbarkeitsrelation ist aber immer noch die gleiche, also immer noch eine Ordnungsrelation.
 ]
 
 #beispiel[Abhängigkeiten][
