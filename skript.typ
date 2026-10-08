@@ -316,7 +316,12 @@ Für schwierige Inhalte nehmen wir uns Zeit an der Tafel. Einfache Inhalte werde
 
 - Die Vorlesung hat nominell 3 SWS (nicht SWS 4).\
   Nur rund 21 Termine werden genutzt.
-- Übungsanmeldung über Campus [todo: ab wann?]
+- Übungen (Tutorien)
+  - Anmeldung über Campus ab Donnerstag, 15. Oktober, 19:00 Uhr.
+    - first come, first served!
+  - Gruppenabgaben zulässig [Todo: Gruppengröße?]
+  - Erstes Blatt vorraussichtlich in Vorlesungswoche 2.
+  - Erste Übungen vorraussichtlich in Vorlesungswoche 3.
 
 === Schein
 
@@ -2219,8 +2224,6 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
   Wir können ungerichtete Graphen als gerichteten Graphen auffassen, wobei eine Kante ${u,v}$ den gerichteten Kanten $(u,v)$ und $(v,u)$ entspricht. Die Kantenrelation ist also notwendig symmetrisch. Weil wir keine Schlingen zugelassen haben, ist sie außerdem irreflexiv. Ungerichtete Graphen mit Knotenmenge $V$ entsprechen also genau den irreflexiven, symmetrischen Relationen auf $V$.
 ]
 
-#stichpunktgrenze
-
 == Ordnungsrelationen
 
 #definition[Quasi-, Halb- und Totalordnung][
@@ -2229,11 +2232,11 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
     columns: 2,
     stroke: none,
     align: (right, left),
-    [Begriff],[Anforderungen an $≼$],
+    [Begriff], [Anforderungen an $≼$],
     table.hline(),
     [*Quasiordnung*], [reflexiv, transitiv],
-    [*Halbordnung*], [reflexiv, transitiv, antisymmetrisch,],
-    [*Totalordnung*], [reflexiv, transitiv, antisymmetrisch, total.],
+    [*Halbordnung*], [reflexiv, transitiv, antisymmetrisch],
+    [*Totalordnung*], [reflexiv, transitiv, antisymmetrisch, total],
   )
   Zwei Elemente $a,b ∈ A$ heißen *vergleichbar*, falls $a ≼ b$ oder $b ≼ a$ oder $a = b$ gilt, andernfalls *unvergleichbar*.#footnote[Eine Halbordnung ist also genau dann eine Totalordnung, wenn je zwei Elemente vergleichbar sind.]
 ]<ordnungen>
@@ -2262,10 +2265,10 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
     [$divides$ auf $ℕ$], [✓], [✓], [✓], [–], [Halbordnung],
     [$R$ auf $2^({1,…,9})$], [✓], [✓], [–], [✓], [Quasiordnung],
   )))
-  Wir begründen nur die überraschenden Einträgen:
-  - „$<$“ ist antisymmetrisch, weil die linke Seite $a < b ∧ b < a$ der Implikation unerfüllbar ist.
-  - „⊆“ ist nicht total weil ${1}$ und ${2}$ unvergleichbar sind.
-  - „|“ ist nicht total weil $2$ und $3$ unvergleichbar sind.
+  Wir begründen nur die überraschenden Einträge:
+  - „$<$“ ist antisymmetrisch, weil die Prämisse $a < b ∧ b < a$ der Implikation unerfüllbar ist.
+  - „$⊆$“ ist nicht total, weil ${1}$ und ${2}$ unvergleichbar sind.
+  - „$divides$“ ist nicht total, weil $2$ und $3$ unvergleichbar sind.
   - „$divides$“ ist auf $ℕ$ antisymmetrisch: Für $a,b ∈ ℕ⁺$ folgt aus $a divides b$ und $b divides a$ schon $a = b$. Zur Null: $0 divides b$ erzwingt $b = 0$.
   - $R$ ist nicht antisymmetrisch, denn ${1} R {2}$ und ${2} R {1}$, aber ${1} ≠ {2}$.
 ]
@@ -2284,7 +2287,7 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
 
 #beweis[
   / Reflexivität: Sei $v ∈ V$. Die einelementige Folge $v$ ist ein gerichteter Weg der Länge $ℓ = 0$ von $v$ nach $v$. Er bezeugt $v ⇝ v$.
-  / Transitivität: Gelte $u ⇝ v$ und $v ⇝ w$. Also gibt es einen gerichteten Weg $u x₁ … x_k v$ von $u$ nach $v$ und einen gerichteten Weg $v y₁ … y_ℓ w$ von $v$ nach $w$. Durch zusammensetzen ergibt sich ein gerichteter Weg $u x₁ … x_k v y₁ … y_ℓ w$ von $u$ nach $w$. Somit gilt $u ⇝ w$.#qedhere
+  / Transitivität: Gelte $u ⇝ v$ und $v ⇝ w$. Zu zeigen ist $u ⇝ w$. Für $u = v$ oder $v = w$ ist das trivial. Andernfalls gibt es einen gerichteten Weg $u x₁ … x_k v$ von $u$ nach $v$ (mit $k ∈ ℕ$) und einen gerichteten Weg $v y₁ … y_ℓ w$ von $v$ nach $w$ (mit $ℓ ∈ ℕ$). Durch Zusammensetzen ergibt sich ein gerichteter Weg $u x₁ … x_k v y₁ … y_ℓ w$ von $u$ nach $w$. Somit gilt $u ⇝ w$.#qedhere
 ]
 
 #definition[Azyklisch, DAG][
@@ -2292,11 +2295,11 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
 ]<dag>
 
 #lemma[
-  Sei $G = (V,E)$ ein gerichteter Graph. Wenn $G$ einen Zyklus positiver Länge enthält, dann enthält $G$ auch einen Kreis.
+  Sei $G = (V,E)$ ein gerichteter Graph. Wenn $G$ einen gerichteten Zyklus positiver Länge enthält, dann enthält $G$ auch einen gerichteten Kreis.
 ]<zyklusGibtKreis>
 
 #beweis[
-  Sei nun $v₀ v₁ … v_k$ ein gerichteter Zyklus mit kürzester positiver Länge $k > 0$ (wir verwenden das Extremalprinzip @extremalprinzip). Wir behaupten, dass er ein Kreis ist, dass also $v₀ = v_k$ die einzige Wiederholung ist. Andernfalls gäbe es nämlich $0 ≤ i < j ≤ k$ mit $v_i = v_j$ und $(i,j) ≠ (0,k)$. Dann wäre $v_i … v_j$ ein gerichteter Zyklus der Länge $j - i$ mit $1 ≤ j - i < k$, im Widerspruch zur Wahl von $k$. Also ist $v₀ … v_k$ ein gerichteter Kreis und $G$ kein DAG.
+  Sei $v₀ v₁ … v_k$ ein gerichteter Zyklus mit kürzester positiver Länge $k > 0$ (wir verwenden das Extremalprinzip, siehe @extremalprinzip). Wir behaupten, dass er ein Kreis ist, dass also $v₀ = v_k$ die einzige Wiederholung ist. Andernfalls gäbe es nämlich $0 ≤ i < j ≤ k$ mit $v_i = v_j$ und $(i,j) ≠ (0,k)$. Dann wäre $v_i … v_j$ ein gerichteter Zyklus der Länge $j - i$ mit $1 ≤ j - i < k$, im Widerspruch zur Wahl von $k$. Also ist $v₀ … v_k$ ein gerichteter Kreis.
 ]
 
 #satz[
@@ -2306,7 +2309,7 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
 #beweis[
   Nach @erreichbarkeitQuasi ist $⇝_G$ eine Quasiordnung. Zu zeigen bleibt die Antisymmetrie. Wir zeigen die Kontraposition: Ist $⇝_G$ nicht antisymmetrisch, so hat $G$ einen gerichteten Kreis.
 
-  Sei also $⇝_G$ nicht antisymmetrisch. Dann gibt es $u,v ∈ V$ mit $u ≠ v$, $u ⇝ v$ sowie $v ⇝ u$. Es ergeben sich also gerichtete Wege von $u$ nach $v$ sowie von $v$ nach $u$. Hängen wir sie zusammen ergibt sich ein gerichteter Zyklus der Länge mindestens $2$. Nach @zyklusGibtKreis enthält $G$ also einen Kreis.
+  Sei also $⇝_G$ nicht antisymmetrisch. Dann gibt es $u,v ∈ V$ mit $u ≠ v$, $u ⇝ v$ sowie $v ⇝ u$. Es ergeben sich also gerichtete Wege von $u$ nach $v$ sowie von $v$ nach $u$. Hängen wir sie zusammen, ergibt sich ein gerichteter Zyklus der Länge mindestens $2$. Nach @zyklusGibtKreis enthält $G$ also einen gerichteten Kreis.
 ]
 
 #uebung[
@@ -2314,7 +2317,7 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
 ]
 
 #loesung[
-  Nehmen wir einen beliebigen DAG (dessen Erreichbarkeitsrelation also eine Ordnungsrelation ist) und fügen Schlingen hinzu, so ist der resultierende Graph kein DAG mehr. Die Erreichbarkeitsrelation ist aber immer noch die gleiche, also immer noch eine Ordnungsrelation.
+  Nehmen wir einen beliebigen DAG (dessen Erreichbarkeitsrelation also eine Halbordnung ist) und fügen Schlingen hinzu, so ist der resultierende Graph kein DAG mehr. Die Erreichbarkeitsrelation ist aber immer noch die gleiche, also immer noch eine Halbordnung.
 ]
 
 #beispiel[Abhängigkeiten][
@@ -2335,24 +2338,24 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
     ("LDS", "PPR"),
   ),
   beschriftung: (
-    "PSE": [Programmierung und\ Software-Entwicklung],
-    "LDS": [Logik & Diskrete\ Strukturen],
-    "DSA": [Datenstrukturen\ und Algorithmen],
-    "FSB": [Formale Sprachen &\ Berechenbarkeit],
-    "PPR": [Programmierprojekt],
-    "KTA": [Komplexitätstheorie\ & Algorithmik],
+    "PSE": [Programmierung und\ Software-Entwicklung (PSE)],
+    "LDS": [Logik & Diskrete\ Strukturen (LDS)],
+    "DSA": [Datenstrukturen und\ Algorithmen (DSA)],
+    "FSB": [Formale Sprachen &\ Berechenbarkeit (FSB)],
+    "PPR": [Programmierprojekt (PPR)],
+    "KTA": [Komplexitätstheorie\ & Algorithmik (KTA)],
   ),
   gerichtet: true,
 )]<modulDag>
 
 #bemerkung[Topologische Sortierung][
-  Eine *topologische Sortierung* einer Halbordnung $≼$ auf einer endlichen Menge $A$ ist eine Totalordnung $⊑$ auf $A$ mit $"≼" ⊆ "⊑"$ (d.h. aus $a ≼ b$ folgt $a ⊑ b$). Ist $≼$ die Erreichbarkeitsrelation in @modulDag, so entspricht $⊑$ einer Reihenfolge, in der man die Module belegen kann also z.B.
-  $ "LDS" ⊑ "FSB" ⊑ "PSE" ⊑ "DSA" ⊑ "PPR" ⊑ "KTA"  $
+  Eine *topologische Sortierung* einer Halbordnung $≼$ auf einer endlichen Menge $A$ ist eine Totalordnung $⊑$ auf $A$ mit $"≼" ⊆ "⊑"$ (d.h. aus $a ≼ b$ folgt $a ⊑ b$). Ist $≼$ die Erreichbarkeitsrelation in @modulDag, so entspricht $⊑$ einer Reihenfolge, in der man die Module belegen kann, also z.B.
+  $ "LDS" ⊑ "FSB" ⊑ "PSE" ⊑ "DSA" ⊑ "PPR" ⊑ "KTA". $
   Wie man eine solche Reihenfolge findet, ist Thema der Vorlesung Datenstrukturen und Algorithmen.
 ]
 
-#bemerkung[Hasse Diagramm][
-  Eine sparsame visuelle Darstellung einer Halbordnung $≼$ auf einer endlichen Menge ist das *Hassediagramm*. Eine Kante $(a,b)$ drückt $a ≼ b$ aus. Man lässt aber alle Kanten weg, die sich aus Reflexivität und Transitivität automatisch ergeben. Die Richtung der Kante ist implizit von unten nach oben.
+#bemerkung[Hasse-Diagramm][
+  Eine sparsame visuelle Darstellung einer Halbordnung $≼$ auf einer endlichen Menge ist das *Hasse-Diagramm* — ein bestimmter gerichteter Graph. Eine Kante $(a,b)$ drückt $a ≼ b$ aus. Man lässt aber alle Kanten weg, die sich aus Reflexivität und Transitivität automatisch ergeben. Die Richtung der Kanten ist implizit von unten nach oben. Die Erreichbarkeitsrelation ist genau $≼$.
 ]
 
 #abbildung(slides: 0, caption: [
@@ -2378,13 +2381,14 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
 )]<hasseTeilmengen>
 
 #abbildung(slides: 0, caption: [
-  Hasse-Diagramm der Teilbarkeitsrelation $divides$ auf ${1,…,12}$.
+  Hasse-Diagramm der Teilbarkeitsrelation $divides$ auf ${0,1,…,12}$. Wegen $a ⋅ 0 = 0$ gilt $a divides 0$ für jedes $a$; die $0$ ist also das größte Element.
 ])[#textgraphbild(
   (
     "1": (0, 0),
-    "2": (-2.1, 1.3), "5": (-1.0, 1.3), "3": (0.5, 1.3), "7": (1.6, 1.3), "11": (2.4, 1.3),
-    "4": (-2.5, 2.6), "10": (-1.3, 2.6), "6": (0.0, 2.6), "9": (1.1, 2.6),
+    "2": (-2.1, 1.3), "5": (-1.0, 1.3), "3": (0.5, 1.3), "7": (1.9, 1.3), "11": (2.8, 1.3),
+    "4": (-2.5, 2.6), "10": (-1.3, 2.6), "6": (0.0, 2.6), "9": (1.0, 2.6),
     "8": (-2.5, 3.9), "12": (-1.2, 3.9),
+    "0": (0.3, 5.3),
   ),
   (
     ("1", "2"), ("1", "3"), ("1", "5"), ("1", "7"), ("1", "11"),
@@ -2392,8 +2396,11 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
     ("3", "6"), ("3", "9"),
     ("5", "10"),
     ("4", "8"), ("4", "12"), ("6", "12"),
+    ("7", "0"), ("8", "0"), ("9", "0"), ("10", "0"), ("11", "0"), ("12", "0"),
   ),
 )]<hasseTeiler>
+
+#stichpunktgrenze
 
 == Äquivalenzrelationen
 
