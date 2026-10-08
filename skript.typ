@@ -1,6 +1,6 @@
 // Projektionsfassung (true) oder Skript (false). Der hier gesetzte Wert gilt im
 // Editor; auf der Kommandozeile hat „--input folien=true/false“ Vorrang.
-#let folienModus = if "folien" in sys.inputs { sys.inputs.folien == "true" } else { true }
+#let folienModus = if "folien" in sys.inputs { sys.inputs.folien == "true" } else { false }
 
 // imports
   #import "@preview/ctheorems:2.0.0": *
@@ -2227,27 +2227,24 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
   - Halbordnung: Quasiordnung + antisymmetrisch
   - Totalordnung: Halbordnung + total
 
-- Uebung: Welche 
+- Uebung: Um welche Art von Ordnung handelt es sich bei folgenden Relationen?
   - auf 2^ℕ: $ X R Y defiff |X| ≤ |Y| $
   - auf 2^ℕ: $ ⊆$.
   - auf $ℕ$: ≤
-- xkcd Bild: Früchte
 
-=== Ordnungen und gerichtete Graphen
+=== Erreichbarkeit in gerichteten Graphen
 
+- Def Erreichbarkeit in gerichteten Graphen $u ⇝_G v$ (oder $u ⇝ v$)
 - Def: DAG („directed acyclic graph“), also gerichteter Graph ohne gerichtete Kreise.
 #satz[
-  Sei $G = (V,E)$ ein DAG. Dann ist die Erreichbarkeitsrelation
-  $ v ≼ w defiff "es gibt einen gerichteten Weg von" v "nach" w $
-  eine Halbordnung auf $V$.
+  Sei $G = (V,E)$ ein DAG. Dann ist die $⇝_G$ eine Halbordnung auf $V$.
 ]
+- Beweis
+- Beispiel: Abhängigkeiten zwischen Modulen im Studienplan, Bauteile in einer Montageanleitung, `make`-Abhängigkeiten. Für mindestens ein Beispiel ein Bild heraussuchen.
+- Bemerkung: Eine *topologische Sortierung* ist eine totale Ordnung, die eine gegebene Halbordnung fortsetzt (etwa eine Reihenfolge, in der man die Module belegen kann). Dass es sie stets gibt, ist ein Thema für Algorithmen und Datenstrukturen.
+- Definition: Hasse Diagram
+- Beispiel: Hasse-Diagramme der Teilmengenrelation auf $2^{1,2,3}$ und der Teilbarkeit auf ${1,…,12}$.
 
-- Beweis: Reflexivität und Transitivität wie zuvor; die Antisymmetrie folgt aus der Kreisfreiheit.
-- Beispiel: Abhängigkeiten zwischen Modulen im Studienplan, Bauteile in einer Montageanleitung, `make`-Abhängigkeiten.
-- Bemerkung: Umgekehrt lässt sich jede _strikte_ Halbordnung als DAG zeichnen.
-    - man zeichnet nur die „unmittelbaren“ Beziehungen, das heißt *Hasse-Diagramm*.
-    - Beispiel: Hasse-Diagramme der Teilmengenrelation auf $2^{1,2,3}$ und der Teilbarkeit auf ${1,…,12}$.
-- Ausblick: Eine *topologische Sortierung* ist eine totale Ordnung, die eine gegebene Halbordnung fortsetzt (etwa eine Reihenfolge, in der man die Module belegen kann). Dass es sie stets gibt, ist ein Thema für Algorithmen und Datenstrukturen.
 == Äquivalenzrelationen
 
 - Notation [a] Äquivalenzklasse von a.
