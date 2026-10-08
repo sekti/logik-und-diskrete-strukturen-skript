@@ -2318,51 +2318,41 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
 ]
 
 #beispiel[Abhängigkeiten][
-  Abhängigkeiten sind der Normalfall eines DAGs:
-  - die Module eines Studiengangs, wobei eine Kante bedeutet „ist Voraussetzung für“ (siehe @modulDag),
-  - die Teilschritte einer Montageanleitung, wobei eine Kante bedeutet „muss vorher erledigt sein“,
-  - die Dateien eines Softwareprojekts, wobei eine Kante bedeutet „muss vorher übersetzt werden“ — genau diesen Graphen beschreibt man in einem `Makefile`.
-  In allen drei Fällen bedeutet $a ⇝ b$, dass $a$ vor $b$ an der Reihe ist. Ein gerichteter Kreis wäre eine zirkuläre Abhängigkeit und damit unerfüllbar.
+  Ein DAG drückt häufig zeitliche oder logische Abhängigkeiten aus. Ein Beispiel ist @modulDag. Ein gerichteter Kreis wäre eine zirkuläre Abhängigkeit und damit problematisch.
 ]
 
 #abbildung(slides: 0, caption: [
-  Ein DAG von Modulabhängigkeiten. Eine Kante von $a$ nach $b$ bedeutet „$a$ ist Voraussetzung für $b$“.
+  Einige Informatikmodule. Eine Kante von $a$ nach $b$ bedeutet, dass $b$ auf den Inhalten von $a$ aufbaut.
 ])[#textgraphbild(
   (
-    "PRG": (-1.9, 2), "LDS": (0.9, 2),
-    "ADS": (-0.7, 1), "THI": (1.7, 1),
-    "CPL": (0.3, 0),
+    "PSE": (-2.0, 3.0), "LDS": (2.0, 3.0),
+    "DSA": (-2.0, 1.5), "FSB": (2.0, 1.5),
+    "PPR": (-2.0, 0.0), "KTA": (2.0, 0.0),
   ),
-  (("PRG", "ADS"), ("LDS", "ADS"), ("LDS", "THI"), ("ADS", "CPL"), ("THI", "CPL")),
+  (
+    ("PSE", "DSA"), ("LDS", "DSA"), ("LDS", "FSB"),
+    ("DSA", "PPR"), ("DSA", "KTA"), ("FSB", "KTA"),
+    ("LDS", "PPR"),
+  ),
   beschriftung: (
-    "PRG": [Programmierung], "LDS": [LDS], "ADS": [Algorithmen],
-    "THI": [Theoretische Inf.], "CPL": [Compilerbau],
+    "PSE": [Programmierung und\ Software-Entwicklung],
+    "LDS": [Logik & Diskrete\ Strukturen],
+    "DSA": [Datenstrukturen\ und Algorithmen],
+    "FSB": [Formale Sprachen &\ Berechenbarkeit],
+    "PPR": [Programmierprojekt],
+    "KTA": [Komplexitätstheorie\ & Algorithmik],
   ),
   gerichtet: true,
 )]<modulDag>
 
 #bemerkung[Topologische Sortierung][
-  Eine *topologische Sortierung* einer Halbordnung $≼$ auf einer endlichen Menge $A$ ist eine Totalordnung $⊑$ auf $A$, die $≼$ fortsetzt, für die also aus $a ≼ b$ stets $a ⊑ b$ folgt. Anschaulich ist das eine Reihenfolge, in der man die Module belegen oder die Montageschritte ausführen kann. Eine solche Reihenfolge gibt es immer; wie man sie effizient berechnet, ist ein Thema für Algorithmen und Datenstrukturen.
+  Eine *topologische Sortierung* einer Halbordnung $≼$ auf einer endlichen Menge $A$ ist eine Totalordnung $⊑$ auf $A$ mit $"≼" ⊆ "⊑"$ (d.h. aus $a ≼ b$ folgt $a ⊑ b$). Ist $≼$ die Erreichbarkeitsrelation in @modulDag, so entspricht $⊑$ einer Reihenfolge, in der man die Module belegen kann also z.B.
+  $ "LDS" ⊑ "FSB" ⊑ "PSE" ⊑ "DSA" ⊑ "PPR" ⊑ "KTA"  $
+  Wie man eine solche Reihenfolge findet, ist Thema der Vorlesung Datenstrukturen und Algorithmen.
 ]
 
-#skript[
-  Umgekehrt lässt sich jede Halbordnung auf einer endlichen Menge zeichnen — und zwar sparsam, denn Reflexivität und Transitivität muss man nicht mitzeichnen.
-]
-
-#definition[Hasse-Diagramm][
-  Sei $≼$ eine Halbordnung auf einer endlichen Menge $A$. Wir sagen, $b$ *überdeckt* $a$, falls $a ≺ b$ gilt und es kein $c ∈ A$ mit $a ≺ c ≺ b$ gibt.
-
-  Das *Hasse-Diagramm* von $(A, ≼)$ zeichnet man, indem man jedes Element von $A$ als Punkt zeichnet, dabei $b$ stets oberhalb von $a$ platziert, falls $a ≺ b$ gilt, und $a$ und $b$ genau dann durch eine Strecke verbindet, wenn $b$ das Element $a$ überdeckt.
-]<hassediagramm>
-
-#beobachtung[
-  Aus dem Hasse-Diagramm lässt sich $≼$ zurückgewinnen: Für $a,b ∈ A$ gilt $a ≼ b$ genau dann, wenn man im Diagramm von $a$ aus über aufsteigende Strecken zu $b$ gelangt. Fasst man die Strecken als nach oben gerichtete Kanten auf, so entsteht ein DAG $H$, für den $≼$ und $⇝_H$ dieselbe Relation sind.
-]<hasseRekonstruktion>
-
-#beispiel[
-  @hasseTeilmengen zeigt das Hasse-Diagramm der Teilmengenrelation $⊆$ auf $2^({1,2,3})$ und @hasseTeiler das der Teilbarkeitsrelation $divides$ auf ${1,…,12}$.
-
-  Im ersten Diagramm überdeckt $B$ genau dann $A$, wenn $B$ aus $A$ durch Hinzunahme eines einzelnen Elements entsteht. Im zweiten überdeckt $b$ genau dann $a$, wenn $b = a⋅p$ für eine Primzahl $p$ gilt. Die Primzahlen $7$ und $11$ haben in ${1,…,12}$ kein Vielfaches außer sich selbst und bleiben deshalb isoliert über der $1$ stehen.
+#bemerkung[Hasse Diagramm][
+  Eine sparsame visuelle Darstellung einer Halbordnung $≼$ auf einer endlichen Menge ist das *Hassediagramm*. Eine Kante $(a,b)$ drückt $a ≼ b$ aus. Man lässt aber alle Kanten weg, die sich aus Reflexivität und Transitivität automatisch ergeben. Die Richtung der Kante ist implizit von unten nach oben.
 ]
 
 #abbildung(slides: 0, caption: [

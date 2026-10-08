@@ -141,5 +141,13 @@
     - Ist $p = k$, so gilt $o(p) = 1 + o(u)$ und $s(p) = 1 + s(u)$. Nach dem Satz ist $o(u) = s(u)$, also $o(p) = s(p)$.
 ]
 
+@Florian: Vielleicht ist das eine gute Übungsaufgabe?
+#beobachtung[
+  Aus dem Hasse-Diagramm lässt sich $≼$ zurückgewinnen: Für $a,b ∈ A$ gilt $a ≼ b$ genau dann, wenn man im Diagramm von $a$ aus über aufsteigende Strecken zu $b$ gelangt. Fasst man die Strecken als nach oben gerichtete Kanten auf, so entsteht ein DAG $H$, für den $≼$ und $⇝_H$ dieselbe Relation sind.
+]<hasseRekonstruktion>
 
 
+#beispiel[
+  @hasseTeilmengen zeigt das Hasse-Diagramm der Teilmengenrelation $⊆$ auf $2^({1,2,3})$ und @hasseTeiler das der Teilbarkeitsrelation $divides$ auf ${1,…,12}$.
+
+  Im ersten Diagramm überdeckt $B$ genau dann $A$, wenn $B$ aus $A$ durch Hinzunahme eines einzelnen Elements entsteht. Im zweiten überdeckt $b$ genau dann $a$, wenn $b = a⋅p$ für eine Primzahl $p$ gilt. Die Primzahlen $7$ und $11$ haben in ${1,…,12}$ kein Vielfaches außer sich selbst und bleiben deshalb isoliert über der $1$ stehen.
