@@ -7,6 +7,7 @@
   #import "venn.typ": venn
   #import "graph.typ": *
   #import "induktion.typ": *
+  #import "aequivalenz.typ": *
   #import "@preview/cetz:0.4.2" as cetz
   #import "@preview/ratchet:0.0.4": *
 
@@ -24,6 +25,7 @@
   #show math.equation: it => {
     show "⇝": math.scripts
     show "↭": math.scripts
+    show "∼": math.scripts
     it
   }
   #show link: it => if type(it.dest) == str {
@@ -2319,56 +2321,245 @@
   ),
 )]<hasseTeiler>
 
-#stichpunktgrenze
-
 == Äquivalenzrelationen
 
-- Äquivalenzrelation intuitiv:
-  - Relaxierung von Gleichheit (Gleichheit "bis auf")
-  - Ignorieren von unwesentlicher Information
-    - Sei M Menge aller Wörter mit deutschen Buchstaben. Teilmenge T = {Müßiggang,müßiggang,Muessiggang,Lückenbüßer, LUECKENBUESSER, maßlos}
-    - In T vertreten sind nur drei _Äquivalenzklassen_ von Wörtern _modulo_ Großschreibung und Umlauten. _Repräsentanten_ der Klassen sind MUESSIGGANG, LUECKENBUESSER und MASSLOS.
-  - Abbildung mit Beispielen:
-    - Zwei kongruente Dreiecke
-    - Zwei einfache isomorphe Graphen mit Knoten 1,2,3,4 bzw. A,B,C,D
+#skript[
+  Oft wollen wir Objekte als gleich behandeln, obwohl sie es streng genommen nicht sind. Wir sprechen dann von Gleichheit _bis auf_ etwas: Zwei Dreiecke sind gleich bis auf ihre Lage, zwei Graphen gleich bis auf die Namen ihrer Knoten. In beiden Fällen ignorieren wir Information, die für den jeweiligen Zweck unwesentlich ist. Äquivalenzrelationen fassen diese Idee präzise.
+]
 
-- Definition: Äquivalenzrelation
-- Notation [a] Äquivalenzklasse von a. a ist ein Repräsentant der Klasse (jedes andere a' ∈ [a] ist das auch). Projektion π.
-- Def: Partition
-- Bild: Partition der Grundmenge
-- Satz Sei A eine Menge. Jede Partition von A entspricht genau einer Äquivalenzrelation auf A und umgekehrt
-  - z.Z (eine Richtung): a ∈ [a] und [a] ∩ [b] ≠ ∅ ⇒ [a] = [b]
-  - (andere Richtung): …
-- Notation: A / R "modulo" für Menge der Äquivalenzklassen (Quotientenmenge), also die Partition.
-- Uebung: Sei P = ℤ × ℕ⁺ und (z₁,n₁) ~ (z₂,n₂) defiff z₁n₂ = z₂n₁. Beweise: ~ ist eine Äquivalenzrelation. Argumentiere: P / ~ entspricht der Menge ℚ der rationalen Zahlen.
-- Loesung: ...
-- Satz: $R$ ist genau dann eine Äquivalenzrelation auf $X$, wenn es eine Menge $Y$ und ein $f : X → Y$ gibt mit $a R b ⟺ f(a) = f(b)$. Die Klassen sind dann die nichtleeren Urbilder $f^(-1)({y})$.
-- Beweis: (hier kommt π wieder vor)
-- Satz: Sei n ∈ ℕ⁺ und x ~ y gdw x und y den selben Rest beim Teilen durch n lassen. Dann ist ~ eine Äquivalenzrelation mit n Äquivalenzklassen.
-- Beweis: Der Rest, den x lässt, ist eine eindeutige Zahl zwischen 0 und n-1, ist also eine Funktion der Zahl. Dann Satz von eben anwenden.
-- Bemerkung: Das Beispiel wird uns später noch viel beschäftigen.
+#beispiel[Wörter bis auf Schreibweise][
+  Sei $M$ die Menge aller Wörter aus Groß- und Kleinbuchstaben des deutschen Alphabets einschließlich Ä, Ö, Ü und ß. Wir betrachten die Teilmenge
+  $ T := {"Müßiggang", "müßiggang", "Muessiggang", "Lückenbüßer", "LUECKENBUESSER", "maßlos"} ⊆ M. $
+  Ignorieren wir Groß- und Kleinschreibung und die Schreibweise von Umlauten und ß (ä wie ae, ö wie oe, ü wie ue, ß wie ss), so zerfällt $T$ in nur drei Gruppen:
+  $ {"Müßiggang", "müßiggang", "Muessiggang"}, quad {"Lückenbüßer", "LUECKENBUESSER"}, quad {"maßlos"}. $
+  Man spricht von _Äquivalenzklassen_ von Wörtern _modulo_ Groß- und Kleinschreibung und Umlauten. Die Klassen selbst sind Teilmengen von $M$; die erste enthält etwa auch MÜSSIGGANG. Als _Repräsentanten_ der drei Klassen bieten sich MUESSIGGANG, LUECKENBUESSER und MASSLOS an. Man erhält sie, indem man in einem Wort alle Buchstaben groß schreibt und Umlaute und ß auflöst.
+]<bspWoerter>
+
+#abbildung(slides: 0, caption: [
+  Gleichheit _bis auf_ etwas: zwei kongruente Dreiecke, gleich bis auf ihre Lage, und zwei isomorphe Graphen, gleich bis auf die Namen der Knoten (siehe @isomorphismus).
+])[#grid(
+  columns: 3,
+  column-gutter: 2.5em,
+  align: horizon,
+  kongruenzbild(),
+  graphbild(
+    ("1": (0, 1.1), "2": (1.1, 1.1), "3": (1.1, 0), "4": (0, 0)),
+    (("1", "2"), ("2", "3"), ("3", "4"), ("4", "1")),
+  ),
+  graphbild(
+    ("A": (0, 1.1), "B": (1.1, 1.1), "C": (0, 0), "D": (1.1, 0)),
+    (("A", "C"), ("C", "B"), ("B", "D"), ("D", "A")),
+  ),
+)]<gleichBisAuf>
+
+#definition("Äquivalenzrelation", kurz: [reflexiv, symmetrisch, transitiv])[
+  Sei $A$ eine Menge. Eine Relation $∼$ auf $A$ heißt *Äquivalenzrelation*, wenn sie reflexiv, symmetrisch und transitiv ist (siehe @relationseigenschaftenA).
+]<aequivalenzrelation>
+
+#beispiel[
+  - Auf jeder Menge $A$ ist die Gleichheit eine Äquivalenzrelation, ebenso die Relation $A × A$, in der alles mit allem in Relation steht.
+  - In @bspWoerter stehen zwei Wörter genau dann in Relation, wenn sie nach Großschreiben und Auflösen der Umlaute übereinstimmen. Das ist eine Äquivalenzrelation auf $M$, denn alle drei Eigenschaften erbt sie von der Gleichheit der umgeschriebenen Wörter. @induziert macht dieses Argument allgemein.
+  - Die Relationen $≤$, $⊆$ und $divides$ sind keine Äquivalenzrelationen, denn sie sind nicht symmetrisch.
+]
+
+#definition("Äquivalenzklasse, Repräsentant", kurz: $[a]$)[
+  Sei $∼$ eine Äquivalenzrelation auf $A$ und $a ∈ A$. Die *Äquivalenzklasse* von $a$ ist
+  $ [a] := {b ∈ A | a ∼ b}. $
+  Ist $K$ eine Äquivalenzklasse und $b ∈ K$, so heißt $b$ ein *Repräsentant* von $K$. Wenn nötig, schreiben wir $[a]_∼$, um die Relation anzugeben.
+]<aequivalenzklasse>
+
+#lemma[Eigenschaften von Äquivalenzklassen][
+  #set enum(numbering: "(1)")
+  Sei $∼$ eine Äquivalenzrelation auf $A$ und seien $a, b ∈ A$. Dann gilt:
+  + $a ∈ [a]$.
+  + $a ∼ b ⇔ [a] = [b]$.
+  + Aus $[a] ∩ [b] ≠ ∅$ folgt $[a] = [b]$.
+]<klassenEigenschaften>
+
+#beweis[
+  #set enum(numbering: "(1)")
+  + Wegen der Reflexivität gilt $a ∼ a$, also $a ∈ [a]$.
+  + „$⇒$“: Gelte $a ∼ b$. Für jedes $c ∈ [b]$ gilt $b ∼ c$ und mit der Transitivität $a ∼ c$, also $c ∈ [a]$. Das zeigt $[b] ⊆ [a]$. Wegen der Symmetrie gilt auch $b ∼ a$, und dasselbe Argument mit vertauschten Rollen liefert $[a] ⊆ [b]$.
+
+    „$⇐$“: Nach (1) gilt $b ∈ [b] = [a]$, also $a ∼ b$.
+  + Sei $c ∈ [a] ∩ [b]$. Dann gilt $a ∼ c$ und $b ∼ c$, mit der Symmetrie also auch $c ∼ b$ und mit der Transitivität $a ∼ b$. Nach (2) folgt $[a] = [b]$.
+]
+
+#bemerkung[
+  Nach @klassenEigenschaften ist eine Äquivalenzklasse durch jeden ihrer Repräsentanten bestimmt: Ist $b ∈ [a]$, so gilt $a ∼ b$ und damit $[b] = [a]$. Welchen Repräsentanten man wählt, ist also gleichgültig.
+]
+
+#definition("Partition")[
+  Sei $A$ eine Menge. Eine Menge $𝒵 ⊆ 2^A$ von Teilmengen von $A$ heißt *Partition* (auch *Zerlegung*) von $A$, wenn gilt:
+  #set enum(numbering: "(1)")
+  + $∅ ∉ 𝒵$, und
+  + jedes $a ∈ A$ liegt in genau einem $Z ∈ 𝒵$.
+  Die Elemente von $𝒵$ heißen *Teile* der Partition.
+]<partition>
+
+#abbildung(slides: 0, caption: [
+  Eine Partition einer Menge in vier Teile. Die zugehörige Äquivalenzrelation setzt zwei Elemente genau dann in Relation, wenn sie im selben Teil liegen. Etwa gilt $c ∼ e$, aber nicht $c ∼ f$.
+])[#partitionsbild()]<partitionsbild>
+
+#satz[Äquivalenzrelationen und Partitionen][
+  #set enum(numbering: "(1)")
+  Sei $A$ eine Menge.
+  + Ist $∼$ eine Äquivalenzrelation auf $A$, so ist ${[a] | a ∈ A}$ eine Partition von $A$.
+  + Ist $𝒵$ eine Partition von $A$, so ist
+    $ a ∼_𝒵 b defiff "es gibt ein" Z ∈ 𝒵 "mit" a ∈ Z "und" b ∈ Z $
+    eine Äquivalenzrelation auf $A$.
+  + Die beiden Konstruktionen machen einander rückgängig: Die Klassen von $∼_𝒵$ sind genau die Teile von $𝒵$, und die Partition ${[a] | a ∈ A}$ liefert über (2) wieder die Relation $∼$.
+  Äquivalenzrelationen und Partitionen beschreiben also dasselbe auf zwei Weisen.
+]<partitionAequivalenz>
+
+#beweis[
+  #set enum(numbering: "(1)")
+  + Jede Klasse $[a]$ enthält $a$ und ist daher nicht leer. Jedes $a ∈ A$ liegt in einer Klasse, nämlich in $[a]$. Liegt $a$ in zwei Klassen $[b]$ und $[c]$, so ist $[b] ∩ [c] ≠ ∅$, und nach @klassenEigenschaften (3) gilt $[b] = [c]$. Also liegt $a$ in genau einer Klasse.
+  + Für $a ∈ A$ sei $Z_a$ der eindeutige Teil von $𝒵$, der $a$ enthält. Jeder Teil, der $a$ enthält, ist dann $Z_a$. Also gilt $a ∼_𝒵 b$ genau dann, wenn $b ∈ Z_a$, und das heißt $Z_a = Z_b$. In dieser Form erben Reflexivität, Symmetrie und Transitivität sich von der Gleichheit.
+  + Mit der Notation aus (2) ist $[a]_(∼_𝒵) = {b ∈ A | b ∈ Z_a} = Z_a$. Jeder Teil $Z ∈ 𝒵$ ist nicht leer und damit von dieser Form, denn für jedes $a ∈ Z$ ist $Z = Z_a$. Also sind die Klassen von $∼_𝒵$ genau die Teile von $𝒵$.
+
+    Sei umgekehrt $𝒵 := {[a] | a ∈ A}$. Nach (1) ist $[a]$ der eindeutige Teil, der $a$ enthält, also $Z_a = [a]$. Damit gilt $a ∼_𝒵 b ⇔ [a] = [b] ⇔ a ∼ b$ nach @klassenEigenschaften (2).
+]
+
+#notation("Quotientenmenge, kanonische Projektion", kurz: [$A \/ ∼$, $π$])[
+  Sei $∼$ eine Äquivalenzrelation auf $A$. Die Menge der Äquivalenzklassen
+  $ A \/ ∼ := {[a] | a ∈ A} $
+  heißt *Quotientenmenge*, gesprochen „$A$ modulo $∼$“. Nach @partitionAequivalenz ist sie eine Partition von $A$. Die Funktion
+  $ π : A → A \/ ∼, quad a ↦ [a] $
+  heißt *kanonische Projektion*. Sie ist surjektiv, und nach @klassenEigenschaften gilt $π(a) = π(b) ⇔ a ∼ b$.
+]<quotientenmenge>
+
+#uebung[Brüche][
+  Sei $P := ℤ × ℕ⁺$ und für $(z₁,n₁), (z₂,n₂) ∈ P$ sei
+  $ (z₁,n₁) ∼ (z₂,n₂) defiff z₁ ⋅ n₂ = z₂ ⋅ n₁. $
+  #set enum(numbering: "(a)")
+  + Zeigen Sie, dass $∼$ eine Äquivalenzrelation auf $P$ ist.
+  + Begründen Sie, dass $P \/ ∼$ der Menge $ℚ$ der rationalen Zahlen entspricht.
+  + Warum verlangt man $n ∈ ℕ⁺$ und nicht nur $n ∈ ℕ$?
+]<uebBrueche>
+
+#loesung[
+  #set enum(numbering: "(a)")
+  + _Reflexivität:_ Es gilt $z ⋅ n = z ⋅ n$. _Symmetrie:_ Die definierende Gleichung ändert sich nicht, wenn man die beiden Paare vertauscht. _Transitivität:_ Gelte $z₁ ⋅ n₂ = z₂ ⋅ n₁$ und $z₂ ⋅ n₃ = z₃ ⋅ n₂$. Dann ist
+    $ z₁ ⋅ n₃ ⋅ n₂ = z₂ ⋅ n₁ ⋅ n₃ = n₁ ⋅ z₂ ⋅ n₃ = n₁ ⋅ z₃ ⋅ n₂ = z₃ ⋅ n₁ ⋅ n₂. $
+    Wegen $n₂ ≠ 0$ dürfen wir durch $n₂$ teilen und erhalten $z₁ ⋅ n₃ = z₃ ⋅ n₁$.
+  + Wegen $n₁ ⋅ n₂ ≠ 0$ gilt $z₁ ⋅ n₂ = z₂ ⋅ n₁$ genau dann, wenn $z₁ \/ n₁ = z₂ \/ n₂$. Die Klasse von $(z,n)$ besteht also aus allen Darstellungen der rationalen Zahl $z \/ n$ als Bruch, etwa $[(1,2)] = {(1,2), (2,4), (3,6), …}$. Jede rationale Zahl hat solche Darstellungen, und verschiedene rationale Zahlen gehören zu verschiedenen Klassen. Wer $ℚ$ noch nicht kennt, kann daher $ℚ := P \/ ∼$ als _Definition_ der rationalen Zahlen verwenden.
+  + Ließe man $n = 0$ zu, so stünde $(0,0)$ zu jedem Paar in Relation, denn $0 ⋅ n = z ⋅ 0$. Dann gälte etwa $(1,1) ∼ (0,0) ∼ (2,1)$, aber nicht $(1,1) ∼ (2,1)$. Die Transitivität wäre verletzt; genau an dieser Stelle braucht der Beweis in (a) die Bedingung $n₂ ≠ 0$.
+]
+
+#satz[Äquivalenzrelationen aus Funktionen][
+  Sei $X$ eine Menge und $R$ eine Relation auf $X$. Dann ist $R$ genau dann eine Äquivalenzrelation, wenn es eine Menge $Y$ und eine Funktion $f : X → Y$ gibt mit
+  $ ∀a, b ∈ X: quad a R b ⇔ f(a) = f(b). $
+  Die Äquivalenzklassen sind dann genau die Urbilder $f^(-1)({y})$ für $y ∈ f(X)$.
+]<induziert>
+
+#beweis[
+  „$⇐$“: Die drei Eigenschaften erbt $R$ von der Gleichheit auf $Y$: Es gilt $f(a) = f(a)$; aus $f(a) = f(b)$ folgt $f(b) = f(a)$; aus $f(a) = f(b)$ und $f(b) = f(c)$ folgt $f(a) = f(c)$.
+
+  „$⇒$“: Wähle $Y := X \/ R$ und $f := π$, die kanonische Projektion aus @quotientenmenge. Dann gilt $f(a) = f(b) ⇔ a R b$.
+
+  Zu den Klassen: Für $a ∈ X$ ist $[a] = {b ∈ X | f(a) = f(b)} = f^(-1)({f(a)})$. Durchläuft $a$ die Menge $X$, so durchläuft $f(a)$ genau die Menge $f(X)$.
+]
+
+#bemerkung[
+  Die Funktion $f$ vergisst genau die Information, die $R$ für unwesentlich erklärt. In @bspWoerter ist $f$ das Umschreiben in Großbuchstaben ohne Umlaute, und die dort gewählten Repräsentanten MUESSIGGANG, LUECKENBUESSER und MASSLOS sind gerade Funktionswerte von $f$.
+]
+
+#notation("Rest", kurz: $x mod n$)[
+  Zu $x ∈ ℤ$ und $n ∈ ℕ⁺$ gibt es genau ein Paar $(q, r) ∈ ℤ × {0, …, n-1}$ mit $x = q ⋅ n + r$ (_Division mit Rest_; wir setzen das hier als bekannt voraus). Wir nennen $r$ den *Rest* von $x$ bei Division durch $n$ und schreiben $x mod n := r$. Etwa ist $17 mod 5 = 2$ wegen $17 = 3 ⋅ 5 + 2$, und $(-3) mod 5 = 2$ wegen $-3 = (-1) ⋅ 5 + 2$.
+]<rest>
+
+#satz[Gleicher Rest][
+  Sei $n ∈ ℕ⁺$. Die Relation $∼$ auf $ℤ$ mit
+  $ x ∼ y defiff x mod n = y mod n $
+  ist eine Äquivalenzrelation mit genau $n$ Äquivalenzklassen.
+]<restklassen>
+
+#beweis[
+  Die Funktion $f : ℤ → {0, …, n-1}$, $x ↦ x mod n$ erfüllt $x ∼ y ⇔ f(x) = f(y)$. Nach @induziert ist $∼$ also eine Äquivalenzrelation, und die Klassen sind die Urbilder $f^(-1)({r})$ für $r ∈ f(ℤ)$. Wegen $r mod n = r$ für $r ∈ {0, …, n-1}$ ist $f$ surjektiv, also $f(ℤ) = {0, …, n-1}$. Die $n$ Urbilder sind nicht leer und paarweise disjunkt, also verschieden, und es gibt genau $n$ Klassen.
+]
+
+#bemerkung[Restklassen][
+  Für $n = 3$ sind die drei Klassen
+  $ {…, -3, 0, 3, 6, …}, quad {…, -2, 1, 4, 7, …}, quad {…, -1, 2, 5, 8, …}. $
+  Die Klassen heißen *Restklassen* modulo $n$, die Quotientenmenge schreibt man $ℤ \/ n ℤ$. Sie wird uns in @sec:modulo noch ausführlich beschäftigen.
+]
 
 === Zusammenhangskomponenten
 
-#definition("Erreichbarkeit in ungerichteten Graphen")[
+#definition("Erreichbarkeit in ungerichteten Graphen", kurz: $v ↭_G w$)[
   Sei $G = (V,E)$ ein ungerichteter Graph. Für $v,w ∈ V$ schreiben wir $v ↭_G w$, falls es einen Weg von $v$ nach $w$ gibt. Wenn klar ist, welcher Graph gemeint ist, lassen wir den Index weg.
 ]<erreichbarkeitungerichtet>
 
 #satz[
   Für jeden ungerichteten Graphen $G = (V,E)$ ist $↭_G$ eine Äquivalenzrelation auf $V$.
+]<erreichbarkeitAequivalenz>
+
+#beweis[
+  / Reflexivität: Die einelementige Folge $v$ ist ein Weg der Länge $0$ von $v$ nach $v$.
+  / Symmetrie: Ist $v₀ v₁ … v_ℓ$ ein Weg von $v$ nach $w$, so ist $v_ℓ … v₁ v₀$ ein Weg von $w$ nach $v$, denn die Kanten ${v_i, v_(i+1)} = {v_(i+1), v_i}$ haben keine Richtung.
+  / Transitivität: Einen Weg von $u$ nach $v$ und einen von $v$ nach $w$ setzen wir wie im Beweis von @erreichbarkeitQuasi zu einem Weg von $u$ nach $w$ zusammen. #qedhere
 ]
-- Beweis: Reflexivität (Weg der Länge 0), Symmetrie (Weg umdrehen), Transitivität (Wege aneinanderhängen).
 
 #definition("Zusammenhangskomponente")[
   Die Elemente von $V \/ ↭_G$, also die Äquivalenzklassen, heißen *Zusammenhangskomponenten* von $G$.
+]<zhk>
+
+#abbildung(slides: 0, caption: [
+  Ein Graph mit den drei Zusammenhangskomponenten ${1,2,3,4}$, ${5,6,7}$ und ${8}$.
+])[#graphbild(
+  (
+    "1": (0, 0.9), "2": (1.1, 0.9), "3": (0.55, 0), "4": (1.6, -0.3),
+    "5": (2.8, 0.8), "6": (3.7, 0.3), "7": (2.9, -0.3),
+    "8": (4.6, 0.6),
+  ),
+  (("1", "2"), ("1", "3"), ("2", "3"), ("3", "4"), ("5", "6"), ("6", "7")),
+)]<zhkbild>
+
+#bemerkung[
+  Ein Graph $G$ ist genau dann zusammenhängend, wenn er genau eine Zusammenhangskomponente hat. Dabei ist „zusammenhängend“ über Pfade definiert und $↭_G$ über Wege; nach @wegPfad macht das keinen Unterschied.
 ]
 
-- Abbildung mit einem Graphen. Die Bildunterschrift listet die Zusammenhangskomponenten auf.
-- Bemerkung: $G$ ist zusammenhängend genau dann, wenn es genau eine Äquivalenzklasse bzgl. $↭_G$ gibt.
-- Uebung: Ist R eine Quasiordnung, dann ist R ∩ R^(-1) eine Äquivalenzrelation.
-- Lösung: …
-- Definition und Satz: Sei $G = (V,E)$ ein gerichteter Graph. Dann ist $↭_G := ⇝_G ∩ ⇝_G^(-1)$ eine Äquivalenzrelation. Die Äquivalenzklassen heißen *starke Zusammenhangskomponenten* von $G$.
-- Beispielgraph. Die Bildunterschrift nennt die starken Zusammenhangskomponenten.
+#uebung[
+  Sei $R$ eine Quasiordnung auf einer Menge $A$. Zeigen Sie, dass $R ∩ R^(-1)$ eine Äquivalenzrelation auf $A$ ist.
+]<uebQuasiAequivalenz>
+
+#loesung[
+  Es gilt $a (R ∩ R^(-1)) b$ genau dann, wenn $a R b$ und $b R a$ gilt.
+  / Reflexivität: Aus $a R a$ folgt $a (R ∩ R^(-1)) a$.
+  / Symmetrie: Die Bedingung „$a R b$ und $b R a$“ ändert sich nicht, wenn man $a$ und $b$ vertauscht.
+  / Transitivität: Aus $a R b$, $b R a$, $b R c$ und $c R b$ folgen mit der Transitivität von $R$ sowohl $a R c$ als auch $c R a$.
+]
+
+#korollar[
+  Sei $G = (V,E)$ ein gerichteter Graph. Dann ist $↭_G := ⇝_G ∩ ⇝_G^(-1)$ eine Äquivalenzrelation auf $V$. Es gilt also $u ↭_G v$ genau dann, wenn $u ⇝_G v$ und $v ⇝_G u$.
+]<starkAequivalenz>
+
+#beweis[
+  Nach @erreichbarkeitQuasi ist $⇝_G$ eine Quasiordnung. Die Behauptung folgt mit @uebQuasiAequivalenz.
+]
+
+#definition("Starke Zusammenhangskomponente")[
+  Sei $G$ ein gerichteter Graph. Die Äquivalenzklassen von $↭_G$ heißen *starke Zusammenhangskomponenten* von $G$.
+
+  Die Schreibweise $↭_G$ passt zu @erreichbarkeitungerichtet: Fasst man einen ungerichteten Graphen als gerichteten auf, in dem jede Kante in beide Richtungen verläuft, so liefern beide Definitionen dieselbe Relation.
+]<starkeZhk>
+
+#abbildung(slides: 0, caption: [
+  Ein gerichteter Graph mit den starken Zusammenhangskomponenten ${1,2,3}$, ${4,5}$, ${6}$ und ${7}$. Zwischen verschiedenen Komponenten verlaufen alle Kanten in dieselbe Richtung.
+])[#graphbild(
+  (
+    "1": (0, 0), "2": (1.1, 0.7), "3": (1.1, -0.7),
+    "4": (2.5, 0.7), "5": (2.5, -0.7),
+    "7": (3.9, 0.7), "6": (3.9, -0.7),
+  ),
+  (
+    ("1", "2"), ("2", "3"), ("3", "1"), ("2", "4"),
+    ("4", "5"), ("5", "4"), ("4", "7"), ("7", "6"), ("5", "6"),
+  ),
+  gerichtet: true,
+  radius: 0.22,
+)]<starkbild>
 
 === Graphisomorphie
 
@@ -2376,27 +2567,105 @@
   Seien $G_1 = (V_1,E_1)$ und $G_2 = (V_2,E_2)$ Graphen. Ein *Isomorphismus* von $G_1$ nach $G_2$ ist eine bijektive Abbildung $φ: V_1 → V_2$ mit
   $ ∀v,w ∈ V_1: quad {v,w} ∈ E_1 ⇔ {φ(v),φ(w)} ∈ E_2. $
   Wir schreiben $G_1 ≅ G_2$, falls ein solcher Isomorphismus existiert, und nennen $G_1$ und $G_2$ dann *isomorph*.
+]<isomorphismus>
+
+#bemerkung[Invarianten][
+  Isomorphe Graphen sind „derselbe Graph mit anderen Knotennamen“. Jede Eigenschaft, die sich ohne Rückgriff auf die Knotennamen formulieren lässt, hat ein Graph daher genau dann, wenn jeder zu ihm isomorphe Graph sie hat. Solche Eigenschaften heißen *Invarianten*. Beispiele sind die Knoten- und Kantenzahl, das Vorkommen von Knoten bestimmten Grades, das Vorkommen von Wegen und Kreisen bestimmter Länge und der Zusammenhang.
+]<invarianten>
+
+#beispiel[Sechseck und $K_(3,3)$][
+  Sei $G$ der Kreis $C_6$ mit Knoten $1, …, 6$ und den drei zusätzlichen Kanten ${1,4}$, ${2,5}$ und ${3,6}$, den „langen Diagonalen“. Jede Kante von $G$ verbindet einen ungeraden mit einem geraden Knoten, und umgekehrt ist jedes der $3 ⋅ 3 = 9$ Paare aus einem ungeraden und einem geraden Knoten eine Kante. Also gilt
+  $ {v,w} ∈ E ⇔ v "und" w "liegen auf verschiedenen Seiten von" {1,3,5} "und" {2,4,6}. $
+  Ist nun $K_(3,3) = (A ∪ B, …)$ mit beliebigen $A$ und $B$ wie in @graphengallerie-uebung, so ist jede Bijektion $φ$, die ${1,3,5}$ auf $A$ und ${2,4,6}$ auf $B$ abbildet, ein Isomorphismus von $G$ nach $K_(3,3)$. Denn $v$ und $w$ liegen genau dann auf verschiedenen Seiten, wenn $φ(v)$ und $φ(w)$ es tun. @sechseckK33 zeigt beide Zeichnungen.
 ]
 
-- Idee: Isomorphe Graphen sind „derselbe Graph mit anderen Knotennamen“. Alle Eigenschaften eines Graphen, die sich ohne Rückgriff auf die Knotennamen formulieren lassen, gelten offensichtlich genauso für jeden isomorphen Graphen. Gibt es Wege oder Kreise gewisser Länge, Knoten von bestimmten Graden usw., dann gibt es sie auch im isomorphen Graphen. 
-- Beispiel: Das Sechseck mit seinen drei langen Diagonalen ist isomorph zu $K_(3,3)$ (Isomorphismus angeben).
-- Beispiel: Petersen-Graph ist nicht isomorph zum Fünfecksprisma. Das Fünfecksprisma enthält einen Kreis der Länge 4, der Petersen-Graph nicht.
+#abbildung(slides: 0, caption: [
+  Links das Sechseck mit seinen drei langen Diagonalen, rechts derselbe Graph mit den ungeraden Knoten links und den geraden rechts. In der rechten Zeichnung erkennt man $K_(3,3)$.
+])[#grid(
+  columns: 2,
+  column-gutter: 3em,
+  align: horizon,
+  graphbild(kreis-knoten(6), kreis-kanten(6) + (("1", "4"), ("2", "5"), ("3", "6"))),
+  graphbild(
+    ("1": (0, 1.2), "3": (0, 0.6), "5": (0, 0), "2": (1.5, 1.2), "4": (1.5, 0.6), "6": (1.5, 0)),
+    kreis-kanten(6) + (("1", "4"), ("2", "5"), ("3", "6")),
+  ),
+)]<sechseckK33>
+
+#beispiel[Petersen-Graph und Fünfecksprisma][
+  Der Petersen-Graph und das Fünfecksprisma in @petersenPrisma haben beide $10$ Knoten vom Grad $3$ und $15$ Kanten. Trotzdem sind sie nicht isomorph: Das Prisma enthält einen Kreis der Länge $4$, der Petersen-Graph nicht. Nach @invarianten kann es also keinen Isomorphismus geben.
+
+  Dass der Petersen-Graph keinen Kreis der Länge $4$ enthält, sieht man so: Jede Speiche wechselt zwischen dem äußeren Fünfeck und dem inneren Pentagramm, ein Kreis benutzt also eine gerade Anzahl von Speichen. Ohne Speichen bleibt der Kreis im Fünfeck oder im Pentagramm, und beide enthalten nur einen Kreis der Länge $5$. Vier Speichen haben keinen Knoten gemeinsam und passen daher nicht in einen Kreis der Länge $4$. Ein Kreis der Länge $4$ mit zwei Speichen hätte die Form $a b b' a'$ mit benachbarten äußeren Knoten $a, b$ und den zugehörigen inneren Knoten $b', a'$. Diese sind im Pentagramm aber nicht benachbart.
+]
+
+#abbildung(slides: 0, caption: [
+  Links der Petersen-Graph, rechts das Fünfecksprisma. Rot markiert ist ein Kreis der Länge $4$ im Prisma.
+])[#grid(
+  columns: 2,
+  column-gutter: 3em,
+  graphbild(doppelfuenfeck-knoten(), petersen-kanten, beschriftung: false, radius: 0.1),
+  graphbild(
+    doppelfuenfeck-knoten(), prisma-kanten, beschriftung: false, radius: 0.1,
+    markiert: (("1", "2"), ("2", "7"), ("7", "6"), ("6", "1")),
+  ),
+)]<petersenPrisma>
 
 #satz[
-  Sei $𝒢 := {(V,E) | (V,E) "ist Graph mit" V ⊆ ℕ }$.
-  Isomorphie $≅$ ist eine Äquivalenzrelation auf $𝒢$.
+  Sei $𝒢 := {(V,E) | (V,E) "ist ein Graph mit" V ⊆ ℕ}$. Dann ist $≅$ eine Äquivalenzrelation auf $𝒢$.
+]<isoAequivalenz>
+
+#beweis[
+  / Reflexivität: Die Identität $id_V$ ist ein Isomorphismus von $G = (V,E)$ nach $G$.
+  / Symmetrie: Sei $φ$ ein Isomorphismus von $G_1$ nach $G_2$. Als Bijektion hat $φ$ eine Umkehrfunktion $φ^(-1): V_2 → V_1$ (siehe @umkehrfunktion), die ebenfalls bijektiv ist. Für $v', w' ∈ V_2$ seien $v := φ^(-1)(v')$ und $w := φ^(-1)(w')$. Dann gilt
+    $ {v', w'} ∈ E_2 ⇔ {φ(v), φ(w)} ∈ E_2 ⇔ {v, w} ∈ E_1. $
+    Also ist $φ^(-1)$ ein Isomorphismus von $G_2$ nach $G_1$.
+  / Transitivität: Ist $φ$ ein Isomorphismus von $G_1$ nach $G_2$ und $ψ$ einer von $G_2$ nach $G_3$, so ist $ψ ∘ φ$ bijektiv (siehe @verkettungInjSurj), und für $v, w ∈ V_1$ gilt
+    $ {v, w} ∈ E_1 ⇔ {φ(v), φ(w)} ∈ E_2 ⇔ {ψ(φ(v)), ψ(φ(w))} ∈ E_3. #qedhere $
 ]
-- Beweis: Identität, Umkehrabbildung und Komposition von Isomorphismen.
-- Bemerkung: Grund der Einschränkung. „Alle Graphen überhaupt“ bilden wie „alle Mengen“ keine Menge. Jeder Graph ist zu einem Graph aus 𝒢 isomorph, es geht also nichts verloren.
+
+#bemerkung[Warum $𝒢$?][
+  Isomorphie auf „allen Graphen überhaupt“ ist keine Relation in unserem Sinne, denn wie alle Mengen zusammen (siehe @mengeAllerMengen) bilden auch alle Graphen zusammen keine Menge. Deshalb schränken wir uns auf Graphen mit $V ⊆ ℕ$ ein. Dabei geht nichts verloren: Jeder Graph mit $n$ Knoten ist zu einem Graphen aus $𝒢$ isomorph, denn wir können seine Knoten bijektiv mit $1, …, n$ durchnummerieren.
+]
 
 #definition("Unbeschrifteter Graph")[
   Ein *unbeschrifteter Graph* (englisch „unlabeled graph“) ist eine Äquivalenzklasse bezüglich Isomorphie, also ein Element von
   $ 𝒢 \/ ≅. $
+]<unbeschriftet>
+
+#konvention[Sprechweise][
+  Oft sagen wir „der Graph“ und meinen seine Isomorphieklasse. Genau das tun wir, wenn wir einen Graphen ohne Knotennamen zeichnen wie in der Galerie in @galerie: $P_5$, $C_6$ oder $K_5$ bezeichnen dort Isomorphieklassen.
 ]
 
-- Sprechweise: Wir sagen dann „der Graph“ und meinen seine Isomorphieklasse. Genau das tun wir beim Zeichnen ohne Knotennamen und in der Graphengalerie: $P_4$, $C_6$ oder $K_5$ bezeichnen Isomorphieklassen.
-- Bemerkung: Ob zwei gegebene Graphen isomorph sind, ist algorithmisch überraschend schwer. Für die Anzahl der unbeschrifteten Graphen mit $n$ Knoten gibt es keine einfache Formel. (Beschriftete Graphen sind leicht zu zählen, siehe Kapitel „Zählen“.)
-- Übung: Bestimmen Sie alle unbeschrifteten Graphen mit 4 Knoten und 3 Kanten. Wie viele beschriftete Graphen mit Knotenmenge ${1,2,3,4}$ und $3$ Kanten gibt es jeweils in einer Klasse?
+#bemerkung[
+  Ob zwei gegebene Graphen isomorph sind, ist algorithmisch überraschend schwer zu entscheiden. Alle $n!$ Bijektionen durchzuprobieren ist schon für $n = 20$ hoffnungslos, und ob es ein wirklich effizientes Verfahren gibt, ist ein berühmtes offenes Problem. Auch für die Anzahl der unbeschrifteten Graphen mit $n$ Knoten gibt es keine geschlossene Formel. Beschriftete Graphen sind dagegen leicht zu zählen, siehe @sec:zaehlen.
+]
+
+#uebung[
+  Bestimmen Sie alle unbeschrifteten Graphen mit $4$ Knoten und $3$ Kanten. Wie viele beschriftete Graphen mit Knotenmenge ${1,2,3,4}$ und $3$ Kanten gehören jeweils zu einer Klasse?
+]<uebVierKnoten>
+
+#loesung[
+  Es gibt drei Klassen:
+  #align(center, grid(
+    columns: 3,
+    column-gutter: 3em,
+    row-gutter: 0.6em,
+    align: center + horizon,
+    graphbild(("a": (0, 0), "b": (0.9, 0), "c": (0.45, 0.75), "d": (1.6, 0.4)),
+      (("a", "b"), ("b", "c"), ("c", "a")), beschriftung: false, radius: 0.1),
+    graphbild(("a": (0, 0), "b": (0.6, 0.5), "c": (1.2, 0), "d": (1.8, 0.5)),
+      (("a", "b"), ("b", "c"), ("c", "d")), beschriftung: false, radius: 0.1),
+    graphbild(("m": (0.6, 0.35), "a": (0, 0), "b": (1.2, 0), "c": (0.6, 1.0)),
+      (("m", "a"), ("m", "b"), ("m", "c")), beschriftung: false, radius: 0.1),
+    [Dreieck und isolierter Knoten], [Pfad $P_4$], [Stern $S_3$],
+  ))
+  - _Dreieck und isolierter Knoten:_ Der Graph ist durch seinen isolierten Knoten festgelegt, also gibt es $4$ beschriftete Graphen.
+  - _Pfad:_ Es gibt $4! = 24$ Reihenfolgen der Knoten entlang des Pfades, und jeder Pfad entsteht aus genau zwei davon (vorwärts und rückwärts gelesen). Also gibt es $12$ beschriftete Graphen.
+  - _Stern:_ Der Graph ist durch seinen Mittelpunkt festgelegt, also gibt es $4$ beschriftete Graphen.
+  Dass es keine weiteren Klassen gibt, zeigt eine Probe: Insgesamt gibt es $binom(6,3) = 20$ beschriftete Graphen mit Knotenmenge ${1,2,3,4}$ und $3$ Kanten, denn man wählt $3$ der $6$ möglichen Kanten aus. Und tatsächlich ist $4 + 12 + 4 = 20$.
+]
+
+#stichpunktgrenze
 
 #slidebreak()
 = Exkurs: Abzählbarkeit
@@ -2439,6 +2708,7 @@
 
 #slidebreak()
 = Zählen und Abschätzen
+<sec:zaehlen>
 - Bemerkung: Summen- und Produktzeichen haben wir im Kapitel über Mengen eingeführt.
 - Technik: Gleichmächtigkeit durch Bijektion zeigen
   - Beispiel: Kardinalität der Potenzmenge.
@@ -2656,6 +2926,7 @@ Wollen wir hier Binärbäume haben?
 - Bemerkung: Den Graphisomorphismus kennen wir schon. Auch dort ist ein Isomorphismus eine Bijektion, welche die Struktur erhält.
 
 == Modulo Rechnung
+<sec:modulo>
 
 - Teilbarkeit, Rest, Kongruenz modulo n
 - Wohldefiniertheit der Addition und Multiplikation.

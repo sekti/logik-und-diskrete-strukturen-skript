@@ -212,6 +212,26 @@
 
 #let stern-kanten(n) = range(1, n + 1).map(i => ("0", str(i)))
 
+// Zwei konzentrische Fünfecke: außen "1" bis "5", innen "6" bis "10",
+// jeweils "i" und "i+5" auf demselben Strahl.
+#let doppelfuenfeck-knoten(aussen: 1.0, innen: 0.5) = {
+  let d = (:)
+  for (name, pos) in kreis-knoten(5, r: aussen).pairs() { d.insert(name, pos) }
+  for (name, pos) in kreis-knoten(5, r: innen).pairs() {
+    d.insert(str(int(name) + 5), pos)
+  }
+  d
+}
+
+// Speichen zwischen den beiden Fünfecken
+#let speichen-kanten = range(1, 6).map(i => (str(i), str(i + 5)))
+
+// Fünfecksprisma: innen wieder ein Fünfeck
+#let prisma-kanten = kreis-kanten(5) + speichen-kanten + range(6, 11).map(i => (str(i), str(calc.rem(i - 5, 5) + 6)))
+
+// Petersen-Graph: innen ein Pentagramm (jeder zweite Knoten wird verbunden)
+#let petersen-kanten = kreis-kanten(5) + speichen-kanten + range(6, 11).map(i => (str(i), str(calc.rem(i - 4, 5) + 6)))
+
 #let bipartit-kanten(m, n) = {
   let e = ()
   for i in range(1, m + 1) {
