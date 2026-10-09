@@ -244,7 +244,7 @@
 === Was soll dieses Modul?
 
 #skript[
-  Die Informatik bedient sich der Sprache der Mathematik. Auch und gerade dann, wenn KI-Systeme zur Problemlösung eingesetzt werden, ist eine präzise mathematische Ausdrucks- und Denkweise nützlich. Diese soll in dieser Vorlesung vermittelt werden.
+  Die Informatik bedient sich der Sprache der Mathematik. Auch und gerade dann, wenn KI-Systeme zur Problemlösung eingesetzt werden, ist eine präzise mathematische Ausdrucks- und Denkweise nützlich. Diese soll in dieser Vorlesung vermittelt werden, zusammen mit den notwendigen mathematischen Grundbegriffen.
 
   Ohne Anwendungen wären die „Mathematikvokabeln“ dieser Vorlesung sehr trocken. Als wiederkehrendes Anwendungsbeispiel dienen uns Graphen, eine der wichtigsten diskreten Strukturen der Informatik.
 ]
