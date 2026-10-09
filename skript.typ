@@ -2333,9 +2333,9 @@
 ]
 
 #beispiel[Gleichheit „bis auf“][
-  Die folgenden Dreiecke sind kongruent, also gleich _bis auf_ Verschieben, Drehen und Spiegeln. Die ersten beiden Graphen sind gleich _bis auf_ die Namen der Knoten (siehe @isomorphismus). Die letzten beiden Graphen sind sogar gleich, sie sind nur anders gezeichnet.
+  Die folgenden Dreiecke sind kongruent, also gleich _bis auf_ Verschieben, Drehen und Spiegeln. Die beiden Graphen sind gleich _bis auf_ die Namen der Knoten (siehe @isomorphismus).
   #grid(
-    columns: 4,
+    columns: 3,
     column-gutter: 2.5em,
     align: center,
     kongruenzbild(),
@@ -2347,12 +2347,8 @@
       ("A": (0, 1.1), "B": (1.1, 1.1), "C": (0, 0), "D": (1.1, 0)),
       (("A", "B"), ("B", "D"), ("D", "C"), ("C", "A")),
     ),
-    graphbild(
-      ("A": (0, 1.1), "D": (1.1, 1.1), "C": (0, 0), "B": (1.1, 0)),
-      (("A", "B"), ("B", "D"), ("D", "C"), ("C", "A")),
-    ),
   )
-  Die Wörter `Apfel` und `aPFEl` sind gleich _bis auf_ Groß- und Kleinschreibung. Für eine Suchfunktion ist das relevant: Suchen Sie nach `Apfel`, so sollte die Suche auch `aPFEl` finden; beide Wörter sind _äquivalent_. Der Repräsentant `Apfel` steht somit stellvertretend für eine Menge von Wörtern -- seine _Äquivalenzklasse_.
+  Die Wörter `Apfel` und `aPFEl` sind gleich _bis auf_ Groß- und Kleinschreibung. Für eine Suchfunktion ist das relevant: Suchen Sie nach `Apfel`, so sollte die Suche auch `aPFEl` finden; beide Wörter sind _äquivalent_. Der _Repräsentant_ `Apfel` steht stellvertretend für eine Menge von Wörtern -- seine _Äquivalenzklasse_.
 ]<bspGleichBisAuf>
 
 #definition("Äquivalenzrelation", kurz: [reflexiv, symmetrisch, transitiv])[
@@ -2363,8 +2359,8 @@
   Auf jeder Menge $A$ ist die Gleichheit eine Äquivalenzrelation.
 ]<gleichheitAequivalenz>
 #beweis[
-  Reflexivität, Symmetrie und Transitivität der Gleichheit sind offensichtlich. Für alle $a,b,c ∈ A$ gilt:
-  $ a = a, quad quad a = b ⇔ b = a, quad quad a = b ∧ b = c ⇒ a = c. qedhere$
+  Wir prüfen Reflexivität, Symmetrie und Transitivität der Gleichheit. Für alle $a,b,c ∈ A$ gilt:
+  $ a = a, quad quad a = b ⇔ b = a, quad quad a = b ∧ b = c ⇒ a = c. qedhere $
 ]
 
 #definition("Äquivalenzklasse, Repräsentant", kurz: $[a]$)[
@@ -2392,21 +2388,21 @@
 ]
 
 #satz[Äquivalenzrelationen aus Funktionen][
-  Sei $A$ eine Menge und $R$ eine Relation auf $A$. Dann ist $R$ genau dann eine Äquivalenzrelation, wenn es eine Menge $K$ und eine Funktion $f : A → K$ gibt mit
-  $ ∀a, b ∈ A: quad a R b ⇔ f(a) = f(b). $
+  Sei $A$ eine Menge und $~$ eine Relation auf $A$. Dann ist $~$ genau dann eine Äquivalenzrelation, wenn es eine Menge $K$ und eine Funktion $f : A → K$ gibt mit
+  $ ∀a, b ∈ A: quad a ~ b ⇔ f(a) = f(b). $
   Die Äquivalenzklassen sind die Urbilder $f^(-1)({k})$ für $k ∈ f(A)$.
 ]<induziert>
 
 #beweis[
-  „$⇐$“: Zu zeigen ist, dass $R$ eine Äquivalenzrelation ist. Das folgt daraus, dass die Gleichheit auf $K$ eine Äquivalenzrelation ist (@gleichheitAequivalenz). Exemplarisch für die Transitivität:
+  „$⇐$“: Zu zeigen ist, dass $~$ eine Äquivalenzrelation ist. Das folgt daraus, dass die Gleichheit auf $K$ eine Äquivalenzrelation ist (@gleichheitAequivalenz). Exemplarisch für die Transitivität:
   $
-    a R b ∧ b R c ⇒ f(a) = f(b) ∧ f(b) = f(c) ⇒ f(a) = f(c) ⇒ a R c.
+    a ~ b ∧ b ~ c ⇒ f(a) = f(b) ∧ f(b) = f(c) ⇒ f(a) = f(c) ⇒ a ~ c.
   $
-  „$⇒$“: Wähle $K := quot(A, R)$ und $f : A → K$ mit $a ↦ [a]$. Man nennt $f$ auch die _kanonische Projektion_. Dann gilt $f(a) = f(b) ⇔ [a] = [b] ⇔ a R b$ nach @klassenEigenschaften (2).
+  „$⇒$“: Wähle $K := quot(A, ~)$ und $f : A → K$ mit $a ↦ [a]$. Man nennt $f$ auch die _kanonische Projektion_. Dann gilt $f(a) = f(b) ⇔ [a] = [b] ⇔ a ~ b$ nach @klassenEigenschaften (2).
 
   Die Äquivalenzklassen sind:
   $
-    quot(A, R) &= {[a] | a ∈ A} = {{b ∈ A | a R b} | a ∈ A} && #weil[Voraussetzung über $f$] \
+    quot(A, ~) &= {[a] | a ∈ A} = {{b ∈ A | a ~ b} | a ∈ A} && #weil[Voraussetzung über $f$] \
                &= {{b ∈ A | f(a) = f(b)} | a ∈ A} && #weil[Def. Urbild] \
                &= {f^(-1)({f(a)}) | a ∈ A} \
                &= {f^(-1)({k}) | k ∈ f(A)}.
@@ -2415,7 +2411,7 @@
 ]
 
 #bemerkung[
-  Die Funktion $f$ vergisst genau die Information, die $R$ für unwesentlich erklärt. Wählen wir als $f$ die Funktion, die einen String in Großbuchstaben verwandelt (z.B. $f(#[`ApFel`]) = #[`APFEL`]$), dann ergibt sich über @induziert die Äquivalenzrelation $~$, die Strings für äquivalent erklärt, wenn sie sich nur in Groß- und Kleinschreibung unterscheiden (z.B. $#[`apfel`] ~ #[`apFEL`]$).
+  Die Funktion $f$ vergisst genau die Information, die $~$ für unwesentlich erklärt. Wählen wir als $f$ die Funktion, die einen String in Großbuchstaben verwandelt (z.B. $f(#[`ApFel`]) = #[`APFEL`]$), dann ergibt sich über @induziert die Äquivalenzrelation $~$, die Strings für äquivalent erklärt, wenn sie sich nur in Groß- und Kleinschreibung unterscheiden (z.B. $#[`apfel`] ~ #[`apFEL`]$).
 ]
 
 #definition("Partition")[
@@ -2429,7 +2425,7 @@
 #beispiel[
   Sei
   $ M := {"à","â","å","b","c","ç","d","e","è"}. $
-  Eine Partition von $M$ in artgleiche Buchstaben, also solche mit demselben Grundbuchstaben, ist
+  Eine Partition von $M$ in artgleiche Buchstaben ist
   $ 𝒵 := {{"à","â","å"},{"b"},{"c","ç"},{"d"},{"e","è"}}. $
   Andererseits können wir eine Äquivalenzrelation $~$ auf $M$ definieren, bei der zwei Buchstaben genau dann in Relation stehen, wenn sie artgleich sind. Als gerichteter Graph dargestellt ergibt sich:
   #align(center, graphbild(
@@ -2474,58 +2470,24 @@
               &⇔ ∃Z ∈ 𝒵: Z = Z_a ∧ Z = Z_b \
               &⇔ Z_a = Z_b. $
     Im letzten Schritt folgt „$⇒$“ aus $Z_a = Z = Z_b$, und für „$⇐$“ wählt man $Z := Z_a$. Mit der Funktion $f : A → 𝒵$, $x ↦ Z_x$ gilt also $a ≡_𝒵 b ⇔ f(a) = f(b)$. Nach @induziert ist $≡_𝒵$ daher eine Äquivalenzrelation.
-  + Für die erste Gleichung verwenden wir $f$ aus (2). Nach @induziert sind die Klassen von $≡_𝒵$ die Urbilder $f^(-1)({Z})$ für $Z ∈ f(A)$. Dabei gilt:
-    - $f^(-1)({Z}) = {b ∈ A | Z_b = Z} = Z$, denn $b ∈ Z ⇔ Z = Z_b$.
-    - $f(A) = 𝒵$, denn jeder Teil $Z ∈ 𝒵$ enthält wegen $Z ≠ ∅$ ein Element $a$, und für dieses ist $f(a) = Z_a = Z$.
-    Zusammen ergibt sich $quot(A, ≡_𝒵) = {Z | Z ∈ 𝒵} = 𝒵$.
-
+  + Für die erste Gleichung verwenden wir die Notation aus (2):
+    $ quot(A, ≡_𝒵) &= {[a]_(≡_𝒵) | a ∈ A} && #weil[Def. $[a]$] \
+                   &= {{b ∈ A | a ≡_𝒵 b} | a ∈ A} && #weil[nach (2)] \
+                   &= {{b ∈ A | Z_a = Z_b} | a ∈ A} && #weil[$Z_a = Z_b ⇔ b ∈ Z_a$] \
+                   &= {Z_a | a ∈ A} = 𝒵. $
     Für die zweite Gleichung zeigen wir, dass beide Relationen dieselben Paare enthalten. Für $a, b ∈ A$ gilt
     $
-      a ≡_(quot(A, ~)) b &⇔ ∃Z ∈ quot(A, ~): a ∈ Z ∧ b ∈ Z && #weil[Def. $quot(A, ~)$] \
-                         &⇔ ∃c ∈ A: a ∈ [c] ∧ b ∈ [c] && #weil[Def. $[c]$] \
-                         &⇔ ∃c ∈ A: c ~ a ∧ c ~ b && #weil[Symmetrie] \
-                         &⇔ ∃c ∈ A: a ~ c ∧ c ~ b \
-                         &⇔ a ~ b.
+      a ≡_(quot(A, ~)) b defiff& ∃Z ∈ quot(A, ~): a ∈ Z ∧ b ∈ Z && #weil[Def. $quot(A, ~)$] \
+                         ⇔& ∃c ∈ A: a ∈ [c] ∧ b ∈ [c] && #weil[Def. $[c]$] \
+                         ⇔& ∃c ∈ A: c ~ a ∧ c ~ b && #weil[Symmetrie] \
+                         ⇔& ∃c ∈ A: a ~ c ∧ c ~ b \
+                         ⇔& a ~ b.
     $
-    Im letzten Schritt folgt „$⇒$“ aus der Transitivität, und für „$⇐$“ wählt man $c := b$ und benutzt $b ~ b$ (Reflexivität).
+    Im letzten Schritt folgt „$⇒$“ aus der Transitivität, und für „$⇐$“ wählt man $c := b$ und benutzt $b ~ b$ (Reflexivität).#qedhere
 ]
 
-#uebung[Brüche][
-  Sei $P := ℤ × ℕ⁺$ und für $(z₁,n₁), (z₂,n₂) ∈ P$ sei
-  $ (z₁,n₁) ~ (z₂,n₂) defiff z₁ ⋅ n₂ = z₂ ⋅ n₁. $
-  #set enum(numbering: "(a)")
-  + Zeigen Sie, dass $~$ eine Äquivalenzrelation auf $P$ ist.
-  + Gilt (a) auch, wenn $ℕ⁺$ durch $ℕ$ ersetzt wird?
-  + Begründen Sie, dass $quot(P, ~)$ den rationalen Zahlen entspricht.
-]<uebBrueche>
-
-#loesung[
-  #set enum(numbering: "(a)")
-  + _Reflexivität:_ Es gilt $z ⋅ n = z ⋅ n$. _Symmetrie:_ Die definierende Gleichung ändert sich nicht, wenn man die beiden Paare vertauscht. _Transitivität:_ Gelte $z₁ ⋅ n₂ = z₂ ⋅ n₁$ und $z₂ ⋅ n₃ = z₃ ⋅ n₂$. Dann ist
-    $ z₁ ⋅ n₃ ⋅ n₂ = z₂ ⋅ n₁ ⋅ n₃ = n₁ ⋅ z₂ ⋅ n₃ = n₁ ⋅ z₃ ⋅ n₂ = z₃ ⋅ n₁ ⋅ n₂. $
-    Wegen $n₂ ≠ 0$ dürfen wir durch $n₂$ teilen und erhalten $z₁ ⋅ n₃ = z₃ ⋅ n₁$.
-  + Nein. Mit $ℕ$ statt $ℕ⁺$ stünde $(0,0) ∈ P$ zu jedem Paar $(z,n) ∈ P$ in Relation, denn $0 ⋅ n = z ⋅ 0$. Dann gälte etwa $(1,1) ~ (0,0) ~ (2,1)$, aber nicht $(1,1) ~ (2,1)$. Die Transitivität wäre verletzt; genau an dieser Stelle braucht der Beweis in (a) die Bedingung $n₂ ≠ 0$.
-  + Jede rationale Zahl wird als Bruch $z/n$ mit Zähler $z ∈ ℤ$ und Nenner $n ∈ ℕ⁺$ dargestellt. Verschiedene Paare können dabei dieselbe rationale Zahl bedeuten, z.B. $3/7 = 6/14$. Die Äquivalenzrelation $~$ auf Paaren drückt genau aus, dass $(z₁)/(n₁) = (z₂)/(n₂)$ gilt, nur umgeformt durch Multiplikation mit $n₁ ⋅ n₂ ≠ 0$. Die Klassen in $quot(P, ~)$ entsprechen also genau den rationalen Zahlen: Zur Klasse $[(z,n)]$ gehört die Zahl $z/n$.
-]
-
-#notation("Rest", kurz: $x mod n$)[
-  Zu $x ∈ ℤ$ und $n ∈ ℕ⁺$ gibt es genau ein Paar $(q, r) ∈ ℤ × {0, …, n-1}$ mit $x = q ⋅ n + r$ (_Division mit Rest_; wir setzen das hier als bekannt voraus). Wir nennen $r$ den *Rest* von $x$ bei Division durch $n$ und schreiben $x mod n := r$. Etwa ist $17 mod 5 = 2$ wegen $17 = 3 ⋅ 5 + 2$, und $(-3) mod 5 = 2$ wegen $-3 = (-1) ⋅ 5 + 2$.
-]<rest>
-
-#satz[Gleicher Rest][
-  Sei $n ∈ ℕ⁺$. Für $x, y ∈ ℤ$ schreiben wir
-  $ x ≡ y space (mod n) defiff x mod n = y mod n $
-  und sagen, $x$ ist *kongruent* zu $y$ modulo $n$. Dies ist eine Äquivalenzrelation auf $ℤ$ mit genau $n$ Äquivalenzklassen.
-]<restklassen>
-
-#beweis[
-  Die Funktion $f : ℤ → {0, …, n-1}$, $x ↦ x mod n$ erfüllt $x ≡ y space (mod n) ⇔ f(x) = f(y)$. Nach @induziert ist die Kongruenz modulo $n$ also eine Äquivalenzrelation, und die Klassen sind die Urbilder $f^(-1)({r})$ für $r ∈ f(ℤ)$. Wegen $r mod n = r$ für $r ∈ {0, …, n-1}$ ist $f$ surjektiv, also $f(ℤ) = {0, …, n-1}$. Die $n$ Urbilder sind nicht leer und paarweise disjunkt, also verschieden, und es gibt genau $n$ Klassen.
-]
-
-#bemerkung[Restklassen][
-  Für $n = 3$ sind die drei Klassen
-  $ {…, -3, 0, 3, 6, …}, quad {…, -2, 1, 4, 7, …}, quad {…, -1, 2, 5, 8, …}. $
-  Die Klassen heißen *Restklassen* modulo $n$. Für die Quotientenmenge schreibt man meist $ℤ \/ n ℤ$; woher diese Schreibweise kommt, klären wir in @sec:modulo, wo uns die Restklassen noch ausführlich beschäftigen.
+#bemerkung[
+  In @sec:modulo sehen wir die _Modulorechnung_. Dort liegt neben einer Äquivalenzrelation aber noch zusätzliche Struktur vor und die Notation ist eine andere.
 ]
 
 === Zusammenhangskomponenten
