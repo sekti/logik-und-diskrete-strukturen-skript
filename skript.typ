@@ -331,7 +331,7 @@ Eine Klausuranmeldung setzt den Schein vorraus. Für den Schein müssen Sie _Pfl
   - aus denjenigen, die votiert haben, wird gelost, wer vorstellt (wenn es niemand freiwillig tut)
   - jeder muss mindestens einmal Vorrechnen
 - 50% der Punkte der Scheinklausuren
-  - November und Januar
+  - November und Januar, anstelle einer regulären Vorlesung
 
 === Ilias
 
@@ -2429,12 +2429,12 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
 - Beweis: Reflexivität (Weg der Länge 0), Symmetrie (Weg umdrehen), Transitivität (Wege aneinanderhängen).
 
 #definition("Zusammenhangskomponente")[
-  Die Äquivalenzklassen $V / ↭_G$ von heißen *Zusammenhangskomponenten* von $G$.
+  Die Elemente von $V \/ ↭_G$, also die Äquivalenzklassen, heißen *Zusammenhangskomponenten* von $G$.
 ]
 
 - Abbildung mit einem Graphen. Die Bildunterschrift listet die Zusammenhangskomponenten auf.
 - Bemerkung: $G$ ist zusammenhängend genau dann, wenn es genau eine Äquivalenzklasse bzgl. $↭_G$ gibt.
-- Definition und Satz: Sei $G = (V,E)$ ein gerichteter Graph. Dann ist „$⇝ ∩ ⇝^(-1)$ eine Äquivalenzrelation. Die Äquivalenzklassen heißen *starke Zusammenhangskomponenten*.
+- Definition und Satz: Sei $G = (V,E)$ ein gerichteter Graph. Dann ist $⇝ ∩ ⇝^(-1)$ eine Äquivalenzrelation. Die Äquivalenzklassen heißen *starke Zusammenhangskomponenten*.
 
 === Graphisomorphie
 
@@ -2446,7 +2446,7 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
 
 - Idee: Isomorphe Graphen sind „derselbe Graph mit anderen Knotennamen“.
 - Beispiel: Das Sechseck mit seinen drei langen Diagonalen ist isomorph zu $K_(3,3)$ (Isomorphismus angeben).
-- Beispiel: Peterson Graph ist nicht isomorph zu zwei geschachtelten Fünfecken.
+- Beispiel: Petersen-Graph ist nicht isomorph zu zwei geschachtelten Fünfecken.
 
 #satz[
   Sei $𝒢 := {(V,E) | (V,E) "ist Graph mit" V ⊆ ℕ }$.
@@ -2607,6 +2607,18 @@ Wollen wir hier Binärbäume haben?
   - Welche Kompromisse bedeutet das
 
 == O-Notation
+
+- Terme werden als Funktionen interpretiert (mit Variable n).
+
+=== O-Notation intuitiv
+
+- Was denken Informatiker, wenn sie O-Notation lesen?
+
+=== O-Notation als Äquivalenzrelation
+
+- Θ ist Äquivalenzrelation auf Funktionen
+
+=== O-Notation als Ordnungsrelation
 
 - Def: O-Notation (seltener: Landau-Notation / Bachmann-Landau Notation)
 - Bemerkung: keine totale Ordnung
