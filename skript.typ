@@ -262,8 +262,8 @@
 == Lernen mit und ohne KI-Systeme
 
 #skript[
-  Alex Kontorovich kommentierte in einem
-  #link("https://www.quantamagazine.org/live-from-icm-2026-what-is-math-for-in-the-age-of-ai-20260903/", [Interview mit dem Quanta Magazine]) (September 2026)
+  Alex Kontorovich kommentierte auf dem
+  #link("https://www.quantamagazine.org/live-from-icm-2026-what-is-math-for-in-the-age-of-ai-20260903/", [International Congress of Mathematicians (September 2026)])
   die Nutzung von KI-Systemen im Studium mit einer Analogie. Sinngemäß sagte er:
 
   _Einen Gabelstapler zu benutzen, um Paletten zu verladen oder um ein besserer Gabelstaplerfahrer zu werden, ist eine Sache. Wer aber mit dem Gabelstapler ins Fitnessstudio fährt, um Gewichte zu stemmen, verkennt das eigentliche Ziel der Übung._
@@ -282,87 +282,6 @@
 
   Es gibt ein öffentliches Repository auf #link("https://github.com/sekti/logik-und-diskrete-strukturen-skript", [GitHub]), wo sie alle Dateien finden. Wenn Sie Fehler finden, können Sie diese dort als #link("https://github.com/sekti/logik-und-diskrete-strukturen-skript/issues",[Issues]) melden (alternativ auch persönlich nach der Vorlesung oder über Ilias).
 ]
-#folien[
-  - #link("Typst.app")
-  - #link("https://github.com/sekti/logik-und-diskrete-strukturen-skript")
-  - _Issues_ auch gerne über GitHub.
-]
-
-=== Was steht wo?
-
-Für schwierige Inhalte nehmen wir uns Zeit an der Tafel. Einfache Inhalte werden mit dem Beamer angeworfen und schneller besprochen. Im Skript können Sie alles nachlesen.
-
-== Organisatorisches
-
-=== Menschen
-#table(
-    columns: 3,
-    stroke: none,
-    [Dozent],[Stefan Walzer],[(Zi 1.101)],
-    [Übungsleiter],[Florian Stober],[(Zi 1.112)],
-    [Ergänzungen],[Fabian Bühler],[(Zi 2.236)],
-    [Modulverantwortlicher],[Manfred Kufleitner],[(Zi 1.160)],
-  )
-=== Veranstaltungen
-
-#table(
-  columns: 4,
-  stroke: none,
-  [Vorlesung],[Mi 14:00 Uhr],[Pfaffenwaldring 47],[V *47.02*],
-  [Vorlesung],[Do 14:00 Uhr],[Pfaffenwaldring 47],[V *47.01*],
-  [Ergänzungen],[Do 17:30 Uhr],[Pfaffenwaldring 7],[V 7.02],
-  [Übungen],[14-täglich],[Universität 38],[?],
-)
-
-- Die Vorlesung hat nominell 3 SWS (nicht SWS 4).\
-  Nur rund 21 Termine werden genutzt.
-- Übungen (Tutorien)
-  - Anmeldung über Campus ab Donnerstag, 15. Oktober, 19:00 Uhr.
-    - first come, first served!
-  - Gruppenabgaben zulässig [Todo: Gruppengröße?]
-  - Erstes Blatt vorraussichtlich in Vorlesungswoche 2.
-  - Erste Übungen vorraussichtlich in Vorlesungswoche 3.
-
-=== Schein
-
-Eine Klausuranmeldung setzt den Schein vorraus. Für den Schein müssen Sie _Pflichtaufgaben_ abgeben, für übrige Aufgaben _votieren_ und die Scheinklausuren bestehen. Genaue Scheinbedingungen:
-- 50% der Punkte der Pflichtaufgaben
-- für 50% der übrigen Aufgaben „votieren“
-  - aus denjenigen, die votiert haben, wird gelost, wer vorstellt (wenn es niemand freiwillig tut)
-  - jeder muss mindestens einmal Vorrechnen
-- 50% der Punkte der Scheinklausuren
-  - November und Januar, anstelle einer regulären Vorlesung
-
-=== Ilias
-
-Ilias Kurse:
-- #link("https://ilias3.uni-stuttgart.de/go/crs/4553404", "Vorlesung")
-  - Diskussionsforum
-  - Vorlesungsskript
-  // Videoaufzeichnungen? mag ich nicht
-- [Übung] // todo
-  - Übungsblätter
-  - Lösungen
-  
-- #link("https://ilias3.uni-stuttgart.de/go/crs/4553360", "Ergänzungen")
-  - ?
-
-=== Hinweis für Wiederholer
-
-Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird so gestaltet, dass sie auch für Wiederholer passt.
-/*
-  Vorschlag: Wahlaufgabe.
-    - Logik aus dem Vorjahr oder
-    - Graphenaufgabe für aktuelles Jahr
-*/
-
-== Was ist klausurrelevant?
-
-- Prinzipiell *alle* Inhalte von Vorlesung und Übung
-- Kennzeichnung in diesem Skript gibt Tendenz vor:
-  - _Übung_: Hätte eine Klausuraufgabe sein können.
-  - _Bemerkung_: Weniger zentraler Inhalt.
-  - Alles andere: Sollten sie reproduzieren, verstehen und anwenden können.
 
 #slidebreak()
 = Mengen
