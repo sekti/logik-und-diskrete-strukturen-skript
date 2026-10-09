@@ -2275,11 +2275,11 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
 
 === Erreichbarkeit in gerichteten Graphen
 
-#definition("Erreichbarkeit", kurz: $u ⇝_G v$)[
+#definition("Erreichbarkeit in gerichteten Graphen", kurz: $u ⇝_G v$)[
   Sei $G = (V,E)$ ein gerichteter Graph und seien $u,v ∈ V$. Wir schreiben
   $ u ⇝_G v defiff "es gibt einen gerichteten Weg von" u "nach" v $
   und sagen dann, $v$ ist von $u$ aus *erreichbar*. Ist $G$ aus dem Zusammenhang klar, schreiben wir nur $u ⇝ v$.
-]<erreichbarkeit>
+]<erreichbarkeitgerichtet>
 
 #satz[
   Für jeden gerichteten Graphen $G = (V,E)$ ist $⇝_G$ eine Quasiordnung auf $V$.
@@ -2404,24 +2404,34 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
 
 == Äquivalenzrelationen
 
+- Äquivalenzrelation intuitiv:
+  - Relaxierung von Gleichhheit (Gleichheit "bis auf")
+  - Ignorieren von unwesentlicher Information
+    - Menge von Worten {Müßiggang,müßiggang,Muessiggang,Lückenbüßer, LUECKENBUESSER, maßlos}
+    - Es treten nur drei _Äquivalenzklassen_ von Wörtern _modulo_ Großschreibung und Umlauten auf. _Repräsentantion_ der Klassen sind MUESSIGGANG, LUECKENBUESSER und MASSLOS.
+  - Abbildung mit Beispielen:
+    - Zwei kongruente Dreiecke
+    - Zwei einfache Isomorphe Graphen mit Knoten 1,2,3,4 bzw. A,B,C,D
+
 - Definition: Äquivalenzrelation
-- Notation [a] Äquivalenzklasse von a.
-- Schreibweise A / R "modulo"
-- Def: Partitionierung
+- Notation [a] Äquivalenzklasse von a. a ist ein Repräsentant der Klasse (jedes andere a' ∈ [a] ist das auch). Projektion π.
+- Def: Partition
 - Bild: Partition der Grundmenge
-- Satz A / R ist eine Partitionierung von A
-  - z.Z: [a] ∩ [b] ≠ ∅ ⇒ [a] = [b]
-- Beispiel: 
-- Beispiele: Sei P = ℤ × ℕ⁺ und (z₁,n₁) ~ (z₂,n₂) defiff z₁n₂ = z₂n₁. Beweise: ~ ist eine Äquivalenzrelation.
-- Bemerkung: ℚ := P / ~ ist eine Konstruktion der rationalen Zahlen. Diese sind gegeben durch Brüche der Form z₁/n₁. Die Relation ~ drückt genau aus, dass zwei Paare (z₁,n₁) und (z₂,n₂) dem selben Bruch entsprechen, dass also z₁/n₁ = z₂/n₂.
-- Bemerkung: Ein wichtiges Beispiel für Quotientenmengen werden die Restklassen modulo n sein (siehe Kapitel ...)
-- Für beliebige Mengen A und B und f : A → B ist a ~ a' defiff f(a) = f(a') eine Äquivalenzrelation. Die Äquivalenzklassen sind {f^(-1)(b) | b ∈ f(A)}.
+- Satz Sei A eine Menge. Jede Partition von A entspricht genau einer Äquivalenzrelation auf A und umgekehrt
+  - z.Z: a ∈ [a] und [a] ∩ [b] ≠ ∅ ⇒ [a] = [b]
+- Notation: A / R "modulo" für Menge der Äquivalenzklassen (Quotientenmenge), also die Partition.
+- Uebung: Sei P = ℤ × ℕ⁺ und (z₁,n₁) ~ (z₂,n₂) defiff z₁n₂ = z₂n₁. Beweise: ~ ist eine Äquivalenz. Argumentiere: P / ~ entspricht der Menge ℚ der rationalen Zahlen.
+- Loesung: ...
+- Satz: $R$ ist genau dann eine Äquivalenzrelation auf $X$, wenn es eine Menge $Y$ und ein $f : X → Y$ gibt mit $a R b ⟺ f(a) = f(b)$. Die Klassen sind dann die nichtleeren Urbilder $f^(-1)({y})$.
+- Satz: Sei n ∈ ℕ und x ~ y gdw x und y den selben Rest beim Teilen durch n lassen. Dann ist ~ eine Äquivalenzrelation mit n Äquivalenzklassen.
+- Beweis: Der Rest den x lässt ist eine eindeutige Zahl zwischen 0 und n-1, ist also eine Funktion der Zahl. Dann Satz von eben anwenden.
+Bemerkung: Das Beispiel wird uns später noch viel beschäftigen.
 
 === Zusammenhangskomponenten
 
-#definition("Erreichbarkeit")[
+#definition("Erreichbarkeit in ungerichteten Graphen")[
   Sei $G = (V,E)$ ein ungerichteter Graph. Für $v,w ∈ V$ schreiben wir $v ↭_G w$, falls es einen Weg von $v$ nach $w$ gibt. Wenn klar ist, welcher Graph gemeint ist, lassen wir den Index weg.
-]
+]<erreichbarkeitungerichtet>
 
 #satz[
   Für jeden ungerichteten Graphen $G = (V,E)$ ist $↭_G$ eine Äquivalenzrelation auf $V$.
@@ -2444,9 +2454,9 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
   Wir schreiben $G_1 ≅ G_2$, falls ein solcher Isomorphismus existiert, und nennen $G_1$ und $G_2$ dann *isomorph*.
 ]
 
-- Idee: Isomorphe Graphen sind „derselbe Graph mit anderen Knotennamen“.
+- Idee: Isomorphe Graphen sind „derselbe Graph mit anderen Knotennamen“. Alle Eigenschaften eines Graphen, die sich ohne Rückgriff auf die Knotennamen formulieren lassen gelten offensichtlich genauso für jeden isomorphen Graphen. Gibt es Wege oder Kreise gewisser Länge, Knoten von bestimmten Graden usw, dann gibt es sie auch im isomorphen Graphen. 
 - Beispiel: Das Sechseck mit seinen drei langen Diagonalen ist isomorph zu $K_(3,3)$ (Isomorphismus angeben).
-- Beispiel: Petersen-Graph ist nicht isomorph zu zwei geschachtelten Fünfecken.
+- Beispiel: Petersen-Graph ist nicht isomorph zum Fünfecksprisma. Das Fünfeckprisma enthält einen Kreis der Länge 4, der Petersen-Graph nicht.
 
 #satz[
   Sei $𝒢 := {(V,E) | (V,E) "ist Graph mit" V ⊆ ℕ }$.
@@ -2456,13 +2466,13 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
 - Bemerkung: Grund der Einschränkung. „Alle Graphen überhaupt“ bilden wie „alle Mengen“ keine Menge.
 
 #definition("Unbeschrifteter Graph")[
-  Ein *unbeschrifteter Graph* (englisch „unlabeled graph“) mit $n$ Knoten ist eine Äquivalenzklasse bezüglich Isomorphie, also ein Element von
+  Ein *unbeschrifteter Graph* (englisch „unlabeled graph“) ist eine Äquivalenzklasse bezüglich Isomorphie, also ein Element von
   $ 𝒢 \/ ≅. $
 ]
 
 - Sprechweise: Wir sagen dann „der Graph“ und meinen seine Isomorphieklasse. Genau das tun wir beim Zeichnen ohne Knotennamen und in der Graphengalerie: $P_4$, $C_6$ oder $K_5$ bezeichnen Isomorphieklassen.
 - Bemerkung: Ob zwei gegebene Graphen isomorph sind, ist algorithmisch überraschend schwer. Für die Anzahl der unbeschrifteten Graphen mit $n$ Knoten gibt es keine einfache Formel. (Beschriftete Graphen sind leicht zu zählen, siehe Kapitel „Zählen“.)
-- Übung: Bestimmen Sie alle unbeschrifteten Graphen mit 3 Knoten. Wie viele beschriftete Graphen mit Knotenmenge ${1,2,3}$ gibt es jeweils in einer Klasse?
+- Übung: Bestimmen Sie alle unbeschrifteten Graphen mit 4 Knoten und 3 Kanten. Wie viele beschriftete Graphen mit Knotenmenge ${1,2,3,4}$ und $3$ Kanten gibt es jeweils in einer Klasse?
 
 #slidebreak()
 = Exkurs: Abzählbarkeit
@@ -2724,6 +2734,8 @@ Wollen wir hier Binärbäume haben?
 == Modulo Rechnung
 
 - Teilbarkeit, Rest, Kongruenz modulo n
+- Wohldefiniertheit der Addition und Multiplikation.
+  - Als Technik? Definition einer Funktion auf Äquivalenzklassen durch Definition auf Repräsentanten.
 - Euklidischer Algorithmus
   - Satz: Korrektheit
   - Satz: Laufzeit (hier brauchen wir die O-Notation)
