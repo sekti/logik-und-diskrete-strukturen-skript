@@ -2365,7 +2365,9 @@
 #definition("Äquivalenzklasse, Repräsentant", kurz: $[a]$)[
   Sei $~$ eine Äquivalenzrelation auf $A$ und $a ∈ A$. Die *Äquivalenzklasse* von $a$ ist
   $ [a]_~ := {b ∈ A | a ~ b}. $
-  Wir schreiben $[a]$ statt $[a]_~$ wenn die Relation aus dem Kontext klar ist. Die Elemente einer Äquivalenzklasse sind ihre _Repräsentanten_.
+  Die Elemente einer Äquivalenzklasse sind ihre _Repräsentanten_. Die Menge der Äquivalenzklassen
+  $ A \/ ~ := {[a]_~ | a ∈ A} $
+  heißt *Quotientenmenge*, gesprochen „$A$ modulo $~$“. Wir schreiben $[a]$ statt $[a]_~$ wenn die Relation aus dem Kontext klar ist.
 ]<aequivalenzklasse>
 
 #lemma[Eigenschaften von Äquivalenzklassen][
@@ -2379,63 +2381,78 @@
 #beweis[
   #set enum(numbering: "(1)")
   + Wegen der Reflexivität gilt $a ~ a$, also $a ∈ [a]$.
-  + „$⇒$“: Gelte $a ~ b$. Für jedes $c ∈ [b]$ gilt $b ~ c$ und mit der Transitivität $a ~ c$, also $c ∈ [a]$. Das zeigt $[b] ⊆ [a]$. Wegen der Symmetrie gilt auch $b ~ a$, und dasselbe Argument mit vertauschten Rollen liefert $[a] ⊆ [b]$.
-
-    „$⇐$“: Nach (1) gilt $b ∈ [b] = [a]$, also $a ~ b$.
-  + Sei $c ∈ [a] ∩ [b]$. Dann gilt $a ~ c$ und $b ~ c$, mit der Symmetrie also auch $c ~ b$ und mit der Transitivität $a ~ b$. Nach (2) folgt $[a] = [b]$.
-]
-
-#bemerkung[
-  Nach @klassenEigenschaften ist eine Äquivalenzklasse durch jeden ihrer Repräsentanten bestimmt: Ist $b ∈ [a]$, so gilt $a ~ b$ und damit $[b] = [a]$. Welchen Repräsentanten man wählt, ist also gleichgültig.
+  + / $⇒$: Gelte $a ~ b$. Für jedes $c ∈ [b]$ gilt $b ~ c$ und mit der Transitivität $a ~ c$, also $c ∈ [a]$. Das zeigt $[b] ⊆ [a]$. Wegen der Symmetrie gilt auch $b ~ a$, und dasselbe Argument mit vertauschten Rollen liefert $[a] ⊆ [b]$. Also gilt $[a] = [b]$.
+    / $⇐$: Nach (1) gilt $b ∈ [b] = [a]$, also $a ~ b$.
+  + Sei $c ∈ [a] ∩ [b]$. Dann gilt $a ~ c$ und $b ~ c$, mit der Symmetrie also auch $c ~ b$ und mit der Transitivität $a ~ b$. Nach (2) folgt $[a] = [b]$. #qedhere
 ]
 
 #definition("Partition")[
-  Sei $A$ eine Menge. Eine Menge $𝒵 ⊆ 2^A$ von Teilmengen von $A$ heißt *Partition* (auch *Zerlegung*) von $A$, wenn gilt:
+  Sei $A$ eine Menge. Eine Menge $𝒵 ⊆ 2^A$ heißt *Partition* (auch *Zerlegung*) von $A$, wenn gilt:
   #set enum(numbering: "(1)")
   + $∅ ∉ 𝒵$, und
   + jedes $a ∈ A$ liegt in genau einem $Z ∈ 𝒵$.
   Die Elemente von $𝒵$ heißen *Teile* der Partition.
 ]<partition>
 
-#abbildung(slides: 0, caption: [
-  Eine Partition einer Menge in vier Teile. Die zugehörige Äquivalenzrelation setzt zwei Elemente genau dann in Relation, wenn sie im selben Teil liegen. Etwa gilt $c ~ e$, aber nicht $c ~ f$.
-])[#partitionsbild()]<partitionsbild>
+#beispiel[
+  Sei 
+  $M = {"a","à","â","å","ä","α","β","b","c","ç","d","ε","e","è"}$.\
+  Eine mögliche Partition von $M$ ist
+  $ 𝒵 = {{"a","à","â","å","ä","α"},{"β","b"},{"c","ç"},{"d"},{"ε","e","è"}}. $ 
+  Diese Partition entspricht der Äquivalenzrelation auf $M$, die Buchstaben für äquivalent erklärt, wenn sie den selben Ursprung haben.
+]
 
 #satz[Äquivalenzrelationen und Partitionen][
   #set enum(numbering: "(1)")
   Sei $A$ eine Menge.
-  + Ist $~$ eine Äquivalenzrelation auf $A$, so ist ${[a] | a ∈ A}$ eine Partition von $A$.
+  + Ist $~$ eine Äquivalenzrelation auf $A$, so ist $A \/ ~$ eine Partition von $A$.
   + Ist $𝒵$ eine Partition von $A$, so ist
-    $ a ~_𝒵 b defiff "es gibt ein" Z ∈ 𝒵 "mit" a ∈ Z "und" b ∈ Z $
+    $ a ~_𝒵 b defiff ∃Z ∈ 𝒵: a ∈ Z ∧ b ∈ Z $
     eine Äquivalenzrelation auf $A$.
-  + Die beiden Konstruktionen machen einander rückgängig: Die Klassen von $~_𝒵$ sind genau die Teile von $𝒵$, und die Partition ${[a] | a ∈ A}$ liefert über (2) wieder die Relation $~$.
-  Äquivalenzrelationen und Partitionen beschreiben also dasselbe auf zwei Weisen.
+  + Die beiden Konstruktionen machen einander rückgängig: Formal:
+  $ A \/ ~_𝒵 = 𝒵 "sowie" ~_(A \/ ~) = ~ $
+  //Die Äquivalenzklassen von $~_𝒵$ sind genau die Teile von $𝒵$, und die Partition $A \/ ~$ liefert über (2) wieder die Relation $~$.
 ]<partitionAequivalenz>
 
 #beweis[
   #set enum(numbering: "(1)")
-  + Jede Klasse $[a]$ enthält $a$ und ist daher nicht leer. Jedes $a ∈ A$ liegt in einer Klasse, nämlich in $[a]$. Liegt $a$ in zwei Klassen $[b]$ und $[c]$, so ist $[b] ∩ [c] ≠ ∅$, und nach @klassenEigenschaften (3) gilt $[b] = [c]$. Also liegt $a$ in genau einer Klasse.
-  + Für $a ∈ A$ sei $Z_a$ der eindeutige Teil von $𝒵$, der $a$ enthält. Jeder Teil, der $a$ enthält, ist dann $Z_a$. Also gilt $a ~_𝒵 b$ genau dann, wenn $b ∈ Z_a$, und das heißt $Z_a = Z_b$. In dieser Form erben Reflexivität, Symmetrie und Transitivität sich von der Gleichheit.
-  + Mit der Notation aus (2) ist $[a]_(~_𝒵) = {b ∈ A | b ∈ Z_a} = Z_a$. Jeder Teil $Z ∈ 𝒵$ ist nicht leer und damit von dieser Form, denn für jedes $a ∈ Z$ ist $Z = Z_a$. Also sind die Klassen von $~_𝒵$ genau die Teile von $𝒵$.
+  + Wir zeigen die beiden Eigenschaften von @partition. (1) Jede Klasse $[a] ∈ A \/ ~$ enthält $a$ und ist daher nicht leer. (2) Jedes $a ∈ A$ liegt in einer Klasse, nämlich in $[a]$. Liegt $a$ in zwei Klassen $[b]$ und $[c]$, so ist $[b] ∩ [c] ≠ ∅$, und nach @klassenEigenschaften (3) gilt $[b] = [c]$. Also liegt $a$ in genau einer Klasse.
+  + Für $x ∈ A$ sei $Z_x$ der eindeutige Teil von $𝒵$, der $x$ enthält. Damit ist für $Z ∈ 𝒵$ die Aussage $x ∈ Z$ äquivalent zu $Z = Z_x$. Die Definition der Relation $~_𝒵$ vereinfacht sich zu:
+      $ a ~_𝒵 b &defiff ∃Z ∈ 𝒵: a ∈ Z ∧ b ∈ Z\
+      & ⇔ ∃Z ∈ 𝒵: Z = Z_a ∧ Z = Z_b ⇔ Z_a = Z_b. $
+      Dass $~_𝒵$ eine Äquivalenzrelation ist ergibt sich nun daraus, dass $=$ eine Äquivalenzrelation ist.
+  + Für die erste Formel verwenden wir die Notation aus (2).
+    $ A \/ ~_𝒵 &= {[a]_(~_Z) | a ∈ A} \
+              &={{b ∈ A | a ~_𝒵 b } | a ∈ A } \
+              &={{b ∈ A | Z_a = Z_b } | a ∈ A } #weil[$Z$ ist Partition]\
+              &={Z_a | a ∈ A } = 𝒵.
+    $
+    Für die Gleichheit der Relationen $~$ und $~_(A \/ ~)$ zeigen wir, dass sie dieselben Paare umfassen:
+    $
+      a ~_(A \/ ~) &⇔ ∃Z ∈ A \/ ~: a ∈ Z ∧ b ∈ Z\
+                   &⇔ ∃c ∈ A: a ∈ [c] ∧ b ∈ [c]\
+                   &⇔ ∃c ∈ A: c ~ a ∧ c ~ b && #weil[Symmetrie]\
+                   &⇔ ∃c ∈ A: a ~ c ∧ c ~ b && #weil[Transitivität und Reflexivität]\
+                   &⇔ a ~ b
 
-    Sei umgekehrt $𝒵 := {[a] | a ∈ A}$. Nach (1) ist $[a]$ der eindeutige Teil, der $a$ enthält, also $Z_a = [a]$. Damit gilt $a ~_𝒵 b ⇔ [a] = [b] ⇔ a ~ b$ nach @klassenEigenschaften (2).
+    $#qedhere
 ]
 
-#notation("Quotientenmenge, kanonische Projektion", kurz: [$A \/ ~$, $π$])[
-  Sei $~$ eine Äquivalenzrelation auf $A$. Die Menge der Äquivalenzklassen
-  $ A \/ ~ := {[a] | a ∈ A} $
-  heißt *Quotientenmenge*, gesprochen „$A$ modulo $~$“. Nach @partitionAequivalenz ist sie eine Partition von $A$. Die Funktion
+/* brauchen wir die kanonische Projektion? Sie ist doch das gleiche wie [⋅]
+
+#notation("kanonische Projektion")[
+  Die Funktion
   $ π : A → A \/ ~, quad a ↦ [a] $
   heißt *kanonische Projektion*. Sie ist surjektiv, und nach @klassenEigenschaften gilt $π(a) = π(b) ⇔ a ~ b$.
 ]<quotientenmenge>
-
+*/
 #uebung[Brüche][
   Sei $P := ℤ × ℕ⁺$ und für $(z₁,n₁), (z₂,n₂) ∈ P$ sei
   $ (z₁,n₁) ~ (z₂,n₂) defiff z₁ ⋅ n₂ = z₂ ⋅ n₁. $
   #set enum(numbering: "(a)")
   + Zeigen Sie, dass $~$ eine Äquivalenzrelation auf $P$ ist.
-  + Begründen Sie, dass $P \/ ~$ der Menge $ℚ$ der rationalen Zahlen entspricht.
-  + Warum verlangt man $n ∈ ℕ⁺$ und nicht nur $n ∈ ℕ$?
+  + Gilt (a) auch, wenn $ℕ⁺$ durch $ℕ$ ersetzt wird?
+  + Begründen Sie, dass $P \/ ~$ den rationalen Zahlen entspricht.
 ]<uebBrueche>
 
 #loesung[
@@ -2443,26 +2460,33 @@
   + _Reflexivität:_ Es gilt $z ⋅ n = z ⋅ n$. _Symmetrie:_ Die definierende Gleichung ändert sich nicht, wenn man die beiden Paare vertauscht. _Transitivität:_ Gelte $z₁ ⋅ n₂ = z₂ ⋅ n₁$ und $z₂ ⋅ n₃ = z₃ ⋅ n₂$. Dann ist
     $ z₁ ⋅ n₃ ⋅ n₂ = z₂ ⋅ n₁ ⋅ n₃ = n₁ ⋅ z₂ ⋅ n₃ = n₁ ⋅ z₃ ⋅ n₂ = z₃ ⋅ n₁ ⋅ n₂. $
     Wegen $n₂ ≠ 0$ dürfen wir durch $n₂$ teilen und erhalten $z₁ ⋅ n₃ = z₃ ⋅ n₁$.
-  + Wegen $n₁ ⋅ n₂ ≠ 0$ gilt $z₁ ⋅ n₂ = z₂ ⋅ n₁$ genau dann, wenn $z₁ \/ n₁ = z₂ \/ n₂$. Die Klasse von $(z,n)$ besteht also aus allen Darstellungen der rationalen Zahl $z \/ n$ als Bruch, etwa $[(1,2)] = {(1,2), (2,4), (3,6), …}$. Jede rationale Zahl hat solche Darstellungen, und verschiedene rationale Zahlen gehören zu verschiedenen Klassen. Wer $ℚ$ noch nicht kennt, kann daher $ℚ := P \/ ~$ als _Definition_ der rationalen Zahlen verwenden.
-  + Ließe man $n = 0$ zu, so stünde $(0,0)$ zu jedem Paar in Relation, denn $0 ⋅ n = z ⋅ 0$. Dann gälte etwa $(1,1) ~ (0,0) ~ (2,1)$, aber nicht $(1,1) ~ (2,1)$. Die Transitivität wäre verletzt; genau an dieser Stelle braucht der Beweis in (a) die Bedingung $n₂ ≠ 0$.
+  + mit $ℕ$ statt $ℕ⁺$ stünde $(0,0) ∈ P$ zu jedem $(z,n) ∈ P$ Paar in Relation, denn $0 ⋅ n = z ⋅ 0$. Dann gälte etwa $(1,1) ~ (0,0) ~ (2,1)$, aber nicht $(1,1) ~ (2,1)$. Die Transitivität wäre verletzt; genau an dieser Stelle braucht der Beweis in (a) die Bedingung $n₂ ≠ 0$.
+  + Jede rationale Zahl wird als Bruch $z/n$ mit Zähler $z ∈ ℤ$ und Nenner $n ∈ ℕ⁺$ dargestellt. Verschiedene Paare können dabei die rationale Zahl bedeuten, z.B. $3/7 = 6/14$. Die Äquivalenzrelation $~$ auf Paaren drückt genau aus, dass $(z₁)/(n₁) = (z₂)/(n₂)$ gilt, nur umgeformt.
 ]
 
 #satz[Äquivalenzrelationen aus Funktionen][
   Sei $X$ eine Menge und $R$ eine Relation auf $X$. Dann ist $R$ genau dann eine Äquivalenzrelation, wenn es eine Menge $Y$ und eine Funktion $f : X → Y$ gibt mit
   $ ∀a, b ∈ X: quad a R b ⇔ f(a) = f(b). $
-  Die Äquivalenzklassen sind dann genau die Urbilder $f^(-1)({y})$ für $y ∈ f(X)$.
+  Die Äquivalenzklassen sind die Urbilder $f^(-1)({y})$ für $y ∈ f(X)$.
 ]<induziert>
 
 #beweis[
-  „$⇐$“: Die drei Eigenschaften erbt $R$ von der Gleichheit auf $Y$: Es gilt $f(a) = f(a)$; aus $f(a) = f(b)$ folgt $f(b) = f(a)$; aus $f(a) = f(b)$ und $f(b) = f(c)$ folgt $f(a) = f(c)$.
+  „$⇐$“: Zu zeigen ist, dass $R$ eine Äquivalenzrelation ist. Das folgt daraus, dass die Gleichheit auf $Y$ eine Äquivalenzrelation ist. Exemplarisch für die Transitivität:
+  $
+    a R b ∧ b R c ⇒ f(a) = f(b) ∧ f(b) = f(c) ⇒ f(a) = f(c) ⇒ a R c.
+  $
+  „$⇒$“: Wähle $Y := X \/ R$ und $f : X → Y$ mit $x ↦ [x]$. Man nennt $f$ auch die _kanonische Projektion_. Dann gilt $f(a) = f(b) ⇔ [a] = [b] ⇔ a R b$ nach @klassenEigenschaften.
 
-  „$⇒$“: Wähle $Y := X \/ R$ und $f := π$, die kanonische Projektion aus @quotientenmenge. Dann gilt $f(a) = f(b) ⇔ a R b$.
-
-  Zu den Klassen: Für $a ∈ X$ ist $[a] = {b ∈ X | f(a) = f(b)} = f^(-1)({f(a)})$. Durchläuft $a$ die Menge $X$, so durchläuft $f(a)$ genau die Menge $f(X)$.
+  Die Äquivalenzklassen sind:
+  $
+    X / R &= {[x] | x ∈ X} = {{y ∈ X | x ~ y} | x ∈ X}\
+          &= {{y ∈ X | f(x) = f(y)} | x ∈ X }\
+          &= {f^(-1)(f(x)) | x ∈ X } = {f^(-1)(y) | y ∈ Y}.#qedhere
+  $
 ]
 
 #bemerkung[
-  Die Funktion $f$ vergisst genau die Information, die $R$ für unwesentlich erklärt. In @bspGleichBisAuf ist $f$ das Umschreiben in Großbuchstaben ohne Umlaute, und die dort gewählten Repräsentanten MUESSIGGANG, LUECKENBUESSER und MASSLOS sind gerade Funktionswerte von $f$.
+  Die Funktion $f$ vergisst genau die Information, die $R$ für unwesentlich erklärt. Wählen wir als $f$ die Funktion die einen String in Großbuchstaben verwandelt (z.B. $f(#[`ApFel`]) = #[`APFEL`])$ dann ergibt sich über @induziert die Äquivalenzrelation $~$, die Strings für äquivalent erklärt, wenn sie sich nur in Groß- und Kleinschreibung unterscheiden (z.B. $#[`apfel`] ~ #[`apFEL`]$).
 ]
 
 #notation("Rest", kurz: $x mod n$)[
