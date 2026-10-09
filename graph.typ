@@ -20,6 +20,8 @@
   beschriftung: true,
   gerichtet: false,
   bogen: 0.0,
+  // Richtung der Schlinge je Knoten, z.B. ("a": 270deg); sonst nach oben
+  schlingen: (:),
 ) = canvas({
   import draw: *
 
@@ -49,11 +51,14 @@
     let b = knoten.at(e.at(1))
 
     if e.at(0) == e.at(1) {
-      // Schleife: Kreisbogen über dem Knoten, mit Lücke nach unten.
+      // Schleife: Kreisbogen neben dem Knoten (standardmäßig darüber),
+      // mit Lücke zum Knoten hin.
       let s = radius * 1.15
+      let w = schlingen.at(e.at(0), default: 90deg)
+      let d = radius + 0.75 * s
       arc(
-        (a.at(0), a.at(1) + radius + 0.75 * s),
-        start: -60deg, stop: 240deg, radius: s, anchor: "origin",
+        (a.at(0) + d * calc.cos(w), a.at(1) + d * calc.sin(w)),
+        start: w - 150deg, stop: w + 150deg, radius: s, anchor: "origin",
         stroke: strich, mark: (end: ">", scale: 0.6, fill: strich.paint),
       )
     } else if not gerichtet {

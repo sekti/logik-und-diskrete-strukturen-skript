@@ -2426,16 +2426,33 @@
   Die Elemente von $𝒵$ heißen *Teile* der Partition.
 ]<partition>
 
-#abbildung(slides: 0, caption: [
-  Eine Partition einer Menge in vier Teile. Nach @partitionAequivalenz gehört dazu die Äquivalenzrelation, die zwei Elemente genau dann für äquivalent erklärt, wenn sie im selben Teil liegen. Etwa ist $c$ äquivalent zu $e$, aber nicht zu $f$.
-])[#partitionsbild()]<partitionsbild>
-
 #beispiel[
-  Sei 
-  $M := {"a","à","â","å","ä","α","β","b","c","ç","d","ε","e","è"}$.\
-  Eine mögliche Partition von $M$ ist
-  $ 𝒵 = {{"a","à","â","å","ä","α"},{"β","b"},{"c","ç"},{"d"},{"ε","e","è"}}. $ 
-  Diese Partition entspricht der Äquivalenzrelation auf $M$, die Buchstaben für äquivalent erklärt, wenn sie denselben Ursprung haben.
+  Sei
+  $ M := {"à","â","å","b","c","ç","d","e","è"}. $
+  Eine Partition von $M$ in artgleiche Buchstaben, also solche mit demselben Grundbuchstaben, ist
+  $ 𝒵 := {{"à","â","å"},{"b"},{"c","ç"},{"d"},{"e","è"}}. $
+  Andererseits können wir eine Äquivalenzrelation $~$ auf $M$ definieren, bei der zwei Buchstaben genau dann in Relation stehen, wenn sie artgleich sind. Als gerichteter Graph dargestellt ergibt sich:
+  #align(center, graphbild(
+    (
+      "à": (0, 0), "â": (1.2, 0), "å": (0.6, -1.05),
+      "b": (2.5, -0.5),
+      "c": (3.8, -0.5), "ç": (4.8, -0.5),
+      "d": (6.1, -0.5),
+      "e": (7.4, -0.5), "è": (8.4, -0.5),
+    ),
+    (
+      ("à", "à"), ("â", "â"), ("å", "å"),
+      ("à", "â"), ("â", "à"), ("à", "å"), ("å", "à"), ("â", "å"), ("å", "â"),
+      ("b", "b"),
+      ("c", "c"), ("ç", "ç"), ("c", "ç"), ("ç", "c"),
+      ("d", "d"),
+      ("e", "e"), ("è", "è"), ("e", "è"), ("è", "e"),
+    ),
+    gerichtet: true,
+    radius: 0.22,
+    schlingen: ("à": 135deg, "â": 45deg, "å": 270deg),
+  ))
+  Der folgende Satz zeigt, dass Partitionen und Äquivalenzrelationen zwei Sichtweisen auf dasselbe Konzept sind: Man kann $𝒵$ aus $~$ gewinnen und umgekehrt.
 ]
 
 #satz[Äquivalenzrelationen und Partitionen][
