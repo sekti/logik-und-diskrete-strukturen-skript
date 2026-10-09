@@ -2326,8 +2326,8 @@
 - Äquivalenzrelation intuitiv:
   - Relaxierung von Gleichheit (Gleichheit "bis auf")
   - Ignorieren von unwesentlicher Information
-    - Menge von Worten {Müßiggang,müßiggang,Muessiggang,Lückenbüßer, LUECKENBUESSER, maßlos}
-    - Es treten nur drei _Äquivalenzklassen_ von Wörtern _modulo_ Großschreibung und Umlauten auf. _Repräsentanten_ der Klassen sind MUESSIGGANG, LUECKENBUESSER und MASSLOS.
+    - Sei M Menge aller Wörter mit deutschen Buchstaben. Teilmenge T = {Müßiggang,müßiggang,Muessiggang,Lückenbüßer, LUECKENBUESSER, maßlos}
+    - In T vertreten sind nur drei _Äquivalenzklassen_ von Wörtern _modulo_ Großschreibung und Umlauten. _Repräsentanten_ der Klassen sind MUESSIGGANG, LUECKENBUESSER und MASSLOS.
   - Abbildung mit Beispielen:
     - Zwei kongruente Dreiecke
     - Zwei einfache isomorphe Graphen mit Knoten 1,2,3,4 bzw. A,B,C,D
@@ -2337,12 +2337,14 @@
 - Def: Partition
 - Bild: Partition der Grundmenge
 - Satz Sei A eine Menge. Jede Partition von A entspricht genau einer Äquivalenzrelation auf A und umgekehrt
-  - z.Z: a ∈ [a] und [a] ∩ [b] ≠ ∅ ⇒ [a] = [b]
+  - z.Z (eine Richtung): a ∈ [a] und [a] ∩ [b] ≠ ∅ ⇒ [a] = [b]
+  - (andere Richtung): …
 - Notation: A / R "modulo" für Menge der Äquivalenzklassen (Quotientenmenge), also die Partition.
 - Uebung: Sei P = ℤ × ℕ⁺ und (z₁,n₁) ~ (z₂,n₂) defiff z₁n₂ = z₂n₁. Beweise: ~ ist eine Äquivalenzrelation. Argumentiere: P / ~ entspricht der Menge ℚ der rationalen Zahlen.
 - Loesung: ...
 - Satz: $R$ ist genau dann eine Äquivalenzrelation auf $X$, wenn es eine Menge $Y$ und ein $f : X → Y$ gibt mit $a R b ⟺ f(a) = f(b)$. Die Klassen sind dann die nichtleeren Urbilder $f^(-1)({y})$.
-- Satz: Sei n ∈ ℕ und x ~ y gdw x und y den selben Rest beim Teilen durch n lassen. Dann ist ~ eine Äquivalenzrelation mit n Äquivalenzklassen.
+- Beweis: (hier kommt π wieder vor)
+- Satz: Sei n ∈ ℕ⁺ und x ~ y gdw x und y den selben Rest beim Teilen durch n lassen. Dann ist ~ eine Äquivalenzrelation mit n Äquivalenzklassen.
 - Beweis: Der Rest, den x lässt, ist eine eindeutige Zahl zwischen 0 und n-1, ist also eine Funktion der Zahl. Dann Satz von eben anwenden.
 - Bemerkung: Das Beispiel wird uns später noch viel beschäftigen.
 
@@ -2363,7 +2365,10 @@
 
 - Abbildung mit einem Graphen. Die Bildunterschrift listet die Zusammenhangskomponenten auf.
 - Bemerkung: $G$ ist zusammenhängend genau dann, wenn es genau eine Äquivalenzklasse bzgl. $↭_G$ gibt.
-- Definition und Satz: Sei $G = (V,E)$ ein gerichteter Graph. Dann ist $⇝ ∩ ⇝^(-1)$ eine Äquivalenzrelation. Die Äquivalenzklassen heißen *starke Zusammenhangskomponenten*.
+- Uebung: Ist R eine Quasiordnung, dann ist R ∩ R^(-1) eine Äquivalenzrelation.
+- Lösung: …
+- Definition und Satz: Sei $G = (V,E)$ ein gerichteter Graph. Dann ist $↭_G := ⇝_G ∩ ⇝_G^(-1)$ eine Äquivalenzrelation. Die Äquivalenzklassen heißen *starke Zusammenhangskomponenten* von $G$.
+- Beispielgraph. Die Bildunterschrift nennt die starken Zusammenhangskomponenten.
 
 === Graphisomorphie
 
@@ -2382,7 +2387,7 @@
   Isomorphie $≅$ ist eine Äquivalenzrelation auf $𝒢$.
 ]
 - Beweis: Identität, Umkehrabbildung und Komposition von Isomorphismen.
-- Bemerkung: Grund der Einschränkung. „Alle Graphen überhaupt“ bilden wie „alle Mengen“ keine Menge.
+- Bemerkung: Grund der Einschränkung. „Alle Graphen überhaupt“ bilden wie „alle Mengen“ keine Menge. Jeder Graph ist zu einem Graph aus 𝒢 isomorph, es geht also nichts verloren.
 
 #definition("Unbeschrifteter Graph")[
   Ein *unbeschrifteter Graph* (englisch „unlabeled graph“) ist eine Äquivalenzklasse bezüglich Isomorphie, also ein Element von
