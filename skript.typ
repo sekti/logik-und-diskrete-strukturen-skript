@@ -2405,13 +2405,13 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
 == Äquivalenzrelationen
 
 - Äquivalenzrelation intuitiv:
-  - Relaxierung von Gleichhheit (Gleichheit "bis auf")
+  - Relaxierung von Gleichheit (Gleichheit "bis auf")
   - Ignorieren von unwesentlicher Information
     - Menge von Worten {Müßiggang,müßiggang,Muessiggang,Lückenbüßer, LUECKENBUESSER, maßlos}
-    - Es treten nur drei _Äquivalenzklassen_ von Wörtern _modulo_ Großschreibung und Umlauten auf. _Repräsentantion_ der Klassen sind MUESSIGGANG, LUECKENBUESSER und MASSLOS.
+    - Es treten nur drei _Äquivalenzklassen_ von Wörtern _modulo_ Großschreibung und Umlauten auf. _Repräsentanten_ der Klassen sind MUESSIGGANG, LUECKENBUESSER und MASSLOS.
   - Abbildung mit Beispielen:
     - Zwei kongruente Dreiecke
-    - Zwei einfache Isomorphe Graphen mit Knoten 1,2,3,4 bzw. A,B,C,D
+    - Zwei einfache isomorphe Graphen mit Knoten 1,2,3,4 bzw. A,B,C,D
 
 - Definition: Äquivalenzrelation
 - Notation [a] Äquivalenzklasse von a. a ist ein Repräsentant der Klasse (jedes andere a' ∈ [a] ist das auch). Projektion π.
@@ -2420,12 +2420,12 @@ Die Vorlesungsinhalte wurden gegenüber dem Vorjahr angepasst. Die Klausur wird 
 - Satz Sei A eine Menge. Jede Partition von A entspricht genau einer Äquivalenzrelation auf A und umgekehrt
   - z.Z: a ∈ [a] und [a] ∩ [b] ≠ ∅ ⇒ [a] = [b]
 - Notation: A / R "modulo" für Menge der Äquivalenzklassen (Quotientenmenge), also die Partition.
-- Uebung: Sei P = ℤ × ℕ⁺ und (z₁,n₁) ~ (z₂,n₂) defiff z₁n₂ = z₂n₁. Beweise: ~ ist eine Äquivalenz. Argumentiere: P / ~ entspricht der Menge ℚ der rationalen Zahlen.
+- Uebung: Sei P = ℤ × ℕ⁺ und (z₁,n₁) ~ (z₂,n₂) defiff z₁n₂ = z₂n₁. Beweise: ~ ist eine Äquivalenzrelation. Argumentiere: P / ~ entspricht der Menge ℚ der rationalen Zahlen.
 - Loesung: ...
 - Satz: $R$ ist genau dann eine Äquivalenzrelation auf $X$, wenn es eine Menge $Y$ und ein $f : X → Y$ gibt mit $a R b ⟺ f(a) = f(b)$. Die Klassen sind dann die nichtleeren Urbilder $f^(-1)({y})$.
 - Satz: Sei n ∈ ℕ und x ~ y gdw x und y den selben Rest beim Teilen durch n lassen. Dann ist ~ eine Äquivalenzrelation mit n Äquivalenzklassen.
-- Beweis: Der Rest den x lässt ist eine eindeutige Zahl zwischen 0 und n-1, ist also eine Funktion der Zahl. Dann Satz von eben anwenden.
-Bemerkung: Das Beispiel wird uns später noch viel beschäftigen.
+- Beweis: Der Rest, den x lässt, ist eine eindeutige Zahl zwischen 0 und n-1, ist also eine Funktion der Zahl. Dann Satz von eben anwenden.
+- Bemerkung: Das Beispiel wird uns später noch viel beschäftigen.
 
 === Zusammenhangskomponenten
 
@@ -2454,9 +2454,9 @@ Bemerkung: Das Beispiel wird uns später noch viel beschäftigen.
   Wir schreiben $G_1 ≅ G_2$, falls ein solcher Isomorphismus existiert, und nennen $G_1$ und $G_2$ dann *isomorph*.
 ]
 
-- Idee: Isomorphe Graphen sind „derselbe Graph mit anderen Knotennamen“. Alle Eigenschaften eines Graphen, die sich ohne Rückgriff auf die Knotennamen formulieren lassen gelten offensichtlich genauso für jeden isomorphen Graphen. Gibt es Wege oder Kreise gewisser Länge, Knoten von bestimmten Graden usw, dann gibt es sie auch im isomorphen Graphen. 
+- Idee: Isomorphe Graphen sind „derselbe Graph mit anderen Knotennamen“. Alle Eigenschaften eines Graphen, die sich ohne Rückgriff auf die Knotennamen formulieren lassen, gelten offensichtlich genauso für jeden isomorphen Graphen. Gibt es Wege oder Kreise gewisser Länge, Knoten von bestimmten Graden usw., dann gibt es sie auch im isomorphen Graphen. 
 - Beispiel: Das Sechseck mit seinen drei langen Diagonalen ist isomorph zu $K_(3,3)$ (Isomorphismus angeben).
-- Beispiel: Petersen-Graph ist nicht isomorph zum Fünfecksprisma. Das Fünfeckprisma enthält einen Kreis der Länge 4, der Petersen-Graph nicht.
+- Beispiel: Petersen-Graph ist nicht isomorph zum Fünfecksprisma. Das Fünfecksprisma enthält einen Kreis der Länge 4, der Petersen-Graph nicht.
 
 #satz[
   Sei $𝒢 := {(V,E) | (V,E) "ist Graph mit" V ⊆ ℕ }$.
