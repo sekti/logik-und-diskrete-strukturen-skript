@@ -211,7 +211,7 @@
 // Grenze zwischen dem ausformulierten Teil und den bloßen Stichpunkten
 #let stichpunktgrenze = [
   #block(above: 1.8em, below: 1.2em,line(length: 100%, stroke: 2.5pt))
-  #align(center)[ENDE DES VORBEREITETEN TEILS (es folgen Stichpunkte)]
+  #align(center)[Ende des lesbaren Teils (es folgen Entwurf und Stichpunkte)]
   #block(above: 1.2em, below: 1.8em,line(length: 100%, stroke: 2.5pt))
 ]
 
@@ -2487,8 +2487,10 @@
 ]
 
 #bemerkung[
-  In @sec:modulo sehen wir die _Modulorechnung_. Dort liegt neben einer Äquivalenzrelation aber noch zusätzliche Struktur vor und die Notation ist eine andere.
+  In @sec:modulo sehen wir die _Modulorechnung_. Dort liegt neben einer Äquivalenzrelation zusätzliche Struktur vor. Die Notation ist dort eine andere.
 ]
+
+#stichpunktgrenze
 
 === Zusammenhangskomponenten
 
@@ -2502,8 +2504,8 @@
 
 #beweis[
   / Reflexivität: Die einelementige Folge $v$ ist ein Weg der Länge $0$ von $v$ nach $v$.
-  / Symmetrie: Ist $v₀ v₁ … v_ℓ$ ein Weg von $v$ nach $w$, so ist $v_ℓ … v₁ v₀$ ein Weg von $w$ nach $v$, denn die Kanten ${v_i, v_(i+1)} = {v_(i+1), v_i}$ haben keine Richtung.
-  / Transitivität: Einen Weg von $u$ nach $v$ und einen von $v$ nach $w$ setzen wir wie im Beweis von @erreichbarkeitQuasi zu einem Weg von $u$ nach $w$ zusammen. #qedhere
+  / Symmetrie: Angenommen $v ↭ w$. Den Weg von $v$ nach $w$ können wir umkehren um einen Weg von $w$ nach $v$ zu erhalten.#footnote[Diese Symmetrie rechtfertigt das symmetrisches Symbol $↭$.] Also gilt $w ↭ v$.
+  / Transitivität: Angenommen $u ↭ v$ und $v ↭ w$. Den Weg von $u$ nach $v$ und den Weg von $v$ nach $w$ können wir zu einem Weg von $u$ nach $w$ zusammensetzen. Also gilt $u ↭ w$. #qedhere
 ]
 
 #definition("Zusammenhangskomponente")[
@@ -2511,7 +2513,7 @@
 ]<zhk>
 
 #abbildung(slides: 0, caption: [
-  Ein Graph mit den drei Zusammenhangskomponenten ${1,2,3,4}$, ${5,6,7}$ und ${8}$.
+  Ein Graph mit Zusammenhangskomponentenmenge $quot(V, ↭) = {{1,2,3,4}, {5,6,7}, {8}}$.
 ])[#graphbild(
   (
     "1": (0, 0.9), "2": (1.1, 0.9), "3": (0.55, 0), "4": (1.6, -0.3),
@@ -2521,23 +2523,25 @@
   (("1", "2"), ("1", "3"), ("2", "3"), ("3", "4"), ("5", "6"), ("6", "7")),
 )]<zhkbild>
 
-#bemerkung[
-  Ein Graph $G$ ist genau dann zusammenhängend, wenn er genau eine Zusammenhangskomponente hat. Dabei ist „zusammenhängend“ über Pfade definiert und $↭_G$ über Wege; nach @wegPfad macht das keinen Unterschied.
-]
-
 #uebung[
   Sei $R$ eine Quasiordnung auf einer Menge $A$. Zeigen Sie, dass $R ∩ R^(-1)$ eine Äquivalenzrelation auf $A$ ist.
 ]<uebQuasiAequivalenz>
 
 #loesung[
-  Es gilt $a (R ∩ R^(-1)) b$ genau dann, wenn $a R b$ und $b R a$ gilt.
-  / Reflexivität: Aus $a R a$ folgt $a (R ∩ R^(-1)) a$.
-  / Symmetrie: Die Bedingung „$a R b$ und $b R a$“ ändert sich nicht, wenn man $a$ und $b$ vertauscht.
-  / Transitivität: Aus $a R b$, $b R a$, $b R c$ und $c R b$ folgen mit der Transitivität von $R$ sowohl $a R c$ als auch $c R a$.
+  Sei $E := R ∩ R^(-1)$. Für beliebige $a,b ∈ A$ gilt
+    $ a E b ⇔ a R b ∧ b R a $
+  / Reflexivität: Als Quasiordnung ist $R$ reflexiv. Damit ist auch $R^(-1)$ reflexiv. Aus $a R a$ folgt $a (R ∩ R^(-1)) a$.
+  / Symmetrie: Dies gilt sogar für jede Relation $R$:
+  $ a E b ⇔ a R b ∧ b R a ⇔ b R a ∧ a R b ⇔ b E a. $
+  / Transitivität: Es gilt:
+  $   &a E b ∧ b E c &&#weil[Def von $E$]\
+    ⇔&a R b ∧ b R a ∧ b R c ∧ c R b &&#weil[Trans. von $R$]\
+    ⇒&a R c ∧  c R a&&#weil[Def von $E$]\
+    ⇒&a E c $
 ]
 
 #korollar[
-  Sei $G = (V,E)$ ein gerichteter Graph. Dann ist $↭_G := ⇝_G ∩ ⇝_G^(-1)$ eine Äquivalenzrelation auf $V$. Es gilt also $u ↭_G v$ genau dann, wenn $u ⇝_G v$ und $v ⇝_G u$.
+  Sei $G = (V,E)$ ein _gerichteter_ Graph. Dann ist $↭_G := ⇝_G ∩ ⇝_G^(-1)$ eine Äquivalenzrelation auf $V$.#footnote[Für $u ↭_G v$ wird also ein gerichteter Weg von $u$ nach $v$ und ein gerichteter Weg von $v$ nach $u$ verlangt.]
 ]<starkAequivalenz>
 
 #beweis[
@@ -2546,8 +2550,6 @@
 
 #definition("Starke Zusammenhangskomponente")[
   Sei $G$ ein gerichteter Graph. Die Äquivalenzklassen von $↭_G$ heißen *starke Zusammenhangskomponenten* von $G$.
-
-  Die Schreibweise $↭_G$ passt zu @erreichbarkeitungerichtet: Fasst man einen ungerichteten Graphen als gerichteten auf, in dem jede Kante in beide Richtungen verläuft, so liefern beide Definitionen dieselbe Relation.
 ]<starkeZhk>
 
 #abbildung(slides: 0, caption: [
@@ -2574,46 +2576,41 @@
   Wir schreiben $G_1 ≅ G_2$, falls ein solcher Isomorphismus existiert, und nennen $G_1$ und $G_2$ dann *isomorph*.
 ]<isomorphismus>
 
-#bemerkung[Invarianten][
-  Isomorphe Graphen sind „derselbe Graph mit anderen Knotennamen“. Jede Eigenschaft, die sich ohne Rückgriff auf die Knotennamen formulieren lässt, hat ein Graph daher genau dann, wenn jeder zu ihm isomorphe Graph sie hat. Solche Eigenschaften heißen *Invarianten*. Beispiele sind die Knoten- und Kantenzahl, das Vorkommen von Knoten bestimmten Grades, das Vorkommen von Wegen und Kreisen bestimmter Länge und der Zusammenhang.
+#beispiel[
+  Folgende beide Graphen sind isomorph.
+  #align(center, grid(
+    columns: 2,
+    column-gutter: 3em,
+    align: horizon,
+    $G₁ = #graphbild(kreis-knoten(6), kreis-kanten(6) + (("1", "4"), ("2", "5"), ("3", "6")))$,
+    $G₂ = #graphbild(
+        ("a": (0, 1.2), "b": (0, 0.6), "c": (0, 0), "d": (1.5, 1.2), "e": (1.5, 0.6), "f": (1.5, 0)),
+        (("a","d"),("a","e"),("a","f"),("b","d"),("b","e"),("b","f"),("c","d"),("c","e"),("c","f")),
+    )$
+  ))
+  Ein passende Isomorphismus $φ : {1,…,6} → {a,…f}$ von $G₁$ nach $G₂$ ist gegeben durch
+  $ φ = {(1,a),(2,d),(3,b),(4,e),(5,c),(6,f)}. $
+]
+
+#bemerkung[
+  Isomorphe Graphen sind „derselbe Graph mit anderen Knotennamen“. Jede Eigenschaft, die sich ohne Rückgriff auf die Knotennamen formulieren lässt, hat ein Graph daher genau dann, wenn jeder zu ihm isomorphe Graph sie hat. Beispiele sind die Knoten- und Kantenzahl, das Vorkommen von Knoten bestimmten Grades, das Vorkommen von Wegen und Kreisen bestimmter Länge und der Zusammenhang.
 ]<invarianten>
 
-#beispiel[Sechseck und $K_(3,3)$][
-  Sei $G$ der Kreis $C_6$ mit Knoten $1, …, 6$ und den drei zusätzlichen Kanten ${1,4}$, ${2,5}$ und ${3,6}$, den „langen Diagonalen“. Jede Kante von $G$ verbindet einen ungeraden mit einem geraden Knoten, und umgekehrt ist jedes der $3 ⋅ 3 = 9$ Paare aus einem ungeraden und einem geraden Knoten eine Kante. Also gilt
-  $ {v,w} ∈ E ⇔ v "und" w "liegen auf verschiedenen Seiten von" {1,3,5} "und" {2,4,6}. $
-  Ist nun $K_(3,3) = (A ∪ B, …)$ mit beliebigen $A$ und $B$ wie in @graphengallerie-uebung, so ist jede Bijektion $φ$, die ${1,3,5}$ auf $A$ und ${2,4,6}$ auf $B$ abbildet, ein Isomorphismus von $G$ nach $K_(3,3)$. Denn $v$ und $w$ liegen genau dann auf verschiedenen Seiten, wenn $φ(v)$ und $φ(w)$ es tun. @sechseckK33 zeigt beide Zeichnungen.
+#uebung[
+  Begründe Sie, dass die folgenden beide Graphen _nicht_ isomorph sind.
+  #grid(
+    columns: 2,
+    column-gutter: 3em,
+    graphbild(
+      doppelfuenfeck-knoten(), prisma-kanten, beschriftung: false, radius: 0.1,
+    ),
+    graphbild(doppelfuenfeck-knoten(), petersen-kanten, beschriftung: false, radius: 0.1),
+  )
 ]
 
-#abbildung(slides: 0, caption: [
-  Links das Sechseck mit seinen drei langen Diagonalen, rechts derselbe Graph mit den ungeraden Knoten links und den geraden rechts. In der rechten Zeichnung erkennt man $K_(3,3)$.
-])[#grid(
-  columns: 2,
-  column-gutter: 3em,
-  align: horizon,
-  graphbild(kreis-knoten(6), kreis-kanten(6) + (("1", "4"), ("2", "5"), ("3", "6"))),
-  graphbild(
-    ("1": (0, 1.2), "3": (0, 0.6), "5": (0, 0), "2": (1.5, 1.2), "4": (1.5, 0.6), "6": (1.5, 0)),
-    kreis-kanten(6) + (("1", "4"), ("2", "5"), ("3", "6")),
-  ),
-)]<sechseckK33>
-
-#beispiel[Petersen-Graph und Fünfecksprisma][
-  Der Petersen-Graph und das Fünfecksprisma in @petersenPrisma haben beide $10$ Knoten vom Grad $3$ und $15$ Kanten. Trotzdem sind sie nicht isomorph: Das Prisma enthält einen Kreis der Länge $4$, der Petersen-Graph nicht. Nach @invarianten kann es also keinen Isomorphismus geben.
-
-  Dass der Petersen-Graph keinen Kreis der Länge $4$ enthält, sieht man so: Jede Speiche wechselt zwischen dem äußeren Fünfeck und dem inneren Pentagramm, ein Kreis benutzt also eine gerade Anzahl von Speichen. Ohne Speichen bleibt der Kreis im Fünfeck oder im Pentagramm, und beide enthalten nur einen Kreis der Länge $5$. Vier Speichen haben keinen Knoten gemeinsam und passen daher nicht in einen Kreis der Länge $4$. Ein Kreis der Länge $4$ mit zwei Speichen hätte die Form $a b b' a'$ mit benachbarten äußeren Knoten $a, b$ und den zugehörigen inneren Knoten $b', a'$. Diese sind im Pentagramm aber nicht benachbart.
+#loesung[
+  Das Fünfecksprisma (links) enthält Kreise der Länge vier. Ein Isomorphismus müsste solche Kreise erhalten. Der Petersen-Graph (rechts) enthält aber keine Kreise der Länge vier.#footnote[Ein formales Argument ist leicht möglich, aber hier nicht das Thema.]
 ]
-
-#abbildung(slides: 0, caption: [
-  Links der Petersen-Graph, rechts das Fünfecksprisma. Rot markiert ist ein Kreis der Länge $4$ im Prisma.
-])[#grid(
-  columns: 2,
-  column-gutter: 3em,
-  graphbild(doppelfuenfeck-knoten(), petersen-kanten, beschriftung: false, radius: 0.1),
-  graphbild(
-    doppelfuenfeck-knoten(), prisma-kanten, beschriftung: false, radius: 0.1,
-    markiert: (("1", "2"), ("2", "7"), ("7", "6"), ("6", "1")),
-  ),
-)]<petersenPrisma>
 
 #satz[
   Sei $𝒢 := {(V,E) | (V,E) "ist ein Graph mit" V ⊆ ℕ}$. Dann ist $≅$ eine Äquivalenzrelation auf $𝒢$.
@@ -2622,35 +2619,31 @@
 #beweis[
   / Reflexivität: Die Identität $id_V$ ist ein Isomorphismus von $G = (V,E)$ nach $G$.
   / Symmetrie: Sei $φ$ ein Isomorphismus von $G_1$ nach $G_2$. Als Bijektion hat $φ$ eine Umkehrfunktion $φ^(-1): V_2 → V_1$ (siehe @umkehrfunktion), die ebenfalls bijektiv ist. Für $v', w' ∈ V_2$ seien $v := φ^(-1)(v')$ und $w := φ^(-1)(w')$. Dann gilt
-    $ {v', w'} ∈ E_2 ⇔ {φ(v), φ(w)} ∈ E_2 ⇔ {v, w} ∈ E_1. $
+    $ {v', w'} ∈ E_2 &⇔ {φ(v), φ(w)} ∈ E_2\ &⇔ {v, w} ∈ E_1 ⇔ {φ^(-1)(v'),φ^(-1)(w')} ∈ E_1. $
     Also ist $φ^(-1)$ ein Isomorphismus von $G_2$ nach $G_1$.
   / Transitivität: Ist $φ$ ein Isomorphismus von $G_1$ nach $G_2$ und $ψ$ einer von $G_2$ nach $G_3$, so ist $ψ ∘ φ$ bijektiv (siehe @verkettungInjSurj), und für $v, w ∈ V_1$ gilt
-    $ {v, w} ∈ E_1 ⇔ {φ(v), φ(w)} ∈ E_2 ⇔ {ψ(φ(v)), ψ(φ(w))} ∈ E_3. #qedhere $
+    $ {v, w} ∈ E_1 ⇔ {φ(v), φ(w)} ∈ E_2 ⇔ {ψ(φ(v)), ψ(φ(w))} ∈ E_3. $
 ]
 
-#bemerkung[Warum $𝒢$?][
-  Isomorphie auf „allen Graphen überhaupt“ ist keine Relation in unserem Sinne, denn wie alle Mengen zusammen (siehe @mengeAllerMengen) bilden auch alle Graphen zusammen keine Menge. Deshalb schränken wir uns auf Graphen mit $V ⊆ ℕ$ ein. Dabei geht nichts verloren: Jeder Graph mit $n$ Knoten ist zu einem Graphen aus $𝒢$ isomorph, denn wir können seine Knoten bijektiv mit $1, …, n$ durchnummerieren.
+#bemerkung[
+  Wir haben uns auf die Menge $𝒢$ eingeschränkt, weil die Gesamtheit aller Graphen keine Menge bildet, was für unseren Begriff von Relation aber nötig ist.
 ]
 
 #definition("Unbeschrifteter Graph")[
   Ein *unbeschrifteter Graph* (englisch „unlabeled graph“) ist eine Äquivalenzklasse bezüglich Isomorphie, also ein Element von
-  $ quot(𝒢, ≅). $
+  $quot(𝒢, ≅).$
 ]<unbeschriftet>
 
 #konvention[Sprechweise][
-  Oft sagen wir „der Graph“ und meinen seine Isomorphieklasse. Genau das tun wir, wenn wir einen Graphen ohne Knotennamen zeichnen wie in der Galerie in @galerie: $P_5$, $C_6$ oder $K_5$ bezeichnen dort Isomorphieklassen.
-]
-
-#bemerkung[
-  Ob zwei gegebene Graphen isomorph sind, ist algorithmisch überraschend schwer zu entscheiden. Alle $n!$ Bijektionen durchzuprobieren ist schon für $n = 20$ hoffnungslos, und ob es ein wirklich effizientes Verfahren gibt, ist ein berühmtes offenes Problem. Auch für die Anzahl der unbeschrifteten Graphen mit $n$ Knoten gibt es keine geschlossene Formel. Beschriftete Graphen sind dagegen leicht zu zählen, siehe @sec:zaehlen.
+  In der Galerie in @galerie haben wir bereits Graphen ohne Beschriftungen gemalt. Tatsächlich ist z.B. mit $P_5$ am ehesten als unbeschrifteter Graph gemeint, d.h. als Äquivalenzklasse. Die Definition mit Knotenmenge ${1,2,3,4,5}$ in @graphengallerie-uebung liefert nur einer von vielen möglichen Repräsentaten.
 ]
 
 #uebung[
-  Bestimmen Sie alle unbeschrifteten Graphen mit $4$ Knoten und $3$ Kanten. Wie viele beschriftete Graphen mit Knotenmenge ${1,2,3,4}$ und $3$ Kanten gehören jeweils zu einer Klasse?
+  Bestimmen Sie alle unbeschrifteten Graphen mit $4$ Knoten und $3$ Kanten.
 ]<uebVierKnoten>
 
 #loesung[
-  Es gibt drei Klassen:
+  Durch Ausprobieren findet man genau drei Klassen:
   #align(center, grid(
     columns: 3,
     column-gutter: 3em,
@@ -2664,13 +2657,7 @@
       (("m", "a"), ("m", "b"), ("m", "c")), beschriftung: false, radius: 0.1),
     [Dreieck und isolierter Knoten], [Pfad $P_4$], [Stern $S_3$],
   ))
-  - _Dreieck und isolierter Knoten:_ Der Graph ist durch seinen isolierten Knoten festgelegt, also gibt es $4$ beschriftete Graphen.
-  - _Pfad:_ Es gibt $4! = 24$ Reihenfolgen der Knoten entlang des Pfades, und jeder Pfad entsteht aus genau zwei davon (vorwärts und rückwärts gelesen). Also gibt es $12$ beschriftete Graphen.
-  - _Stern:_ Der Graph ist durch seinen Mittelpunkt festgelegt, also gibt es $4$ beschriftete Graphen.
-  Dass es keine weiteren Klassen gibt, zeigt eine Probe: Insgesamt gibt es $binom(6,3) = 20$ beschriftete Graphen mit Knotenmenge ${1,2,3,4}$ und $3$ Kanten, denn man wählt $3$ der $6$ möglichen Kanten aus. Und tatsächlich ist $4 + 12 + 4 = 20$.
 ]
-
-#stichpunktgrenze
 
 #slidebreak()
 = Exkurs: Abzählbarkeit
