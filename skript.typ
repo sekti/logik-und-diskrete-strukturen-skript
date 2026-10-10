@@ -2502,7 +2502,7 @@
 
 #beweis[
   / Reflexivität: Die einelementige Folge $v$ ist ein Weg der Länge $0$ von $v$ nach $v$.
-  / Symmetrie: Angenommen $v ↭ w$. Den Weg von $v$ nach $w$ können wir umkehren, um einen Weg von $w$ nach $v$ zu erhalten.#footnote[Diese Symmetrie rechtfertigt das symmetrische Symbol $↭$.] Also gilt $w ↭ v$.
+  / Symmetrie: Angenommen $v ↭ w$. Kanten sind ungerichtet, also können wir den Weg von $v$ nach $w$ umkehren, um einen Weg von $w$ nach $v$ zu erhalten.#footnote[Diese Symmetrie rechtfertigt das symmetrische Symbol $↭$.] Also gilt $w ↭ v$.
   / Transitivität: Angenommen $u ↭ v$ und $v ↭ w$. Den Weg von $u$ nach $v$ und den Weg von $v$ nach $w$ können wir zu einem Weg von $u$ nach $w$ zusammensetzen. Also gilt $u ↭ w$. #qedhere
 ]
 
@@ -2641,7 +2641,7 @@
 ]<uebVierKnoten>
 
 #loesung[
-  Durch Ausprobieren findet man genau drei Klassen:
+  Durch Ausprobieren findet man drei Klassen:
   #align(center, grid(
     columns: 3,
     column-gutter: 3em,
@@ -2655,6 +2655,7 @@
       (("m", "a"), ("m", "b"), ("m", "c")), beschriftung: false, radius: 0.1),
     [Dreieck und isolierter Knoten], [Pfad $P_4$], [Stern $S_3$],
   ))
+  Dass es keine weiteren gibt, kann man durch Fallunterscheidung zeigen (Gibt es einen Knoten von Grad 0? Gibt es einen Knoten von Grad 3?).
 ]
 
 #stichpunktgrenze
