@@ -2507,7 +2507,7 @@
 ]
 
 #definition("Zusammenhangskomponente")[
-  Die Elemente von $quot(V, ↭_G)$, also die Äquivalenzklassen, heißen *Zusammenhangskomponenten* von $G$.
+  Sei $G = (V,E)$ ein ungerichteter Graph. Die Elemente von $quot(V, ↭_G)$, also die Äquivalenzklassen, heißen *Zusammenhangskomponenten* von $G$.
 ]<zhk>
 
 #abbildung(slides: 0, caption: [
@@ -2526,16 +2526,16 @@
 ]<uebQuasiAequivalenz>
 
 #loesung[
-  Sei $E := R ∩ R^(-1)$. Für beliebige $a,b ∈ A$ gilt
-    $ a E b ⇔ a R b ∧ b R a $
-  / Reflexivität: Als Quasiordnung ist $R$ reflexiv. Damit ist auch $R^(-1)$ reflexiv. Aus $a R a$ folgt $a (R ∩ R^(-1)) a$.
+  Sei $S := R ∩ R^(-1)$. Für beliebige $a,b ∈ A$ gilt
+    $ a S b ⇔ a R b ∧ b R a $
+  / Reflexivität: Als Quasiordnung ist $R$ reflexiv. Damit ist auch $R^(-1)$ reflexiv. Aus $a R a$ folgt $a S a$.
   / Symmetrie: Dies gilt sogar für jede Relation $R$:
-  $ a E b ⇔ a R b ∧ b R a ⇔ b R a ∧ a R b ⇔ b E a. $
+  $ a S b ⇔ a R b ∧ b R a ⇔ b R a ∧ a R b ⇔ b S a. $
   / Transitivität: Es gilt:
-  $   &a E b ∧ b E c &&#weil[Def. von $E$]\
+  $   &a S b ∧ b S c &&#weil[Def. von $S$]\
     ⇔&a R b ∧ b R a ∧ b R c ∧ c R b &&#weil[Trans. von $R$]\
-    ⇒&a R c ∧  c R a&&#weil[Def. von $E$]\
-    ⇒&a E c $
+    ⇒&a R c ∧  c R a&&#weil[Def. von $S$]\
+    ⇒&a S c $
 ]
 
 #korollar[
@@ -2596,18 +2596,18 @@
 
 #uebung[
   Begründen Sie, dass die folgenden beiden Graphen _nicht_ isomorph sind.
-  #grid(
+  #align(center, grid(
     columns: 2,
     column-gutter: 3em,
     graphbild(
       doppelfuenfeck-knoten(), prisma-kanten, beschriftung: false, radius: 0.1,
     ),
     graphbild(doppelfuenfeck-knoten(), petersen-kanten, beschriftung: false, radius: 0.1),
-  )
+  ))
 ]
 
 #loesung[
-  Das Fünfecksprisma (links) enthält Kreise der Länge vier. Ein Isomorphismus müsste solche Kreise erhalten. Der Petersen-Graph (rechts) enthält aber keine Kreise der Länge vier.#footnote[Ein formales Argument ist leicht möglich, aber hier nicht das Thema.]
+  Die naheliegenden Invarianten helfen nicht weiter: Beide Graphen haben $10$ Knoten und $15$ Kanten, und jeder Knoten hat Grad $3$. Aber das Fünfecksprisma (links) enthält Kreise der Länge vier. Ein Isomorphismus müsste solche Kreise erhalten. Der Petersen-Graph (rechts) enthält aber keine Kreise der Länge vier.#footnote[Ein formales Argument ist leicht möglich, aber hier nicht das Thema.]
 ]
 
 #satz[
@@ -2624,7 +2624,7 @@
 ]
 
 #bemerkung[
-  Wir haben uns auf die Menge $𝒢$ eingeschränkt, weil die Gesamtheit aller Graphen keine Menge bildet, was für unseren Begriff von Relation aber nötig ist.
+  Wir haben uns auf die Menge $𝒢$ eingeschränkt, weil die Gesamtheit aller Graphen keine Menge bildet, was für unseren Begriff von Relation aber nötig ist. Verloren geht dadurch nichts: Jeder Graph ist isomorph zu einem Graphen aus $𝒢$, man nummeriert einfach die Knoten durch.
 ]
 
 #definition("Unbeschrifteter Graph")[
