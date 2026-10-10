@@ -2490,8 +2490,6 @@
   In @sec:modulo sehen wir die _Modulorechnung_. Dort liegt neben einer Äquivalenzrelation zusätzliche Struktur vor. Die Notation ist dort eine andere.
 ]
 
-#stichpunktgrenze
-
 === Zusammenhangskomponenten
 
 #definition("Erreichbarkeit in ungerichteten Graphen", kurz: $v ↭_G w$)[
@@ -2504,7 +2502,7 @@
 
 #beweis[
   / Reflexivität: Die einelementige Folge $v$ ist ein Weg der Länge $0$ von $v$ nach $v$.
-  / Symmetrie: Angenommen $v ↭ w$. Den Weg von $v$ nach $w$ können wir umkehren um einen Weg von $w$ nach $v$ zu erhalten.#footnote[Diese Symmetrie rechtfertigt das symmetrisches Symbol $↭$.] Also gilt $w ↭ v$.
+  / Symmetrie: Angenommen $v ↭ w$. Den Weg von $v$ nach $w$ können wir umkehren, um einen Weg von $w$ nach $v$ zu erhalten.#footnote[Diese Symmetrie rechtfertigt das symmetrische Symbol $↭$.] Also gilt $w ↭ v$.
   / Transitivität: Angenommen $u ↭ v$ und $v ↭ w$. Den Weg von $u$ nach $v$ und den Weg von $v$ nach $w$ können wir zu einem Weg von $u$ nach $w$ zusammensetzen. Also gilt $u ↭ w$. #qedhere
 ]
 
@@ -2534,9 +2532,9 @@
   / Symmetrie: Dies gilt sogar für jede Relation $R$:
   $ a E b ⇔ a R b ∧ b R a ⇔ b R a ∧ a R b ⇔ b E a. $
   / Transitivität: Es gilt:
-  $   &a E b ∧ b E c &&#weil[Def von $E$]\
+  $   &a E b ∧ b E c &&#weil[Def. von $E$]\
     ⇔&a R b ∧ b R a ∧ b R c ∧ c R b &&#weil[Trans. von $R$]\
-    ⇒&a R c ∧  c R a&&#weil[Def von $E$]\
+    ⇒&a R c ∧  c R a&&#weil[Def. von $E$]\
     ⇒&a E c $
 ]
 
@@ -2577,7 +2575,7 @@
 ]<isomorphismus>
 
 #beispiel[
-  Folgende beide Graphen sind isomorph.
+  Die folgenden beiden Graphen sind isomorph.
   #align(center, grid(
     columns: 2,
     column-gutter: 3em,
@@ -2588,7 +2586,7 @@
         (("a","d"),("a","e"),("a","f"),("b","d"),("b","e"),("b","f"),("c","d"),("c","e"),("c","f")),
     )$
   ))
-  Ein passende Isomorphismus $φ : {1,…,6} → {a,…f}$ von $G₁$ nach $G₂$ ist gegeben durch
+  Ein passender Isomorphismus $φ : {1,…,6} → {a,…,f}$ von $G₁$ nach $G₂$ ist gegeben durch
   $ φ = {(1,a),(2,d),(3,b),(4,e),(5,c),(6,f)}. $
 ]
 
@@ -2597,7 +2595,7 @@
 ]<invarianten>
 
 #uebung[
-  Begründe Sie, dass die folgenden beide Graphen _nicht_ isomorph sind.
+  Begründen Sie, dass die folgenden beiden Graphen _nicht_ isomorph sind.
   #grid(
     columns: 2,
     column-gutter: 3em,
@@ -2635,7 +2633,7 @@
 ]<unbeschriftet>
 
 #konvention[Sprechweise][
-  In der Galerie in @galerie haben wir bereits Graphen ohne Beschriftungen gemalt. Tatsächlich ist z.B. mit $P_5$ am ehesten als unbeschrifteter Graph gemeint, d.h. als Äquivalenzklasse. Die Definition mit Knotenmenge ${1,2,3,4,5}$ in @graphengallerie-uebung liefert nur einer von vielen möglichen Repräsentaten.
+  In der Galerie in @galerie haben wir bereits Graphen ohne Beschriftungen gemalt. Tatsächlich ist z.B. mit $P_5$ am ehesten ein unbeschrifteter Graph gemeint, d.h. eine Äquivalenzklasse. Die Definition mit Knotenmenge ${1,2,3,4,5}$ in @graphengallerie-uebung liefert nur einen von vielen möglichen Repräsentanten.
 ]
 
 #uebung[
@@ -2658,6 +2656,8 @@
     [Dreieck und isolierter Knoten], [Pfad $P_4$], [Stern $S_3$],
   ))
 ]
+
+#stichpunktgrenze
 
 #slidebreak()
 = Exkurs: Abzählbarkeit
