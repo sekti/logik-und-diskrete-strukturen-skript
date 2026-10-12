@@ -12,7 +12,7 @@
   #import "@preview/ratchet:0.0.4": *
 
 // Styling
-  #set text(size: 12pt, lang: "de")
+  #set text(size: 12pt, lang: "de", costs: (hyphenation: 50%))
   #show: thm-rules.with(qed-symbol: $square$)
   // Spacing des Doppelpunkts (passend für Quantoren)
     #show math.equation: it => {
@@ -38,7 +38,8 @@
   } else {
     it
   }
-  #set par(justify: true)
+  #set par(justify: true,
+         justification-limits: (tracking: (min: -0.01em, max: 0.02em)))
   // Enger Abstand zwischen den Umgebungen auf den Folien. Der Abstand gehört
   // zum Block der Umgebung selbst (siehe blockArgs); eine Hülle per show-Regel
   // würde für ausgeblendete Umgebungen einen leeren Block mit Abstand erzeugen.
@@ -318,12 +319,12 @@
   Welche der folgenden Ausdrücke beschreibt eine Menge?
   + Der Dreck an meinem Schuh.
   + Die Studierenden, die im WS26/27 dieses Modul bestehen.
-  + Die großen Fußballspieler.
+  + Die großen Studierenden im Hörsaal.
   + Die natürlichen Zahlen, also 0,1,2,3,….
 ]
 
 #loesung[
-  + ✗ Dreck besteht nicht aus wohlunterschiedenen Einzelobjekten.#footnote[Wenn Sie an Atome denken könnte man entgegnen, dass auf dieser Ebene das Konzept von "Dreck" keinen Sinn mehr ergibt.]
+  + ✗ Dreck besteht zunächst nicht aus wohlunterschiedenen Einzelobjekten. Die Menge der Sandkörner an meinem Schuh wäre schön eher eine Menge, wobei es schwierig sein dürfte zu definieren, was ein Sandkorn ist.
   + ✓ Dies ist eine Menge, obwohl wir sie noch nicht kennen.
   + ✗ Groß ist eine graduelle Eigenschaft.#footnote[Wenn man einen künstlichen Schwellwert für "groß" festlegt, könnte man das Beispiel vielleicht retten.]
   + ✓ Ein wichtiges Beispiel für uns.
@@ -335,7 +336,7 @@
   Wir schreiben *„A := B“*, um auszudrücken, dass das Symbol $A$ im Folgenden durch den Ausdruck $B$ _definiert_ ist. Dann gilt selbstverständlich auch $A = B$. Der Doppelpunkt weist darauf hin, dass es an der Gleichheit nichts zu hinterfragen gibt.
 ]
 
-#notation(kurz: [$M = {a,b,c}$, $M = {a,...,b}$, $M = {x | P(x)}$])[
+#notation(kurz: [${a,...,b}$, ${x ∈ A | P(x)}$, ${f(x) | x ∈ A}$])[
   Eine endliche Menge kann durch Auflisten ihrer Elemente in geschweiften
   Klammern angegeben werden, z.B. $ {1, 2, 3}. $ Reihenfolge und
   Wiederholungen spielen dabei keine Rolle:
@@ -457,7 +458,7 @@
   + ${2⋅n | n ∈ ℕ} ∩ {3⋅n | n ∈ ℕ} = {6⋅n | n ∈ ℕ}$
   + ${1,3,5,7,…}^C = {…,-2,-1,0} ∪ {2⋅n | n ∈ ℕ}$\
     wenn das Komplement bezüglich $U := ℤ$ gebildet wird
-  + $abs(lr({A ⊆ {1,2,3,4,5} mid(|) |A| = 2}, size: #120%)) = 10$
+  + $abs(lr({A mid(|) A ⊆ {1,2,3,4,5}, |A| = 2}, size: #120%)) = 10$
 ]
 #loesung[
   + Beide Seiten beschreiben die Menge der durch sechs teilbaren natürlichen Zahlen. Hier kommt die Einsicht zum Tragen, dass eine Zahl genau dann durch sechs teilbar ist, wenn sie sowohl durch zwei als auch durch drei teilbar ist (was wir hier ohne Beweis glauben wollen).
@@ -465,10 +466,10 @@
   + Hier werden alle Teilmengen von ${1,2,3,4,5}$ der Größe $2$ zu einer Menge zusammengefasst. Diese sind ${1,2}$, ${1,3}$, ${1,4}$, ${1,5}$, ${2,3}$, ${2,4}$, ${2,5}$, ${3,4}$, ${3,5}$, ${4,5}$. Die Kardinalität dieser Menge ist $10$.
 ]
 
-#uebung[Spitzfindigkeiten][
+#uebung[Eigenheiten][
   Kommentieren Sie:
   + ${2⋅n | n ∈ ℕ} = {2⋅x | x ∈ ℕ} = {2⋅ξ | ξ ∈ ℕ}$
-  + ${n² | n ∈ ℕ} = {n ∈ ℕ | "es gibt ein" k ∈ ℕ "mit" n = k²}$
+  + ${k² | k ∈ ℕ} = {n ∈ ℕ | "es gibt ein" k ∈ ℕ "mit" n = k²}$
   + $|{}| = 0$, $|∅| = 0, |{∅}| = 1, |{{},∅,{∅}}| = 2$
 ]
 #loesung[
@@ -479,9 +480,11 @@
 
 == Exkurs: Probleme der naiven Mengenlehre
 
-#bemerkung(slides: "titel")[Die Menge aller Mengen?][\
+#bemerkung(slides: 1)[Barbierparadoxon][
   _“You can define the barber as ‘one who shaves all those, and those only, who do not shave themselves.’ The question is, does the barber shave himself?” — Bertrand Russell 1918_.
+]
 
+#bemerkung(slides: "titel")[Die Menge aller Mengen?][
   Der naive Mengenbegriff hat das Problem, dass es Beschreibungen von Mengen gibt, die einen inneren Widerspruch enthalten, ähnlich wie das oben abgedruckte Barbierparadoxon.
 
   Wir definieren
@@ -643,7 +646,7 @@
 )<galerie>
 
 #uebung[Definitionen von $P_n$, $C_n$, $S_n$, $K_n$ und $K_(m,n)$][
-  Generalisieren Sie die Beispiele aus @galerie.
+  Generalisieren Sie die Beispiele aus @galerie. Welche Werte von $n$ bzw. $m$ sind jeweils zulässig?
 ]<graphengallerie-uebung>
 
 #loesung[
@@ -666,18 +669,18 @@
 
 == Wege, Pfade, Kreise, Zusammenhang
 
-#definition[Weg, Pfad, Zyklus, Kreis][
+#definition(slides: "titel")[Weg, Pfad, Zyklus, Kreis][
   Gegeben sei ein Graph $G = (V,E)$ und eine Folge $(v₀,…,v_ℓ)$ von Knoten aus $V$ für ein $ℓ ∈ ℕ$, im Folgenden meist in Kurzschreibweise als $v₀ … v_ℓ$. Wir nennen die Knotenfolge *Weg* / *Pfad* / *Zyklus* / *Kreis* unter folgenden Bedingungen.#footnote[Die englischen Bezeichnungen sind in der Literatur einheitlich, die deutschen nicht.]
-  #table(
+  #block(breakable: false,table(
     stroke: none,
     columns: 3,
     [Konzept], [englisch], [Bedingung],
     table.hline(),
-    [Weg], [walk], [$∀ i ∈ {0,…,ℓ-1}: {v_i,v_(i+1)} ∈ E$],
+    [Weg], [walk], [für alle $i ∈ {0,…,ℓ-1}$ gilt ${v_i,v_(i+1)} ∈ E$],
     [Pfad], [path], [Weg und $|{v_0,…,v_ℓ}| = ℓ+1$ ],
     [Zyklus], [closed walk], [Weg und $v₀ = v_ℓ$ ],
     [Kreis], [cycle], [Zyklus und $|{v₀,…,v_ℓ}| = ℓ$ und $ℓ ≥ 3$],
-  )
+  ))
   Ein Pfad ist also ein Weg ohne wiederholte Knoten und ein Kreis ein Zyklus, bei dem $v₀ = v_ℓ$ die einzige Wiederholung ist. Die *Länge* eines Wegs/Pfads/Zyklus/Kreises ist die Anzahl der „Schritte“, also $ℓ$.
 
   Die Bedingung $ℓ ≥ 3$ beim Kreis schließt aus, dass man eine Kante einfach hin und zurück durchläuft: Die Folge $v₀ v₁ v₀$ ist ein Zyklus der Länge 2, aber kein Kreis. Ein Kreis hat also mindestens die Länge 3.
@@ -698,15 +701,15 @@
 
 == Bäume
 
-#definition(kurz: [azyklisch $defiff$ keine Kreise.])[azyklisch][
+#definition[azyklisch][
   Ein Graph heißt *azyklisch*, wenn er keine Kreise hat.
 ]
 
-#definition(kurz: [Baum $colon ⇔$ zusammenhängend & azyklisch])[Baum][
+#definition[Baum][
   Ein *Baum* ist ein zusammenhängender azyklischer Graph.
 ]
 
-#definition(kurz: [Knoten von Grad $1$])[Blatt][
+#definition[Blatt][
   Ein *Blatt* eines Baumes ist ein Knoten vom Grad 1.
 ]
 
@@ -1449,7 +1452,7 @@
   / IV: Für ein $n > 1$ gelte, dass jedes $m ∈ {1,…,n-1}$ ein Produkt von Primzahlen ist.
   / IS: Zu zeigen ist, dass $n$ ein Produkt von Primzahlen ist.
     / Fall 1\: $n$ ist eine Primzahl.: $n$ ist das Produkt bestehend aus einem primen Faktor (nämlich $n$).
-    / Fall 2\: $n$ ist keine Primzahl.: Dann hat $n$ einen Teiler $a ∈ {2,…,n-1}$. Für $b := n/b$ gilt dann ebenfalls $b in {2,…,n-1}$. Also ist $n = a ⋅ b$ das Produkt zweier kleinerer Zahlen. Nach Induktionsvoraussetzung sind $a$ und $b$ Produkte von Primzahlen, also ist es auch $n = a ⋅ b$.#qedhere
+    / Fall 2\: $n$ ist keine Primzahl.: Dann hat $n$ einen Teiler $a ∈ {2,…,n-1}$. Für $b := n/a$ gilt dann ebenfalls $b ∈ {2,…,n-1}$. Also ist $n = a ⋅ b$ das Produkt zweier kleinerer Zahlen. Nach Induktionsvoraussetzung sind $a$ und $b$ Produkte von Primzahlen, also ist es auch $n = a ⋅ b$.#qedhere
 ]
 
 #uebung[
@@ -1851,6 +1854,13 @@
 #definition("Verkettung", kurz: [$g ∘ f$])[
   Seien $f: X → Y$ und $g: Y → Z$ Funktionen. Die *Verkettung* oder *Komposition* $g ∘ f$, gesprochen „$g$ nach $f$“, ist die Funktion
   $ g ∘ f : X → Z, quad x ↦ g(f(x)). $
+]
+
+#bemerkung[Folge][
+  Wir haben den Begriff der *Folge* bereits ohne Definition verwendet (z.B. in @wegpfadkreis). Jetzt können wir eine Definition nachliefern. Eine Folge $(a₁,…,a_n)$ mit $n ∈ ℕ$ Folgengliedern aus einer Menge $A$ ist eine Funktion
+  $ f : {1,…,n} → A, quad i ↦ a_i. $
+  Für $n = 0$ ergibt sich die leere Folge $()$. Eine unendliche Folge $(a₁,a₂,…)$ mit Folgengliedern aus $A$ ist eine Funktion
+  $ f : ℕ⁺ → A, quad i ↦ a_i. $
 ]
 
 === Injektiv, surjektiv, bijektiv
