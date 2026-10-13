@@ -2672,34 +2672,38 @@
 #stichpunktgrenze
 
 #slidebreak()
-= Exkurs: Abzählbarkeit
+= Mächtigkeit und (Über-)Abzählbarkeit
 <sec:cardinality>
 
 #skript[
-  Bisher haben wir $|A|$ nur für endliche Mengen erklärt. Für unendliche Mengen brauchen wir einen Vergleich, der ohne Zählen funktioniert: Zwei Mengen sind gleich groß, wenn sich ihre Elemente paarweise einander zuordnen lassen. Das führt zu einem überraschenden Ergebnis, das für die Informatik grundlegend ist: Es gibt mehr Probleme als Programme.
+  Wir haben bereits die Schreibweise $|A| = n$ verwendet für „$A$ hat $n$ Elemente“. Wir haben aber nie definiert, was „$n$ Elemente haben“ bedeutet. Wir holen das auf eine weise nach, die interessante Konsequenzen für unendliche Menge hat.
 ]
 
 == Mächtigkeit neu gedacht
 
-#skript[
-  Wir haben bereits die Schreibweise $|A| = n$ verwendet für „$A$ hat $n$ Elemente“. Wir haben aber nie definiert, was „$n$ Elemente haben“ bedeutet.
-]
+- Def
+  - Gleichmächtigkeit zweier Mengen.
+  - „Höchstens so mächtig wie“.
+  - „weniger mächtig als“
 
-- Def: Gleichmächtigkeit zweier Mengen.
-- Def: Ist $A$ gleichmächtig zu ${1,…,n}$, so schreiben wir $|A| = n$ und sagen, $A$ hat Mächtigkeit oder Kardinalität $n$.
+-Bemerkung: Sei $ℳ$ eine beliebige Menge von Mengen. Wir definieren hier nicht eine Funktion |⋅| auf A die jedem A eine Größe zuweist und anschließend eine Relation auf den Größen. Vielmehr ist |⋅| ≤ |⋅| eine Relation auf $ℳ$ und |⋅| = |⋅| eine Relation auf $ℳ$.
 
-#satz[Wohldefiniertheit der Mächtigkeit][
-  Ist $A$ gleichmächtig zu ${1,…,n}$ und gleichmächtig zu ${1,…,m}$, so gilt $n = m$.
-]
-#beweis[
-  Induktion.
-]
+- Satz (Cantor-Schröder-Bernstein): 
+  - gilt |A| ≤ |B| und |B| ≤ |A| so gilt |A| = |B|
 
-#satz[Gleichmächtigkeit ist Äquivalenzrelation][
-  Eingeschränkt auf eine beliebige Menge $ℳ$ von Mengen ist Gleichmächtigkeit eine Äquivalenzrelation.
+#satz[
+  Eingeschränkt auf eine beliebige Menge $ℳ$ von Mengen ist höchstens-so-mächtig-wie eine Quasiordnung und Gleichmächtigkeit eine Äquivalenzrelation.
 ]
 #beweis[
   …
+]
+
+== Endliche Menge
+
+- Def: Eine Menge $A$ heißt endlich wenn es ein $n ∈ ℕ$ gibt sodass $A$ gleichmächtig zu ${1,…,n}$ ist. Wir sagen dann auch $A$ hat Mächtigkeit/Kardinalität $n$ und schreiben $|A| = n$.
+
+#satz[
+  |∅| < |{1}| < |{1,2}| < … < |ℕ|.
 ]
 
 #satz[Kardinalitäten endlicher Mengen][
@@ -2716,47 +2720,25 @@
 ]
 - Bemerkung: Der Fall mit drei Mengen (Bild) und die allgemeine Formel für $k$ Mengen. Beides ohne Beweis.
 
-== Abzählbarkeit
+== Abzählbare Menge
 
-- Def: Wir sagen, $A$ ist höchstens so mächtig wie $B$, wenn es eine Injektion von $A$ nach $B$ gibt.
-
-#satz[
-  Eingeschränkt auf eine beliebige Menge $ℳ$ von Mengen ist „Höchstens so mächtig“ eine Quasiordnung.
-]
-#beweis[
-  …
-]
-
-/* Todo: Ich will einfangen, dass die Reihenfolge ist:
-  - endlich
-  - abzählbar
-  - überabzählbar
-*/
-- Def: Eine Menge heißt abzählbar, wenn sie höchstens so mächtig wie $ℕ$ ist, andernfalls heißt sie *überabzählbar*.
-- Bemerkung: Anschaulich heißt abzählbar, dass man die Elemente in einer (endlichen oder unendlichen) Liste aufzählen kann.
-- Satz: Eine Menge ist genau dann abzählbar, wenn sie endlich ist oder gleichmächtig zu $ℕ$.
-#beweis[
-  …
-]
-- Sprechweise: weniger mächtig, mächtiger
-- Beispiel (Hilberts Hotel): $|ℕ| = |ℕ₀|$, obwohl $ℕ ⊊ ℕ₀$. Bei unendlichen Mengen kann eine echte Teilmenge gleich groß sein.
-- Übung: $ℤ$ ist abzählbar.
-- Satz: $ℕ × ℕ$ ist abzählbar (Cantorsche Paarung oder $(a,b) ↦ 2^a 3^b$).
-- Korollar: Die Menge $ℕ^*$ aller endlichen Folgen natürlicher Zahlen ist abzählbar.
+- Def: Menge $A$ heißt abzählbar, wenn $|A| ≤ |ℕ|$ andernfalls heißt $A$ *überabzählbar*..
+- Bemerkung: Nicht einheitlich, manchmal heißt abzählbar auch $|A| = |ℕ|$ also abzählbar unendlich. Mit höchstens abzählbar ist man auf der sicheren Seite.
+- Übung: Ist $A$ höchstens abzählbar, dann ist $A$ endlich oder gleichmächtig zu $ℕ$.
+- Lösung: Bild der Injektion komprimieren?
+- Satz: Beispiele für abzählbar unendliche Mengen.
+  - |ℕ⁺| = |ℕ| (Hilberts Hotel)
+  - |ℤ| = |ℕ|
+  - |ℕ × {1,2}| = |ℕ| (Hilbert Bus)
+  - |ℕ × ℕ| = |ℕ| (Cantorsche Paarung oder $(a,b) ↦ 2^a 3^b$).
+  - $|ℕ^*| = |ℕ|$
 
 == Cantors Diagonalargument
 
-- Satz (Cantors Diagonalargument): $M$ ist weniger mächtig als $2^M$ für jede Menge $M$.
+- Satz (Cantors Diagonalargument): Für jede Menge $M$ gilt $|M| < |2^M|$.
 - Bild: Diagonalargument für ℕ.
-
-== Unendliche Bäume und das Lemma von Kőnig
-
-- Potentiell unendliche Bäume entsprechen Mengen von Folgen
-- Menge von natürlichen Zahlen entsprechen 0-1 Folgen.
-- Es gibt abzählbar viele endliche 0-1 Folgen (Knoten im unendlichen Baum).
-- Es gibt überabzählbar viele unendliche 0-1 Folgen (absteigende Pfade im unendlichen Baum).
-- Lemma von Kőnig: Jeder unendliche Baum mit endlichem Grad an jedem Knoten hat einen unendlichen Pfad
-- Bemerkung: Die reellen Zahlen sind gleichmächtig wie $ℕ$. Intuition: Reelle Zahlen entsprechen unendlichen Ziffernfolgen.
+- Bemerkung: $2^ℕ$ entspricht den reellen Zahlen in $[0,1]$, Binärdarstellung.
+- Bemerkung: Betrachte unendlichen Binärbaum. Er hat abzählbar viele Knoten aber überabzählbar viele absteigende Pfade.
 
 == Korollar: Es gibt mehr Probleme als Programme
 
@@ -3127,6 +3109,11 @@ Das hier kam vom Relationskapitel wo es um bipartite Graphen mit fester Bipartit
 - Bemerkung: Für drei Literale pro Klausel (3-SAT) ist keine solche Methode bekannt; 3-SAT ist NP-vollständig.
 
 - Bemerkung: Prädikatenlogik als formales System (Strukturen, Semantik, Normalformen) behandeln wir nicht. Wer Formeln mit $∀$ und $∃$ nur zum Aufschreiben mathematischer Aussagen braucht, hat das Nötige im Kapitel „Aussagen und Beweise“ gesehen.
+
+== Kompaktheitssatz der Aussagenlogik
+
+- Lemma von Kőnig: Jeder unendliche Baum mit endlichem Grad an jedem Knoten hat einen unendlichen Pfad
+- Kompaktheitssatz
 
 == Ausblick: Prädikatenlogik
 
