@@ -2682,11 +2682,11 @@
 == Mächtigkeit neu gedacht
 
 #skript[
-  Wir haben bereits die Schreibeweise $|A| = n$ verwendet für „$A$ hat $n$ Elemente“. Wir haben aber nie definiert was „$n$ Elemente haben“ bedeutet.
+  Wir haben bereits die Schreibweise $|A| = n$ verwendet für „$A$ hat $n$ Elemente“. Wir haben aber nie definiert, was „$n$ Elemente haben“ bedeutet.
 ]
 
 - Def: Gleichmächtigkeit zweier Mengen.
-- Def: Ist $A$ gleichmächtig zu ${1,…,n}$ so schreiben wir $|A| = n$ und sagen $n$ hat Mächtigkeit oder Kardinalität $n$.
+- Def: Ist $A$ gleichmächtig zu ${1,…,n}$, so schreiben wir $|A| = n$ und sagen, $A$ hat Mächtigkeit oder Kardinalität $n$.
 
 #satz[Wohldefiniertheit der Mächtigkeit][
   Ist $A$ gleichmächtig zu ${1,…,n}$ und gleichmächtig zu ${1,…,m}$, so gilt $n = m$.
@@ -2704,21 +2704,21 @@
 
 #satz[Kardinalitäten endlicher Mengen][
   Seien $A$ und $B$ endliche Mengen. Dann gilt:
-  + Ist $x ∉ A$ so gilt $|A ∪ {x}| = |A| + 1$.
-  + Sind $A$ und $B$ disjunkt so gilt $|A ∪ B| = |A| + |B|$.
+  + Ist $x ∉ A$, so gilt $|A ∪ {x}| = |A| + 1$.
+  + Sind $A$ und $B$ disjunkt, so gilt $|A ∪ B| = |A| + |B|$.
   + $|A ∪ B| = |A| + |B| - |A ∩ B|$
 ]
 #beweisansatz[
   Beweis nicht in der Vorlesung. Mögliche Beweisansätze sind:
   + Bijektion von $A$ nach ${1,…,|A|}$ auf Bijektion von $A ∪ {x}$ nach ${1,…,|A|+1}$ erweitern.
-  + Induktion über $|B|$ und (2).
-  + Induktion über $|A ∩ B|$ und (3).
+  + Induktion über $|B|$ und (1).
+  + Induktion über $|A ∩ B|$ und (2).
 ]
 - Bemerkung: Der Fall mit drei Mengen (Bild) und die allgemeine Formel für $k$ Mengen. Beides ohne Beweis.
 
 == Abzählbarkeit
 
-- Def: Wir sagen $A$ ist höchstens so mächtig wie $B$ wenn es eine Injektion von $A$ nach $B$ gibt.
+- Def: Wir sagen, $A$ ist höchstens so mächtig wie $B$, wenn es eine Injektion von $A$ nach $B$ gibt.
 
 #satz[
   Eingeschränkt auf eine beliebige Menge $ℳ$ von Mengen ist „Höchstens so mächtig“ eine Quasiordnung.
