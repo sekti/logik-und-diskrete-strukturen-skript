@@ -185,6 +185,7 @@
 
 #let loesung = makeProofEnv("Lösung", qed: false)
 #let beweis = makeProofEnv("Beweis")
+#let beweisansatz = makeProofEnv("Beweisansatz", qed: false)
 #let begründung = makeProofEnv("Begründung", qed: false)
 
 // Abbildungen können auf Folien deaktiviert werden
@@ -2678,36 +2679,90 @@
   Bisher haben wir $|A|$ nur für endliche Mengen erklärt. Für unendliche Mengen brauchen wir einen Vergleich, der ohne Zählen funktioniert: Zwei Mengen sind gleich groß, wenn sich ihre Elemente paarweise einander zuordnen lassen. Das führt zu einem überraschenden Ergebnis, das für die Informatik grundlegend ist: Es gibt mehr Probleme als Programme.
 ]
 
-- Def: $|A| = |B| defiff$ es gibt eine Bijektion $A → B$; $|A| ≤ |B| defiff$ es gibt eine Injektion $A → B$.
-- Def: $A$ ist *abzählbar*, falls $|A| ≤ |ℕ|$, sonst *überabzählbar*.
-- Bemerkung: Anschaulich heißt abzählbar, dass man die Elemente in einer (endlichen oder unendlichen) Liste aufzählen kann.
+== Mächtigkeit neu gedacht
 
-- Def: $A$ hat Mächtigkeit $n ∈ ℕ$ gdw. $A$ Bijektion zu ${1,…,n}$ hat.
-- Frage: Ist klar, dass es keine Bijektion zwischen ${1}$ und ${1,2}$ gibt?
-- Skript: Das ist durchaus nützlich, besser verwendbar als die naive Definition (die offensichtlich Äquivalent ist)
-
-#satz(kurz: $|A ∪ B| = |A| + |B| - |A ∩ B|$)[
-  Für endliche Mengen $A$ und $B$ gilt $|A ∪ B| = |A| + |B| - |A ∩ B|$.
+#skript[
+  Wir haben bereits die Schreibeweise $|A| = n$ verwendet für „$A$ hat $n$ Elemente“. Wir haben aber nie definiert was „$n$ Elemente haben“ bedeutet.
 ]
-- Satz: $A ⊆ B ⇔ |A ∪ B| = |A|$
-- Beweis: Bild; oder jedes Element von $A$ und jedes Element von $B$ bekommt 1 €.
-- Beispiel
-- Bemerkung: Der Fall mit drei Mengen (Bild) und die allgemeine Formel für $k$ Mengen. Beides ohne Beweis; die allgemeine Formel ist Stoff für eine weiterführende Vorlesung.
 
-== Cantors Diagonalargument
+- Def: Gleichmächtigkeit zweier Mengen.
+- Def: Ist $A$ gleichmächtig zu ${1,…,n}$ so schreiben wir $|A| = n$ und sagen $n$ hat Mächtigkeit oder Kardinalität $n$.
 
+#satz[Wohldefiniertheit der Mächtigkeit][
+  Ist $A$ gleichmächtig zu ${1,…,n}$ und gleichmächtig zu ${1,…,m}$, so gilt $n = m$.
+]
+#beweis[
+  Induktion.
+]
+
+#satz[Gleichmächtigkeit ist Äquivalenzrelation][
+  Eingeschränkt auf eine beliebige Menge $ℳ$ von Mengen ist Gleichmächtigkeit eine Äquivalenzrelation.
+]
+#beweis[
+  …
+]
+
+#satz[Kardinalitäten endlicher Mengen][
+  Seien $A$ und $B$ endliche Mengen. Dann gilt:
+  + Ist $x ∉ A$ so gilt $|A ∪ {x}| = |A| + 1$.
+  + Sind $A$ und $B$ disjunkt so gilt $|A ∪ B| = |A| + |B|$.
+  + $|A ∪ B| = |A| + |B| - |A ∩ B|$
+]
+#beweisansatz[
+  Beweis nicht in der Vorlesung. Mögliche Beweisansätze sind:
+  + Bijektion von $A$ nach ${1,…,|A|}$ auf Bijektion von $A ∪ {x}$ nach ${1,…,|A|+1}$ erweitern.
+  + Induktion über $|B|$ und (2).
+  + Induktion über $|A ∩ B|$ und (3).
+]
+- Bemerkung: Der Fall mit drei Mengen (Bild) und die allgemeine Formel für $k$ Mengen. Beides ohne Beweis.
+
+== Abzählbarkeit
+
+- Def: Wir sagen $A$ ist höchstens so mächtig wie $B$ wenn es eine Injektion von $A$ nach $B$ gibt.
+
+#satz[
+  Eingeschränkt auf eine beliebige Menge $ℳ$ von Mengen ist „Höchstens so mächtig“ eine Quasiordnung.
+]
+#beweis[
+  …
+]
+
+/* Todo: Ich will einfangen, dass die Reihenfolge ist:
+  - endlich
+  - abzählbar
+  - überabzählbar
+*/
+- Def: Eine Menge heißt abzählbar, wenn sie höchstens so mächtig wie $ℕ$ ist, andernfalls heißt sie *überabzählbar*.
+- Bemerkung: Anschaulich heißt abzählbar, dass man die Elemente in einer (endlichen oder unendlichen) Liste aufzählen kann.
+- Satz: Eine Menge ist genau dann abzählbar, wenn sie endlich ist oder gleichmächtig zu $ℕ$.
+#beweis[
+  …
+]
+- Sprechweise: weniger mächtig, mächtiger
 - Beispiel (Hilberts Hotel): $|ℕ| = |ℕ₀|$, obwohl $ℕ ⊊ ℕ₀$. Bei unendlichen Mengen kann eine echte Teilmenge gleich groß sein.
 - Übung: $ℤ$ ist abzählbar.
 - Satz: $ℕ × ℕ$ ist abzählbar (Cantorsche Paarung oder $(a,b) ↦ 2^a 3^b$).
 - Korollar: Die Menge $ℕ^*$ aller endlichen Folgen natürlicher Zahlen ist abzählbar.
-  - Korollar: Es gibt nur abzählbar viele Python-Programme (ein Programm ist eine endliche Zeichenfolge).
-- Satz (Cantors Diagonalargument): Die Menge $2^ℕ$ aller Teilmengen von $ℕ$ ist überabzählbar.
-  - Beweis über Diagonalisierung: Zu jeder Aufzählung konstruieren wir eine Menge, die nicht in der Aufzählung vorkommt.
-  - Gleichwertige Sicht: Die Menge ${0,1}^ℕ$ der unendlichen 0-1-Folgen ist überabzählbar.
+
+== Cantors Diagonalargument
+
+- Satz (Cantors Diagonalargument): $M$ ist weniger mächtig als $2^M$ für jede Menge $M$.
+- Bild: Diagonalargument für ℕ.
+
+== Unendliche Bäume und das Lemma von Kőnig
+
+- Potentiell unendliche Bäume entsprechen Mengen von Folgen
+- Menge von natürlichen Zahlen entsprechen 0-1 Folgen.
+- Es gibt abzählbar viele endliche 0-1 Folgen (Knoten im unendlichen Baum).
+- Es gibt überabzählbar viele unendliche 0-1 Folgen (absteigende Pfade im unendlichen Baum).
+- Lemma von Kőnig: Jeder unendliche Baum mit endlichem Grad an jedem Knoten hat einen unendlichen Pfad
+- Bemerkung: Die reellen Zahlen sind gleichmächtig wie $ℕ$. Intuition: Reelle Zahlen entsprechen unendlichen Ziffernfolgen.
+
+== Korollar: Es gibt mehr Probleme als Programme
+
+- Korollar: Es gibt nur abzählbar viele Python-Programme (ein Programm ist eine endliche Zeichenfolge).
 - Korollar: Es gibt eine Teilmenge von $ℕ$, die kein Computerprogramm aufzählt. Denn es gibt nur abzählbar viele Programme, aber überabzählbar viele Teilmengen von $ℕ$.
   - Ausblick: Es gibt also unentscheidbare _Probleme_, das heißt solche, die von keinem Algorithmus gelöst werden. Dass es _interessante_ unentscheidbare Probleme gibt (etwa das Halteproblem), ist Inhalt einer zukünftigen Vorlesung über Formale Sprachen und Berechenbarkeit.
-- Bemerkung: Allgemeiner gilt $|M| < |2^M|$ für jede Menge $M$ (ohne Beweis).
-- Bemerkung: Auch $ℝ$ ist überabzählbar. Das Diagonalargument über Dezimaldarstellungen ist etwas unsauber, weil verschiedene Dezimaldarstellungen dieselbe Zahl bezeichnen können ($0{,}999… = 1$).
 
 #slidebreak()
 = Zählen und Abschätzen
