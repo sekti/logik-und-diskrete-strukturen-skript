@@ -472,11 +472,19 @@
   + ${2⋅n | n ∈ ℕ} = {2⋅x | x ∈ ℕ} = {2⋅ξ | ξ ∈ ℕ}$
   + ${k² | k ∈ ℕ} = {n ∈ ℕ | "es gibt ein" k ∈ ℕ "mit" n = k²}$
   + $|{}| = 0$, $|∅| = 0, |{∅}| = 1, |{{},∅,{∅}}| = 2$
+  + $|{1+1, 2}| = 1$ aber $|{„1+1“,„2“}| = 2$
+  + Seien $x,y ∈ ℕ$. Gilt dann ${x} ⊊ {x,y}$?
+  
 ]
 #loesung[
   + Hier wird jeweils die Menge der geraden Zahlen beschrieben. Wie die Variable heißt, die dabei als Hilfsmittel verwendet wird, spielt keine Rolle.
   + Wir sehen zwei Arten, die Menge der Quadratzahlen zu notieren. Die Perspektive und die Rolle der Variablen $n$ unterscheiden sich. Im ersten Fall nehmen wir jedes $n ∈ ℕ$ her, quadrieren es und sammeln die Ergebnisse auf. Im zweiten Fall nehmen wir jedes $n ∈ ℕ$ her, nehmen es aber nur in die Menge auf, wenn eine andere natürliche Zahl $k$ bezeugt, dass $n$ eine Quadratzahl ist (in dem Fall ist $k$ die Wurzel von $n$).
   + Die leere Menge hat keine Elemente, egal ob man sie "${}$" oder "$∅$" schreibt. Die Menge ${∅}$ hat ein Element, nämlich die leere Menge. Die Menge ${{},∅,{∅}}$ hat zwei Elemente, nämlich ${}$ und ${∅}$. Das vermeitlich dritte Element $∅$ ist identisch mit dem ersten.
+  + Im ersten Fall verweist der Ausdruck $1+1$ auf seine Bedeutung $2$ und für die gebildete Menge gilt damit
+  $ |{1+1,2}| = |{2,2}| = |{2}| = 1. $
+  Eine Menge kann ein Element nicht zweimal enthalten und das zweite Vorkommen in der Liste wird daher ignoriert.
+  Im zweiten Fall drücken die Anführungszeichen aus, dass es hier um Folgen von Symbolen geht, nicht um deren Bedeutung. Weil $1+1$ und $2$ zwei verschiedene Ausdrücke sind, ist die Kardinalität der Menge $2$.
+  + Es kommt drauf an. Wenn $x ≠ y$ gilt (z.B. $x = 3$ und $y = 4$), dann ist in der Tat ${x} ⊊ {x,y}$. Gilt dagegen $x = y$, so gilt ${x,y} = {x}$ und somit ist ${x} ⊊ {x,y}$ falsch.
 ]
 
 == Exkurs: Probleme der naiven Mengenlehre
