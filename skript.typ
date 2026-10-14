@@ -327,7 +327,7 @@
 #loesung[
   + ✗ Dreck besteht zunächst nicht aus wohlunterschiedenen Einzelobjekten. Die Menge der Sandkörner an meinem Schuh wäre schön eher eine Menge, wobei es schwierig sein dürfte zu definieren, was ein Sandkorn ist.
   + ✓ Dies ist eine Menge, obwohl wir sie noch nicht kennen.
-  + ✗ Groß ist eine graduelle Eigenschaft.#footnote[Wenn man einen künstlichen Schwellwert für "groß" festlegt, könnte man das Beispiel vielleicht retten.]
+  + ✗ Groß ist eine graduelle Eigenschaft.#footnote[Wenn man einen künstlichen Schwellwert für "groß" festlegt (z.B. 1.80m), könnte man das Beispiel vielleicht retten.]
   + ✓ Ein wichtiges Beispiel für uns.
 ]
 
@@ -2738,7 +2738,7 @@
 - Satz (Cantors Diagonalargument): Für jede Menge $M$ gilt $|M| < |2^M|$.
 - Bild: Diagonalargument für ℕ.
 - Bemerkung: $2^ℕ$ entspricht den reellen Zahlen in $[0,1]$, Binärdarstellung.
-- Bemerkung: Betrachte unendlichen Binärbaum. Er hat abzählbar viele Knoten aber überabzählbar viele absteigende Pfade.
+- Visuelle Darstellung: Betrachte unendlichen Binärbaum. Er hat abzählbar viele Knoten aber überabzählbar viele absteigende Pfade.
 
 == Korollar: Es gibt mehr Probleme als Programme
 
