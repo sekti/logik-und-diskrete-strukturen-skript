@@ -748,10 +748,23 @@
   Eine *Aussage* ist ein formales oder sprachliches Gebilde, das entweder wahr oder falsch ist.
 ]
 
-#beispiel[
-  - „$4 ∈ {2⋅n | n ∈ ℕ}$“ ist eine Aussage. Sie ist wahr.
-  - „$7 < 5$“ ist eine Aussage. Sie ist falsch.
-  - „Am 12.1.2042 regnet es in Stuttgart.“ ist eine Aussage. Wir wissen derzeit nicht, ob sie wahr oder falsch ist.
+#uebung[
+  Sind folgende Gebilde Aussagen?
+  + $4 ∈ {2⋅n | n ∈ ℕ}$
+  + $7 < 5$
+  + Am 12.1.2042 regnet es in Stuttgart.
+  + Wie spät ist es?
+  + Hurrah!
+  + $x < 5$
+]
+
+#loesung[
+  + Ja (wahre Aussage).
+  + Ja (falsche Aussage).
+  + Ja. Wir wissen derzeit nicht, ob die Aussage wahr oder falsch ist.
+  + Keine Aussage.
+  + Keine Aussage.
+  + Keine Aussage, solange nicht feststeht, welche Zahl $x$ bezeichnet. Solche Gebilde nennen wir gleich _Formeln_.
 ]
 
 #skript[
@@ -759,7 +772,7 @@
 ]
 
 #definition[Formel][
-  Eine *Formel* ist ein Gebilde, in dem *freie Variablen* vorkommen dürfen, deren Werte durch die Formel selbst nicht festgelegt sind. Werden für die Variablen konkrete Werte eingesetzt, dann entsteht eine Aussage, die wahr oder falsch ist.
+  Eine *Formel* ist ein Gebilde, in dem *freie Variablen*#footnote[Nicht frei ist dagegen $n$ in der Aussage $4 ∈ {2⋅n | n ∈ ℕ}$ aus dem vorigen Beispiel: Die Mengenschreibweise legt fest, welche Werte $n$ durchläuft. Man sagt, $n$ ist dort *gebunden*. Weitere gebundene Variablen lernen wir mit den Quantoren kennen.] vorkommen dürfen, deren Werte durch die Formel selbst nicht festgelegt sind. Werden für die Variablen konkrete Werte eingesetzt, dann entsteht eine Aussage, die wahr oder falsch ist.
 
   Ausdrücke, die keinen Wahrheitswert bezeichnen, sondern andere Objekte (Zahl, Menge, Graph, …), heißen *Terme*.
 ]
@@ -793,6 +806,11 @@
     ]
   / $P ↔ Q$: ist definiert als $(P → Q) ∧ (Q → P)$.
 ]<logischeVerknüpfungen>
+
+#konvention(kurz: [$¬$ vor $∧, ∨$ vor $→, ↔$])[Bindungsstärke][
+  Um Klammern zu sparen, vereinbaren wir: $¬$ bindet am stärksten, danach folgen $∧$ und $∨$, am schwächsten binden $→$ und $↔$. Zwischen $∧$ und $∨$ sowie zwischen $→$ und $↔$ legen wir keine Rangfolge fest und setzen immer Klammern. So bedeutet etwa
+  $ ¬P ∧ Q → P ∨ ¬Q quad "dasselbe wie" quad ((¬P) ∧ Q) → (P ∨ (¬Q)). $
+]<bindungsstaerke>
 
 #definition[Wahrheitstabelle][
   Eine *Wahrheitstabelle* für eine aussagenlogische Formel stellt dar, wie sich der Wahrheitswert aus den Wahrheitswerten der Elementaraussagen ergibt. Wir schreiben dabei $0$ für „falsch“ und $1$ für „wahr“.
@@ -868,7 +886,7 @@
 #loesung[
   + $¬M$
   + $M → G$
-  + $¬M → ¬ G$. Diese Aussage ist äquivalent zu $G → M$, denn beide bedeuten nach Definition von „$→$“ dasselbe, nämlich $M ∨ ¬G$.
+  + $¬M → ¬ G$. Diese Aussage ist äquivalent zu $G → M$: Nach Definition von „$→$“ bedeutet die erste dasselbe wie $¬¬M ∨ ¬G$, wegen $¬¬M ↔ M$ also dasselbe wie $M ∨ ¬G$. Die zweite bedeutet $¬G ∨ M$.
   + $Z → M$
   + $¬M → ¬Z$
   + $M ∨ ¬Z$
@@ -880,7 +898,7 @@
   Inwiefern „passt“ $∧$ zu $∩$ und $∨$ zu $∪$?
 ]
 #loesung[
-  Für beliebige Mengen $A$ und $B$ gilt
+  Für beliebige Mengen $A$ und $B$ und jedes Objekt $x$ gilt
   $
     x ∈ A ∧ x ∈ B "genau dann, wenn" x ∈ A ∩ B\
     x ∈ A ∨ x ∈ B "genau dann, wenn" x ∈ A ∪ B.
