@@ -678,13 +678,13 @@
 ]
 
 #bemerkung[
-  Schreibweisen wie ${1,…,n}$ können verwirrend sein, wenn für $n$ kleine Zahlen eingesetzt werden. Sei $M_n := {1,…,n}$ für $n ∈ ℕ$. Die intendierte Interpretation ist:
-  $ M_3 = {1,2,3}, M_2 = {1,2}, M_1 = {1}, M_0 = {} = ∅ $
-  Mit anderen Worten ${1,…,0}$ ist als die leere Menge zu interpretieren obwohl es scheint als wären zumindest $1$ und $0$ explizit als Elemente vorgesehen. Vielleicht hilft eine Analogie zu einer For-Schleife in der Programmierung. Schreibt man
-  ```c++
-  for(int i = 1; i <= n; ++i) { print(i) }
-  ```
-  so werden genau die Elemente von ${1,…,n}$ ausgegeben.
+  Schreibweisen wie ${1,…,n}$ können verwirrend sein, wenn für $n$ kleine Zahlen eingesetzt werden. Gemeint ist:
+  $ {1,…,n} := {i ∈ ℕ | 1 ≤ i ≤ n } $
+  Die intendierte Interpretation von ${1,…,n}$ ist also:
+  - für $n = 3$: ${1,2,3}$
+  - für $n = 2$: ${1,2}$
+  - für $n = 1$: ${1}$
+  - für $n = 0$: ${} = ∅$.
 ]
 
 == Wege, Pfade, Kreise, Zusammenhang
