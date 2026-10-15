@@ -745,7 +745,7 @@
 == Aussagen und Formeln
 
 #definition[Aussage][
-  Eine Aussage ist ein formales oder sprachliches Gebilde, das entweder wahr oder falsch ist.
+  Eine *Aussage* ist ein formales oder sprachliches Gebilde, das entweder wahr oder falsch ist.
 ]
 
 #beispiel[
@@ -759,7 +759,7 @@
 ]
 
 #definition[Formel][
-  Eine *Formel* ist ein Gebilde in dem *freie Variablen* vorkommen dürfen, deren Werte durch die Formel selbst nicht festgelegt sind. Werden für die Variablen konkrete Werte eingesetzt, dann entsteht eine Aussage, die dann wahr oder falsch ist.
+  Eine *Formel* ist ein Gebilde, in dem *freie Variablen* vorkommen dürfen, deren Werte durch die Formel selbst nicht festgelegt sind. Werden für die Variablen konkrete Werte eingesetzt, dann entsteht eine Aussage, die wahr oder falsch ist.
 
   Ausdrücke, die keinen Wahrheitswert bezeichnen, sondern andere Objekte (Zahl, Menge, Graph, …), heißen *Terme*.
 ]
@@ -771,8 +771,8 @@
 === Formeln mit $∧, ∨, ¬, →, ↔$
 
 #definition("Aussagenlogische Formeln", kurz: [$∧, ∨, ¬, →, ↔$])[
-  Eine aussagenlogische Formel ist eine Formel, die aus Variablensymbolen, den aussagenlogischen Verknüpfungen $∧$,$∨$,$→$,$↔$, dem Negationssymbol $¬$, und, wenn nötig, Klammern besteht. Die Variablen heißen auch *Elementaraussagen* und können nur die Werte _wahr_ oder _falsch_ annehmen.
-  Die Bedeutung der Symbole $∧$,$∨$,$→$,$↔$,$¬$ ist wie folgt:
+  Eine aussagenlogische Formel ist eine Formel, die aus Variablensymbolen, den aussagenlogischen Verknüpfungen $∧$, $∨$, $→$, $↔$, dem Negationssymbol $¬$ und, wenn nötig, Klammern besteht. Die Variablen heißen auch *Elementaraussagen* und können nur die Werte _wahr_ oder _falsch_ annehmen.
+  Die Bedeutung der Symbole $∧$, $∨$, $→$, $↔$, $¬$ ist wie folgt:
   #table(
     columns: 3,
     stroke: none,
@@ -781,11 +781,11 @@
     [Konjunktion], [$P ∧ Q$], [$P$ und $Q$],
     [Disjunktion], [$P ∨ Q$], [$P$ oder $Q$],
     [Negation], [$¬P$], [nicht $P$],
-    [Implikation], [$P → Q$], [wenn $P$ dann $Q$],
+    [Implikation], [$P → Q$], [wenn $P$, dann $Q$],
     [Äquivalenz], [$P ↔ Q$], [$P$ genau dann, wenn $Q$],
   )
   Anmerkungen zur präzisen Bedeutung:
-  / $P ∧ Q$: heißt _sowohl_ $P$ _als auch_ $Q$ ist wahr.
+  / $P ∧ Q$: heißt _sowohl_ $P$ _als auch_ $Q$ sind wahr.
   / $P ∨ Q$: heißt $P$ ist wahr oder $Q$ ist wahr _oder beide sind wahr_.
   / $¬P$: heißt $P$ ist falsch.
   / $P → Q$: ist definiert als $¬P ∨ Q$. Insbesondere ist eine Implikation wahr, wenn die linke Seite falsch ist. Die Verwendung von „wenn-dann“ in der Alltagssprache unterscheidet sich hiervon teilweise. #footnote[
@@ -825,14 +825,14 @@
 ]<wahrheitstabelle-verknüpfungen>
 
 #definition[Äquivalente Formeln][
-  Zwei aussagenlogische Formeln heißen *äquivalent*, wenn sich für jede Belegung der Elementaraussagen mit Wahrheitswerten der selbe Wahrheitswert insgesamt ergibt (mit anderen Worten: wenn die Wahrheitstabellen übereinstimmen).#footnote[In einem späteren Kapitel wird es noch eine formalere Definition geben.]
+  Zwei aussagenlogische Formeln heißen *äquivalent*, wenn sich für jede Belegung der Elementaraussagen mit Wahrheitswerten derselbe Wahrheitswert insgesamt ergibt (mit anderen Worten: wenn die Wahrheitstabellen übereinstimmen).#footnote[In einem späteren Kapitel wird es noch eine formalere Definition geben.]
 ]
 
 #uebung[
   Weisen Sie durch Anfertigung einer Wahrheitstabelle nach, dass die Formeln $P ↔ Q$ und $(P ∧ Q) ∨ (¬P ∧ ¬Q)$ äquivalent sind.
 ]
 #loesung[
-  Die Wahrheitstabelle für $P ↔ Q$ haben wir schon. Die Wahrheitstabelle für die andere Aussage erhalten wir Schritt für Schritt aus Wahrheitstabellen ihrer Teilformeln.
+  Die Wahrheitstabelle für $P ↔ Q$ haben wir schon. Die Wahrheitstabelle für die andere Formel erhalten wir Schritt für Schritt aus Wahrheitstabellen ihrer Teilformeln.
 
   #block(breakable: false)[
     #table(
@@ -856,7 +856,7 @@
   / Z: Der Zeuge spricht die Wahrheit.
   / M: Paul ist der Mörder.
   / G: Paul muss ins Gefängnis.
-  Formulieren Sie formale Aussagen, die folgenden Äußerungen möglichst nahe kommen.
+  Formulieren Sie formale Aussagen, die folgenden Äußerungen möglichst nahekommen.
   + Paul beteuert: „Ich war's nicht.“
   + Der Staatsanwalt fordert: „Mörder müssen ins Gefängnis.“
   + Der Verteidiger fordert: „Wer unschuldig ist, wird freigesprochen.“
