@@ -764,7 +764,7 @@
   + Ja. Wir wissen derzeit nicht, ob die Aussage wahr oder falsch ist.
   + Keine Aussage.
   + Keine Aussage.
-  + Keine Aussage, solange nicht feststeht, welche Zahl $x$ bezeichnet. Solche Gebilde nennen wir gleich _Formeln_.
+  + „$x < 5$“ ist eine _Aussageform_, ist aber erst eine Aussage, wenn der Kontext dem Symbol $x$ eine Bedeutung verleiht. Solche Gebilde nennen wir gleich _Formeln_.
 ]
 
 #skript[
@@ -772,7 +772,7 @@
 ]
 
 #definition[Formel][
-  Eine *Formel* ist ein Gebilde, in dem *freie Variablen*#footnote[Nicht frei ist dagegen $n$ in der Aussage $4 ∈ {2⋅n | n ∈ ℕ}$ aus dem vorigen Beispiel: Die Mengenschreibweise legt fest, welche Werte $n$ durchläuft. Man sagt, $n$ ist dort *gebunden*. Weitere gebundene Variablen lernen wir mit den Quantoren kennen.] vorkommen dürfen, deren Werte durch die Formel selbst nicht festgelegt sind. Werden für die Variablen konkrete Werte eingesetzt, dann entsteht eine Aussage, die wahr oder falsch ist.
+  Eine *Formel* ist ein Gebilde, in dem *freie Variablen*#footnote[Nicht frei ist dagegen $n$ in der Aussage $4 ∈ {2⋅n | n ∈ ℕ}$ aus der vorherigen Übung: Die Mengenschreibweise legt fest, welche Werte $n$ durchläuft. Man sagt, $n$ ist dort *gebunden*. Weitere gebundene Variablen lernen wir mit den Quantoren kennen.] vorkommen dürfen, deren Werte durch die Formel selbst nicht festgelegt sind. Werden für die Variablen konkrete Werte eingesetzt, dann entsteht eine Aussage, die wahr oder falsch ist.
 
   Ausdrücke, die keinen Wahrheitswert bezeichnen, sondern andere Objekte (Zahl, Menge, Graph, …), heißen *Terme*.
 ]
