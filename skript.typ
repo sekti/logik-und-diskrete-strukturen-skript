@@ -557,16 +557,16 @@
   columns: 2,
   gutter: 8pt,
   row-gutter: 10pt,
-  figure(image("bilder/Road_map_graph_plain.svg", height: H, fit: "contain"), caption: [Straßennetz]),
-  figure(image("bilder/Dolphin_triangle_mesh.png", height: H, fit: "contain"), caption: [Dreiecksnetz]),
+  abbildung(image("bilder/Road_map_graph_plain.svg", height: H, fit: "contain"), caption: [Straßennetz]),
+  abbildung(image("bilder/Dolphin_triangle_mesh.png", height: H, fit: "contain"), caption: [Dreiecksnetz]),
 
-  [#figure(
+  [#abbildung(
     image("bilder/DFAexample.svg", height: H, fit: "contain"),
     caption: [Einfacher endlicher Automat],
   )<endlicherAutomat>],
-  figure(
+  abbildung(
     image("bilder/AST_binary_tree_arithmetic.svg", height: H, fit: "contain"),
-    caption: [Syntaxbaum des arithmetischen Ausdrucks 3⋅(2-3)+(2+7)],
+    caption: [Syntaxbaum des arithmetischen Ausdrucks $3⋅(2-3)+(2+7)$],
   ),
 )
 
@@ -585,7 +585,7 @@
 #definition("Nachbar, Grad, adjazent, isoliert", slides: "titel")[
   Sei $G = (V,E)$ ein Graph und $v,w ∈ V$. Falls ${v,w} ∈ E$ gilt, nennt man $v$ und $w$ *adjazent* oder *Nachbarn*. Der *Grad* $deg(v)$ von $v$ ist die Anzahl seiner Nachbarn:
   $ deg(v) := |{w ∈ V | {v, w} ∈ E}|. $
-  Ein Knoten von Grad 0 heißt *isoliert*.
+  Ein Knoten vom Grad 0 heißt *isoliert*.
 ]
 
 #let gKnoten = (
@@ -625,7 +625,7 @@
   - Kantenbeschriftungen
   - Positionen von Knoten im zweidimensionalen oder dreidimensionalen Raum
   - Verlauf von Kanten in der Ebene
-  Für manche dieser Eigenschaften werden wir später in der Vorlesung sehen, wie man sie "nachrüsten" kann.
+  Für manche dieser Eigenschaften werden wir später in der Vorlesung sehen, wie man sie "nachrüsten" kann. Kantenrichtungen und Schlingen erlauben zum Beispiel die gerichteten Graphen aus @gerichteterGraph.
 ]
 
 == Galerie einfacher Graphen
@@ -638,7 +638,7 @@
   #text(size: 0.85em, titel)
 ]
 
-#figure(
+#abbildung(
   grid(
     columns: 3,
     gutter: 6pt,
@@ -670,17 +670,17 @@
   Für $K_(m,n)$ nehme man beliebige disjunkte Mengen $A$, $B$ mit $|A| = m$ und $|B| = n$ und definiere: $ K_(m,n) := (A ∪ B, {{a,b} | a ∈ A, b ∈ B}) $
   Beachte: Der Graph $K_(m,n)$ hat Knotenzahl $m+n$ und der Graph $S_n$ hat Knotenzahl $n+1$. Der Index zählt hier also nicht die Knoten, anders als bei $P_n$, $C_n$ und $K_n$ und anders als in @graph-nm.
 
-  Die Parameter $n,m$ sind beliebig aus $ℕ⁺$ zu wählen, mit Ausnahme von $C_n$, wo $n = 1$ und $n = 2$ nicht sinnvoll ist.
+  Die Parameter $n,m$ sind beliebig aus $ℕ⁺$ zu wählen, mit Ausnahme von $C_n$, wo $n = 1$ und $n = 2$ nicht sinnvoll sind.
 ]
 
 #bemerkung[
-  Es kommt bei den Definitionen in @graphengallerie-uebung nicht auf die Wahl der Knotenmenge an, solange die Struktur stimmt.#footnote[Das relevante Konzept von "Graphisomorphie" kommt im Kapitel zu Äquivalenzklassen.]
+  Es kommt bei den Definitionen in @graphengallerie-uebung nicht auf die Wahl der Knotenmenge an, solange die Struktur stimmt.#footnote[Das relevante Konzept ist die _Graphisomorphie_, siehe @isomorphismus.]
 ]
 
 == Wege, Pfade, Kreise, Zusammenhang
 
 #definition(slides: "titel")[Weg, Pfad, Zyklus, Kreis][
-  Gegeben sei ein Graph $G = (V,E)$ und eine Folge $(v₀,…,v_ℓ)$ von Knoten aus $V$ für ein $ℓ ∈ ℕ$, im Folgenden meist in Kurzschreibweise als $v₀ … v_ℓ$. Wir nennen die Knotenfolge *Weg* / *Pfad* / *Zyklus* / *Kreis* unter folgenden Bedingungen.#footnote[Die englischen Bezeichnungen sind in der Literatur einheitlich, die deutschen nicht.]
+  Gegeben sei ein Graph $G = (V,E)$ und eine Folge $(v₀,…,v_ℓ)$ von Knoten aus $V$ für ein $ℓ ∈ ℕ$, im Folgenden meist in Kurzschreibweise als $v₀ … v_ℓ$. Wir nennen die Knotenfolge *Weg* / *Pfad* / *Zyklus* / *Kreis* unter folgenden Bedingungen.#footnote[Die englischen Bezeichnungen sind in der Literatur weitgehend einheitlich, die deutschen nicht.]
   #block(breakable: false,table(
     stroke: none,
     columns: 3,
@@ -691,13 +691,13 @@
     [Zyklus], [closed walk], [Weg und $v₀ = v_ℓ$ ],
     [Kreis], [cycle], [Zyklus und $|{v₀,…,v_ℓ}| = ℓ$ und $ℓ ≥ 3$],
   ))
-  Ein Pfad ist also ein Weg ohne wiederholte Knoten und ein Kreis ein Zyklus, bei dem $v₀ = v_ℓ$ die einzige Wiederholung ist. Die *Länge* eines Wegs/Pfads/Zyklus/Kreises ist die Anzahl der „Schritte“, also $ℓ$.
+  Ein Pfad ist also ein Weg ohne wiederholte Knoten und ein Kreis ein Zyklus, bei dem $v₀ = v_ℓ$ die einzige Wiederholung ist. Die *Länge* eines Wegs/Pfads/Zyklus/Kreises ist die Anzahl der „Schritte“, also $ℓ$. Einen Weg bzw. Pfad $v₀ … v_ℓ$ nennen wir auch einen Weg bzw. Pfad *von $v₀$ nach $v_ℓ$*.
 
   Die Bedingung $ℓ ≥ 3$ beim Kreis schließt aus, dass man eine Kante einfach hin und zurück durchläuft: Die Folge $v₀ v₁ v₀$ ist ein Zyklus der Länge 2, aber kein Kreis. Ein Kreis hat also mindestens die Länge 3.
 ]<wegpfadkreis>
 
 #beispiel[
-  Im Graph aus @bspgraph ist enthalten:
+  Im Graphen aus @bspgraph sind enthalten:
   - der Weg $43123$ der Länge 4,
   - der Pfad $5431$ der Länge 3,
   - der Zyklus $123123431$ der Länge 8,
@@ -1687,7 +1687,7 @@
 
 #definition("Gerichteter Graph", kurz: $E ⊆ V × V$)[
   Ein *gerichteter Graph* ist ein Paar $G = (V,E)$ aus einer endlichen, nichtleeren Menge $V$ von Knoten und einer Menge $E ⊆ V × V$ von *gerichteten Kanten*. Für $(u,v) ∈ E$ sagen wir, die Kante führt *von* $u$ *nach* $v$.
-]
+]<gerichteterGraph>
 
 #bemerkung[Schlingen][
   Eine gerichtete Kante der Form $(u,u)$ heißt *Schlinge*. Manche Autoren verbieten solche Kanten. Bei ungerichteten Graphen sind sie nach unserer Definition ausgeschlossen, weil Kanten dort zweielementige Mengen sind.
@@ -3148,7 +3148,7 @@ Das hier kam vom Relationskapitel wo es um bipartite Graphen mit fester Bipartit
 
 == Spannbäume und Charakterisierung von Bäumen
 
-- Falls nötig: Definition Teilgraph, vermutlich aber verzichbar:
+- Falls nötig: Definition Teilgraph, vermutlich aber verzichtbar:
 #definition("Teilgraph", kurz: $G_1 ⊆ G_2$)[
   Seien $G_1 = (V_1,E_1)$ und $G_2 = (V_2,E_2)$ Graphen. Wir schreiben $G_1 ⊆ G_2$ und nennen $G_1$ einen *Teilgraphen* von $G_2$, falls $V_1 ⊆ V_2$ und $E_1 ⊆ E_2$.
 
