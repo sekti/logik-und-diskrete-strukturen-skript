@@ -2690,9 +2690,9 @@
 == Mächtigkeit neu gedacht
 
 - Def
-  - Gleichmächtigkeit zweier Mengen.
-  - „Höchstens so mächtig wie“.
-  - „weniger mächtig als“
+  - Gleichmächtigkeit zweier Mengen |A| = |B|.
+  - „Höchstens so mächtig wie“ |A| ≤ |B|.
+  - „weniger mächtig als“ |A| < |B|.
 
 -Bemerkung: Sei $ℳ$ eine beliebige Menge von Mengen. Wir definieren hier nicht eine Funktion |⋅| auf A die jedem A eine Größe zuweist und anschließend eine Relation auf den Größen. Vielmehr ist |⋅| ≤ |⋅| eine Relation auf $ℳ$ und |⋅| = |⋅| eine Relation auf $ℳ$.
 
@@ -2708,11 +2708,11 @@
 
 == Endliche Menge
 
-- Def: Eine Menge $A$ heißt endlich wenn es ein $n ∈ ℕ$ gibt sodass $A$ gleichmächtig zu ${1,…,n}$ ist. Wir sagen dann auch $A$ hat Mächtigkeit/Kardinalität $n$ und schreiben $|A| = n$.
-
 #satz[
   |∅| < |{1}| < |{1,2}| < … < |ℕ|.
 ]
+
+- Def: Eine Menge $A$ heißt endlich wenn es ein $n ∈ ℕ$ gibt sodass $A$ gleichmächtig zu ${1,…,n}$ ist. Wir sagen dann auch $A$ hat Mächtigkeit/Kardinalität $n$ und schreiben $|A| = n$.
 
 #satz[Kardinalitäten endlicher Mengen][
   Seien $A$ und $B$ endliche Mengen. Dann gilt:
@@ -2730,7 +2730,7 @@
 
 == Abzählbare Menge
 
-- Def: Menge $A$ heißt abzählbar, wenn $|A| ≤ |ℕ|$ andernfalls heißt $A$ *überabzählbar*..
+- Def: Menge $A$ heißt abzählbar, wenn $|A| ≤ |ℕ|$ andernfalls heißt $A$ *überabzählbar*.
 - Bemerkung: Nicht einheitlich, manchmal heißt abzählbar auch $|A| = |ℕ|$ also abzählbar unendlich. Mit höchstens abzählbar ist man auf der sicheren Seite.
 - Übung: Ist $A$ höchstens abzählbar, dann ist $A$ endlich oder gleichmächtig zu $ℕ$.
 - Lösung: Bild der Injektion komprimieren?
