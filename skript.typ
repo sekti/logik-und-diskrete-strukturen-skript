@@ -342,6 +342,7 @@
   Klammern angegeben werden, z.B. $ {1, 2, 3}. $ Reihenfolge und
   Wiederholungen spielen dabei keine Rolle:
   $ {1,2,3} = {3,2,1} = {1,1,2,3}. $
+  Zwei Mengen sind gleich genau dann, wenn sie die selben Elemente haben.
   Für regelmäßige, aber größere Mengen verwendet man auch Auslassungspunkte,
   z.B. $ {4, dots, 10} = {4,5,6,7,8,9,10}. $
   Unendliche Mengen lassen sich häufig ebenso andeuten; etwa wäre
@@ -472,7 +473,7 @@
   + ${2⋅n | n ∈ ℕ} = {2⋅x | x ∈ ℕ} = {2⋅ξ | ξ ∈ ℕ}$
   + ${k² | k ∈ ℕ} = {n ∈ ℕ | "es gibt ein" k ∈ ℕ "mit" n = k²}$
   + $|{}| = 0$, $|∅| = 0, |{∅}| = 1, |{{},∅,{∅}}| = 2$
-  + $|{1+1, 2}| = 1$ aber $|{„1+1“,„2“}| = 2$
+  + $|{1+1, 2}| = 1$ aber $|{“1+1”,“2”}| = 2$
   + Seien $x,y ∈ ℕ$. Gilt dann ${x} ⊊ {x,y}$?
   
 ]
@@ -597,7 +598,7 @@
 )
 #let gKanten = (("1", "2"), ("1", "3"), ("2", "3"), ("3", "4"), ("4", "5"))
 
-#beispiel("Ein Graph", kurz: [$G$ mit $V = {1,…,6}$ und 5 Kanten])[
+#beispiel(slides : 0)[
   Sei $G = (V,E)$ gegeben durch
   $ V := {1,2,3,4,5,6} quad "und" quad E := {{1,2},{1,3},{2,3},{3,4},{4,5}}. $
   Um ihn visuell darzustellen, zeichnen wir einen Kreis (oder Punkt) für jeden Knoten. Für jede Kante ${v,w} ∈ E$ zeichnen wir eine Verbindungslinie zwischen den zugehörigen Kreisen.
@@ -651,7 +652,7 @@
     galeriebild(bipartitbild(3, 4, beschriftung: false), [vollständiger bipartiter Graph $K_(3,4)$]),
   ),
   kind: image,
-  caption: [Einige einfache Graphen],
+  caption: [Einige Graphen. Die Knotennamen sind uns nicht wichtig, daher fehlen sie in der Zeichnung.],
 )<galerie>
 
 #uebung[Definitionen von $P_n$, $C_n$, $S_n$, $K_n$ und $K_(m,n)$][
@@ -732,7 +733,7 @@
 #let baumKanten = (("1", "3"), ("2", "3"), ("3", "4"), ("4", "5"))
 
 #abbildung(
-  slides: 0,
+  slides: 1,
   graphbild(baumKnoten, baumKanten, radius: 0.3),
   kind: image,
   caption: [Ein Baum mit den Blättern 1, 2 und 5.],
@@ -743,8 +744,11 @@
 
 == Aussagen und Formeln
 
-#definition(kurz: [ein formales oder sprachliches Gebilde, das entweder wahr oder falsch ist.])[Aussage][
+#definition[Aussage][
   Eine Aussage ist ein formales oder sprachliches Gebilde, das entweder wahr oder falsch ist.
+]
+
+#beispiel[
   - „$4 ∈ {2⋅n | n ∈ ℕ}$“ ist eine Aussage. Sie ist wahr.
   - „$7 < 5$“ ist eine Aussage. Sie ist falsch.
   - „Am 12.1.2042 regnet es in Stuttgart.“ ist eine Aussage. Wir wissen derzeit nicht, ob sie wahr oder falsch ist.
@@ -754,10 +758,14 @@
   Aussagen in natürlicher Sprache sind manchmal ungenau. In diesem Abschnitt lernen wir Symbole kennen, die im Folgenden helfen, mathematische Aussagen präzise zu formulieren.
 ]
 
-#definition(kurz: [Wie formale Aussage, aber oft mit freien Variablen])[Formel][
-  Eine *Formel* ist ein Gebilde in dem *Variablen* vorkommen dürfen, deren Werte durch die Formel selbst nicht festgelegt sind. Zum Beispiel ist „$2⋅x+1 ∈ A$“ eine Formel. Werden für die Variablen $x$ und $A$ konkrete Werte eingesetzt (für $x$ eine Zahl und für $A$ eine Menge), dann entsteht eine Aussage, die dann wahr oder falsch ist. Wir sagen, $x$ und $A$ kommen *frei* in der Formel vor.
+#definition[Formel][
+  Eine *Formel* ist ein Gebilde in dem *freie Variablen* vorkommen dürfen, deren Werte durch die Formel selbst nicht festgelegt sind. Werden für die Variablen konkrete Werte eingesetzt, dann entsteht eine Aussage, die dann wahr oder falsch ist.
 
-  Ausdrücke, die keinen Wahrheitswert bezeichnen, sondern etwa eine Zahl, eine Menge oder einen Graphen, heißen *Terme*. Zum Beispiel ist $2⋅x$ ein Term in obiger Formel.
+  Ausdrücke, die keinen Wahrheitswert bezeichnen, sondern andere Objekte (Zahl, Menge, Graph, …), heißen *Terme*.
+]
+
+#beispiel[
+  Der Ausdruck „$2⋅x+1 ∈ A$“ ist eine Formel mit freien Variablen $x$ und $A$. Beispiele für Terme darin sind $2⋅x$, $2⋅x+1$ und $A$.
 ]
 
 === Formeln mit $∧, ∨, ¬, →, ↔$
@@ -786,7 +794,7 @@
   / $P ↔ Q$: ist definiert als $(P → Q) ∧ (Q → P)$.
 ]<logischeVerknüpfungen>
 
-#definition(kurz: [])[Wahrheitstabelle][
+#definition[Wahrheitstabelle][
   Eine *Wahrheitstabelle* für eine aussagenlogische Formel stellt dar, wie sich der Wahrheitswert aus den Wahrheitswerten der Elementaraussagen ergibt. Wir schreiben dabei $0$ für „falsch“ und $1$ für „wahr“.
 ]
 
@@ -816,11 +824,11 @@
   )
 ]<wahrheitstabelle-verknüpfungen>
 
-#definition(kurz: [])[Äquivalente Formeln][
+#definition[Äquivalente Formeln][
   Zwei aussagenlogische Formeln heißen *äquivalent*, wenn sich für jede Belegung der Elementaraussagen mit Wahrheitswerten der selbe Wahrheitswert insgesamt ergibt (mit anderen Worten: wenn die Wahrheitstabellen übereinstimmen).#footnote[In einem späteren Kapitel wird es noch eine formalere Definition geben.]
 ]
 
-#uebung(kurz: [Zeige: $P ↔ Q$ und $(P ∧ Q) ∨ (¬P ∧ ¬Q)$ sind äquivalent.])[
+#uebung[
   Weisen Sie durch Anfertigung einer Wahrheitstabelle nach, dass die Formeln $P ↔ Q$ und $(P ∧ Q) ∨ (¬P ∧ ¬Q)$ äquivalent sind.
 ]
 #loesung[
@@ -843,7 +851,7 @@
   Da die Spalte für $P ↔ Q$ in @wahrheitstabelle-verknüpfungen und die Spalte für $(P ∧ Q) ∨ (¬P ∧ ¬Q)$ hier den gleichen Inhalt haben, sind beide Formeln äquivalent.
 ]
 
-#uebung(kurz: [Beispiel an der Tafel])[
+#uebung[
   Ein Zeuge beschuldigt Paul des Mordes. Wir betrachten die Elementaraussagen:
   / Z: Der Zeuge spricht die Wahrheit.
   / M: Paul ist der Mörder.
