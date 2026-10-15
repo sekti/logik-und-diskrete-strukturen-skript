@@ -677,6 +677,16 @@
   Es kommt bei den Definitionen in @graphengallerie-uebung nicht auf die Wahl der Knotenmenge an, solange die Struktur stimmt.#footnote[Das relevante Konzept ist die _Graphisomorphie_, siehe @isomorphismus.]
 ]
 
+#bemerkung[
+  Schreibweisen wie ${1,…,n}$ können verwirrend sein, wenn für $n$ kleine Zahlen eingesetzt werden. Sei $M_n := {1,…,n}$ für $n ∈ ℕ$. Die intendierte Interpretation ist:
+  $ M_3 = {1,2,3}, M_2 = {1,2}, M_1 = {1}, M_0 = {} = ∅ $
+  Mit anderen Worten ${1,…,0}$ ist als die leere Menge zu interpretieren obwohl es scheint als wären zumindest $1$ und $0$ explizit als Elemente vorgesehen. Vielleicht hilft eine Analogie zu einer For-Schleife in der Programmierung. Schreibt man
+  ```c++
+  for(int i = 1; i <= n; ++i) { print(i) }
+  ```
+  so werden genau die Elemente von ${1,…,n}$ ausgegeben.
+]
+
 == Wege, Pfade, Kreise, Zusammenhang
 
 #definition(slides: "titel")[Weg, Pfad, Zyklus, Kreis][
