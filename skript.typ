@@ -317,7 +317,7 @@
 ]
 
 #uebung[
-  Welche der folgenden Ausdrücke beschreibt eine Menge?
+  Welche der folgenden Ausdrücke beschreiben eine Menge?
   + Der Dreck an meinem Schuh.
   + Die Studierenden, die im WS26/27 dieses Modul bestehen.
   + Die großen Studierenden im Hörsaal.
@@ -325,9 +325,9 @@
 ]
 
 #loesung[
-  + ✗ Dreck besteht zunächst nicht aus wohlunterschiedenen Einzelobjekten. Die Menge der Sandkörner an meinem Schuh wäre schön eher eine Menge, wobei es schwierig sein dürfte zu definieren, was ein Sandkorn ist.
+  + ✗ Dreck besteht zunächst nicht aus wohlunterschiedenen Einzelobjekten. Die Menge der Sandkörner an meinem Schuh wäre schon eher eine Menge, wobei es schwierig sein dürfte zu definieren, was ein Sandkorn ist.
   + ✓ Dies ist eine Menge, obwohl wir sie noch nicht kennen.
-  + ✗ Groß ist eine graduelle Eigenschaft.#footnote[Wenn man einen künstlichen Schwellwert für "groß" festlegt (z.B. 1.80m), könnte man das Beispiel vielleicht retten.]
+  + ✗ Groß ist eine graduelle Eigenschaft.#footnote[Wenn man einen künstlichen Schwellwert für "groß" festlegt (z.B. 1,80 m), könnte man das Beispiel vielleicht retten.]
   + ✓ Ein wichtiges Beispiel für uns.
 ]
 
@@ -342,7 +342,7 @@
   Klammern angegeben werden, z.B. $ {1, 2, 3}. $ Reihenfolge und
   Wiederholungen spielen dabei keine Rolle:
   $ {1,2,3} = {3,2,1} = {1,1,2,3}. $
-  Zwei Mengen sind gleich genau dann, wenn sie die selben Elemente haben.
+  Zwei Mengen sind gleich genau dann, wenn sie dieselben Elemente haben.
   Für regelmäßige, aber größere Mengen verwendet man auch Auslassungspunkte,
   z.B. $ {4, dots, 10} = {4,5,6,7,8,9,10}. $
   Unendliche Mengen lassen sich häufig ebenso andeuten; etwa wäre
@@ -369,7 +369,7 @@
 ]
 
 #bemerkung(slides: 0)[
-  Das Symbol $ℕ$ wird nicht einheitlich verwendet und bedeutet je nach Autor dasselbe wie $ℕ₀$ oder dasselbe wie $ℕ⁺$. Wenn wir die Anwesenheit oder Abwesenheit der $0$ betonen wollen schreiben wir explizit $ℕ₀$ oder $ℕ⁺$. Ansonsten schreiben wir $ℕ$ was bei uns die $0$ einschließt.
+  Das Symbol $ℕ$ wird nicht einheitlich verwendet und bedeutet je nach Autor dasselbe wie $ℕ₀$ oder dasselbe wie $ℕ⁺$. Wenn wir die Anwesenheit oder Abwesenheit der $0$ betonen wollen, schreiben wir explizit $ℕ₀$ oder $ℕ⁺$. Ansonsten schreiben wir $ℕ$, was bei uns die $0$ einschließt.
 ]
 
 #definition("Vereinigung", kurz: $A ∪ B$)[
@@ -397,7 +397,7 @@
 #abbildung(slides: 0, caption: [Differenz $A without B$])[#venn("differenz")]
 
 #definition("Disjunkt", kurz: [$A ∩ B = ∅$])[
-  Wir sagen $A$ und $B$ sind *disjunkt*, falls $A ∩ B = ∅$.
+  Seien $A$ und $B$ Mengen. Wir sagen, $A$ und $B$ sind *disjunkt*, falls $A ∩ B = ∅$.
 ]
 #abbildung(slides: 0, caption: [Zwei disjunkte Mengen $A$ und $B$])[#venn("disjunkt")]
 
@@ -452,7 +452,7 @@
 ]
 
 #bemerkung([Unendliche Mengen], kurz: $|ℕ| = ∞.$)[
-  Für eine unendliche Menge $A$ schreiben wir $|A| = ∞$. In @sec:cardinality haben wir mehr dazu zu sagen.
+  Für eine unendliche Menge $A$ schreibt man manchmal $|A| = ∞$. In @sec:cardinality revidieren wir das allerdings zugunsten einer ausdrucksstärkeren Schreibeweise.
 ]
 
 #uebung[
@@ -473,19 +473,19 @@
   + ${2⋅n | n ∈ ℕ} = {2⋅x | x ∈ ℕ} = {2⋅ξ | ξ ∈ ℕ}$
   + ${k² | k ∈ ℕ} = {n ∈ ℕ | "es gibt ein" k ∈ ℕ "mit" n = k²}$
   + $|{}| = 0$, $|∅| = 0, |{∅}| = 1, |{{},∅,{∅}}| = 2$
-  + $|{1+1, 2}| = 1$ aber $|{“1+1”,“2”}| = 2$
+  + $|{1+1, 2}| = 1$ aber $|{#[`"1+1"`,`"2"`]}| = 2$
   + Seien $x,y ∈ ℕ$. Gilt dann ${x} ⊊ {x,y}$?
   
 ]
 #loesung[
   + Hier wird jeweils die Menge der geraden Zahlen beschrieben. Wie die Variable heißt, die dabei als Hilfsmittel verwendet wird, spielt keine Rolle.
-  + Wir sehen zwei Arten, die Menge der Quadratzahlen zu notieren. Die Perspektive und die Rolle der Variablen $n$ unterscheiden sich. Im ersten Fall nehmen wir jedes $n ∈ ℕ$ her, quadrieren es und sammeln die Ergebnisse auf. Im zweiten Fall nehmen wir jedes $n ∈ ℕ$ her, nehmen es aber nur in die Menge auf, wenn eine andere natürliche Zahl $k$ bezeugt, dass $n$ eine Quadratzahl ist (in dem Fall ist $k$ die Wurzel von $n$).
-  + Die leere Menge hat keine Elemente, egal ob man sie "${}$" oder "$∅$" schreibt. Die Menge ${∅}$ hat ein Element, nämlich die leere Menge. Die Menge ${{},∅,{∅}}$ hat zwei Elemente, nämlich ${}$ und ${∅}$. Das vermeitlich dritte Element $∅$ ist identisch mit dem ersten.
-  + Im ersten Fall verweist der Ausdruck $1+1$ auf seine Bedeutung $2$ und für die gebildete Menge gilt damit
-  $ |{1+1,2}| = |{2,2}| = |{2}| = 1. $
-  Eine Menge kann ein Element nicht zweimal enthalten und das zweite Vorkommen in der Liste wird daher ignoriert.
-  Im zweiten Fall drücken die Anführungszeichen aus, dass es hier um Folgen von Symbolen geht, nicht um deren Bedeutung. Weil $1+1$ und $2$ zwei verschiedene Ausdrücke sind, ist die Kardinalität der Menge $2$.
-  + Es kommt drauf an. Wenn $x ≠ y$ gilt (z.B. $x = 3$ und $y = 4$), dann ist in der Tat ${x} ⊊ {x,y}$. Gilt dagegen $x = y$, so gilt ${x,y} = {x}$ und somit ist ${x} ⊊ {x,y}$ falsch.
+  + Wir sehen zwei Arten, die Menge der Quadratzahlen zu notieren. Im ersten Fall nehmen wir jedes $k ∈ ℕ$ her, quadrieren es und sammeln die Ergebnisse auf. Im zweiten Fall nehmen wir jedes $n ∈ ℕ$ her, nehmen es aber nur in die Menge auf, wenn eine andere natürliche Zahl $k$ bezeugt, dass $n$ eine Quadratzahl ist (in dem Fall ist $k$ die Wurzel von $n$).
+  + Die leere Menge hat keine Elemente, egal ob man sie "${}$" oder "$∅$" schreibt. Die Menge ${∅}$ hat ein Element, nämlich die leere Menge. Die Menge ${{},∅,{∅}}$ hat zwei Elemente, nämlich ${}$ und ${∅}$. Das vermeintlich dritte Element $∅$ ist identisch mit dem ersten.
+  + Im ersten Fall verweist der Ausdruck $1+1$ auf seine Bedeutung $2$, und für die gebildete Menge gilt damit
+    $ |{1+1,2}| = |{2,2}| = |{2}| = 1. $
+    Eine Menge kann ein Element nicht zweimal enthalten, und das zweite Vorkommen in der Liste wird daher ignoriert.
+    Im zweiten Fall drücken die Anführungszeichen aus, dass es hier um Folgen von Symbolen geht, nicht um deren Bedeutung. Weil $1+1$ und $2$ zwei verschiedene Ausdrücke sind, ist die Kardinalität der Menge $2$.
+  + Es kommt darauf an. Wenn $x ≠ y$ gilt (z.B. $x = 3$ und $y = 4$), dann ist in der Tat ${x} ⊊ {x,y}$. Gilt dagegen $x = y$, so gilt ${x,y} = {x}$ und somit ist ${x} ⊊ {x,y}$ falsch.
 ]
 
 == Exkurs: Probleme der naiven Mengenlehre
@@ -503,7 +503,7 @@
   + Sei $R = { m ∈ ℳ | m ∉ m }$.
   + Frage: Gilt $R ∈ R$? Beide Antworten führen auf einen Widerspruch.#footnote[Nach 2 soll $R$ dann und nur dann in die Menge $R$ aufgenommen werden, wenn $R ∉ R$ gilt. Das heißt, es müsste $R ∈ R$ genau dann gelten, wenn $R ∉ R$ gilt.]
 
-  Das Problem wird gelöst, indem Formulierungen wie in 1 für unzulässig erklärt werden: Mengen dürfen nur auf eine bestimmte Art und Weise (gemäß dem Zermelo-Fraenkel-Axiomensystem) gebildet werden. Die Axiome schließen aus, dass Mengen sich selbst enthalten. In dieser Vorlesung werden wir mit der naiven Mengenlehre arbeiten. Die Gefahr, dabei in eine Paradoxie zu laufen, ist gering, wenn man es nicht darauf anlegt.
+  Das Problem wird gelöst, indem Formulierungen wie in 1 für unzulässig erklärt werden: Mengen dürfen nur auf bestimmte Art und Weise gebildet werden (gemäß dem Zermelo-Fraenkel-Axiomensystem). Insbesondere gibt es keine Menge aller Mengen. Ein weiteres Axiom schließt außerdem aus, dass Mengen sich selbst enthalten. In dieser Vorlesung werden wir mit der naiven Mengenlehre arbeiten. Die Gefahr, dabei in eine Paradoxie zu laufen, ist gering, wenn man es nicht darauf anlegt.
 ]<mengeAllerMengen>
 
 #bemerkung(slides: "titel")[Sind Zahlen auch Mengen?][
