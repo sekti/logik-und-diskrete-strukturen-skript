@@ -10,14 +10,16 @@ werden.
 Wer das Skript selbst setzen möchte, braucht [Typst](https://typst.app). Im
 geklonten Verzeichnis genügt
 
-    typst compile skript.typ
+    typst compile --input kapitel=alle skript.typ
 
 Statt des Skripts entsteht die Projektionsfassung für die Vorlesung mit
 
-    typst compile --input folien=true skript.typ
+    typst compile --input folien=true --input kapitel=alle skript.typ
 
-Ohne `--input` gilt der Wert von `folienModus` aus der ersten Zeile von
-`skript.typ`; den stellt man im Editor ein.
+Ohne `--input` gelten die Werte von `folienModus` und `nurKapitel` am Anfang
+von `skript.typ`; die stellt man im Editor ein. Mit `nurKapitel` wird nur ein
+Kapitel gesetzt, was beim Schreiben deutlich schneller ist. Verweise in andere
+Kapitel erscheinen dann rot.
 
 ## Fehler
 

@@ -1,6 +1,9 @@
 // Projektionsfassung (true) oder Skript (false). Der hier gesetzte Wert gilt im
 // Editor; auf der Kommandozeile hat „--input folien=true/false“ Vorrang.
 #let folienModus = if "folien" in sys.inputs { sys.inputs.folien == "true" } else { false }
+// Nur ein Kapitel setzen, z.B. 5 (im Editor deutlich schneller); none = alles.
+// Auf der Kommandozeile hat „--input kapitel=5“ bzw. „--input kapitel=alle“ Vorrang.
+#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { int(sys.inputs.kapitel) } } else { 4 }
 
 // imports
   #import "@preview/ctheorems:2.0.0": *
@@ -14,6 +17,9 @@
 // Styling
   #set text(size: 12pt, lang: "de", costs: (hyphenation: 50%))
   #show: thm-rules.with(qed-symbol: $square$)
+  // Wird nur ein Kapitel gesetzt, fehlen die Labels der anderen. Verweise darauf
+  // erscheinen dann rot statt als Fehler. Im Gesamtdokument bleibt ein fehlendes Label ein Fehler.
+  #show ref: it => if nurKapitel != none and it.element == none { text(fill: red)[[#str(it.target)]] } else { it }
   // Spacing des Doppelpunkts (passend für Quantoren)
     #show math.equation: it => {
       show sym.colon: $class("punctuation", colon)$
@@ -206,6 +212,12 @@
 #let folien(block) = {
   if not folienModus { [] } else { block }
 }
+// Kapitelweise setzen (siehe nurKapitel). Ein nicht genommener #if-Zweig wird
+// weder ausgewertet noch umbrochen; daher #if und kein Funktionsaufruf.
+#let zeige(n) = nurKapitel == none or nurKapitel == n
+// Stellt den Überschriftenzähler so, dass die Nummern auch im Einzelkapitel stimmen.
+#let kapitelstart(n) = if nurKapitel != none { counter(heading).update(n - 1) }
+
 #let slidebreak() = {
   if folienModus { pagebreak() }
 }
@@ -232,6 +244,8 @@
 
 #outline()
 
+#if zeige(1) [
+#kapitelstart(1)
 #slidebreak()
 = Vorrede
 
@@ -291,7 +305,10 @@
 
   Es gibt ein öffentliches Repository auf #link("https://github.com/sekti/logik-und-diskrete-strukturen-skript", [GitHub]), wo sie alle Dateien finden. Wenn Sie Fehler finden, können Sie diese dort als #link("https://github.com/sekti/logik-und-diskrete-strukturen-skript/issues",[Issues]) melden (alternativ auch persönlich nach der Vorlesung oder über Ilias).
 ]
+]
 
+#if zeige(2) [
+#kapitelstart(2)
 #slidebreak()
 = Mengen
 
@@ -518,7 +535,10 @@
   - …
   In dieser Vorlesung werden wir die Existenz der Zahlen nicht weiter hinterfragen und auf der Schulmathematik aufbauen. Wir werden aber sehr wohl Konzepte wie Funktionen oder Relationen mengentheoretisch fundieren.
 ]
+]
 
+#if zeige(3) [
+#kapitelstart(3)
 #slidebreak()
 = Graphen
 
@@ -748,7 +768,10 @@
   kind: image,
   caption: [Ein Baum mit den Blättern 1, 2 und 5.],
 )
+]
 
+#if zeige(4) [
+#kapitelstart(4)
 #slidebreak()
 = Aussagen und Beweise
 
@@ -1647,7 +1670,10 @@
   - Jeder Graph mit _weniger_ Kanten ist nicht zusammenhängend.
   - Jeder Graph mit _mehr_ Kanten ist nicht azyklisch.
 ]
+]
 
+#if zeige(5) [
+#kapitelstart(5)
 #slidebreak()
 = Relationen und Funktionen
 
@@ -2714,7 +2740,10 @@
 ]
 
 #stichpunktgrenze
+]
 
+#if zeige(6) [
+#kapitelstart(6)
 #slidebreak()
 = Mächtigkeit und (Über-)Abzählbarkeit
 <sec:cardinality>
@@ -2757,7 +2786,7 @@
 ]
 - Bemerkung: Der Schritt $|{1,…,n}| < |{1,…,n+1}|$ ist das Schubfachprinzip: Es gibt keine Injektion von ${1,…,n+1}$ nach ${1,…,n}$. Das Zählkapitel verweist hierher.
 
-- Def: Eine Menge $A$ heißt endlich, wenn es ein $n ∈ ℕ$ gibt, sodass $A$ gleichmächtig zu ${1,…,n}$ ist. Wir sagen dann auch $A$ hat Mächtigkeit/Kardinalität $n$ und schreiben $|A| = n$. Andernfalls heißt $A$ *unendlich*.
+- Def: Eine Menge $A$ heißt *endlich*, wenn es ein $n ∈ ℕ$ gibt, sodass $A$ gleichmächtig zu ${1,…,n}$ ist. Wir sagen dann auch $A$ hat Mächtigkeit/Kardinalität $n$ und schreiben $|A| = n$. Andernfalls heißt $A$ *unendlich*.
 - Korollar (Wohldefiniertheit): Das $n$ ist eindeutig. Denn wäre $A$ gleichmächtig zu ${1,…,n}$ und zu ${1,…,m}$ mit $n < m$, so wären diese beiden gleichmächtig, im Widerspruch zum Satz oben.
 
 #satz[Kardinalitäten endlicher Mengen][
@@ -2803,7 +2832,10 @@
 - Korollar: Es gibt nur abzählbar viele Python-Programme (ein Programm ist eine endliche Zeichenfolge).
 - Korollar: Es gibt eine Teilmenge von $ℕ$, die kein Computerprogramm aufzählt. Denn es gibt nur abzählbar viele Programme, aber überabzählbar viele Teilmengen von $ℕ$.
   - Ausblick: Es gibt also unentscheidbare _Probleme_, das heißt solche, die von keinem Algorithmus gelöst werden. Dass es _interessante_ unentscheidbare Probleme gibt (etwa das Halteproblem), ist Inhalt einer zukünftigen Vorlesung über Formale Sprachen und Berechenbarkeit.
+]
 
+#if zeige(7) [
+#kapitelstart(7)
 #slidebreak()
 = Zählen und Abschätzen
 <sec:zaehlen>
@@ -2899,7 +2931,10 @@ Wollen wir hier Binärbäume haben?
 //- Beweis: Strukturelle Induktion über den Aufbau; ein Fall pro Regel.
 //- Übung: Zeigen Sie per struktureller Induktion, dass in jedem Präfix eines korrekten Klammerausdrucks mindestens so viele öffnende wie schließende Klammern vorkommen.
 - Anzahl Klammerausdrücke mit Catalanzahlen.
+]
 
+#if zeige(8) [
+#kapitelstart(8)
 #slidebreak()
 = Asymptotisches Wachstum
 
@@ -2940,7 +2975,10 @@ Wollen wir hier Binärbäume haben?
   - Bemerkung: Stirling-Formel ohne Beweis.
   - Bemerkung: $log(n!) ∈ Θ(n log n)$ ist die Schranke, die man beim Sortieren wiedersieht.
 - Übung: mittlerer Binomialkoeffizient, $2^n/n ≤ binom(n, floor(n/2)) ≤ 2^n$
+]
 
+#if zeige(9) [
+#kapitelstart(9)
 #slidebreak()
 = Algebraische Strukturen
 
@@ -3048,7 +3086,10 @@ Wollen wir hier Binärbäume haben?
 - Initialisierung, Verschlüsseln, Entschlüsseln; kleines Zahlenbeispiel
 - Korrektheit mit kleinem Fermat und chinesischem Restsatz
 - Bemerkung: Warum ist das sicher? Faktorisieren gilt als schwer. Das ist eine Annahme, kein Satz.
+]
 
+#if zeige(10) [
+#kapitelstart(10)
 #slidebreak()
 = Aussagenlogik
 
@@ -3180,7 +3221,10 @@ Das hier kam vom Relationskapitel wo es um bipartite Graphen mit fester Bipartit
   - $∀x:∃y: x > y$ ist wahr auf ℤ und falsch auf ℕ.
   - $∀x:∃y: P(x,y)$ ist wahr auf $ℤ$ wenn $P$ als $>$ interpretiert wird.
   - $∀x:∃y: P(x,y) ∨ ¬ P(x,y)$ ist wahr in jeder Interpretation.
+]
 
+#if zeige(11) [
+#kapitelstart(11)
 #slidebreak()
 = Graphentheorie
 
@@ -3238,6 +3282,4 @@ Das hier kam vom Relationskapitel wo es um bipartite Graphen mit fester Bipartit
 - Satz: Kuratowski (subtil anders als Wagner), ohne Beweis
   - Animation: Petersen-Graph enthält eine Unterteilung von K₃,₃: https://de.wikipedia.org/wiki/Planarer_Graph#/media/Datei:Kuratowski.gif
 - Bemerkung: Dieses Kapitel steht am Ende, damit klar ist, was bei Zeitmangel entfallen kann.
-
-
-
+]
