@@ -3,7 +3,7 @@
 #let folienModus = if "folien" in sys.inputs { sys.inputs.folien == "true" } else { false }
 // Nur ein Kapitel setzen, z.B. 5 (im Editor deutlich schneller); none = alles.
 // Auf der Kommandozeile hat „--input kapitel=5“ bzw. „--input kapitel=alle“ Vorrang.
-#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { int(sys.inputs.kapitel) } } else { 4 }
+#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { int(sys.inputs.kapitel) } } else { 6 }
 
 // imports
   #import "@preview/ctheorems:2.0.0": *
@@ -11,6 +11,7 @@
   #import "graph.typ": *
   #import "induktion.typ": *
   #import "aequivalenz.typ": *
+  #import "maechtigkeit.typ": *
   #import "@preview/cetz:0.4.2" as cetz
   #import "@preview/ratchet:0.0.4": *
 
@@ -50,7 +51,7 @@
   // zum Block der Umgebung selbst (siehe blockArgs); eine Hülle per show-Regel
   // würde für ausgeblendete Umgebungen einen leeren Block mit Abstand erzeugen.
   #let folienAbstand = if folienModus { (above: 3pt, below: 3pt) } else { (:) }
-
+  #show table: set table(stroke: none)
 
 // Functionality
 
@@ -456,7 +457,6 @@
 
   #table(
     columns: 2,
-    stroke: none,
     table.header[*Sprechweise*][*Schreibweise und Ergebnis*],
     table.hline(),
     [Vereinigung von $A$ und $B$], [$A ∪ B = {1,2,3,4}$],
@@ -469,8 +469,8 @@
 ]
 
 #bemerkung([Unendliche Mengen], kurz: $|ℕ| = ∞.$)[
-  Für eine unendliche Menge $A$ schreibt man manchmal $|A| = ∞$. In @sec:cardinality revidieren wir das allerdings zugunsten einer ausdrucksstärkeren Schreibeweise.
-]
+  Für eine unendliche Menge $A$ schreibt man manchmal $|A| = ∞$. In @sec:cardinality revidieren wir das allerdings zugunsten einer ausdrucksstärkeren Schreibweise.
+]<unendlicheMengen>
 
 #uebung[
   Begründen Sie die Richtigkeit folgender Gleichungen.
@@ -627,7 +627,6 @@
   $
     #table(
       columns: 7,
-      stroke: none,
       align: center,
       [$v$], [1], [2], [3], [4], [5], [6],
       table.hline(),
@@ -712,7 +711,6 @@
 #definition(slides: "titel")[Weg, Pfad, Zyklus, Kreis][
   Gegeben sei ein Graph $G = (V,E)$ und eine Folge $(v₀,…,v_ℓ)$ von Knoten aus $V$ für ein $ℓ ∈ ℕ$, im Folgenden meist in Kurzschreibweise als $v₀ … v_ℓ$. Wir nennen die Knotenfolge *Weg* / *Pfad* / *Zyklus* / *Kreis* unter folgenden Bedingungen.#footnote[Die englischen Bezeichnungen sind in der Literatur weitgehend einheitlich, die deutschen nicht.]
   #block(breakable: false,table(
-    stroke: none,
     columns: 3,
     [Konzept], [englisch], [Bedingung],
     table.hline(),
@@ -821,7 +819,6 @@
   Die Bedeutung der Symbole $∧$, $∨$, $→$, $↔$, $¬$ ist wie folgt:
   #table(
     columns: 3,
-    stroke: none,
     table.header[*Konzept*][*schreibe*][*sprich*],
     table.hline(y: 1),
     [Konjunktion], [$P ∧ Q$], [$P$ und $Q$],
@@ -852,7 +849,6 @@
 #abbildung(slides: 0, caption: [Wahrheitstabelle für $¬$.])[
   #table(
     columns: 2,
-    stroke: none,
     table.header[*$P$*][*$¬P$*],
     table.hline(),
     table.vline(x: 1),
@@ -864,7 +860,6 @@
 #abbildung(slides: 0, caption: [Wahrheitstabelle für $∧,∨,→,↔$.])[
   #table(
     columns: 6,
-    stroke: none,
     table.header[*$P$*][*$Q$*][*$P ∧ Q$*][*$P ∨ Q$*][*$P → Q$*][*$P ↔ Q$*],
     table.hline(),
     table.vline(x: 2),
@@ -888,7 +883,6 @@
   #block(breakable: false)[
     #table(
       columns: 5,
-      stroke: none,
       align: center,
       table.header[*$P$*][*$Q$*][*$P ∧ Q$*][*$¬P ∧ ¬Q$*][*$(P ∧ Q) ∨ (¬P ∧ ¬Q)$*],
       table.hline(),
@@ -948,7 +942,6 @@
   Ist $P$ eine Formel, in der die Variable $x$ frei vorkommt, und $M$ eine Menge von Werten, die man sinnvoll für $x$ einsetzen kann, dann können wir folgende komplexere Formeln bilden.
   #table(
     columns: 3,
-    stroke: none,
     table.header[*Konzept*][*schreibe*][*sprich*],
     table.hline(y: 1),
     [Allquantor], [$∀x ∈ M: P$], [für _alle_ $x$ aus $M$ gilt $P$],
@@ -1161,7 +1154,6 @@
 
   #table(
     columns: 2,
-    stroke: none,
     [zu zeigen], [Beweisstruktur],
     table.hline(),
     [$∀x ∈ M: F$], [Führe eine Variable $x ∈ M$ ein und beweise $F$, ohne weitere Annahmen über $x$ zu treffen.],
@@ -1181,7 +1173,6 @@
 
   #table(
     columns: 2,
-    stroke: none,
     [Annahme], [Verwendung],
     table.hline(),
     [$∀x ∈ M: F$], [Ist bereits ein $x ∈ M$ gegeben, so darf angenommen werden, dass für dieses $x$ auch $F$ gilt.],
@@ -1325,7 +1316,6 @@
 
   Die Fälle $j = 0$, $j = 1$, …, $j = 9$ sind erschöpfend. Wir gehen sie durch:
   #table(
-    stroke: none,
     columns: 11,
     [$j$], [0], [1], [2], [3], [4], [5], [6], [7], [8], [9],
     table.hline(),
@@ -1844,7 +1834,6 @@
   Sei $R ⊆ X × Y$ eine binäre Relation. Dann heißt $R$
   #table(
     columns: 2,
-    stroke: none,
     align: (right,left),
     column-gutter: 0.8em,
     [*linkstotal*], [$∀x ∈ X: ∃y ∈ Y: (x,y) ∈ R$,],
@@ -1858,7 +1847,6 @@
   Intuitiv gesprochen und auf die Graphik bezogen bedeuten die Begriffe:
   #table(
     columns: 2,
-    stroke: none,
     align: (right,left),
     column-gutter: 0.8em,
     [*linkstotal*], [links je _mindestens_ eine Kante],
@@ -2143,7 +2131,6 @@
   Einige Relationen auf einer Menge kennen wir bereits.
   #table(
     columns: 4,
-    stroke: none,
     column-gutter: 0.8em,
     align: (left, center, center, left),
     [Relation], [auf], [Symbol], [Beispiele],
@@ -2168,7 +2155,6 @@
   Sei $A$ eine Menge und $R$ eine Relation auf $A$. Dann heißt $R$
   #table(
     columns: 2,
-    stroke: none,
     align: (right, left),
     [*reflexiv*], [falls $∀a ∈ A: a R a$,],
     [*irreflexiv*], [falls $∀a ∈ A: ¬(a R a)$,],
@@ -2188,7 +2174,6 @@
 #loesung[
   #align(center, text(size: 0.85em, table(
     columns: 7,
-    stroke: none,
     align: (left, center, center, center, center, center, center),
     column-gutter: 0.5em,
     [], [refl.], [irrefl.], [symm.], [antis.], [trans.], [total],
@@ -2212,7 +2197,6 @@
 #loesung[
   #table(
     columns: 2,
-    stroke: none,
     align: (right, left),
     [*reflexiv*], [an jedem Knoten liegt eine Schlinge,],
     [*irreflexiv*], [es gibt keine Schlinge,],
@@ -2237,7 +2221,6 @@
   Sei $A$ eine Menge und $≼$ eine Relation auf $A$. Wir nennen $≼$ eine
   #table(
     columns: 2,
-    stroke: none,
     align: (right, left),
     [Begriff], [Anforderungen an $≼$],
     table.hline(),
@@ -2261,7 +2244,6 @@
   Die Eigenschaften lassen sich leicht prüfen:
   #align(center, text(size: 0.85em, table(
     columns: 6,
-    stroke: none,
     align: (left, center, center, center, center, left),
     column-gutter: 0.5em,
     [], [refl.], [trans.], [antis.], [total], [stärkster erfüllter Begriff],
@@ -2749,35 +2731,108 @@
 <sec:cardinality>
 
 #skript[
-  Wir haben bereits die Schreibweise $|A| = n$ verwendet für „$A$ hat $n$ Elemente“. Wir haben aber nie definiert, was „$n$ Elemente haben“ bedeutet. Wir holen das auf eine Weise nach, die interessante Konsequenzen für unendliche Mengen hat.
+  Wir haben bereits die Schreibweise $|A| = n$ verwendet für „$A$ hat $n$ Elemente“. Wir haben aber nie definiert, was „$n$ Elemente haben“ bedeutet. Vergessen Sie jetzt die alte Schreibweise, wir machen das ganze jetzt nochmal „richtig“.
 ]
 
 == Mächtigkeit neu gedacht
 
-- Def
-  - Gleichmächtigkeit zweier Mengen |A| = |B|.
-  - „Höchstens so mächtig wie“ |A| ≤ |B|.
-  - „weniger mächtig als“ |A| < |B|.
+#bemerkung[Zählen mit den #strike[Fingern] Stühlen][
+  Ob in einem Hörsaal genauso viele Personen wie Stühle sind, lässt sich ohne Zählen feststellen: Man bittet alle, sich zu setzen. Wenn jeder sitzt und kein Stuhl frei ist, so gibt es gleich viele Personen wie Stühle. Das suggeriert, dass das Konzept „gleich viel“ grundlegender ist als Zählen.
+]
 
-- Bemerkung: Sei $ℳ$ eine beliebige Menge von Mengen. Wir definieren hier nicht eine Funktion |⋅| auf $ℳ$, die jedem $A ∈ ℳ$ eine Größe zuweist, und anschließend eine Relation auf den Größen. Vielmehr ist |⋅| ≤ |⋅| eine Relation auf $ℳ$ und |⋅| = |⋅| eine Relation auf $ℳ$.
+#definition("Mächtigkeit", kurz: [$|A| = |B|$, $|A| ≤ |B|$, $|A| < |B|$])[
+  Seien $A$ und $B$ Mengen.
+
+  #box(width: 110%, table(
+    columns: 3,
+    [schreibe], [sage],[Bedingung],
+    table.hline(),
+    [$|A| = |B|$], [$A$ und $B$ sind *gleichmächtig*],[$∃$ Bijektion $f: A → B$],
+    [$|A| ≤ |B|$], [$A$ ist *höchstens so mächtig* wie $B$],[$∃$ Injektion $f: A → B$],
+    [$|A| < |B|$], [$A$ ist *weniger mächtig* als $B$],[$|A| ≤ |B| ∧ |A| ≠ |B|$],
+
+  ))
+]<maechtigkeit>
+
+#bemerkung[Lesart der Schreibweise][
+  Die Schreibweise legt nahe, dass die Größen $|A|$ und $|B|$ gebildet und anschließend verglichen werden. So ist es _nicht_ gemeint: $|A| = |B|$, $|A| ≤ |B|$ und $|A| < |B|$ sind jeweils als Ganzes zu lesen. Sie dürfen sich vorstellen, dass $|⋅| = |⋅|$ eine Relation ist.
+]
+
+#uebung[
+  Seien $A$ und $B$ beliebige Mengen mit $A ⊆ B$. Zeigen Sie: $|A| = |A|$ und $|A| ≤ |B|$.
+]
+#loesung[
+  Auf $A$ ist die Identität $id_A$ eine Bijektion, also gilt $|A| = |A|$. Die *Inklusion* $ι : A → B$, $a ↦ a$ ist injektiv, also gilt $|A| ≤ |B|$.
+]
 
 #satz[
-  Eingeschränkt auf eine beliebige Menge $ℳ$ von Mengen ist höchstens-so-mächtig-wie eine Quasiordnung und Gleichmächtigkeit eine Äquivalenzrelation.
-]
+  Sei $ℳ$ eine Menge von Mengen#footnote[Die Einschränkung auf eine beliebige Menge $ℳ$ hat wieder nur den Grund, dass es die Menge _aller_ Mengen nicht gibt.]. Auf $ℳ$ ist „höchstens so mächtig wie“ eine Quasiordnung und .
+]<maechtigkeitOrdnung>
+
 #beweis[
-  …
+  Es sind Reflexivität und Transitivität zu zeigen.
+  / Reflexivität: Die Identität $id_A : A → A$ ist injektiv, also folgt $|A| ≤ |A|$.
+  / Transitivität: Seien $A, B, C ∈ ℳ$ mit $|A| ≤ |B|$ und $|B| ≤ |C|$. Das heißt es gibt injektive Funktionen $f : A → B$ und $g : B → C$. Damit ist auch $g ∘ f : A → C$ injektiv  (siehe @verkettungInjSurj) also gilt $|A| ≤ |C|$.#qedhere
+]
+
+#bemerkung[
+  „Höchstens so mächtig wie“ ist nicht antisymmetrisch (also keine Halbordnung), denn aus $|A| ≤ |B|$ und $|B| ≤ |A|$ folgt nicht $A = B$.
 ]
 
 #satz[Cantor-Schröder-Bernstein][
-  Gilt |A| ≤ |B| und |B| ≤ |A|, so gilt |A| = |B|.
+  Seien $A$ und $B$ Mengen mit $|A| ≤ |B|$ und $|B| ≤ |A|$. Dann gilt $|A| = |B|$.
+]<csb>
+
+#bemerkung[
+  Die Notation suggieriert, dass die Aussage offensichtlich ist. Es ist aber umgekehrt: Weil die Aussage stimmt ist die Notation sinnvoll.
+]
+
+#bemerkung[Unendlicher Graph][
+  Wir können die Forderung, dass die Knotenmenge eines (gerichtete oder ungerichtete) Graphen endlich ist auch fallen lassen. Begriffe wie Grad, Pfad, Kreis, zusammenhängend, azyklisch oder Baum behalten ihre Bedeutung. Manche Sätze gelten nicht mehr (etwa $"Baum" ⇔ "Knotenzahl" -1 = "Kantenzahl"$) und Induktionsbeweise greifen nicht mehr. Die Terminologie kann trotzdem sehr nützlich sein.
 ]
 
 #beweis[
-  …
+  Seien $f : A → B$ und $g : B → A$ injektiv. Zu konstruieren ist eine Bijektion von $A$ nach $B$.
+  Wir betrachten den gerichteten Graphen $G = (V,E)$ mit den potentiell unendlichen Knoten- und Kantenmengen
+  $ V = $
 ]
 
-  - Bemerkung: Die Quasiordnung „höchstens so mächtig wie“ ist also bis auf Gleichmächtigkeit antisymmetrisch. Rückbezug auf @uebQuasiAequivalenz: $R ∩ R^(-1)$ für $R$ = „höchstens so mächtig wie“ ist genau die Gleichmächtigkeit.
-  - Nutzen: Für $|A| = |B|$ genügen zwei Injektionen, eine Bijektion braucht man nicht explizit (siehe $ℕ × ℕ$ unten).
+#bemerkung[Beweisidee][
+  Seien $f : A → B$ und $g : B → A$ injektiv. Zu konstruieren ist eine Bijektion von $A$ nach $B$. Verfolgt man von einem Element aus abwechselnd die Pfeile von $f$ und $g$, so zerfallen $A$ und $B$ in _Ketten_ (@csbKetten). Rückwärts ist jede Kette eindeutig, weil $f$ und $g$ injektiv sind: Ein $a ∈ A$ hat höchstens ein Urbild unter $g$, ein $b ∈ B$ höchstens eines unter $f$.
+
+  Eine Kette, die in einem Element von $A ∖ g(B)$ beginnt, verbindet man mit $f$: Jedes Element von $A$ in der Kette wird auf das folgende Element von $B$ abgebildet. Bei allen anderen Ketten nimmt man $g$ rückwärts: Jedes Element von $A$ wird auf sein Urbild unter $g$ abgebildet, das es dort immer gibt. In beiden Fällen wird jedes Element der Kette genau einmal getroffen (@csbBijektion).
+]
+
+#abbildung(slides: 1, caption: [
+  Zwei Injektionen $f : A → B$ (durchgezogen) und $g : B → A$ (gestrichelt). Links eine Kette, die in $a_0 ∈ A ∖ g(B)$ beginnt, rechts eine, die in $b'_0 ∈ B ∖ f(A)$ beginnt. Beide Ketten gehen nach rechts unendlich weiter.
+])[#csbbild(modus: "fg")]<csbKetten>
+
+#abbildung(slides: 1, caption: [
+  Die Bijektion $h$ aus dem Beweis von @csb für die Ketten aus @csbKetten. Auf der Menge $C$ (rot) folgt $h$ den Pfeilen von $f$, außerhalb von $C$ den Pfeilen von $g$ in Gegenrichtung.
+])[#csbbild(modus: "h")]<csbBijektion>
+
+#beweis[
+  Seien $f : A → B$ und $g : B → A$ injektiv. Nach @einschränkung-auf-bild ist $g : B → g(B)$ bijektiv und hat daher eine Umkehrfunktion $g^(-1) : g(B) → B$. Wir setzen
+  $ C_0 := A ∖ g(B), quad C_(k+1) := g(f(C_k)) "für" k ∈ ℕ, quad C := union.big_(k ∈ ℕ) C_k $
+  und definieren $h : A → B$ durch
+  $ h(a) := cases(f(a) & "falls" a ∈ C, g^(-1)(a) & "falls" a ∉ C.) $
+  Die Funktion ist wohldefiniert: Aus $a ∉ C$ folgt $a ∉ C_0 = A ∖ g(B)$, also $a ∈ g(B)$. In @csbBijektion ist $C_0 ∋ a_0$, $C_1 ∋ a_1$ und so weiter.
+
+  _$h$ ist injektiv._ Seien $a, a' ∈ A$ mit $h(a) = h(a')$. Wir unterscheiden drei Fälle.
+  - $a, a' ∈ C$: Dann ist $f(a) = f(a')$, und weil $f$ injektiv ist, folgt $a = a'$.
+  - $a, a' ∉ C$: Dann ist $g^(-1)(a) = g^(-1)(a')$, und Anwenden von $g$ liefert $a = a'$.
+  - $a ∈ C$ und $a' ∉ C$ (der umgekehrte Fall ist symmetrisch): Dann ist $f(a) = g^(-1)(a')$, also $a' = g(f(a))$. Wegen $a ∈ C$ gibt es ein $k$ mit $a ∈ C_k$, und damit ist $a' ∈ g(f(C_k)) = C_(k+1) ⊆ C$. Das widerspricht $a' ∉ C$; dieser Fall tritt also nicht ein.
+
+  _$h$ ist surjektiv._ Sei $b ∈ B$ und $a := g(b)$.
+  - $a ∉ C$: Dann ist $h(a) = g^(-1)(g(b)) = b$.
+  - $a ∈ C$: Wegen $a ∈ g(B)$ ist $a ∉ C_0$, also $a ∈ C_(k+1)$ für ein $k ∈ ℕ$. Es gibt daher ein $c ∈ C_k$ mit $a = g(f(c))$, also $g(b) = g(f(c))$. Da $g$ injektiv ist, folgt $b = f(c)$, und wegen $c ∈ C$ ist $h(c) = f(c) = b$.
+  Also ist $h$ bijektiv, und es gilt $|A| = |B|$.
+]
+
+#bemerkung[
+  - Die Quasiordnung „höchstens so mächtig wie“ ist nach @csb also bis auf Gleichmächtigkeit antisymmetrisch. Mit @uebQuasiAequivalenz ausgedrückt: Für die Relation $R$ = „höchstens so mächtig wie“ ist $R ∩ R^(-1)$ genau die Gleichmächtigkeit.
+  - Der Satz ist auch praktisch nützlich: Um $|A| = |B|$ zu zeigen, genügen zwei Injektionen. Eine Bijektion muss man nicht ausdrücklich angeben. Davon machen wir bei $ℕ × ℕ$ Gebrauch.
+]
 
 == Endliche Mengen
 
