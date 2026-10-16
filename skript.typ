@@ -2749,15 +2749,20 @@
   Wir nehmen ohne Einschränkung an, dass $A$ und $B$ disjunkt sind#footnote[Andernfalls betrachten wir die disjunkten Mengen $A' = A × {1}$ sowie $B' = B × {2}$. Wir konstruieren eine Bijektion $h' : A' → B'$. Zusammen mit den offensichtlichen Bijektionen $h_A : A → A × {1}$ sowie $h_B : B × {2} → B$ ergibt sich die gewünschte Bijektion $h_B ∘ h' ∘ h_A: A → B$.].
   Wir betrachten den gerichteten Graphen $G = (V,E)$ mit den potentiell unendlichen Knoten- und Kantenmengen
   $ V = A ∪ B "und" E = {(a,f(a)) | a ∈ A } ∪ {(b,g(b)) | b ∈ B }. $
-  Jeder Knoten $v ∈ V$ hat genau eine ausgehende Kante (weil $f$ und $g$ Funktionen sind) und höchstens eine eingehende Kante (weil $f$ und $g$ injektiv sind). Daraus folgt, dass es für die Zusammenhangskomponenten#footnote[Mit der (schwachen) Zusammenhangskomponente eines gerichteten Graphen sind die Zusammenhangskomponenten des zugrundeliegenden ungerichteten Graphen $(V,{{x,y} | (x,y) ∈ E })$ gemeint.] des Graphen nur folgende vier Möglichkeiten gibt. Wir stellen $A$-Knoten rot und $B$-Knoten blau dar.
-  [todo: Bild]
-  + Ein Strahl, der an einem $A$-Knoten beginnt und sich unendlich nach rechts fortsetzt.
-  + Ein Strahl, der an einem $B$-Knoten beginnt und sich unendlich nach rechts fortsetzt.
-  + Ein Doppelstrahl, der in beide Richtungen unendlich ist.
+  Jeder Knoten $v ∈ V$ hat genau eine ausgehende Kante (weil $f$ und $g$ Funktionen sind) und höchstens eine eingehende Kante (weil $f$ und $g$ injektiv sind). Daraus folgt, dass es für die Zusammenhangskomponenten#footnote[Mit der (schwachen) Zusammenhangskomponente eines gerichteten Graphen sind die Zusammenhangskomponenten des zugrundeliegenden ungerichteten Graphen $(V,{{x,y} | (x,y) ∈ E })$ gemeint.] des Graphen nur folgende vier Möglichkeiten gibt (@csbTypen). Wir stellen $A$-Knoten als rote Kreise und $B$-Knoten als blaue Quadrate dar.
+  #abbildung(slides: 1, caption: [
+    Die vier möglichen Typen von Zusammenhangskomponenten. Kanten von $f$ sind durchgezogen, Kanten von $g$ gestrichelt.
+  ])[#csbtypen(modus: "fg")]<csbTypen>
+  + Ein „Strahl“, der an einem $A$-Knoten beginnt und sich unendlich nach rechts fortsetzt.
+  + Ein „Strahl“, der an einem $B$-Knoten beginnt und sich unendlich nach rechts fortsetzt.
+  + Ein „Doppelstrahl“, der in beide Richtungen unendlich ist.
   + Ein Kreis, der genauso viele $A$-Knoten wie $B$-Knoten enthält.
   Wir sagen, ein Knoten ist vom Typ 1, 2, 3 oder 4, wenn er in einer entsprechenden Komponente ist. Wir definieren nun die gewünschte Bijektion zwischen den roten und blauen Knoten:
-  $ h : A → B, quad a ↦ cases(f(a) & "falls" a "vom Typ 1,2 oder 4 ist",h^(-1)(a) & "falls" a "vom Typ 3 ist.") $
-  Intuitiv gesprochen machen wir für einen $A$-Knoten vom Typ 1, 2 oder 4 einen Schritt in Pfeilrichtung, für einen $A$-Knoten vom Typ 3 dagegen einen Schritt entgegen der Pfeilrichtung. Es ist leicht zu sehen, dass $h(a)$ in derselben Komponente wie $a$ ist und innerhalb jeder Komponente eine Bijektion ist. Damit ist $h$ auch insgesamt eine Bijektion.
+  $ h : A → B, quad a ↦ cases(f(a) & "falls" a "vom Typ 1, 3 oder 4 ist",g^(-1)(a) & "falls" a "vom Typ 2 ist.") $
+  Intuitiv gesprochen machen wir für einen $A$-Knoten vom Typ 1, 3 oder 4 einen Schritt in Pfeilrichtung, für einen $A$-Knoten vom Typ 2 dagegen einen Schritt entgegen der Pfeilrichtung (@csbBijektion).
+  #abbildung(slides: 1, caption: [
+    Die Bijektion $h$ (fett) in den vier Typen von Komponenten. Bei Typ 2 geht $h$ entgegen der Pfeilrichtung, sonst in Pfeilrichtung.
+  ])[#csbtypen(modus: "h")]<csbBijektion> Es ist leicht zu sehen, dass $h(a)$ in derselben Komponente wie $a$ ist und innerhalb jeder Komponente eine Bijektion ist. Damit ist $h$ auch insgesamt eine Bijektion.
 ]
 
 == Mächtigkeit neu gedacht
@@ -2803,7 +2808,7 @@
     / Reflexivität: $id_A : A → A$ ist injektiv, also folgt $|A| ≤ |A|$.
     / Transitivität: Seien $A, B, C ∈ ℳ$ mit $|A| ≤ |B|$ und $|B| ≤ |C|$. Das heißt, es gibt injektive Funktionen $f : A → B$ und $g : B → C$. Damit ist auch $g ∘ f : A → C$ injektiv (siehe @verkettungInjSurj), also gilt $|A| ≤ |C|$.
   + Das ist @csb in anderer Terminologie.
-  + Sei $R$ die Relation „höchstens so mächtig wie“. Nach der vorherigen Aussage ist die Gleichmächtigkeitsrelation genau $R ∩ R^(-1)$ und nach @uebQuasiAequivalenz ist $R ∩ R^(-1)$ eine Äquivalenzrelation.#qedhere
+  + Sei $R$ die Relation „höchstens so mächtig wie“. Die Gleichmächtigkeitsrelation ist genau $R ∩ R^(-1)$: Ist $f : A → B$ bijektiv, so sind $f$ und die Umkehrfunktion $f^(-1) : B → A$ (siehe @umkehrfunktion) injektiv, also gilt $|A| ≤ |B|$ und $|B| ≤ |A|$. Die Umkehrung ist die vorherige Aussage. Nach @uebQuasiAequivalenz ist $R ∩ R^(-1)$ eine Äquivalenzrelation.#footnote[Das lässt sich auch ohne @csb direkt zeigen: Die Identität, die Umkehrfunktion einer Bijektion und die Verkettung zweier Bijektionen sind wieder Bijektionen (siehe @umkehrfunktion und @verkettungInjSurj).]#qedhere
 ]
 
 #korollar[Die Pointe von CSB][
@@ -2811,6 +2816,10 @@
 ]
 
 == Endliche Mengen
+
+#skript[
+  Wir können nun formal nachbauen, was wir zuvor nur mit Rückgriff auf die Intuition einer „Anzahl von Elementen“ definieren könnten, nämlich die Kardinalität endlicher Mengen.
+]
 
 #satz[
   |∅| < |{1}| < |{1,2}| < … < |ℕ|.
