@@ -2766,13 +2766,17 @@
 ]
 
 #satz[
-  Sei $ℳ$ eine Menge von Mengen#footnote[Die Einschränkung auf eine beliebige Menge $ℳ$ hat wieder nur den Grund, dass es die Menge _aller_ Mengen nicht gibt.]. Auf $ℳ$ ist „höchstens so mächtig wie“ eine Quasiordnung und .
+  Sei $ℳ$ eine Menge von Mengen#footnote[Die Einschränkung auf eine beliebige Menge $ℳ$ hat wieder nur den Grund, dass es die Menge _aller_ Mengen nicht gibt.]. Auf $ℳ$ ist „höchstens so mächtig wie“ eine Quasiordnung und Gleichmächtigkeit ist eine Äquivalenzrelation.
 ]<maechtigkeitOrdnung>
 
 #beweis[
-  Es sind Reflexivität und Transitivität zu zeigen.
+  Für „höchstens so mächtig wie“ sind Reflexivität und Transitivität zu zeigen.
   / Reflexivität: Die Identität $id_A : A → A$ ist injektiv, also folgt $|A| ≤ |A|$.
-  / Transitivität: Seien $A, B, C ∈ ℳ$ mit $|A| ≤ |B|$ und $|B| ≤ |C|$. Das heißt es gibt injektive Funktionen $f : A → B$ und $g : B → C$. Damit ist auch $g ∘ f : A → C$ injektiv  (siehe @verkettungInjSurj) also gilt $|A| ≤ |C|$.#qedhere
+  / Transitivität: Seien $A, B, C ∈ ℳ$ mit $|A| ≤ |B|$ und $|B| ≤ |C|$. Das heißt es gibt injektive Funktionen $f : A → B$ und $g : B → C$. Damit ist auch $g ∘ f : A → C$ injektiv  (siehe @verkettungInjSurj) also gilt $|A| ≤ |C|$.
+  Für Gleichmächtigkeit sind Reflexivität, Symmetrie und Transititivät zu zeigen.
+  / Reflexivität: Die Identität $id_A : A → A$ ist bijektiv, also folgt $|A| = |A|$.
+  / Symmetrie: Ist $f: A → B$ bijektiv so ist die Umkehrfunktion $f^(-1) : B → A$ bijektiv, siehe @umkehrfunktion.
+  / Transitivität: Ist $f : A → B$ bijektiv und $g : B → C$ bijektiv, so ist $g ∘ f$ nach @verkettungInjSurj auch bijektiv. #qedhere
 ]
 
 #bemerkung[
@@ -2788,45 +2792,22 @@
 ]
 
 #bemerkung[Unendlicher Graph][
-  Wir können die Forderung, dass die Knotenmenge eines (gerichtete oder ungerichtete) Graphen endlich ist auch fallen lassen. Begriffe wie Grad, Pfad, Kreis, zusammenhängend, azyklisch oder Baum behalten ihre Bedeutung. Manche Sätze gelten nicht mehr (etwa $"Baum" ⇔ "Knotenzahl" -1 = "Kantenzahl"$) und Induktionsbeweise greifen nicht mehr. Die Terminologie kann trotzdem sehr nützlich sein.
+  Wir können die Forderung, dass die Knotenmenge eines (gerichtete oder ungerichtete) Graphen endlich ist auch fallen lassen. Die meisten Begriffe (Grad, Pfad, Kreis, zusammenhängend, azyklisch, Baum) behalten ihre Bedeutung. Manche Sätze gelten nicht mehr (z.B. $"Baum" ⇔ "Knotenzahl" -1 = "Kantenzahl"$).
 ]
 
 #beweis[
-  Seien $f : A → B$ und $g : B → A$ injektiv. Zu konstruieren ist eine Bijektion von $A$ nach $B$.
+  Seien $f : A → B$ und $g : B → A$ injektiv. Zu konstruieren ist eine Bijektion von $A$ nach $B$. Wir nehmen ohne Einschränkung an, dass $A$ und $B$ disjunkt sind#footnote[Andernfalls betrachten wir die disjunkten Mengen $A' = A × {1}$ sowie $B' = B × {2}$. Offensichtlich gilt $|A'| = |A|$ und $|B'| = |B|$. Da wir $|A'| = |B'|$ zeigen folgt dann auch $|A| = |A'| = |B'| = |B|$, also $|A| = |B|$ mit @maechtigkeitOrdnung.].
   Wir betrachten den gerichteten Graphen $G = (V,E)$ mit den potentiell unendlichen Knoten- und Kantenmengen
-  $ V = $
-]
-
-#bemerkung[Beweisidee][
-  Seien $f : A → B$ und $g : B → A$ injektiv. Zu konstruieren ist eine Bijektion von $A$ nach $B$. Verfolgt man von einem Element aus abwechselnd die Pfeile von $f$ und $g$, so zerfallen $A$ und $B$ in _Ketten_ (@csbKetten). Rückwärts ist jede Kette eindeutig, weil $f$ und $g$ injektiv sind: Ein $a ∈ A$ hat höchstens ein Urbild unter $g$, ein $b ∈ B$ höchstens eines unter $f$.
-
-  Eine Kette, die in einem Element von $A ∖ g(B)$ beginnt, verbindet man mit $f$: Jedes Element von $A$ in der Kette wird auf das folgende Element von $B$ abgebildet. Bei allen anderen Ketten nimmt man $g$ rückwärts: Jedes Element von $A$ wird auf sein Urbild unter $g$ abgebildet, das es dort immer gibt. In beiden Fällen wird jedes Element der Kette genau einmal getroffen (@csbBijektion).
-]
-
-#abbildung(slides: 1, caption: [
-  Zwei Injektionen $f : A → B$ (durchgezogen) und $g : B → A$ (gestrichelt). Links eine Kette, die in $a_0 ∈ A ∖ g(B)$ beginnt, rechts eine, die in $b'_0 ∈ B ∖ f(A)$ beginnt. Beide Ketten gehen nach rechts unendlich weiter.
-])[#csbbild(modus: "fg")]<csbKetten>
-
-#abbildung(slides: 1, caption: [
-  Die Bijektion $h$ aus dem Beweis von @csb für die Ketten aus @csbKetten. Auf der Menge $C$ (rot) folgt $h$ den Pfeilen von $f$, außerhalb von $C$ den Pfeilen von $g$ in Gegenrichtung.
-])[#csbbild(modus: "h")]<csbBijektion>
-
-#beweis[
-  Seien $f : A → B$ und $g : B → A$ injektiv. Nach @einschränkung-auf-bild ist $g : B → g(B)$ bijektiv und hat daher eine Umkehrfunktion $g^(-1) : g(B) → B$. Wir setzen
-  $ C_0 := A ∖ g(B), quad C_(k+1) := g(f(C_k)) "für" k ∈ ℕ, quad C := union.big_(k ∈ ℕ) C_k $
-  und definieren $h : A → B$ durch
-  $ h(a) := cases(f(a) & "falls" a ∈ C, g^(-1)(a) & "falls" a ∉ C.) $
-  Die Funktion ist wohldefiniert: Aus $a ∉ C$ folgt $a ∉ C_0 = A ∖ g(B)$, also $a ∈ g(B)$. In @csbBijektion ist $C_0 ∋ a_0$, $C_1 ∋ a_1$ und so weiter.
-
-  _$h$ ist injektiv._ Seien $a, a' ∈ A$ mit $h(a) = h(a')$. Wir unterscheiden drei Fälle.
-  - $a, a' ∈ C$: Dann ist $f(a) = f(a')$, und weil $f$ injektiv ist, folgt $a = a'$.
-  - $a, a' ∉ C$: Dann ist $g^(-1)(a) = g^(-1)(a')$, und Anwenden von $g$ liefert $a = a'$.
-  - $a ∈ C$ und $a' ∉ C$ (der umgekehrte Fall ist symmetrisch): Dann ist $f(a) = g^(-1)(a')$, also $a' = g(f(a))$. Wegen $a ∈ C$ gibt es ein $k$ mit $a ∈ C_k$, und damit ist $a' ∈ g(f(C_k)) = C_(k+1) ⊆ C$. Das widerspricht $a' ∉ C$; dieser Fall tritt also nicht ein.
-
-  _$h$ ist surjektiv._ Sei $b ∈ B$ und $a := g(b)$.
-  - $a ∉ C$: Dann ist $h(a) = g^(-1)(g(b)) = b$.
-  - $a ∈ C$: Wegen $a ∈ g(B)$ ist $a ∉ C_0$, also $a ∈ C_(k+1)$ für ein $k ∈ ℕ$. Es gibt daher ein $c ∈ C_k$ mit $a = g(f(c))$, also $g(b) = g(f(c))$. Da $g$ injektiv ist, folgt $b = f(c)$, und wegen $c ∈ C$ ist $h(c) = f(c) = b$.
-  Also ist $h$ bijektiv, und es gilt $|A| = |B|$.
+  $ V = A ∪ B "und" E = {(a,f(a)) | a ∈ A } ∪ {(b,g(b)) | b ∈ B }. $
+  Jeder Knoten $v ∈ V$ hat genau eine ausgehende Kante (weil $f$ und $g$ Funktionen sind) und höchstens eine eingehende Kante (weil $f$ und $g$ injektiv sind). Für die Zusammenhangskomponenten#footnote[Mit der (schwachen) Zusammenhangskomponente eines gerichteten Graphen sind die Zusammenhangskomponenten des zugrundeliegenden ungerichteten Graphens $(V,{{x,y} | (x,y) ∈ E })$ gemeint.] des Graphen gibt es folgende vier Möglichkeiten, wobei wir $A$-Knoten rot und $B$-Knoten blau darstellen.
+  [todo: Bild]
+  + Ein Strahl, der an einem $A$-Knoten beginnt und sich unendlich nach rechts fortsetzt.
+  + Ein Strahl, der an einem $B$-Knoten beginnt und sich unendlich nach rechts fortsetzt.
+  + Ein Doppelstrahl, der in beide Richtungen unendlich ist.
+  + Ein Kreis der genau so viele $A$-Knoten wie $B$-Knoten enthält.
+  Wir sagen ein Knoten ist vom Typ 1,2,3 oder 4 wenn er in einer entsprechenden Komponente ist. Wir definieren nun die gewünschte Bijektion zwischen den roten und blauen Knoten:
+  $ h : A → B, quad a ↦ cases(f(a) & "falls" a "vom Typ 1,2 oder 4 ist",h^(-1)(a) & "falls" a "vom Typ 3 ist") $
+  Es ist leicht zu prüfen, dass $h(a)$ in der selben Komponente von $a$ ist und innerhalb jeder Komponente eine Bijektion ist. Damit ist $h$ auch insgesamt eine Bijektion.
 ]
 
 #bemerkung[
