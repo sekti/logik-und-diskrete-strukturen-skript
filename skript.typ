@@ -2732,9 +2732,6 @@
 
 - Bemerkung: Sei $ℳ$ eine beliebige Menge von Mengen. Wir definieren hier nicht eine Funktion |⋅| auf $ℳ$, die jedem $A ∈ ℳ$ eine Größe zuweist, und anschließend eine Relation auf den Größen. Vielmehr ist |⋅| ≤ |⋅| eine Relation auf $ℳ$ und |⋅| = |⋅| eine Relation auf $ℳ$.
 
-- Satz (Cantor-Schröder-Bernstein): 
-  - gilt |A| ≤ |B| und |B| ≤ |A| so gilt |A| = |B|
-
 #satz[
   Eingeschränkt auf eine beliebige Menge $ℳ$ von Mengen ist höchstens-so-mächtig-wie eine Quasiordnung und Gleichmächtigkeit eine Äquivalenzrelation.
 ]
@@ -2742,39 +2739,56 @@
   …
 ]
 
+#satz[Cantor-Schröder-Bernstein][
+  Gilt |A| ≤ |B| und |B| ≤ |A|, so gilt |A| = |B|.
+]
+
+#beweis[
+  …
+]
+
+  - Bemerkung: Die Quasiordnung „höchstens so mächtig wie“ ist also bis auf Gleichmächtigkeit antisymmetrisch. Rückbezug auf @uebQuasiAequivalenz: $R ∩ R^(-1)$ für $R$ = „höchstens so mächtig wie“ ist genau die Gleichmächtigkeit.
+  - Nutzen: Für $|A| = |B|$ genügen zwei Injektionen, eine Bijektion braucht man nicht explizit (siehe $ℕ × ℕ$ unten).
+
 == Endliche Mengen
 
 #satz[
   |∅| < |{1}| < |{1,2}| < … < |ℕ|.
 ]
+- Bemerkung: Der Schritt $|{1,…,n}| < |{1,…,n+1}|$ ist das Schubfachprinzip: Es gibt keine Injektion von ${1,…,n+1}$ nach ${1,…,n}$. Das Zählkapitel verweist hierher.
 
-- Def: Eine Menge $A$ heißt endlich, wenn es ein $n ∈ ℕ$ gibt, sodass $A$ gleichmächtig zu ${1,…,n}$ ist. Wir sagen dann auch $A$ hat Mächtigkeit/Kardinalität $n$ und schreiben $|A| = n$.
+- Def: Eine Menge $A$ heißt endlich, wenn es ein $n ∈ ℕ$ gibt, sodass $A$ gleichmächtig zu ${1,…,n}$ ist. Wir sagen dann auch $A$ hat Mächtigkeit/Kardinalität $n$ und schreiben $|A| = n$. Andernfalls heißt $A$ *unendlich*.
+- Korollar (Wohldefiniertheit): Das $n$ ist eindeutig. Denn wäre $A$ gleichmächtig zu ${1,…,n}$ und zu ${1,…,m}$ mit $n < m$, so wären diese beiden gleichmächtig, im Widerspruch zum Satz oben.
 
 #satz[Kardinalitäten endlicher Mengen][
   Seien $A$ und $B$ endliche Mengen. Dann gilt:
   + Ist $x ∉ A$, so gilt $|A ∪ {x}| = |A| + 1$.
   + Sind $A$ und $B$ disjunkt, so gilt $|A ∪ B| = |A| + |B|$.
   + $|A ∪ B| = |A| + |B| - |A ∩ B|$
+  + $|A × B| = |A| ⋅ |B|$
+  + Jede Teilmenge $A' ⊆ A$ ist endlich, und es gilt $|A'| ≤ |A|$.
 ]
 #beweisansatz[
   Beweis nicht in der Vorlesung. Mögliche Beweisansätze sind:
   + Bijektion von $A$ nach ${1,…,|A|}$ auf Bijektion von $A ∪ {x}$ nach ${1,…,|A|+1}$ erweitern.
   + Induktion über $|B|$ und (1).
   + Induktion über $|A ∩ B|$ und (2).
+  + $A × B$ ist die disjunkte Vereinigung der $|A|$ Mengen ${a} × B$, jede gleichmächtig zu $B$. Induktion über $|A|$ und (2).
+  + Induktion über $|A|$: Entfernen eines Elements aus $A$ und gegebenenfalls aus $A'$.
 ]
 - Bemerkung: Der Fall mit drei Mengen (Bild) und die allgemeine Formel für $k$ Mengen. Beides ohne Beweis.
 
 == Abzählbare Mengen
 
-- Def: Eine Menge $A$ heißt abzählbar, wenn $|A| ≤ |ℕ|$, andernfalls heißt $A$ *überabzählbar*.
+- Def: Eine Menge $A$ heißt abzählbar, wenn $|A| ≤ |ℕ|$, andernfalls heißt $A$ *überabzählbar*. Gilt $|A| = |ℕ|$, so heißt $A$ *abzählbar unendlich*.
 - Bemerkung: Nicht einheitlich, manchmal heißt abzählbar auch $|A| = |ℕ|$ also abzählbar unendlich. Mit höchstens abzählbar ist man auf der sicheren Seite.
-- Übung: Ist $A$ höchstens abzählbar, dann ist $A$ endlich oder gleichmächtig zu $ℕ$.
-- Lösung: Bild der Injektion komprimieren?
+- Satz: Ist $A$ abzählbar, dann ist $A$ endlich oder abzählbar unendlich.
+- Beweis: Sei $f : A → ℕ$ injektiv; $A$ ist gleichmächtig zu $f(A) ⊆ ℕ$. Ist $f(A)$ endlich, fertig. Sonst $f(A)$ der Größe nach aufzählen („komprimieren“): $a_0 := min f(A)$, $a_(k+1) := min(f(A) ∖ {a_0,…,a_k})$ (Extremalprinzip). Injektiv nach Konstruktion; surjektiv, weil unterhalb jedes $x ∈ f(A)$ nur endlich viele Elemente liegen, $x$ also nach endlich vielen Schritten an der Reihe ist. Braucht Teilmengen endlicher Mengen sind endlich (Satz oben).
 - Satz: Beispiele für abzählbar unendliche Mengen.
   - |ℕ⁺| = |ℕ| (Hilberts Hotel)
   - |ℤ| = |ℕ|
   - |ℕ × {1,2}| = |ℕ| (Hilbert Bus)
-  - |ℕ × ℕ| = |ℕ| (Cantorsche Paarung oder $(a,b) ↦ 2^a 3^b$).
+  - |ℕ × ℕ| = |ℕ| (Cantorsche Paarung oder mit Cantor-Schröder-Bernstein über die Injektionen $n ↦ (n,0)$ und $(a,b) ↦ 2^a 3^b$; Eindeutigkeit der Primfaktorzerlegung ohne Beweis).
   - $|ℕ^*| = |ℕ|$
 
 == Cantors Diagonalargument
@@ -2803,7 +2817,7 @@
   - Beispiel: Anzahl Injektionen
     - Korollar: Keine Injektionen wenn Bildbereich kleiner als Definitionsbereich
     - Korollar: Anzahl der Permutationen
-- Schubfachprinzip als Satz
+- Schubfachprinzip als Satz: kein eigener Beweis, Verweis auf den Satz $|∅| < |{1}| < … < |ℕ|$ in @sec:cardinality
 
 == Binomialkoeffizienten
 
