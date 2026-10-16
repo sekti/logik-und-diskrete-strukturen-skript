@@ -2737,7 +2737,7 @@
 == Eine Vorbereitung
 
 #bemerkung[Unendlicher Graph][
-  Wir können die Forderung, dass die Knotenmenge eines (gerichtete oder ungerichtete) Graphen endlich ist, fallen lassen. Die meisten Begriffe (Grad, Pfad, Kreis, zusammenhängend, azyklisch, Baum) behalten ihre Bedeutung. #footnote[Manche Sätze gelten nicht mehr, z.B. $"Baum" ⇔ "Knotenzahl" -1 = "Kantenzahl"$.]
+  Wir können die Forderung, dass die Knotenmenge eines (gerichteten oder ungerichteten) Graphen endlich ist, fallen lassen. Die meisten Begriffe (Grad, Pfad, Kreis, zusammenhängend, azyklisch, Baum) behalten ihre Bedeutung. #footnote[Manche Sätze gelten nicht mehr, z.B. $"Baum" ⇔ "Knotenzahl" -1 = "Kantenzahl"$.]
 ]
 
 #satz[Cantor-Schröder-Bernstein][
@@ -2746,18 +2746,18 @@
 
 
 #beweis[
-  Wir nehmen ohne Einschränkung an, dass $A$ und $B$ disjunkt sind#footnote[Andernfalls betrachten wir die disjunkten Mengen $A' = A × {1}$ sowie $B' = B × {2}$. Wir konstruieren eine Bijektion $h' : A' → B'$. Zusammen mit den offensichtlichen Bijektion $h_A : A → A × {1}$ sowie $h_B : B × {2} → B$ ergibt sich die gewünschte Bijektion $h_B ∘ h' ∘ h_A: A → B$.].
+  Wir nehmen ohne Einschränkung an, dass $A$ und $B$ disjunkt sind#footnote[Andernfalls betrachten wir die disjunkten Mengen $A' = A × {1}$ sowie $B' = B × {2}$. Wir konstruieren eine Bijektion $h' : A' → B'$. Zusammen mit den offensichtlichen Bijektionen $h_A : A → A × {1}$ sowie $h_B : B × {2} → B$ ergibt sich die gewünschte Bijektion $h_B ∘ h' ∘ h_A: A → B$.].
   Wir betrachten den gerichteten Graphen $G = (V,E)$ mit den potentiell unendlichen Knoten- und Kantenmengen
   $ V = A ∪ B "und" E = {(a,f(a)) | a ∈ A } ∪ {(b,g(b)) | b ∈ B }. $
-  Jeder Knoten $v ∈ V$ hat genau eine ausgehende Kante (weil $f$ und $g$ Funktionen sind) und höchstens eine eingehende Kante (weil $f$ und $g$ injektiv sind). Daraus folgt, dass es für die Zusammenhangskomponenten#footnote[Mit der (schwachen) Zusammenhangskomponente eines gerichteten Graphen sind die Zusammenhangskomponenten des zugrundeliegenden ungerichteten Graphens $(V,{{x,y} | (x,y) ∈ E })$ gemeint.] des Graphen nur folgende vier Möglichkeiten gibt. Wir stellen $A$-Knoten rot und $B$-Knoten blau dar.
+  Jeder Knoten $v ∈ V$ hat genau eine ausgehende Kante (weil $f$ und $g$ Funktionen sind) und höchstens eine eingehende Kante (weil $f$ und $g$ injektiv sind). Daraus folgt, dass es für die Zusammenhangskomponenten#footnote[Mit der (schwachen) Zusammenhangskomponente eines gerichteten Graphen sind die Zusammenhangskomponenten des zugrundeliegenden ungerichteten Graphen $(V,{{x,y} | (x,y) ∈ E })$ gemeint.] des Graphen nur folgende vier Möglichkeiten gibt. Wir stellen $A$-Knoten rot und $B$-Knoten blau dar.
   [todo: Bild]
   + Ein Strahl, der an einem $A$-Knoten beginnt und sich unendlich nach rechts fortsetzt.
   + Ein Strahl, der an einem $B$-Knoten beginnt und sich unendlich nach rechts fortsetzt.
   + Ein Doppelstrahl, der in beide Richtungen unendlich ist.
-  + Ein Kreis der genau so viele $A$-Knoten wie $B$-Knoten enthält.
-  Wir sagen ein Knoten ist vom Typ 1,2,3 oder 4 wenn er in einer entsprechenden Komponente ist. Wir definieren nun die gewünschte Bijektion zwischen den roten und blauen Knoten:
+  + Ein Kreis, der genauso viele $A$-Knoten wie $B$-Knoten enthält.
+  Wir sagen, ein Knoten ist vom Typ 1, 2, 3 oder 4, wenn er in einer entsprechenden Komponente ist. Wir definieren nun die gewünschte Bijektion zwischen den roten und blauen Knoten:
   $ h : A → B, quad a ↦ cases(f(a) & "falls" a "vom Typ 1,2 oder 4 ist",h^(-1)(a) & "falls" a "vom Typ 3 ist.") $
-  Intuitiv gesprochen machen wir für einen $A$-Knoten vom Typ 1, 2 oder 4 einen Schritt in Pfeilrichtung, für einen $A$-Knoten vom Typ 3 dagegen einen Schritt entgegen der Pfeilrichtung. Es ist leicht zu sehen, dass $h(a)$ in der selben Komponente von $a$ ist und innerhalb jeder Komponente eine Bijektion ist. Damit ist $h$ auch insgesamt eine Bijektion.
+  Intuitiv gesprochen machen wir für einen $A$-Knoten vom Typ 1, 2 oder 4 einen Schritt in Pfeilrichtung, für einen $A$-Knoten vom Typ 3 dagegen einen Schritt entgegen der Pfeilrichtung. Es ist leicht zu sehen, dass $h(a)$ in derselben Komponente wie $a$ ist und innerhalb jeder Komponente eine Bijektion ist. Damit ist $h$ auch insgesamt eine Bijektion.
 ]
 
 == Mächtigkeit neu gedacht
@@ -2794,20 +2794,20 @@
 #satz[
   Sei $ℳ$ eine Menge von Mengen#footnote[Die Einschränkung auf eine beliebige Menge $ℳ$ hat wieder nur den Grund, dass es die Menge _aller_ Mengen nicht gibt.].
   + Auf $ℳ$ ist „höchstens so mächtig wie“ eine Quasiordnung.
-  + Für $A,B ∈ ℳ$ impliziert $|A| ≤ |B| ∧ |B| ≤ |A|$ dass $|A| = |B|$.
+  + Für $A,B ∈ ℳ$ impliziert $|A| ≤ |B| ∧ |B| ≤ |A|$, dass $|A| = |B|$.
   + Gleichmächtigkeit auf $ℳ$ ist eine Äquivalenzrelation.
 ]<maechtigkeitOrdnung>
 
 #beweis[
   + Es sind Reflexivität und Transitivität zu zeigen.
     / Reflexivität: $id_A : A → A$ ist injektiv, also folgt $|A| ≤ |A|$.
-    / Transitivität: Seien $A, B, C ∈ ℳ$ mit $|A| ≤ |B|$ und $|B| ≤ |C|$. Das heißt es gibt injektive Funktionen $f : A → B$ und $g : B → C$. Damit ist auch $g ∘ f : A → C$ injektiv  (siehe @verkettungInjSurj) also gilt $|A| ≤ |C|$.
+    / Transitivität: Seien $A, B, C ∈ ℳ$ mit $|A| ≤ |B|$ und $|B| ≤ |C|$. Das heißt, es gibt injektive Funktionen $f : A → B$ und $g : B → C$. Damit ist auch $g ∘ f : A → C$ injektiv (siehe @verkettungInjSurj), also gilt $|A| ≤ |C|$.
   + Das ist @csb in anderer Terminologie.
   + Sei $R$ die Relation „höchstens so mächtig wie“. Nach der vorherigen Aussage ist die Gleichmächtigkeitsrelation genau $R ∩ R^(-1)$ und nach @uebQuasiAequivalenz ist $R ∩ R^(-1)$ eine Äquivalenzrelation.#qedhere
 ]
 
 #korollar[Die Pointe von CSB][
-  Um zu zeigen, dass zwei Mengen $A$ und $B$ gleichmächtig ist, genügt es Injektionen in beide Richtungen anzugeben. 
+  Um zu zeigen, dass zwei Mengen $A$ und $B$ gleichmächtig sind, genügt es, Injektionen in beide Richtungen anzugeben.
 ]
 
 == Endliche Mengen
@@ -2828,6 +2828,12 @@
   + $|A × B| = |A| ⋅ |B|$
   + Jede Teilmenge $A' ⊆ A$ ist endlich, und es gilt $|A'| ≤ |A|$.
 ]
+
+#skript[
+  Die Beweise sind gute Übungen für Induktionsbeweise, aber ansonsten wenig lehrreich. Wir lassen sie weg.
+]
+
+/*
 #beweisansatz[
   Beweis nicht in der Vorlesung. Mögliche Beweisansätze sind:
   + Bijektion von $A$ nach ${1,…,|A|}$ auf Bijektion von $A ∪ {x}$ nach ${1,…,|A|+1}$ erweitern.
@@ -2836,7 +2842,7 @@
   + $A × B$ ist die disjunkte Vereinigung der $|A|$ Mengen ${a} × B$, jede gleichmächtig zu $B$. Induktion über $|A|$ und (2).
   + Induktion über $|A|$: Entfernen eines Elements aus $A$ und gegebenenfalls aus $A'$.
 ]
-- Bemerkung: Der Fall mit drei Mengen (Bild) und die allgemeine Formel für $k$ Mengen. Beides ohne Beweis.
+*/
 
 == Abzählbare Mengen
 
