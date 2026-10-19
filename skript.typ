@@ -3,7 +3,7 @@
 #let folienModus = if "folien" in sys.inputs { sys.inputs.folien == "true" } else { false }
 // Nur ein Kapitel setzen, z.B. 5 (im Editor deutlich schneller); none = alles.
 // Auf der Kommandozeile hat „--input kapitel=5“ bzw. „--input kapitel=alle“ Vorrang.
-#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { int(sys.inputs.kapitel) } } else { 6 }
+#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { int(sys.inputs.kapitel) } } else { 4 }
 
 // imports
   #import "@preview/ctheorems:2.0.0": *
@@ -784,7 +784,6 @@
   + $4 ∈ {2⋅n | n ∈ ℕ}$
   + $7 < 5$
   + Am 12.1.2042 regnet es in Stuttgart.
-  + Wie spät ist es?
   + Hurrah!
   + $x < 5$
 ]
@@ -793,7 +792,6 @@
   + Ja (wahre Aussage).
   + Ja (falsche Aussage).
   + Ja. Wir wissen derzeit nicht, ob die Aussage wahr oder falsch ist.
-  + Keine Aussage.
   + Keine Aussage.
   + „$x < 5$“ ist eine _Aussageform_, ist aber erst eine Aussage, wenn der Kontext dem Symbol $x$ eine Bedeutung verleiht. Solche Gebilde nennen wir gleich _Formeln_.
 ]
@@ -814,10 +812,7 @@
 
 === Formeln mit $∧, ∨, ¬, →, ↔$
 
-#definition("Aussagenlogische Formeln", kurz: [$∧, ∨, ¬, →, ↔$])[
-  Eine aussagenlogische Formel ist eine Formel, die aus Variablensymbolen, den aussagenlogischen Verknüpfungen $∧$, $∨$, $→$, $↔$, dem Negationssymbol $¬$ und, wenn nötig, Klammern besteht. Die Variablen heißen auch *Elementaraussagen* und können nur die Werte _wahr_ oder _falsch_ annehmen.
-  Die Bedeutung der Symbole $∧$, $∨$, $→$, $↔$, $¬$ ist wie folgt:
-  #table(
+#let ALF-tabelle = table(
     columns: 3,
     table.header[*Konzept*][*schreibe*][*sprich*],
     table.hline(y: 1),
@@ -826,7 +821,12 @@
     [Negation], [$¬P$], [nicht $P$],
     [Implikation], [$P → Q$], [wenn $P$, dann $Q$],
     [Äquivalenz], [$P ↔ Q$], [$P$ genau dann, wenn $Q$],
-  )
+)
+
+#definition(kurz: [#ALF-tabelle])[Elementaraussagen und aussagenlogische Formeln][
+  Eine aussagenlogische Formel ist eine Formel, die aus Variablensymbolen, den aussagenlogischen Verknüpfungen $∧$, $∨$, $→$, $↔$, dem Negationssymbol $¬$ und, wenn nötig, Klammern besteht. Die Variablen heißen auch *Elementaraussagen* und können nur die Werte _wahr_ oder _falsch_ annehmen.
+  Die Bedeutung der Symbole $∧$, $∨$, $→$, $↔$, $¬$ ist wie folgt:
+  #ALF-tabelle
   Anmerkungen zur präzisen Bedeutung:
   / $P ∧ Q$: heißt _sowohl_ $P$ _als auch_ $Q$ sind wahr.
   / $P ∨ Q$: heißt $P$ ist wahr oder $Q$ ist wahr _oder beide sind wahr_.
@@ -837,7 +837,7 @@
   / $P ↔ Q$: ist definiert als $(P → Q) ∧ (Q → P)$.
 ]<logischeVerknüpfungen>
 
-#konvention(kurz: [$¬$ vor $∧, ∨$ vor $→, ↔$])[Bindungsstärke][
+#konvention(kurz: [$¬$ stark; $→, ↔$ schwach])[Bindungsstärke][
   Um Klammern zu sparen, vereinbaren wir: $¬$ bindet am stärksten, danach folgen $∧$ und $∨$, am schwächsten binden $→$ und $↔$. Zwischen $∧$ und $∨$ sowie zwischen $→$ und $↔$ legen wir keine Rangfolge fest und setzen immer Klammern. So bedeutet etwa
   $ ¬P ∧ Q → P ∨ ¬Q quad "dasselbe wie" quad ((¬P) ∧ Q) → (P ∨ (¬Q)). $
 ]<bindungsstaerke>
@@ -934,13 +934,7 @@
 
 === Formeln mit den Quantoren ∀ und ∃
 
-#bemerkung("Formel allgemein")[
-  Wir werden die aussagenlogischen Verknüpfungen nun auch außerhalb rein aussagenlogischer Kontexte verwenden. Zum Beispiel könnten wir Formeln betrachten wie $x ∈ A ∧ ¬(2⋅x ∈ A)$ die Arithmetik, Mengenlehre und Aussagenlogik mischen. Zudem brauchen wir *Quantoren*, die wir nun einführen.
-]
-
-#notation(kurz: $∀,∃$)[Quantoren $∀,∃$][
-  Ist $P$ eine Formel, in der die Variable $x$ frei vorkommt, und $M$ eine Menge von Werten, die man sinnvoll für $x$ einsetzen kann, dann können wir folgende komplexere Formeln bilden.
-  #table(
+#let quantorenTabelle = table(
     columns: 3,
     table.header[*Konzept*][*schreibe*][*sprich*],
     table.hline(y: 1),
@@ -948,6 +942,10 @@
     [Existenzquantor], [$∃x ∈ M: P$], [für _mindestens ein_ $x$ aus $M$ gilt $P$],
     [], [$∃!x ∈ M: P$], [für _genau ein_ $x$ aus $M$ gilt $P$],
   )
+
+#notation(kurz: quantorenTabelle)[Quantoren $∀,∃$][
+  Ist $P$ eine Formel, in der die Variable $x$ frei vorkommt, und $M$ eine Menge von Werten, die man sinnvoll für $x$ einsetzen kann, dann können wir folgende komplexere Formeln bilden.
+  #quantorenTabelle
   Der Ausdruck $∀x ∈ M: P$ meint: Aus $P$ wird eine wahre Aussage, ganz egal welchen Wert aus $M$ man für $x$ einsetzt.
   Analog bedeutet $∃x ∈ M: P$, dass es mindestens ein Element in $M$ gibt, das, wenn man es für $x$ einsetzt, zu einer wahren Aussage führt. Die Variante "$∃!$" wird nur selten verwendet.
 
@@ -994,7 +992,7 @@
 
 
 #uebung[
-  Erstellen Sie Formeln, die folgende natürlichsprachliche Aussagen ausdrücken. Die Objekte, über die gesprochen wird, seien eine Zahl $x ∈ ℕ$, ein Graph $G = (V,E)$ und ein Knoten $v₀ ∈ V$. Diese werden frei in der Formel vorkommen.
+  Erstellen Sie Formeln, die folgende natürlichsprachliche Aussagen ausdrücken. Die Objekte, über die gesprochen wird, seien eine Zahl $x ∈ ℕ$, ein Graph $G = (V,E)$ und ein Knoten $v₀ ∈ V$. Diese dürfen frei in den Formeln vorkommen.
   + $x$ ist eine Primzahl
   + $G$ enthält ein Dreieck.
   + $v₀$ hat mindestens zwei Nachbarn.
@@ -1019,32 +1017,34 @@
 === Rechenregeln für Quantoren und Negation
 
 #skript[
-  Die folgenden Regeln benutzen wir im Rest der Vorlesung ständig, meist ohne sie zu erwähnen. Besonders wichtig ist, eine Aussage negieren zu können: Beim indirekten Beweis und beim Widerspruchsbeweis ist die Negation der Ausgangspunkt.
+  Die folgenden Regeln benutzen wir im Rest der Vorlesung ständig, meist ohne sie zu erwähnen. Besonders wichtig ist, eine Aussage negieren zu können.
 ]
 
-#satz("Doppelnegation", kurz: [$¬(¬P)$ ist äquivalent zu $P$])[
+#satz[Doppelnegation][
   $¬(¬P)$ ist äquivalent zu $P$.
 ]
 
-#satz("De-Morgansche Regeln")[
+#satz[De-Morgansche Regeln][
   Für alle Aussagen $P$ und $Q$ gilt:
   - $¬(P ∧ Q)$ ist äquivalent zu $¬P ∨ ¬Q$.
   - $¬(P ∨ Q)$ ist äquivalent zu $¬P ∧ ¬Q$.
 ]
 
-#skript[
-  Ein Beweis der De-Morganschen Regeln, etwa mit Wahrheitstabellen, ist möglich aber wenig erhellend. Nützlicher ist es zu erkennen, dass Sie diese Regeln bereits intuitiv beherrschen, sogar in allgemeinerer Form:
+#beweis[
+  Man überprüft das durch Anfertigen von Wahrheitstabellen.
+]
 
+#bemerkung(slides: 1)[De-Morgan intuitiv][
   Eine Konjunktion $A ∧ B ∧ C ∧ …$ ("der Mörder ist alt und bärtig und charismatisch und …") ist dann falsch, wenn eine der beteiligten Aussagen falsch ist, also wenn $¬A ∨ ¬B ∨ ¬C ∨ …$ gilt.
 
   Eine Disjunktion $A ∨ B ∨ C ∨ …$ ("der Mörder war Alice oder Bob oder Carol oder …") ist dann falsch, wenn keine der genannten Möglichkeiten zutrifft, also wenn $¬A ∧ ¬B ∧ ¬C ∧ …$ gilt.
 ]
 
-#bemerkung[De-Morgan in Worten][
+#bemerkung(slides: 1)[De-Morgan in Worten][
   Beim Negieren einer Konjunktion oder Disjunktion wird die Negation auf alle Terme in der Klammer angewendet, und $∧$ und $∨$ vertauschen ihre Rollen.
 ]
 
-#satz("Kontraposition", kurz: [$P → Q$ ist äquivalent zu $¬Q → ¬P$])[
+#satz[Kontraposition][
   $P → Q$ ist äquivalent zu $¬Q → ¬P$.
 ]<kontraposition>
 
@@ -1064,7 +1064,7 @@
   Nach Definition von „$→$“ ist $¬(P → Q)$ dasselbe wie $¬(¬P ∨ Q)$. Nach der zweiten de-Morganschen Regel ist das äquivalent zu $¬(¬P) ∧ ¬Q$ und nach dem Satz über die Doppelnegation zu $P ∧ ¬Q$.
 ]
 
-#satz(kurz: [$¬∀ ⇝ ∃¬$ sowie $¬∃ ⇝ ∀¬$])[
+#satz[
   Sei $P$ eine Formel und seien $A, B, M$ Mengen. Dann gilt:
   + $¬ ∀x ∈ M: P$ ist äquivalent zu $∃x ∈ M: ¬ P$
   + $¬ ∃x ∈ M: P$ ist äquivalent zu $∀x ∈ M: ¬ P$
@@ -2749,9 +2749,9 @@
   Wir nehmen ohne Einschränkung an, dass $A$ und $B$ disjunkt sind#footnote[Andernfalls betrachten wir die disjunkten Mengen $A' = A × {1}$ sowie $B' = B × {2}$. Wir konstruieren eine Bijektion $h' : A' → B'$. Zusammen mit den offensichtlichen Bijektionen $h_A : A → A × {1}$ sowie $h_B : B × {2} → B$ ergibt sich die gewünschte Bijektion $h_B ∘ h' ∘ h_A: A → B$.].
   Wir betrachten den gerichteten Graphen $G = (V,E)$ mit den potentiell unendlichen Knoten- und Kantenmengen
   $ V = A ∪ B "und" E = {(a,f(a)) | a ∈ A } ∪ {(b,g(b)) | b ∈ B }. $
-  Jeder Knoten $v ∈ V$ hat genau eine ausgehende Kante (weil $f$ und $g$ Funktionen sind) und höchstens eine eingehende Kante (weil $f$ und $g$ injektiv sind). Daraus folgt, dass es für die Zusammenhangskomponenten#footnote[Mit der (schwachen) Zusammenhangskomponente eines gerichteten Graphen sind die Zusammenhangskomponenten des zugrundeliegenden ungerichteten Graphen $(V,{{x,y} | (x,y) ∈ E })$ gemeint.] des Graphen nur folgende vier Möglichkeiten gibt (@csbTypen). Wir stellen $A$-Knoten als rote Kreise und $B$-Knoten als blaue Quadrate dar.
+  Jeder Knoten $v ∈ V$ hat genau eine ausgehende Kante (weil $f$ und $g$ Funktionen sind) und höchstens eine eingehende Kante (weil $f$ und $g$ injektiv sind). Daraus folgt, dass es für die Zusammenhangskomponenten#footnote[Mit der (schwachen) Zusammenhangskomponente eines gerichteten Graphen sind die Zusammenhangskomponenten des zugrundeliegenden ungerichteten Graphen $(V,{{x,y} | (x,y) ∈ E })$ gemeint.] des Graphen nur folgende vier Möglichkeiten gibt (@csbTypen). Wir stellen $A$-Knoten rot und $B$-Knoten blau dar.
   #abbildung(slides: 1, caption: [
-    Die vier möglichen Typen von Zusammenhangskomponenten. Kanten von $f$ sind durchgezogen, Kanten von $g$ gestrichelt.
+    Die vier möglichen Typen von Zusammenhangskomponenten. Jede Kante ist mit der Funktion beschriftet, zu der sie gehört.
   ])[#csbtypen(modus: "fg")]<csbTypen>
   + Ein „Strahl“, der an einem $A$-Knoten beginnt und sich unendlich nach rechts fortsetzt.
   + Ein „Strahl“, der an einem $B$-Knoten beginnt und sich unendlich nach rechts fortsetzt.
