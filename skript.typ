@@ -817,13 +817,13 @@
     table.header[*Konzept*][*schreibe*][*sprich*],
     table.hline(y: 1),
     [Konjunktion], [$P ∧ Q$], [$P$ und $Q$],
-    [Disjunktion], [$P ∨ Q$], [$P$ oder $Q$],
+    [Disjunktion], [$P ∨ Q$], [$P$ oder $Q$ (oder beides)],
     [Negation], [$¬P$], [nicht $P$],
     [Implikation], [$P → Q$], [wenn $P$, dann $Q$],
     [Äquivalenz], [$P ↔ Q$], [$P$ genau dann, wenn $Q$],
 )
 
-#definition(kurz: [#ALF-tabelle])[Elementaraussagen und aussagenlogische Formeln][
+#definition(slides: "titel")[Elementaraussagen und aussagenlogische Formeln][
   Eine aussagenlogische Formel ist eine Formel, die aus Variablensymbolen, den aussagenlogischen Verknüpfungen $∧$, $∨$, $→$, $↔$, dem Negationssymbol $¬$ und, wenn nötig, Klammern besteht. Die Variablen heißen auch *Elementaraussagen* und können nur die Werte _wahr_ oder _falsch_ annehmen.
   Die Bedeutung der Symbole $∧$, $∨$, $→$, $↔$, $¬$ ist wie folgt:
   #ALF-tabelle
@@ -880,17 +880,17 @@
 #loesung[
   Die Wahrheitstabelle für $P ↔ Q$ haben wir schon. Die Wahrheitstabelle für die andere Formel erhalten wir Schritt für Schritt aus Wahrheitstabellen ihrer Teilformeln.
 
-  #block(breakable: false)[
+  #block(breakable: false, width: 110%)[
     #table(
-      columns: 5,
+      columns: 7,
       align: center,
-      table.header[*$P$*][*$Q$*][*$P ∧ Q$*][*$¬P ∧ ¬Q$*][*$(P ∧ Q) ∨ (¬P ∧ ¬Q)$*],
+      table.header[*$P$*][*$Q$*][*$P ∧ Q$*][*$¬P$*][*$¬Q$*][*$¬P ∧ ¬Q$*][*$(P ∧ Q) ∨ (¬P ∧ ¬Q)$*],
       table.hline(),
       table.vline(x: 2),
-      [0], [0], [0], [1], [1],
-      [0], [1], [0], [0], [0],
-      [1], [0], [0], [0], [0],
-      [1], [1], [1], [0], [1],
+      [0], [0], [0], [1], [1], [1], [1],
+      [0], [1], [0], [1], [0], [0], [0],
+      [1], [0], [0], [0], [1], [0], [0],
+      [1], [1], [1], [0], [0], [0], [1],
     )
   ]
   Da die Spalte für $P ↔ Q$ in @wahrheitstabelle-verknüpfungen und die Spalte für $(P ∧ Q) ∨ (¬P ∧ ¬Q)$ hier den gleichen Inhalt haben, sind beide Formeln äquivalent.
@@ -956,6 +956,7 @@
   Sind folgende Aussagen wahr oder falsch?
   + $∃x ∈ ℕ: 4⋅x = 20$
   + $∃x ∈ ℕ: 4⋅x = 10$
+  + $∃!x ∈ ℤ: x² = 25$
   + $∃x ∈ ℕ: ∀y ∈ ℕ: x > y$
   + $∀y ∈ ℕ: ∃x ∈ ℕ: x > y$
   + $∀x ∈ ℕ: ∃k ∈ ℕ: x = 2⋅k+1 ∨ x = 2⋅k$
@@ -964,13 +965,14 @@
 #loesung[
   + Wahr, wähle $x = 5$.
   + Falsch, keine zulässige Wahl von $x$ ist möglich (beachte: 2,5 $∉ ℕ$).
+  + Falsch, es gibt zwei zulässige Wahlen, nämlich $x = 5$ und $x = -5$.
   + Falsch, gesucht ist eine Zahl $x$, die größer ist als jede andere Zahl. Die gibt es nicht.
   + Wahr. Zu jeder Zahl $y$ lässt sich eine größere Zahl finden, etwa $x := y+1$.
   + Wahr. Für jedes ungerade $x$ gibt es ein $k$, um die linke Seite der Disjunktion zu erfüllen, für jedes gerade $x$ gibt es ein $k$, um die rechte Seite der Disjunktion zu erfüllen.
 ]
 
 #bemerkung[
-  Die dritte und die vierte Aussage der vorherigen Übung zeigen, dass man einen Allquantor und einen Existenzquantor nicht vertauschen darf. Das ist auch in der Alltagssprache so: "Für jeden Topf gibt es einen passenden Deckel." ist etwas anderes als "Es gibt einen Deckel der auf jeden Topf passt".
+  Die vierte und die fünfte Aussage der vorherigen Übung zeigen, dass man einen Allquantor und einen Existenzquantor nicht vertauschen darf. Das ist auch in der Alltagssprache so: "Für jeden Topf gibt es einen passenden Deckel." ist etwas anderes als "Es gibt einen Deckel der auf jeden Topf passt".
   Das ist eine häufige Fehlerquelle.
 ]<quantorenTauschen>
 
@@ -1028,16 +1030,19 @@
   Für alle Aussagen $P$ und $Q$ gilt:
   - $¬(P ∧ Q)$ ist äquivalent zu $¬P ∨ ¬Q$.
   - $¬(P ∨ Q)$ ist äquivalent zu $¬P ∧ ¬Q$.
+  Allgemeiner gilt für alle $n ∈ ℕ$ und Aussagen $P₁,…,P_n$:
+  - $¬(P₁ ∧ P₂ ∧ … ∧ P_n)$ ist äquivalent zu $¬P₁ ∨ ¬P₂ ∨ … ∨ ¬P_n$.
+  - $¬(P₁ ∨ P₂ ∨ … ∨ P_n)$ ist äquivalent zu $¬P₁ ∧ ¬P₂ ∧ … ∧ ¬P_n$.
+
 ]
 
-#beweis[
-  Man überprüft das durch Anfertigen von Wahrheitstabellen.
-]
+#begründung[
+  Für den Fall mit zwei Aussagen ist die Äquivalenz leicht mit einer Wahrheitstabelle überprüfbar.
+  Für den allgemeinen Fall geben wir nur die Intuition an:
 
-#bemerkung(slides: 1)[De-Morgan intuitiv][
-  Eine Konjunktion $A ∧ B ∧ C ∧ …$ ("der Mörder ist alt und bärtig und charismatisch und …") ist dann falsch, wenn eine der beteiligten Aussagen falsch ist, also wenn $¬A ∨ ¬B ∨ ¬C ∨ …$ gilt.
+  Eine Konjunktion $A ∧ B ∧ C ∧ …$ ("der Mörder ist alt und bärtig und charismatisch und …") ist genau dann falsch, wenn eine der beteiligten Aussagen falsch ist, also wenn $¬A ∨ ¬B ∨ ¬C ∨ …$ gilt.
 
-  Eine Disjunktion $A ∨ B ∨ C ∨ …$ ("der Mörder war Alice oder Bob oder Carol oder …") ist dann falsch, wenn keine der genannten Möglichkeiten zutrifft, also wenn $¬A ∧ ¬B ∧ ¬C ∧ …$ gilt.
+  Eine Disjunktion $A ∨ B ∨ C ∨ …$ ("der Mörder war Alice oder Bob oder Carol oder …") ist genau dann falsch, wenn keine der genannten Möglichkeiten zutrifft, also wenn $¬A ∧ ¬B ∧ ¬C ∧ …$ gilt.
 ]
 
 #bemerkung(slides: 1)[De-Morgan in Worten][
@@ -1052,8 +1057,9 @@
   Nach Definition von „$→$“ ist $¬Q → ¬P$ dasselbe wie $¬(¬Q) ∨ ¬P$. Nach dem Satz über die Doppelnegation ist das äquivalent zu $Q ∨ ¬P$. Weil es bei $∨$ nicht auf die Reihenfolge ankommt, ist das äquivalent zu $¬P ∨ Q$, was nach Definition von „$→$“ das gleich ist wie $P → Q$.
 ]
 
-#bemerkung[
-  Achtung: $P → Q$ ist _nicht_ äquivalent zu $Q → P$. Beispiel: „Wenn es regnet, ist die Straße nass“ ist etwas anderes als „Wenn die Straße nass ist, regnet es“.
+#bemerkung(slides: 1)[
+  Achtung: $P → Q$ ist _nicht_ äquivalent zu $Q → P$.
+  #skript[Beispiel: „Wenn es regnet, ist die Straße nass“ ist etwas anderes als „Wenn die Straße nass ist, regnet es“.]
 ]
 
 #satz[
@@ -1079,8 +1085,7 @@
   + Beide Formeln besagen, dass für jede Kombination aus einem $x ∈ A$ und einem $y ∈ B$ die Formel $P$ wahr wird. Die Reihenfolge der Festlegung ist wieder egal. $qedhere$
 ]
 
-#bemerkung[
-  Wir können gleichartige Quantoren zusammenfassen.
+#bemerkung(slides: "titel")[Zusammenfassen gleichartiger Quantoren][
   - man schreibt $∃x₁,x₂ ∈ V: …$ für $∃x₁ ∈ V: ∃x₂ ∈ V: …$
   - man schreibt $∀x₁,x₂ ∈ V: …$ für $∀x₁ ∈ V: ∀x₂ ∈ V: …$
 ]
@@ -1109,10 +1114,14 @@
 
 #definition[Beweis][
   Ein *Beweis* einer Behauptung ist ein Text in natürlicher Sprache, gemischt mit Formeln. Er begründet die Behauptung lückenlos und für den (menschlichen) Leser nachvollziehbar.
-  Jeder Schritt darf sich stützen auf die Voraussetzungen der Behauptung, Definitionen, bereits bewiesene Aussagen und Schlüsse, die als offensichtlich gelten dürfen.
+  Jeder Schritt darf sich stützen auf
+  - die Voraussetzungen der Behauptung
+  - Definitionen
+  - bereits bewiesene Aussagen und
+  - Schlüsse, die als offensichtlich gelten dürfen.
 ]
 
-#bemerkung[Formaler Beweis][
+#bemerkung(slides: "titel")[Formaler Beweis][
   Ein *formaler Beweis* besteht aus einer Folge von
   Formeln, die jeweils Axiome sind oder durch feste Schlussregeln aus vorherigen Formeln
   entstehen. Ob ein Text ein formaler Beweis ist, kann mechanisch überprüft werden.
@@ -1123,7 +1132,7 @@
   In dieser Vorlesung diskutieren wir kein Axiomensystem und führen keine formalen Beweise.
 ]
 
-#notation(kurz: [$A ⇒ B$, $A ⇔ B$])[Folgerung und Äquivalenz][
+#notation[Implikation und Äquivalenz][
   Seien $A$ und $B$ Formeln. Wir schreiben
   $ A ⇒ B, $
   gesprochen „aus $A$ folgt $B$“, für die Behauptung: Bei _jeder Belegung der
@@ -1141,10 +1150,10 @@
     wahr, für $x := 2$ ist sie falsch.
 ]
 
-#bemerkung[Weitere Unterschiede zwischen $→$ und $⇒$][
+#bemerkung(slides: "titel")[Weitere Unterschiede zwischen $→$ und $⇒$][
   Die Unterschiede zwischen $→$ und $⇒$ sind subtil und manche Autoren verwenden $⇒$ für beide Bedeutungen.
   - $A → B$ ist eine Formel (mit Teilformeln $A$ und $B$), während $A ⇒ B$ eine Aussage _über_ die Formeln $A$ und $B$ ist.
-  - Wir verwenden die Schreibweise $A ⇒ B ⇒ C$ und auszudrücken das beide Folgerungen $A ⇒ B$ und $B ⇒ C$ gelten. Für $→$ ist der analoger Ausdruck nicht sinnvoll. Schlimmer noch: $(A → B) → C$ und $A → (B → C)$ sind nicht äquivalent.
+  - Wir verwenden die Schreibweise $A ⇒ B ⇒ C$ und auszudrücken das beide Folgerungen $A ⇒ B$ und $B ⇒ C$ gelten. Für $→$ ist der analoge Ausdruck nicht sinnvoll. Schlimmer noch: $(A → B) → C$ und $A → (B → C)$ sind nicht äquivalent.
 ]
 
 == Beweistechniken
@@ -1190,7 +1199,7 @@
 
 === Einschub: Summen- und Produktzeichen
 
-#notation("Summen- und Produktzeichen", kurz: [$sum$, $product$])[
+#notation(kurz: [$sum$, $product$])[Summen- und Produktzeichen][
   Ist $I$ eine Indexmenge und ist für jedes $i ∈ I$ eine Zahl $a_i$ definiert, so schreiben wir
   $
         sum_(i ∈ I) & a_i "für die Summe dieser Zahlen und" \
@@ -1203,7 +1212,7 @@
   $sum_(i∈{3,4,5}) i² = sum_(i=3)^5 i² = 9 + 16 + 25 = 50$.
 ]
 
-#notation("Leere Summe, leeres Produkt")[
+#notation(slides: "titel")[Leere Summe, leeres Produkt][
   Wir vereinbaren $sum_(i ∈ ∅) a_i = 0$ und $product_(i ∈ ∅) a_i = 1$. So ist sichergestellt, dass für disjunkte (möglicherweise leere) Mengen $I$ und $J$ gilt:
   $
     sum_(i ∈ I) a_i + sum_(i ∈ J) a_i = sum_(i ∈ I ∪ J) a_i quad "sowie" quad product_(i ∈ I) a_i ⋅ product_(i ∈ J) a_i = product_(i ∈ I ∪ J) a_i.
@@ -1280,7 +1289,7 @@
 ]<indirekterBeweis>
 
 #bemerkung[
-  In Worten: Um zu zeigen, dass aus der Annahme $A$ die Behauptung $B$ folgt, zeigen wir stattdessen, dass in Fällen, in denen die Behauptung $B$ nicht gilt, die Annahme $A$ verletzt sein muss. Die Technik ist eng verwandt mit einem Beweis durch Widerspruch.
+  Im Grunde nutzen wir hier @kontraposition.
 ]
 
 #satz[
