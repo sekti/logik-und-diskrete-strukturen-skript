@@ -793,13 +793,13 @@
   + Ja (falsche Aussage).
   + Ja. Wir wissen derzeit nicht, ob die Aussage wahr oder falsch ist.
   + Keine Aussage.
-  + „$x < 5$“ ist eine _Aussageform_, ist aber erst eine Aussage, wenn der Kontext dem Symbol $x$ eine Bedeutung verleiht. Solche Gebilde nennen wir gleich _Formeln_.
+  + „$x < 5$“ ist eine _Aussageform_ und wird erst zu einer Aussage, wenn der Kontext dem Symbol $x$ eine Bedeutung verleiht. Solche Gebilde nennen wir gleich _Formeln_.
 ]
 
-#bemerkung[„beliebig aber fest“][
-  In folgendem Zusammenhang ist „$x < 5$“ eine Aussage über ein unbekanntes aber festes $x$.
-  #align(center, [Sei $x ∈ ℕ$ _beliebig aber fest_. Gilt $x² < 25$ dann auch $x < 5$.])
-  Die Floskel „beliebig aber fest“ wird oft implizit mitgedacht.
+#bemerkung[„beliebig, aber fest“][
+  In folgendem Zusammenhang ist „$x < 5$“ eine Aussage:
+  #align(center, [Sei $x ∈ ℕ$ _beliebig, aber fest_. Gilt $x² < 25$, dann auch $x < 5$.])
+  Die Floskel „beliebig, aber fest“ wird oft implizit mitgedacht. _Fest_ heißt: Im folgenden bezeichnet $x$ immer dieselbe Zahl, und „$x² < 25$“ sowie „$x < 5$“ sind Aussagen über diese Zahl. _Beliebig_ heißt: Wir wissen zunächst nichts über $x$, das folgende Argument muss jede möglichen Wert mitdenken. In diesem Sinne ist $x$ trotzdem eine Variable.
 ]
 
 #definition[Formel][
@@ -826,7 +826,7 @@
 )
 
 #definition(slides: "titel")[Elementaraussagen und aussagenlogische Formeln][
-  Eine aussagenlogische Formel ist eine Formel, die aus Variablensymbolen, den aussagenlogischen Verknüpfungen $∧$, $∨$, $→$, $↔$, dem Negationssymbol $¬$ und, wenn nötig, Klammern besteht. Die Variablen heißen auch *Elementaraussagen* und können nur die Werte _wahr_ oder _falsch_ annehmen.
+  Eine *aussagenlogische Formel* ist eine Formel, die aus Variablensymbolen, den aussagenlogischen Verknüpfungen $∧$, $∨$, $→$, $↔$, dem Negationssymbol $¬$ und, wenn nötig, Klammern besteht. Die Variablen heißen auch *Elementaraussagen* und können nur die Werte _wahr_ oder _falsch_ annehmen.
   Die Bedeutung der Symbole $∧$, $∨$, $→$, $↔$, $¬$ ist wie folgt:
   #ALF-tabelle
   Anmerkungen zur präzisen Bedeutung:
@@ -946,7 +946,7 @@
   )
 
 #notation(slides: "titel")[Quantoren $∀,∃$][
-  Ist $P$ eine Formel, in der die Variable $x$ frei vorkommt, und $M$ eine Menge von Werten, die man sinnvoll für $x$ einsetzen kann, dann können wir folgende komplexere Formeln bilden.
+  Ist $P$ eine Formel, in der die Variable $x$ (typischerweise) frei vorkommt, und $M$ eine Menge von Werten, die man sinnvoll für $x$ einsetzen kann, dann können wir folgende komplexere Formeln bilden.
   #quantorenTabelle
   Der Ausdruck $∀x ∈ M: P$ meint: Aus $P$ wird eine wahre Aussage, ganz egal welchen Wert aus $M$ man für $x$ einsetzt.
   Analog bedeutet $∃x ∈ M: P$, dass es mindestens ein Element in $M$ gibt, das, wenn man es für $x$ einsetzt, zu einer wahren Aussage führt. Die Variante "$∃!$" wird nur selten verwendet.
@@ -968,13 +968,13 @@
   + Wahr, wähle $x = 5$.
   + Falsch, keine zulässige Wahl von $x$ ist möglich (beachte: 2,5 $∉ ℕ$).
   + Falsch, es gibt zwei zulässige Wahlen, nämlich $x = 5$ und $x = -5$.
-  + Falsch, gesucht ist eine Zahl $x$, die größer ist als jede andere Zahl. Die gibt es nicht.
+  + Falsch, gesucht ist eine Zahl $x$, die größer ist als jede Zahl. Die gibt es nicht.
   + Wahr. Zu jeder Zahl $y$ lässt sich eine größere Zahl finden, etwa $x := y+1$.
   + Wahr. Für jedes ungerade $x$ gibt es ein $k$, um die linke Seite der Disjunktion zu erfüllen, für jedes gerade $x$ gibt es ein $k$, um die rechte Seite der Disjunktion zu erfüllen.
 ]
 
 #bemerkung[
-  Die vierte und die fünfte Aussage der vorherigen Übung zeigen, dass man einen Allquantor und einen Existenzquantor nicht vertauschen darf. Das ist auch in der Alltagssprache so: "Für jeden Topf gibt es einen passenden Deckel." ist etwas anderes als "Es gibt einen Deckel der auf jeden Topf passt".
+  Die vierte und die fünfte Aussage der vorherigen Übung zeigen, dass man einen Allquantor und einen Existenzquantor nicht vertauschen darf. Das ist auch in der Alltagssprache so: "Für jeden Topf gibt es einen passenden Deckel." ist etwas anderes als "Es gibt einen Deckel, der auf jeden Topf passt".
   Das ist eine häufige Fehlerquelle.
 ]<quantorenTauschen>
 
@@ -986,12 +986,10 @@
 ]
 
 #loesung[
-  Das eigentümliche an diesen Aussagen ist, dass $x$ nicht in der inneren Formel vorkommt und das in 2 und 3 über die leere Menge quantifiziert wird. Man darf solche Formeln trotzdem bilden.
+  Das Eigentümliche an diesen Aussagen ist, dass $x$ nicht in der inneren Formel vorkommt und dass in 2 und 3 über die leere Menge quantifiziert wird. Man darf solche Formeln trotzdem bilden.
   + Wahr.
   + Falsch (es gibt kein $x$ in der leeren Menge).
   + Wahr ("alle" Elemente aus ∅, wovon es 0 gibt, erfüllen die Formel).
-
-  Wahr. Die Aussage ist komisch, weil $x$ in der inneren Formel "1+1=2" nicht frei vorkommt. Man darf solche Formeln trotzdem bilden, es ist nur ziemlich sinnlos.
 ]
 
 
@@ -1034,7 +1032,7 @@
   Für alle Aussagen $P$ und $Q$ gilt:
   - $¬(P ∧ Q)$ ist äquivalent zu $¬P ∨ ¬Q$.
   - $¬(P ∨ Q)$ ist äquivalent zu $¬P ∧ ¬Q$.
-  Allgemeiner gilt für alle $n ∈ ℕ$ und Aussagen $P₁,…,P_n$:
+  Allgemeiner gilt für alle $n ∈ ℕ⁺$ und Aussagen $P₁,…,P_n$:
   - $¬(P₁ ∧ P₂ ∧ … ∧ P_n)$ ist äquivalent zu $¬P₁ ∨ ¬P₂ ∨ … ∨ ¬P_n$.
   - $¬(P₁ ∨ P₂ ∨ … ∨ P_n)$ ist äquivalent zu $¬P₁ ∧ ¬P₂ ∧ … ∧ ¬P_n$.
 
@@ -1044,13 +1042,13 @@
   Für den Fall mit zwei Aussagen ist die Äquivalenz leicht mit einer Wahrheitstabelle überprüfbar.
   Für den allgemeinen Fall geben wir nur die Intuition an:
 
-  Eine Konjunktion $A ∧ B ∧ C ∧ …$ ("der Mörder ist alt und bärtig und charismatisch und …") ist genau dann falsch, wenn eine der beteiligten Aussagen falsch ist, also wenn $¬A ∨ ¬B ∨ ¬C ∨ …$ gilt.
+  Eine Konjunktion $A ∧ B ∧ C ∧ …$ ("der Mörder ist alt und bärtig und charismatisch und …") ist genau dann falsch, wenn mindestens eine der beteiligten Aussagen falsch ist, also wenn $¬A ∨ ¬B ∨ ¬C ∨ …$ gilt.
 
   Eine Disjunktion $A ∨ B ∨ C ∨ …$ ("der Mörder war Alice oder Bob oder Carol oder …") ist genau dann falsch, wenn keine der genannten Möglichkeiten zutrifft, also wenn $¬A ∧ ¬B ∧ ¬C ∧ …$ gilt.
 ]
 
 #bemerkung(slides: 1)[De-Morgan in Worten][
-  Beim Negieren einer Konjunktion oder Disjunktion wird die Negation auf alle Terme in der Klammer angewendet, und $∧$ und $∨$ vertauschen ihre Rollen.
+  Beim Negieren einer Konjunktion oder Disjunktion wird die Negation auf alle Teilformeln in der Klammer angewendet, und $∧$ und $∨$ vertauschen ihre Rollen.
 ]
 
 #satz[Kontraposition][
@@ -1058,7 +1056,7 @@
 ]<kontraposition>
 
 #beweis[
-  Nach Definition von „$→$“ ist $¬Q → ¬P$ dasselbe wie $¬(¬Q) ∨ ¬P$. Nach dem Satz über die Doppelnegation ist das äquivalent zu $Q ∨ ¬P$. Weil es bei $∨$ nicht auf die Reihenfolge ankommt, ist das äquivalent zu $¬P ∨ Q$, was nach Definition von „$→$“ das gleich ist wie $P → Q$.
+  Nach Definition von „$→$“ ist $¬Q → ¬P$ dasselbe wie $¬(¬Q) ∨ ¬P$. Nach dem Satz über die Doppelnegation ist das äquivalent zu $Q ∨ ¬P$. Weil es bei $∨$ nicht auf die Reihenfolge ankommt, ist das äquivalent zu $¬P ∨ Q$, was nach Definition von „$→$“ dasselbe ist wie $P → Q$.
 ]
 
 #bemerkung(slides: 1)[
@@ -1084,7 +1082,7 @@
 
 #beweis[
   + Eine Allaussage ist falsch genau dann, wenn es ein _Gegenbeispiel_ gibt: _"Alle Studenten bestehen die Prüfung" ist falsch genau dann, wenn es einen Studenten gibt, der die Prüfung nicht besteht._
-  + Eine Existenzaussage ist falsch genau dann, wenn für alle Kandidaten die Aussage falsch ist. _"Es gibt einen Studenten der die Prüfung besteht" ist falsch genau dann, wenn alle Studenten die Prüfung nicht bestehen._
+  + Eine Existenzaussage ist falsch genau dann, wenn für alle Kandidaten die Aussage falsch ist. _"Es gibt einen Studenten, der die Prüfung besteht" ist falsch genau dann, wenn alle Studenten die Prüfung nicht bestehen._
   + Beide Formeln besagen, dass es ein $x ∈ A$ und ein $y ∈ B$ gibt, sodass $P$ wahr wird. Auf die Reihenfolge, in der man die Elemente festlegt, kommt es dabei nicht an.
   + Beide Formeln besagen, dass für jede Kombination aus einem $x ∈ A$ und einem $y ∈ B$ die Formel $P$ wahr wird. Die Reihenfolge der Festlegung ist wieder egal. $qedhere$
 ]
@@ -1157,7 +1155,7 @@
 #bemerkung(slides: "titel")[Weitere Unterschiede zwischen $→$ und $⇒$][
   Die Unterschiede zwischen $→$ und $⇒$ sind subtil und manche Autoren verwenden $⇒$ für beide Bedeutungen.
   - $A → B$ ist eine Formel (mit Teilformeln $A$ und $B$), während $A ⇒ B$ eine Aussage _über_ die Formeln $A$ und $B$ ist.
-  - Wir verwenden die Schreibweise $A ⇒ B ⇒ C$ und auszudrücken das beide Folgerungen $A ⇒ B$ und $B ⇒ C$ gelten. Für $→$ ist der analoge Ausdruck nicht sinnvoll. Schlimmer noch: $(A → B) → C$ und $A → (B → C)$ sind nicht äquivalent.
+  - Wir verwenden die Schreibweise $A ⇒ B ⇒ C$ um auszudrücken, dass beide Folgerungen $A ⇒ B$ und $B ⇒ C$ gelten. Für $→$ ist der analoge Ausdruck nicht sinnvoll. Schlimmer noch: $(A → B) → C$ und $A → (B → C)$ sind nicht äquivalent.
 ]
 
 == Beweistechniken
