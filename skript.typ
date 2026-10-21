@@ -796,8 +796,10 @@
   + „$x < 5$“ ist eine _Aussageform_, ist aber erst eine Aussage, wenn der Kontext dem Symbol $x$ eine Bedeutung verleiht. Solche Gebilde nennen wir gleich _Formeln_.
 ]
 
-#skript[
-  Aussagen in natürlicher Sprache sind manchmal ungenau. In diesem Abschnitt lernen wir Symbole kennen, die im Folgenden helfen, mathematische Aussagen präzise zu formulieren.
+#bemerkung[„beliebig aber fest“][
+  In folgendem Zusammenhang ist „$x < 5$“ eine Aussage über ein unbekanntes aber festes $x$.
+  #align(center, [Sei $x ∈ ℕ$ _beliebig aber fest_. Gilt $x² < 25$ dann auch $x < 5$.])
+  Die Floskel „beliebig aber fest“ wird oft implizit mitgedacht.
 ]
 
 #definition[Formel][
@@ -943,7 +945,7 @@
     [], [$∃!x ∈ M: P$], [für _genau ein_ $x$ aus $M$ gilt $P$],
   )
 
-#notation(kurz: quantorenTabelle)[Quantoren $∀,∃$][
+#notation(slides: "titel")[Quantoren $∀,∃$][
   Ist $P$ eine Formel, in der die Variable $x$ frei vorkommt, und $M$ eine Menge von Werten, die man sinnvoll für $x$ einsetzen kann, dann können wir folgende komplexere Formeln bilden.
   #quantorenTabelle
   Der Ausdruck $∀x ∈ M: P$ meint: Aus $P$ wird eine wahre Aussage, ganz egal welchen Wert aus $M$ man für $x$ einsetzt.
@@ -996,9 +998,9 @@
 #uebung[
   Erstellen Sie Formeln, die folgende natürlichsprachliche Aussagen ausdrücken. Die Objekte, über die gesprochen wird, seien eine Zahl $x ∈ ℕ$, ein Graph $G = (V,E)$ und ein Knoten $v₀ ∈ V$. Diese dürfen frei in den Formeln vorkommen.
   + $x$ ist eine Primzahl
-  + $G$ enthält ein Dreieck.
+  + $G$ enthält einen Kreis der Länge 3.
   + $v₀$ hat mindestens zwei Nachbarn.
-  + Jeder Knoten von $G$ hat einen Nachbarn.
+  + Jeder Knoten von $G$ hat mindestens einen Nachbarn.
   + $G$ ist vollständig.
   + $G$ hat einen Knoten, der zu allen anderen Knoten benachbart ist.
 ]<uebung-formeln>
@@ -1014,12 +1016,14 @@
   Zu 2: Dass die drei Knoten paarweise verschieden sind, muss nicht gefordert werden. Kanten sind zweielementige Mengen, aus ${u,v} ∈ E$ folgt also bereits $u ≠ v$.
 
   Zu 5 und 6: Die Bedingung $v ≠ w$ ist dagegen nötig, denn ${v,v}$ ist keine Kante. Ohne sie wären die Formeln für jeden Graphen falsch.
+
+  Zu 3, 4, 5, 6: Mit der Notation $deg(v)$ für Knotengrade lassen sich kompaktere äquivalente Formeln finden.
 ]
 
 === Rechenregeln für Quantoren und Negation
 
 #skript[
-  Die folgenden Regeln benutzen wir im Rest der Vorlesung ständig, meist ohne sie zu erwähnen. Besonders wichtig ist, eine Aussage negieren zu können.
+  Folgende Regeln benutzen wir im Rest der Vorlesung ständig, teils ohne sie zu erwähnen. Besonders wichtig ist es, eine Aussage negieren zu können.
 ]
 
 #satz[Doppelnegation][
@@ -1079,7 +1083,7 @@
 ]
 
 #beweis[
-  + Eine Allaussage ist falsch genau dann, wenn es ein Gegenbeispiel gibt: _"Alle Studenten bestehen die Prüfung" ist falsch genau dann, wenn es einen Studenten gibt, der die Prüfung nicht besteht._
+  + Eine Allaussage ist falsch genau dann, wenn es ein _Gegenbeispiel_ gibt: _"Alle Studenten bestehen die Prüfung" ist falsch genau dann, wenn es einen Studenten gibt, der die Prüfung nicht besteht._
   + Eine Existenzaussage ist falsch genau dann, wenn für alle Kandidaten die Aussage falsch ist. _"Es gibt einen Studenten der die Prüfung besteht" ist falsch genau dann, wenn alle Studenten die Prüfung nicht bestehen._
   + Beide Formeln besagen, dass es ein $x ∈ A$ und ein $y ∈ B$ gibt, sodass $P$ wahr wird. Auf die Reihenfolge, in der man die Elemente festlegt, kommt es dabei nicht an.
   + Beide Formeln besagen, dass für jede Kombination aus einem $x ∈ A$ und einem $y ∈ B$ die Formel $P$ wahr wird. Die Reihenfolge der Festlegung ist wieder egal. $qedhere$
@@ -1113,11 +1117,11 @@
 == Beweise
 
 #definition[Beweis][
-  Ein *Beweis* einer Behauptung ist ein Text in natürlicher Sprache, gemischt mit Formeln. Er begründet die Behauptung lückenlos und für den (menschlichen) Leser nachvollziehbar.
+  Ein *Beweis* einer Behauptung ist ein Text in natürlicher Sprache, gemischt mit Formeln. Er begründet die Behauptung lückenlos und für den (menschlichen) Leser nachvollziehbar.#footnote[Was _lückenlos_ und _nachvollziehbar_ bedeutet, könnte davon abhängen für wen der Beweis gedacht ist: Erstsemester oder ausgebildete Mathematiker.]
   Jeder Schritt darf sich stützen auf
-  - die Voraussetzungen der Behauptung
-  - Definitionen
-  - bereits bewiesene Aussagen und
+  - die Voraussetzungen der Behauptung,
+  - Definitionen,
+  - bereits bewiesene Aussagen, und
   - Schlüsse, die als offensichtlich gelten dürfen.
 ]
 
@@ -1860,7 +1864,7 @@
     column-gutter: 0.8em,
     [*linkstotal*], [links je _mindestens_ eine Kante],
     [*rechtstotal*], [rechts je _mindestens_ eine Kante],
-    [*rechtseindeutig*], [links je _höchstens_ eine Kante],
+    [*rechtseindeutig*], [links je _höchstens_ eine Kante#footnote[Die Vorstellung ist, dass es _von_ jedem linken Knoten eine eindeutige Kante _nach rechts_ gibt.]],
     [*linkseindeutig*], [rechts je _höchstens_ eine Kante],
   )
   In @magbild kann man direkt ablesen: „mag“ ist linkstotal, erfüllt aber keine der anderen Eigenschaften.
