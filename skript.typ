@@ -131,7 +131,7 @@
     } else if slides == 1 {
       locEnv(..args)
     } else if slides == "titel" {
-      locEnv(separator: [], ..args.named(), ..ohneInhalt, [])
+      locEnv(separator: [*.*], ..args.named(), ..ohneInhalt, [])
     } else if slides == 0 {
       // Die Umgebung wird weiterhin angelegt (Zähler, Nummer, Verweisziel),
       // nur ihre Darstellung ist leer.
@@ -1115,9 +1115,9 @@
 == Beweise
 
 #definition[Beweis][
-  Ein *Beweis* einer Behauptung ist ein Text in natürlicher Sprache, gemischt mit Formeln. Er begründet die Behauptung lückenlos und für den (menschlichen) Leser nachvollziehbar.#footnote[Was _lückenlos_ und _nachvollziehbar_ bedeutet, könnte davon abhängen für wen der Beweis gedacht ist: Erstsemester oder ausgebildete Mathematiker.]
+  Ein *Beweis* einer Behauptung ist ein Text in natürlicher Sprache, gemischt mit Formeln. Er begründet die Behauptung lückenlos und für den (menschlichen) Leser nachvollziehbar.#footnote[Was _lückenlos_ und _nachvollziehbar_ bedeutet, könnte davon abhängen für wen der Beweis gedacht ist, z.B. Erstsemester oder ausgebildete Mathematiker.]
   Jeder Schritt darf sich stützen auf
-  - die Voraussetzungen der Behauptung,
+  - Voraussetzungen bzw. getroffene Annahmen,
   - Definitionen,
   - bereits bewiesene Aussagen, und
   - Schlüsse, die als offensichtlich gelten dürfen.
@@ -1150,12 +1150,13 @@
     rechte falsch.
   - Die Formel $x > 1 → x > 2$ ist dagegen nicht einfach falsch: Für $x := 1$ ist sie
     wahr, für $x := 2$ ist sie falsch.
+  - „$A ⇒ B$“ ist gleichbedeutend mit „$A → B$ ist _allgemeingültig_ (d.h. bei jeder Belegung der vorkommenden Variablen wahr)“.
 ]
 
 #bemerkung(slides: "titel")[Weitere Unterschiede zwischen $→$ und $⇒$][
   Die Unterschiede zwischen $→$ und $⇒$ sind subtil und manche Autoren verwenden $⇒$ für beide Bedeutungen.
   - $A → B$ ist eine Formel (mit Teilformeln $A$ und $B$), während $A ⇒ B$ eine Aussage _über_ die Formeln $A$ und $B$ ist.
-  - Wir verwenden die Schreibweise $A ⇒ B ⇒ C$ um auszudrücken, dass beide Folgerungen $A ⇒ B$ und $B ⇒ C$ gelten. Für $→$ ist der analoge Ausdruck nicht sinnvoll. Schlimmer noch: $(A → B) → C$ und $A → (B → C)$ sind nicht äquivalent.
+  - Wir verwenden die Schreibweise $A ⇒ B ⇒ C$ um auszudrücken, dass beide Folgerungen $A ⇒ B$ und $B ⇒ C$ gelten. Für $→$ ist der analoge Ausdruck nicht gebräuchlich. Schlimmer noch: $(A → B) → C$ und $A → (B → C)$ sind nicht äquivalent und beide sind nicht äquivalent zu $(A → B) ∧ (B → C)$.
 ]
 
 == Beweistechniken
@@ -1167,12 +1168,12 @@
     columns: 2,
     [zu zeigen], [Beweisstruktur],
     table.hline(),
-    [$∀x ∈ M: F$], [Führe eine Variable $x ∈ M$ ein und beweise $F$, ohne weitere Annahmen über $x$ zu treffen.],
-    [$A ⊆ B$],[beweise $∀x ∈ A: x ∈ B$],
+    [$∀x ∈ M: F$], [Führe eine Variable $x ∈ M$ ein und beweise $F$ (ohne weitere Annahmen über $x$ zu treffen).],
+    [$A ⊆ B$],[Für eine Variable $x ∈ A$ ein. Beweise $x ∈ B$.],
     [$∃x ∈ M: F$],
     [Definiere $x$ „geschickt“, oft in Abhängigkeit anderer Variablen. Beweise dann, dass für diese Wahl von $x$ sowohl $x ∈ M$ als auch $F$ gelten.],
     [$F ∧ G$], [Beweise $F$ und beweise $G$.],
-    [$F → G$], [Nimm $F$ an. Beweise dann $G$.],
+    [$F → G$], [Treffe $F$ als Annahme. Beweise dann $G$.],
     [$F ∨ G$],
     [Verwende, dass $F ∨ G$ und $¬F → G$ äquivalent sind (alternativ auch $¬G → F$). Verwende dann die Technik für die Implikation.],
     [$¬F$], [Negation „reinziehen“ oder Beweis durch Widerspruch (siehe unten).],
@@ -1196,7 +1197,8 @@
 ]
 
 #skript[
-  Im Folgenden lernen wir Argumentationsmuster kennen, die in vielen Beweisen nützlich sind. Das Finden eines Beweises bleibt dennoch eine kreative Aufgabe: Oft ist eine Idee nötig, die sich aus der Struktur der Aussage allein nicht ablesen lässt.
+  Die obigen Tabellen sind nicht vollständig.
+  Im Folgenden lernen wir zusätzliche Argumentationsmuster kennen, die in vielen Beweisen nützlich sind. Das Finden eines Beweises bleibt dennoch eine kreative Aufgabe: Oft ist eine Idee nötig, die sich aus der Struktur der Aussage allein nicht ablesen lässt.
 ]
 
 === Einschub: Summen- und Produktzeichen
@@ -1227,7 +1229,7 @@
   Wir wollen eine Gleichung $a = b$ beweisen. Wir definieren dazu eine Menge $X$ „geschickt“ und zählen ihre Elemente auf zwei Weisen. Ergibt die eine Zählung $|X| = a$ und die andere $|X| = b$, so folgt $a = b$.
 ]<doppeltesAbzählen>
 
-#satz("Handschlaglemma", kurz: [$sum_(v ∈ V) deg(v) = 2 m$])[
+#satz[Handschlaglemma][
   Sei $G = (V,E)$ ein Graph. Dann gilt
   $ sum_(v ∈ V) deg(v) = 2 ⋅ |E|. $
 ]<handschlaglemma>
@@ -1266,7 +1268,7 @@
   Das kann nicht stimmen, da $2⋅|E|$ gerade ist, 21 dagegen ungerade. Dieser Widerspruch zeigt, dass die Annahme falsch gewesen sein muss. Somit ergibt sich die Behauptung nach @beweisDurchWiderspruch.
 ]
 
-#bemerkung[
+#bemerkung[Es geht meist ohne Widerspruch][
   In der Regel ist es nicht schwierig, einen Widerspruchsbeweis so umzuschreiben, dass kein expliziter Widerspruch auftaucht.
 ]
 
