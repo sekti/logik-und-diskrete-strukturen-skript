@@ -1087,7 +1087,7 @@
   + Beide Formeln besagen, dass für jede Kombination aus einem $x ∈ A$ und einem $y ∈ B$ die Formel $P$ wahr wird. Die Reihenfolge der Festlegung ist wieder egal. $qedhere$
 ]
 
-#bemerkung(slides: "titel")[Zusammenfassen gleichartiger Quantoren][
+#notation(slides: 1)[Zusammenfassen gleichartiger Quantoren][
   - man schreibt $∃x₁,x₂ ∈ V: …$ für $∃x₁ ∈ V: ∃x₂ ∈ V: …$
   - man schreibt $∀x₁,x₂ ∈ V: …$ für $∀x₁ ∈ V: ∀x₂ ∈ V: …$
 ]
@@ -1356,22 +1356,22 @@
 
 #beweis[
   Jeder Knoten hat höchstens $n-1$ Nachbarn, die möglichen Grade sind also $0,1,…,n-1$. Da es ebenso viele Knoten wie mögliche Grade gibt, genügt das Schubfachprinzip zunächst noch nicht. Eine Fallunterscheidung hilft weiter. In beiden Fällen wenden wir das Schubfachprinzip mit der Indexmenge $I = V$ und den Werten $x_v = deg(v)$ an; nur die Wertemenge $M$ ist verschieden.
-  / Fall 1\: Kein Knoten von $G$ hat Grad $n-1$.: Für die Knoten aus $V$ kommen also nur Grade aus ${0,1,…,n-2}$ in Frage. Weil $n = |V| > |{0,1,…,n-2}| = n-1$ gilt, haben nach dem Schubfachprinzip zwei verschiedene Knoten den gleichen Grad.
-  / Fall 2\: Mindestens ein Knoten von $G$ hat Grad $n-1$.: Ein solcher Knoten ist zu allen anderen Knoten benachbart. Jeder andere Knoten hat also mindestens Grad 1, und wegen $n ≥ 2$ hat auch der Knoten selbst Grad $n-1 ≥ 1$. Es gibt also keinen Knoten von Grad $0$, und für die Knoten aus $V$ kommen nur Grade aus ${1,…,n-1}$ in Frage. Weil $n = |V| > |{1,2,…,n-1}| = n-1$ gilt, haben nach dem Schubfachprinzip zwei verschiedene Knoten den gleichen Grad.#qedhere
+  / Fall 1\: Kein Knoten von $G$ hat Grad $n-1$.: Für die Knoten aus $V$ kommen also nur Grade aus $M := {0,1,…,n-2}$ in Frage. Weil $|V| = n > n-1 = |M|$ gilt, haben nach dem Schubfachprinzip zwei verschiedene Knoten den gleichen Grad.
+  / Fall 2\: Mindestens ein Knoten von $G$ hat Grad $n-1$.: Ein solcher Knoten ist zu allen anderen Knoten benachbart. Jeder andere Knoten hat also mindestens Grad 1, und wegen $n ≥ 2$ hat auch der Knoten selbst Grad $n-1 ≥ 1$. Es gibt also keinen Knoten von Grad $0$, und für die Knoten aus $V$ kommen nur Grade aus $M := {1,…,n-1}$ in Frage. Weil $|V| = n > n-1 = |M|$ gilt, haben nach dem Schubfachprinzip zwei verschiedene Knoten den gleichen Grad.#qedhere
 ]
 
 === Extremalprinzip
 
 #technik[Extremalprinzip][
-  Gegeben sei eine nichtleere Menge $M$. Anstatt ein beliebiges Objekt $x ∈ M$ zu betrachten, lohnt es sich zuweilen, ein extremales Objekt zu betrachten; z.B. das kleinste, größte oder längste. Ein solches Objekt hat oft nützliche Eigenschaften.#footnote[Für potentiell unendliche $M$ ist Vorsicht geboten. So hat eine Menge $M ⊆ ℕ$ nicht notwendigerweise ein größtes Element (garantiert aber ein kleinstes Element, wenn $M ≠ ∅$).]
+  Gegeben sei eine nichtleere Menge $M$. Anstatt ein beliebiges Objekt $x ∈ M$ zu betrachten, lohnt es sich zuweilen, ein extremales Objekt zu betrachten; z.B. das kleinste, größte oder längste. Ein solches Objekt hat oft nützliche Eigenschaften.#footnote[Für potentiell unendliche $M$ ist Vorsicht geboten. So hat eine nichtleere Menge $M ⊆ ℕ$ nur dann ein größtes Element wenn $M$ endlich ist (garantiert aber ein kleinstes Element).]
 ]<extremalprinzip>
 
-#lemma[Weg ⇒ Pfad][
+#lemma[Weg $⇒$ Pfad][
   Sei $G = (V,E)$ ein Graph und seien $u,v ∈ V$, sodass es einen Weg von $u$ nach $v$ gibt. Dann gibt es auch einen Pfad von $u$ nach $v$.
 ]<wegPfad>
 
 #beweis[
-  Sei $M$ die Menge der Längen der Wege von $u$ nach $v$. Weil $M ≠ ∅$ gibt es nach dem Extremalprinzip eine kleinstes Element von $M$. Entsprechend gibt es einen kürzesten Weg von $u$ nach $v$. Wir zeigen, dass dieser Weg ein Pfad ist.
+  Sei $M$ die Menge der Längen der Wege von $u$ nach $v$. Weil $M ≠ ∅$ ist, gibt es nach dem Extremalprinzip eine kleinstes Element von $M$. Entsprechend gibt es einen kürzesten Weg von $u$ nach $v$. Wir zeigen, dass dieser Weg ein Pfad ist.
 
   Wir nehmen zum Widerspruch an, dies sei nicht der Fall. Dann gibt es einen Knoten $w ∈ V$, der mindestens zweimal auf dem Weg vorkommt, das heißt, der Weg hat die Form $u … w … w … v$. Wenn wir das Zwischenstück $w … w$ durch $w$ ersetzen, erhalten wir einen kürzeren Weg von $u$ nach $v$. Das widerspricht der Wahl des Weges. Also ist der kürzeste Weg von $u$ nach $v$ ein Pfad.
 ]
@@ -1385,10 +1385,10 @@
 
   Wir behaupten, dass $v₀$ und $v_ℓ$ Blätter sind. Wir zeigen das für $v₀$, für $v_ℓ$ folgt es analog.
   $ "z.Z.:" deg(v₀) = 1 $
-  Weil $v₀$ zu $v₁$ benachbart ist, gilt $deg(v₀) ≥ 1$. Wir führen die Annahme $deg(v₀) ≥ 2$ zu einem Widerspruch (dann folgt $deg(v₀) = 1$).
+  Weil $v₀$ zu $v₁$ benachbart ist, gilt $deg(v₀) ≥ 1$. Wir führen die Annahme $deg(v₀) ≥ 2$ zu einem Widerspruch.
   Nach Annahme gibt es also $u ∈ V$ mit $u ≠ v₁$ und ${v₀,u} ∈ E$.
   / Fall 1\: $u$ kommt im Pfad nicht vor.: Dann sind die Knoten $u v₀ v₁ … v_ℓ$ paarweise verschieden und je zwei aufeinanderfolgende benachbart. Also ist $u v₀ … v_ℓ$ ein Pfad der Länge $ℓ+1$. Das widerspricht der Wahl von $v₀ … v_ℓ$ als längstem Pfad.
-  / Fall 2\: $u$ kommt im Pfad vor.: Wegen $u ∉ {v₀,v₁}$ gilt $u = v_j$ für ein $j ≥ 2$. Die Folge $v₀ v₁ … v_j v₀$ hat dann mindestens vier Folgeglieder und ist ein Kreis. Das widerspricht der Annahme, dass $G$ ein Baum (und damit azyklisch) ist.
+  / Fall 2\: $u$ kommt im Pfad vor.: Wegen $u ∉ {v₀,v₁}$ gilt $u = v_j$ für ein $j ≥ 2$. Die Folge $v₀ v₁ … v_j v₀$ hat dann mindestens vier Folgeglieder und ist ein Kreis. Damit ist $G$ nicht azyklisch. Das widerspricht der Annahme, dass $G$ ein Baum.
 
   Beide Fälle sind unmöglich, also gilt $deg(v₀) = 1$.
 ]
@@ -1398,16 +1398,6 @@
 #skript[
   Wir betrachten nun Aussagen, die für alle (oder fast alle) natürlichen Zahlen gelten sollen. Dafür gibt es eine eigene Beweistechnik.
 ]
-
-#technik[Vollständige Induktion][
-  Für jedes $n ∈ ℕ$ sei $A(n)$ eine Aussage und sei $n₀ ∈ ℕ$ ein *Startwert*. Wir wollen zeigen, dass $A(n)$ für alle $n ≥ n₀$ gilt. Dazu zeigen wir zwei Dinge:
-
-  / Induktionsanfang: $A(n₀)$ gilt.
-  / Induktionsschritt: Für jedes $n ≥ n₀$ gilt $A(n) ⇒ A(n+1)$.
-
-  Dann folgt $A(n)$ für alle $n ≥ n₀$. Die im Induktionsschritt verwendete Annahme $A(n)$ heißt *Induktionsvoraussetzung*.
-]<induktion>
-
 // bilder/Dominoes_falling.jpg
 //   „Dominoes falling.jpg“ von Kurt:S, 12.10.2015, Original 6016×4000
 //   https://commons.wikimedia.org/wiki/File:Dominoes_falling.jpg
@@ -1417,10 +1407,20 @@
 
 #let credits(content) = text(size: 0.8em, fill: gray, content)
 
-#abbildung(slides: 0, caption: [
+#abbildung(slides: 1, caption: [
   Die Anschauung zur vollständigen Induktion: Der erste Stein fällt nach Induktionsanfang. Der Induktionsschritt garantiert, dass mit jedem fallenden Stein der folgende Stein ebenfalls fällt.\
   #credits[Foto: Kurt:S, #link("https://commons.wikimedia.org/wiki/File:Dominoes_falling.jpg")[Wikimedia Commons], CC BY 2.0.]
 ])[#image("bilder/Dominoes_falling.jpg", width: 50%)]<domino>
+
+#technik[Vollständige Induktion][
+  Für jedes $n ∈ ℕ$ sei $A(n)$ eine Aussage und sei $n₀ ∈ ℕ$ ein *Startwert*. Wir wollen zeigen, dass $A(n)$ für alle $n ≥ n₀$ gilt. Dazu zeigen wir zwei Dinge:
+
+  / $quad$ Induktionsanfang (IA): $A(n₀)$ gilt.
+  / $quad$ Induktionsschritt (IS): Für jedes $n ≥ n₀$ gilt $A(n) ⇒ A(n+1)$.
+
+  Dann folgt $A(n)$ für alle $n ≥ n₀$. Die im Induktionsschritt verwendete Annahme $A(n)$ heißt *Induktionsvoraussetzung (IV)* .
+]<induktion>
+
 
 #bemerkung[Beweisschema][
   Induktionsbeweise schreibt man nach einem mehr oder minder festen Muster auf. Man benennt die Komponenten _Induktionsanfang_ (IA), _Induktionsvorraussetzung_ (IV) und _Induktionsschritt_ (IS) explizit als solche.
@@ -1439,7 +1439,7 @@
   Induktion über $n$ mit Startwert $n₀ = 1$.
 
   / IA: Für $n = 1$ gilt $sum_(i=1)^1 (2i-1) = 1 = 1²$. ✓
-  / IV: Für ein $n ≥ 1$ gelte $sum_(i=1)^(n) (2i-1) = n²$
+  / IV: Für ein $n ≥ 1$ gelte $sum_(i=1)^(n) (2i-1) = n²$.
   / IS: Zu zeigen ist $sum_(i=1)^(n+1) (2i-1) = (n+1)²$. Tatsächlich gilt:
   $
     sum_(i=1)^(n+1) (2i-1) & = sum_(i=1)^n (2i-1) + (2(n+1)-1) \
@@ -1447,8 +1447,12 @@
   $
 ]
 
-#bemerkung[
-  Manchmal ist es bequemer im Induktionsschritt $A(n)$ aus $A(n-1)$ herzuleiten (für alle $n > n₀$), anstatt $A(n+1)$ aus $A(n)$ herzuleiten (für alle $n ≥ n₀$). Da der gewählte Startwert aus dem Induktionsanfang hervorgeht muss man ihn nicht explizit erwähnen.
+#bemerkung[impliziter Startwert][
+  Da der Startwert aus dem Induktionsanfang hervorgeht, muss man ihn nicht explizit erwähnen.
+]
+
+#bemerkung(slides: "titel")[$n-1 ⇝ n$ statt $n ⇝ n+1$][
+  Manchmal ist es bequemer im Induktionsschritt $A(n)$ aus $A(n-1)$ herzuleiten (für alle $n > n₀$), anstatt $A(n+1)$ aus $A(n)$ herzuleiten (für alle $n ≥ n₀$).
 ]
 
 #uebung[Gaußsche Summenformel][
@@ -1461,39 +1465,38 @@
   / IA: Für $n = 1$ ist $sum_(i=1)^1 i = 1 = (1 ⋅ 2)/2$. ✓
   / IV: Für ein $n > 1$ gelte $sum_(i=1)^(n-1) i = ((n-1) ⋅ n)/2$.
   / IS: Zu zeigen ist $sum_(i=1)^n i = (n ⋅ (n+1))/2$. Tatsächlich gilt:
-  $ sum_(i=1)^n i &= sum_(i=1)^(n-1) i + n   && #weil[letzten Summanden abspalten] \
-                  &= ((n-1) ⋅ n)/2 + n       && #weil[Induktionsvoraussetzung] \
-                  &= (n² - n + 2n)/2         && #weil[auf einen Bruch bringen] \
-                  &= (n ⋅ (n+1))/2.          && $
+  $ sum_(i=1)^n i &= sum_(i=1)^(n-1) i + n =^"(IV)" ((n-1) ⋅ n)/2 + n
+                   = (n² - n + 2n)/2
+                   = (n ⋅ (n+1))/2. $
 ]
 
 #bemerkung[
-  In @ungeradeSumme und @gaussformel könnte man die Induktion auch bei $0$ beginnen lassen. Dabei kommt @leeresProdukt zur Anwendung.
+  @ungeradeSumme und @gaussformel gelten auch für $n = 0$. Man kann für die Induktion den Startwert $n₀ = 0$ wählen. Dann kommen leere Summen vor (siehe @leeresProdukt).
 ]
 
 #bemerkung[Bezug zum Extremalprinzip][
   Vollständige Induktion lässt sich auf das Extremalprinzip (@extremalprinzip) zurückführen. #footnote[Umgekehrt lässt sich aus der Induktion auch eine Form des Extremalprinzips herleiten, nämlich dass jede nichtleere Teilmenge von $ℕ$ ein kleinstes Element hat.]
 
-  Um im Dominobeispiel aus @domino zu zeigen, dass alle Steine fallen, würde man mit dem Extremalprinzip folgermaßen argumentieren. Wir führen die Annahme, dass nicht alle Steine fallen zu einem Widerspruch. In dem Fall gibt es eine kleinste Zahl $n ∈ ℕ$ sodass der $n$te Stein nicht fällt. Dieser Stein ist aber entweder der erste Stein (und wird direkt angestoßen) oder der vorherige Stein fällt (nach Wahl von $n$). In beiden Fällen erhält man einen Widerspruch, also Fallen alle Steine.
+  Um im Dominobeispiel aus @domino zu zeigen, dass alle Steine fallen, würde man mit dem Extremalprinzip folgermaßen argumentieren. Wir führen die Annahme, dass nicht alle Steine fallen zu einem Widerspruch. In dem Fall gibt es eine kleinste Zahl $n ∈ ℕ$ sodass der $n$te Stein nicht fällt. Dieser Stein ist aber entweder der erste Stein (und wird direkt angestoßen) oder der vorherige Stein fällt (nach Wahl von $n$) und stößt Stein $n$ um. In beiden Fällen erhält man einen Widerspruch, also Fallen alle Steine.
 ]
 
 #skript[
   Wir wollen noch ein Beispiel für eine Induktionsbeweis auf Graphen zeigen. Eine kleine Vorbereitung ist nötig.
 ]
 
-#lemma(kurz: [Baum ohne Blatt ist Baum])[
+#lemma[
   Sei $G = (V,E)$ ein Baum mit einem Blatt $v ∈ V$ dessen Nachbar $u ∈ V$ ist. Dann ist
-  $ G - v := (V ∖ {v}, E ∖ {{u,v}}) $
+  $G - v := (V ∖ {v}, E ∖ {{u,v}})$
   ebenfalls ein Baum.
 ]<blattEntfernen>
 
 #beweis[
   Dass $G-v$ ein Graph ist, ist ziemlich klar.#footnote[Zu prüfen ist, dass $V ∖ {v}$ nicht leer ist und dass jedes Element aus $E ∖ {{u,v}}$ ganz in $V ∖ {v}$ liegt. Beides folgt, weil $v$ ein Blatt von $G$ ist, also Grad 1 hat.]
   Zu prüfen ist, dass $G-v$ zusammenhängend und azyklisch ist.
-  / azyklisch: _Intuitiv_: $G$ hat keinen Kreis und durch das _Löschen_ von Knoten und Kanten kann kein Kreis entstehen. _Formaler_: Angenommen $G - v$ hätte einen Kreis. Dieser Kreis wäre auch ein Kreis in $G$ — Widerspruch.
+  / azyklisch: _Intuitiv_: $G$ hat keinen Kreis und durch das _Löschen_ von Knoten und Kanten kann kein Kreis entstehen.\ _Formaler_: Angenommen $G - v$ hätte einen Kreis. Dieser Kreis wäre auch ein Kreis in $G$ — Widerspruch.
   / zusammenhängend: Seien $x,y ∈ V ∖ {v}$. Wir müssen zeigen, dass es einen Pfad von $x$ nach $y$ in $G - {v}$ gibt. Weil $G$ zusammenhängend ist, gibt es in $G$ einen Pfad von $x$ nach $y$. Dieser Pfad enthält $v$ nicht: Käme $v$ darin vor, so wäre $v$ wegen $x ≠ v$ und $y ≠ v$ ein innerer Knoten des Pfades und hätte damit zwei verschiedene Nachbarn auf dem Pfad, im Widerspruch zu $deg(v) = 1$. Der Pfad liegt also ganz in $G - v$. #qedhere
 ]
-#satz(kurz: [Bäume haben $n-1$ Kanten])[
+#satz[
   Jeder Baum mit $n$ Knoten hat genau $n-1$ Kanten.
 ]<baumKanten>
 
@@ -1519,24 +1522,31 @@
 
 #beweis[
   Starke Induktion über $n$ mit Startwert $n₀ = 1$.
-  / IA: $n = 1$ ist das _leere Produkt_, siehe @leeresProdukt. ✓
+  / IA: $n = 1$ ist das _leere Produkt_ (siehe @leeresProdukt). ✓
   / IV: Für ein $n > 1$ gelte, dass jedes $m ∈ {1,…,n-1}$ ein Produkt von Primzahlen ist.
   / IS: Zu zeigen ist, dass $n$ ein Produkt von Primzahlen ist.
     / Fall 1\: $n$ ist eine Primzahl.: $n$ ist das Produkt bestehend aus einem primen Faktor (nämlich $n$).
     / Fall 2\: $n$ ist keine Primzahl.: Dann hat $n$ einen Teiler $a ∈ {2,…,n-1}$. Für $b := n/a$ gilt dann ebenfalls $b ∈ {2,…,n-1}$. Also ist $n = a ⋅ b$ das Produkt zweier kleinerer Zahlen. Nach Induktionsvoraussetzung sind $a$ und $b$ Produkte von Primzahlen, also ist es auch $n = a ⋅ b$.#qedhere
 ]
 
+// Das ist irgendwie cool, aber nicht so lehrreich wie ich dachte:
 #uebung[
-  Finden Sie den Fehler in folgendem Induktions"beweis" von $∀n ∈ ℕ: n = n+1$.
-  / IV: Für ein $n ≥ 1$ gelte $n = n+1$
-  / IS: Zu zeigen ist $n+1 = n+2$. Tatsächlich gilt:
-  $ n+1 =^"IV" (n+1)+1 = n+2. $
-]
-#loesung[
-  Der Induktionsanfang fehlt.
+  Finden den Fehler in folgendem Induktions"beweis". Wir zeigen, dass für jedes $n ∈ ℕ$: Hat man $n$ Äpfel, so sind alle gleich schwer.
+  / IA: Für $n = 1$ ist nichts zu zeigen. ✓
+  / IV: Für ein $n > 1$ gelte: Hat man $n-1$ Äpfel, so sind alle gleich schwer.
+  / IS: Wir betrachten nun eine Menge von $n$ Äpfel mit Gewichten $w₁,…,w_n$. Nach IV sind die ersten $n-1$ Äpfel gleich schwer. Ebenfalls nach IV sind die letzten $n-1$ jeweils gleich schwer. Es gilt also:
+    $
+      w₁ = & w₂ = w₃ = … = w_(n-2) = w_(n-1) \
+           & w₂ = w₃ = … = w_(n-2) = w_(n-1) = w_n
+    $
+    Somit haben alle $n$ Äpfel das Gewichte $w₂$, sind also gleich schwer.
 ]
 
-#bemerkung[Induktion in der Philosophie][
+#loesung[
+  Der Induktionsschritt schlägt für $n = 2$ fehl, weil dann $w_2$ nicht in beiden Gleichungen vorkommt (die Schreibweise suggeriert fälschlicherweise eine Überlappung).
+]
+
+#bemerkung(slides: "titel")[Induktion in der Philosophie][
   In der Philosophie und Wissenschaftstheorie ist ein _induktiver Schluss_ ein (problematischer) Schluss von endlich vielen Beobachtungen auf eine allgemeine Regel, etwa
   $
            & "alle Raben, die ich gesehen habe, waren schwarz" \
@@ -2750,7 +2760,7 @@
 == Eine Vorbereitung
 
 #bemerkung[Unendlicher Graph][
-  Wir können die Forderung, dass die Knotenmenge eines (gerichteten oder ungerichteten) Graphen endlich ist, fallen lassen. Die meisten Begriffe (Grad, Pfad, Kreis, zusammenhängend, azyklisch, Baum) behalten ihre Bedeutung. #footnote[Manche Sätze gelten nicht mehr, z.B. $"Baum" ⇔ "Knotenzahl" -1 = "Kantenzahl"$.]
+  Wir können die Forderung, dass die Knotenmenge eines (gerichteten oder ungerichteten) Graphen endlich ist, fallen lassen. Die meisten Begriffe (Grad, Pfad, Kreis, zusammenhängend, azyklisch, Baum) behalten ihre Bedeutung. #footnote[Manche Sätze gelten nicht mehr, z.B. „$G = (V,E) "ist Baum" ⇔ G "zusammenhängend" ∧ |E| = |V|-1$“.]
 ]
 
 #satz[Cantor-Schröder-Bernstein][
@@ -2759,7 +2769,7 @@
 
 
 #beweis[
-  Wir nehmen ohne Einschränkung an, dass $A$ und $B$ disjunkt sind#footnote[Andernfalls betrachten wir die disjunkten Mengen $A' = A × {1}$ sowie $B' = B × {2}$. Wir konstruieren eine Bijektion $h' : A' → B'$. Zusammen mit den offensichtlichen Bijektionen $h_A : A → A × {1}$ sowie $h_B : B × {2} → B$ ergibt sich die gewünschte Bijektion $h_B ∘ h' ∘ h_A: A → B$.].
+  Wir nehmen ohne Einschränkung an, dass $A$ und $B$ disjunkt sind#footnote[Andernfalls betrachten wir die disjunkten Mengen $A' = A × {1}$ sowie $B' = B × {2}$. Aus $f$ und $g$ erhält man auch die Injektionen $f' : A' → B'$ mit $(a,1) ↦ (f(a),2)$ sowie $g' : B' → A'$ mit $(b,2) ↦ (g(b),1)$. Mit dem folgenden Argument für disjunkte $A'$ und $B'$ erhalten wir eine Bijektion $h' : A' → B'$. Zusammen mit den offensichtlichen Bijektionen $h_A : A → A × {1}$ sowie $h_B : B × {2} → B$ ergibt sich die gewünschte Bijektion $h_B ∘ h' ∘ h_A: A → B$.].
   Wir betrachten den gerichteten Graphen $G = (V,E)$ mit den potentiell unendlichen Knoten- und Kantenmengen
   $ V = A ∪ B "und" E = {(a,f(a)) | a ∈ A } ∪ {(b,g(b)) | b ∈ B }. $
   Jeder Knoten $v ∈ V$ hat genau eine ausgehende Kante (weil $f$ und $g$ Funktionen sind) und höchstens eine eingehende Kante (weil $f$ und $g$ injektiv sind). Daraus folgt, dass es für die Zusammenhangskomponenten#footnote[Mit der (schwachen) Zusammenhangskomponente eines gerichteten Graphen sind die Zusammenhangskomponenten des zugrundeliegenden ungerichteten Graphen $(V,{{x,y} | (x,y) ∈ E })$ gemeint.] des Graphen nur folgende vier Möglichkeiten gibt (@csbTypen). Wir stellen $A$-Knoten rot und $B$-Knoten blau dar.
