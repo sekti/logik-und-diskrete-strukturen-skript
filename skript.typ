@@ -1600,7 +1600,11 @@
 ]<ringschluss>
 
 #skript[
-  Bevor wir einen Ringschluss demonstrieren, beweisen wir zwei Hilfsaussagen. Für einen Graphen $G = (V,E)$ und eine Kante $e = {u,v}$ mit $u, v ∈ V$, $u ≠ v$ schreiben wir
+  Vor dem Hauptergebnis dieses Abschnitts zeigen wir zwei Hilfsaussagen.
+]
+
+#notation[
+  Für einen Graphen $G = (V,E)$ und eine mögliche Kante $e = {u,v}$ mit $u, v ∈ V$, $u ≠ v$ schreiben wir
   $ G - e := (V,E ∖ {e}) "und" G + e := (V,E ∪ {e}) $
   für die Graphen, die durch Löschen bzw. Hinzufügen dieser Kante entstehen.
 ]
@@ -1613,10 +1617,11 @@
 ]<kreiskriterium>
 
 #beweis[
+  Wir zeigen die Äquivalenz in dem wir beide Richtungen zeigen. Das kann man als Ringschluss mit zwei Aussagen sehen.
   / $(1) ⇒ (2)$.: Den Kreis, auf dem $e$ liegt, können wir so zyklisch verschieben und gegebenenfalls umkehren, dass die Kante $e$ als Letztes von $w$ nach $u$ durchlaufen wird. Also gibt es in $G$ einen Kreis der Form $u v₁ … v_k w u$. Durch Weglassen des letzten Folgenglieds ergibt sich der Pfad $u v₁ … v_k w$. Dieser Pfad verwendet $e$ nicht, liegt also in $G - e$.
   // alt: Sei $v₁,v₂,…,v_k$ ein Kreis, auf dem $e$ liegt. Durch zyklisches Verschieben dürfen wir $u = v₁$ und $w = v₂$ annehmen. Dann ist $v₂,v₃,…,v_k$ eine Folge benachbarter Knoten von $w$ nach $u = v_k$, in der kein Knoten doppelt vorkommt, also ein Pfad. Er benutzt die Kante $e$ nicht: Seine Kanten sind ${v_i,v_(i+1)}$ für $i ∈ {2,…,k-1}$, und wegen $k ≥ 4$ ist $v_(k-1) ≠ v₂$. Rückwärts gelesen ist das ein Pfad von $u$ nach $w$ in $G - e$.
-  / $(2) ⇒ (1)$.: Sei $u v₁ … v_k w$ ein Pfad von $u$ nach $w$ in $G-e$.
-    Durch Anhängen eines Schritts von $w$ nach $u$ ergibt sich ein Kreis $u v₁ … v_k w u$ in $G$.#footnote[Dass hierbei nicht der Weg $u w u$ herauskommt (der nicht als Kreis zählt), liegt daran, dass $u w$ in $G-e$ kein Pfad ist (die Kante $e$ fehlt dort ja gerade). Damit gilt $k ≥ 1$, es gibt also mindestens einen Zwischenknoten.]#qedhere
+  / $(2) ⇒ (1)$.: Sei $u v₁ … v_k w$ ein Pfad von $u$ nach $w$ in $G-e$. Da ${u,w}$ selbst keine Kanten in $G-e$ ist, gibt es mindestens einen Zwischenknoten (d.h. $k ≥ 1$).
+    Durch Anhängen des Folgeglieds $u$ ergibt sich eine Folge $u v₁ … v_k w u$ in $G$ mit mindestens $4$ Gliedern. Diese ist ein Kreis.#qedhere
 ]
 
 #lemma[
@@ -1625,7 +1630,9 @@
 
 #beweis[
   Sei $e = {u,w}$. Nach @kreiskriterium gibt es in $G - e$ einen Pfad von $u$ nach $w$; wir nennen ihn den _Umweg_.\
-  Seien nun $x,y ∈ V$ beliebig. Weil $G$ zusammenhängend ist, gibt es einen Pfad von $x$ nach $y$ in $G$. Ersetzen wir darin die Kante $e$, falls sie vorkommt, durch den Umweg, so erhalten wir einen Weg von $x$ nach $y$ in $G - e$. Nach @wegPfad gibt es dann auch einen Pfad von $x$ nach $y$ in $G - e$.
+  Wir wollen zeigen, dass $G-e$ zusammenhängend ist, also
+  $ "z.Z." ∀x,y ∈ V: ∃ "Pfad" x…y "in" G-e $
+  Seien dazu $x,y ∈ V$ beliebig. Weil $G$ zusammenhängend ist, gibt es einen Pfad von $x$ nach $y$ in $G$. Ersetzen wir darin die Kante $e$, falls sie vorkommt, durch den Umweg, so erhalten wir einen Weg von $x$ nach $y$ in $G - e$. Nach @wegPfad gibt es dann auch einen Pfad von $x$ nach $y$ in $G - e$.
 ]
 
 #satz[Charakterisierung von Bäumen][
@@ -1648,14 +1655,14 @@
     Angenommen, zwischen $x$ und $y$ gäbe es zwei verschiedene Pfade $P$ und $Q$. Dann gibt es eine Kante $e = {u,w}$, die nur auf einem der Pfade liegt. Wir dürfen _ohne Beschränkung der Allgemeinheit_ (o.B.d.A.)#footnote[Siehe folgende Bemerkung.] annehmen, dass sie auf $P$ liegt und in Richtung $u w$ durchlaufen wird.
     In $G - e$ gibt es dann einen Weg von $u$ nach $w$: erst auf $P$ rückwärts bis $x$, dann auf $Q$ bis $y$, dann auf $P$ rückwärts bis $w$. Keines der drei Stücke benutzt $e$. Nach @wegPfad gibt es in $G - e$ also auch einen Pfad von $u$ nach $w$, und nach @kreiskriterium liegt $e$ damit auf einem Kreis von $G$ — im Widerspruch zur Azyklizität.
 
-  / $(2) ⇒ (3)$.: Weil es zwischen je zwei Knoten einen Pfad gibt, ist $G$ zusammenhängend. Sei $e = {u,w} ∈ E$ beliebig. Wir müssen zeigen, dass $G-e$ nicht zusammenhängend ist. Gäbe es in $G - e$ einen Pfad von $u$ nach $w$, so wären dieser und die Folge $u w$ zwei verschiedene Pfade von $u$ nach $w$ in $G$, im Widerspruch zu (2). Also ist $G - e$ nicht zusammenhängend.
+  / $(2) ⇒ (3)$.: Weil es zwischen je zwei Knoten einen Pfad gibt, ist $G$ zusammenhängend. Sei $e = {u,w} ∈ E$ beliebig. Wir müssen zeigen, dass $G-e$ nicht zusammenhängend ist. Gäbe es in $G - e$ einen Pfad von $u$ nach $w$, so wären dieser und die Folge $u w$ zwei verschiedene Pfade von $u$ nach $w$ in $G$, im Widerspruch zu (2). Also gibt es keinen Pfad von $u$ nach $w$ in $G-e$, also ist $G - e$ nicht zusammenhängend.
 
   / $(3) ⇒ (1)$.: Zusammenhängend ist $G$ nach Voraussetzung. Angenommen $G$ enthält einen Kreis. Sei $e$ eine Kante auf dem Kreis. Dann ist $G-e$ nach @kreiskante zusammenhängend, im Widerspruch zur Minimalität. Also ist $G$ azyklisch und damit ein Baum.
 
   / $(2) ⇒ (4)$.: _Azyklisch:_ Läge eine Kante ${u,w}$ auf einem Kreis, so gäbe es nach @kreiskriterium in $G - {u,w}$ einen Pfad von $u$ nach $w$; dieser und die Folge $u w$ wären zwei verschiedene Pfade, im Widerspruch zu (2).\
     _Maximal:_ Seien $u,w$ nicht benachbart. Nach (2) gibt es in $G$ einen Pfad von $u$ nach $w$, und dieser ist auch ein Pfad in $(G + {u,w}) - {u,w}$. Nach @kreiskriterium liegt ${u,w}$ also auf einem Kreis von $G + {u,w}$.
 
-  / $(4) ⇒ (1)$.: Azyklisch ist $G$ nach Voraussetzung. Für den Zusammenhang seien $u,w$ Knoten. Sind sie gleich oder benachbart, so gibt es einen Pfad von $u$ nach $w$. Andernfalls enthält $G + {u,w}$ einen Kreis, weil $G$ maximal azyklisch ist. Dieser benutzt die Kante ${u,w}$, denn sonst wäre er schon ein Kreis in $G$. Nach @kreiskriterium gibt es also in $G$ einen Pfad von $u$ nach $w$.#qedhere
+  / $(4) ⇒ (1)$.: Azyklisch ist $G$ nach Voraussetzung. Für den Zusammenhang seien $u,w$ Knoten. Sind sie gleich oder benachbart, so gibt es einen Pfad von $u$ nach $w$. Andernfalls enthält $G' := G + {u,w}$ einen Kreis, weil $G$ maximal azyklisch ist. Dieser benutzt die Kante ${u,w}$, denn sonst wäre er schon ein Kreis in $G$. Nach @kreiskriterium gibt es also in $G = G' - {u,w}$ einen Pfad von $u$ nach $w$.#qedhere
 ]
 
 #bemerkung[„o.B.d.A.“][
