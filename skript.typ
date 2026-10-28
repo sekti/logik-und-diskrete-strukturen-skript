@@ -1169,11 +1169,12 @@
     [zu zeigen], [Beweisstruktur],
     table.hline(),
     [$∀x ∈ M: F$], [Führe eine Variable $x ∈ M$ ein und beweise $F$ (ohne weitere Annahmen über $x$ zu treffen).],
-    [$A ⊆ B$],[Für eine Variable $x ∈ A$ ein. Beweise $x ∈ B$.],
+    [$A ⊆ B$],[Führe eine Variable $x ∈ A$ ein. Beweise $x ∈ B$.],
     [$∃x ∈ M: F$],
     [Definiere $x$ „geschickt“, oft in Abhängigkeit anderer Variablen. Beweise dann, dass für diese Wahl von $x$ sowohl $x ∈ M$ als auch $F$ gelten.],
     [$F ∧ G$], [Beweise $F$ und beweise $G$.],
-    [$F → G$], [Treffe $F$ als Annahme. Beweise dann $G$.],
+    [$F → G$], [Triff $F$ als Annahme. Beweise dann $G$.],
+    [$F ↔ G$], [Zeige $F → G$ und $G → F$.],
     [$F ∨ G$],
     [Verwende, dass $F ∨ G$ und $¬F → G$ äquivalent sind (alternativ auch $¬G → F$). Verwende dann die Technik für die Implikation.],
     [$¬F$], [Negation „reinziehen“ oder Beweis durch Widerspruch (siehe unten).],
@@ -1188,9 +1189,9 @@
     [Annahme], [Verwendung],
     table.hline(),
     [$∀x ∈ M: F$], [Ist bereits ein $x ∈ M$ gegeben, so darf angenommen werden, dass für dieses $x$ auch $F$ gilt.],
-    [$∃x ∈ M: F$], [Wir dürfen eine Variable $x ∈ M$ einführen und annehmen, dass $F$ für $x$ gilt.],
+    [$∃x ∈ M: F$], [Wir dürfen eine neue Variable $x ∈ M$ einführen und annehmen, dass $F$ für $x$ gilt.],
     [$F ∧ G$], [Wir dürfen sowohl $F$ als auch $G$ annehmen.],
-    [$F → G$], [Gelingt es uns $F$ zu beweisen, so dürfen wir anschließend $G$ annehmen.],
+    [$F → G$], [Gelingt es uns, $F$ zu beweisen, so dürfen wir anschließend $G$ annehmen.],
     [$F ∨ G$],
     [Fallunterscheidung: Zeige die Behauptung einmal unter der zusätzlichen Annahme $F$ und einmal unter der zusätzlichen Annahme $G$ (siehe unten).],
   )
@@ -1249,7 +1250,7 @@
 ]<beweisDurchWiderspruch>
 
 #uebung[
-  Es gibt keinen Graphen mit genau 7 Knoten, in dem jeder Knoten Grad 3 hat.
+  Zeigen Sie: Es gibt keinen Graphen mit genau 7 Knoten, in dem jeder Knoten Grad 3 hat.
 ]
 
 #loesung[Beweis durch Widerspruch][
@@ -1320,7 +1321,7 @@
   Zudem überprüfen wir, dass die Fälle *erschöpfend* sind, dass also $F₁ ∨ F₂ ∨ … ∨ F_k$ gilt. Dann folgt $A$.
 ]<fallunterscheidung>
 
-#uebung[Sei $n ∈ ℕ$. Dann endet die Dezimaldarstellung von $n²$ auf 0,1,4,5,6 oder 9.]
+#uebung[Sei $n ∈ ℕ$. Dann endet die Dezimaldarstellung von $n²$ auf 0, 1, 4, 5, 6 oder 9.]
 
 #loesung[
   Sei $n ∈ ℕ$ beliebig. Sei $j ∈ {0,1,…,9}$ die letzte Ziffer von $n$. Dann gilt $n = 10⋅a + j$ für ein $a ∈ ℕ$. Ferner gilt:
@@ -1363,7 +1364,7 @@
 === Extremalprinzip
 
 #technik[Extremalprinzip][
-  Gegeben sei eine nichtleere Menge $M$. Anstatt ein beliebiges Objekt $x ∈ M$ zu betrachten, lohnt es sich zuweilen, ein extremales Objekt zu betrachten; z.B. das kleinste, größte oder längste. Ein solches Objekt hat oft nützliche Eigenschaften.#footnote[Für potentiell unendliche $M$ ist Vorsicht geboten. So hat eine nichtleere Menge $M ⊆ ℕ$ nur dann ein größtes Element wenn $M$ endlich ist (garantiert aber ein kleinstes Element).]
+  Gegeben sei eine nichtleere Menge $M$. Anstatt ein beliebiges Objekt $x ∈ M$ zu betrachten, lohnt es sich zuweilen, ein extremales Objekt zu betrachten; z.B. das kleinste, größte oder längste. Ein solches Objekt hat oft nützliche Eigenschaften.#footnote[Für potentiell unendliche $M$ ist Vorsicht geboten. So hat eine nichtleere Menge $M ⊆ ℕ$ nur dann ein größtes Element, wenn $M$ endlich ist (garantiert aber ein kleinstes Element).]
 ]<extremalprinzip>
 
 #lemma[Weg $⇒$ Pfad][
@@ -1371,7 +1372,7 @@
 ]<wegPfad>
 
 #beweis[
-  Sei $M$ die Menge der Längen der Wege von $u$ nach $v$. Weil $M ≠ ∅$ ist, gibt es nach dem Extremalprinzip eine kleinstes Element von $M$. Entsprechend gibt es einen kürzesten Weg von $u$ nach $v$. Wir zeigen, dass dieser Weg ein Pfad ist.
+  Sei $M$ die Menge der Längen der Wege von $u$ nach $v$. Weil $M ≠ ∅$ ist, gibt es nach dem Extremalprinzip ein kleinstes Element von $M$. Entsprechend gibt es einen kürzesten Weg von $u$ nach $v$. Wir zeigen, dass dieser Weg ein Pfad ist.
 
   Wir nehmen zum Widerspruch an, dies sei nicht der Fall. Dann gibt es einen Knoten $w ∈ V$, der mindestens zweimal auf dem Weg vorkommt, das heißt, der Weg hat die Form $u … w … w … v$. Wenn wir das Zwischenstück $w … w$ durch $w$ ersetzen, erhalten wir einen kürzeren Weg von $u$ nach $v$. Das widerspricht der Wahl des Weges. Also ist der kürzeste Weg von $u$ nach $v$ ein Pfad.
 ]
@@ -1388,7 +1389,7 @@
   Weil $v₀$ zu $v₁$ benachbart ist, gilt $deg(v₀) ≥ 1$. Wir führen die Annahme $deg(v₀) ≥ 2$ zu einem Widerspruch.
   Nach Annahme gibt es also $u ∈ V$ mit $u ≠ v₁$ und ${v₀,u} ∈ E$.
   / Fall 1\: $u$ kommt im Pfad nicht vor.: Dann sind die Knoten $u v₀ v₁ … v_ℓ$ paarweise verschieden und je zwei aufeinanderfolgende benachbart. Also ist $u v₀ … v_ℓ$ ein Pfad der Länge $ℓ+1$. Das widerspricht der Wahl von $v₀ … v_ℓ$ als längstem Pfad.
-  / Fall 2\: $u$ kommt im Pfad vor.: Wegen $u ∉ {v₀,v₁}$ gilt $u = v_j$ für ein $j ≥ 2$. Die Folge $v₀ v₁ … v_j v₀$ hat dann mindestens vier Folgeglieder und ist ein Kreis. Damit ist $G$ nicht azyklisch. Das widerspricht der Annahme, dass $G$ ein Baum.
+  / Fall 2\: $u$ kommt im Pfad vor.: Wegen $u ∉ {v₀,v₁}$ gilt $u = v_j$ für ein $j ≥ 2$. Die Folge $v₀ v₁ … v_j v₀$ hat dann mindestens vier Folgeglieder und ist ein Kreis. Damit ist $G$ nicht azyklisch. Das widerspricht der Annahme, dass $G$ ein Baum ist.
 
   Beide Fälle sind unmöglich, also gilt $deg(v₀) = 1$.
 ]
@@ -1418,12 +1419,12 @@
   / $quad$ Induktionsanfang (IA): $A(n₀)$ gilt.
   / $quad$ Induktionsschritt (IS): Für jedes $n ≥ n₀$ gilt $A(n) ⇒ A(n+1)$.
 
-  Dann folgt $A(n)$ für alle $n ≥ n₀$. Die im Induktionsschritt verwendete Annahme $A(n)$ heißt *Induktionsvoraussetzung (IV)* .
+  Dann folgt $A(n)$ für alle $n ≥ n₀$. Die im Induktionsschritt verwendete Annahme $A(n)$ heißt *Induktionsvoraussetzung (IV)*.
 ]<induktion>
 
 
 #bemerkung[Beweisschema][
-  Induktionsbeweise schreibt man nach einem mehr oder minder festen Muster auf. Man benennt die Komponenten _Induktionsanfang_ (IA), _Induktionsvorraussetzung_ (IV) und _Induktionsschritt_ (IS) explizit als solche.
+  Induktionsbeweise schreibt man nach einem mehr oder minder festen Muster auf. Man benennt die Komponenten _Induktionsanfang_ (IA), _Induktionsvoraussetzung_ (IV) und _Induktionsschritt_ (IS) explizit als solche.
 ]
 
 #satz(kurz: [$sum_(i=1)^n (2i-1) = n²$])[
@@ -1452,7 +1453,7 @@
 ]
 
 #bemerkung(slides: "titel")[$n-1 ⇝ n$ statt $n ⇝ n+1$][
-  Manchmal ist es bequemer im Induktionsschritt $A(n)$ aus $A(n-1)$ herzuleiten (für alle $n > n₀$), anstatt $A(n+1)$ aus $A(n)$ herzuleiten (für alle $n ≥ n₀$).
+  Manchmal ist es bequemer, im Induktionsschritt $A(n)$ aus $A(n-1)$ herzuleiten (für alle $n > n₀$), anstatt $A(n+1)$ aus $A(n)$ herzuleiten (für alle $n ≥ n₀$).
 ]
 
 #uebung[Gaußsche Summenformel][
@@ -1477,15 +1478,15 @@
 #bemerkung[Bezug zum Extremalprinzip][
   Vollständige Induktion lässt sich auf das Extremalprinzip (@extremalprinzip) zurückführen. #footnote[Umgekehrt lässt sich aus der Induktion auch eine Form des Extremalprinzips herleiten, nämlich dass jede nichtleere Teilmenge von $ℕ$ ein kleinstes Element hat.]
 
-  Um im Dominobeispiel aus @domino zu zeigen, dass alle Steine fallen, würde man mit dem Extremalprinzip folgermaßen argumentieren. Wir führen die Annahme, dass nicht alle Steine fallen zu einem Widerspruch. In dem Fall gibt es eine kleinste Zahl $n ∈ ℕ$ sodass der $n$te Stein nicht fällt. Dieser Stein ist aber entweder der erste Stein (und wird direkt angestoßen) oder der vorherige Stein fällt (nach Wahl von $n$) und stößt Stein $n$ um. In beiden Fällen erhält man einen Widerspruch, also Fallen alle Steine.
+  Um im Dominobeispiel aus @domino zu zeigen, dass alle Steine fallen, würde man mit dem Extremalprinzip folgendermaßen argumentieren. Wir führen die Annahme, dass nicht alle Steine fallen, zu einem Widerspruch. In dem Fall gibt es eine kleinste Zahl $n ∈ ℕ$, sodass der $n$-te Stein nicht fällt. Dieser Stein ist aber entweder der erste Stein (und wird direkt angestoßen) oder der vorherige Stein fällt (nach Wahl von $n$) und stößt Stein $n$ um. In beiden Fällen erhält man einen Widerspruch, also fallen alle Steine.
 ]
 
 #skript[
-  Wir wollen noch ein Beispiel für eine Induktionsbeweis auf Graphen zeigen. Eine kleine Vorbereitung ist nötig.
+  Wir wollen noch ein Beispiel für einen Induktionsbeweis auf Graphen zeigen. Eine kleine Vorbereitung ist nötig.
 ]
 
 #lemma[
-  Sei $G = (V,E)$ ein Baum mit einem Blatt $v ∈ V$ dessen Nachbar $u ∈ V$ ist. Dann ist
+  Sei $G = (V,E)$ ein Baum mit einem Blatt $v ∈ V$, dessen Nachbar $u ∈ V$ ist. Dann ist
   $G - v := (V ∖ {v}, E ∖ {{u,v}})$
   ebenfalls ein Baum.
 ]<blattEntfernen>
@@ -1494,7 +1495,7 @@
   Dass $G-v$ ein Graph ist, ist ziemlich klar.#footnote[Zu prüfen ist, dass $V ∖ {v}$ nicht leer ist und dass jedes Element aus $E ∖ {{u,v}}$ ganz in $V ∖ {v}$ liegt. Beides folgt, weil $v$ ein Blatt von $G$ ist, also Grad 1 hat.]
   Zu prüfen ist, dass $G-v$ zusammenhängend und azyklisch ist.
   / azyklisch: _Intuitiv_: $G$ hat keinen Kreis und durch das _Löschen_ von Knoten und Kanten kann kein Kreis entstehen.\ _Formaler_: Angenommen $G - v$ hätte einen Kreis. Dieser Kreis wäre auch ein Kreis in $G$ — Widerspruch.
-  / zusammenhängend: Seien $x,y ∈ V ∖ {v}$. Wir müssen zeigen, dass es einen Pfad von $x$ nach $y$ in $G - {v}$ gibt. Weil $G$ zusammenhängend ist, gibt es in $G$ einen Pfad von $x$ nach $y$. Dieser Pfad enthält $v$ nicht: Käme $v$ darin vor, so wäre $v$ wegen $x ≠ v$ und $y ≠ v$ ein innerer Knoten des Pfades und hätte damit zwei verschiedene Nachbarn auf dem Pfad, im Widerspruch zu $deg(v) = 1$. Der Pfad liegt also ganz in $G - v$. #qedhere
+  / zusammenhängend: Seien $x,y ∈ V ∖ {v}$. Wir müssen zeigen, dass es einen Pfad von $x$ nach $y$ in $G - v$ gibt. Weil $G$ zusammenhängend ist, gibt es in $G$ einen Pfad von $x$ nach $y$. Dieser Pfad enthält $v$ nicht: Käme $v$ darin vor, so wäre $v$ wegen $x ≠ v$ und $y ≠ v$ ein innerer Knoten des Pfades und hätte damit zwei verschiedene Nachbarn auf dem Pfad, im Widerspruch zu $deg(v) = 1$. Der Pfad liegt also ganz in $G - v$. #qedhere
 ]
 #satz[
   Jeder Baum mit $n$ Knoten hat genau $n-1$ Kanten.
@@ -1509,7 +1510,7 @@
 ]
 
 #technik[Starke Induktion][
-  Manchmal ist es nützlich im Induktionsschritt nicht nur einen Schritt zurück zu blicken ("$n-1 ⇝ n$") sondern auf _alle_ vorherigen Schritte ("$(0 ∧ … ∧ n-1) → n$"). Der Beweis hat dann die Form:
+  Manchmal ist es nützlich, im Induktionsschritt nicht nur einen Schritt zurückzublicken ("$n-1 ⇝ n$"), sondern auf _alle_ vorherigen Schritte ("$(0 ∧ … ∧ n-1) ⇝ n$"). Der Beweis hat dann die Form:
   / IA: Zeige, dass $A(n₀)$ gilt.
   / IV: Für ein $n > n₀$ gelte $A(m)$ für _alle_ $m ∈ {n₀,…,n-1}$.
   / IS: Zeige, dass $A(n)$ gilt.
@@ -1531,15 +1532,15 @@
 
 // Das ist irgendwie cool, aber nicht so lehrreich wie ich dachte:
 #uebung[
-  Finden den Fehler in folgendem Induktions"beweis". Wir zeigen, dass für jedes $n ∈ ℕ$: Hat man $n$ Äpfel, so sind alle gleich schwer.
+  Finden Sie den Fehler in folgendem Induktions"beweis". Wir zeigen, dass für jedes $n ∈ ℕ$: Hat man $n$ Äpfel, so sind alle gleich schwer.
   / IA: Für $n = 1$ ist nichts zu zeigen. ✓
   / IV: Für ein $n > 1$ gelte: Hat man $n-1$ Äpfel, so sind alle gleich schwer.
-  / IS: Wir betrachten nun eine Menge von $n$ Äpfel mit Gewichten $w₁,…,w_n$. Nach IV sind die ersten $n-1$ Äpfel gleich schwer. Ebenfalls nach IV sind die letzten $n-1$ jeweils gleich schwer. Es gilt also:
+  / IS: Wir betrachten nun eine Menge von $n$ Äpfeln mit Gewichten $w₁,…,w_n$. Nach IV sind die ersten $n-1$ Äpfel gleich schwer. Ebenfalls nach IV sind die letzten $n-1$ jeweils gleich schwer. Es gilt also:
     $
       w₁ = & w₂ = w₃ = … = w_(n-2) = w_(n-1) \
            & w₂ = w₃ = … = w_(n-2) = w_(n-1) = w_n
     $
-    Somit haben alle $n$ Äpfel das Gewichte $w₂$, sind also gleich schwer.
+    Somit haben alle $n$ Äpfel das Gewicht $w₂$, sind also gleich schwer.
 ]
 
 #loesung[
@@ -1569,7 +1570,7 @@
 
 #definition("Wohlgeformte Klammerausdrücke")[
   Die Menge $K$ der *wohlgeformten Klammerausdrücke* ist rekursiv definiert:
-  + Das leere Wort ist in $K$.
+  + Der leere Ausdruck `""` ist in $K$.
   + Sind $u, v ∈ K$, so ist auch $u v ∈ K$ (Hintereinanderschreiben).
   + Ist $u ∈ K$, so ist auch $(u) ∈ K$.
   Implizit: Nichts anderes ist ein wohlgeformter Klammerausdruck.
@@ -1589,6 +1590,13 @@
   / IA (Regel 1): Ist $k$ das leere Wort, so enthält es $0$ öffnende und $0$ schließende Klammern.
   / IS (Regel 2): Wir betrachten $k = u v$ für $u,v ∈ K$. Wir dürfen annehmen, dass $u$ gleich viele öffnende wie schließende Klammern enthält; diese Zahl sei $x_u$. Ebenso dürfen wir annehmen, dass $v$ gleich viele öffnende wie schließende Klammern enthält; diese Zahl sei $x_v$. Die Anzahlen öffnender und schließender Klammern in $k$ sind damit beide $x_u + x_v$ und damit gleich.
   / IS (Regel 3): Wir betrachten $k = (u)$ für $u ∈ K$. Wir dürfen annehmen, dass $u$ gleich viele öffnende wie schließende Klammern enthält; diese Zahl sei $x_u$. Dann enthält $k$ genau $x_u + 1$ öffnende und $x_u + 1$ schließende Klammern, also gleich viele. #qedhere
+]
+
+#uebung[
+  Sei $k ∈ K$, sei $p$ ein Präfix#footnote[Ein Präfix ist ein Anfangsstück. Die Menge der Präfixe von `"APFEL"` ist {`""`,`"A"`,`"AP"`,`"APF"`,`"APFE"`,`"APFEL"`}.] von $k$. Sei $x$ die Anzahl öffenender Klammern in $p$ und $y$ die Anzahl schließender Klammern in $p$. Dann gilt $x ≥ y$. 
+]
+#skript[
+  Die Aufgabe ist Teil von Übungsblatt 2, daher keine Lösung hier.
 ]
 
 === Ringschluss
@@ -1617,10 +1625,10 @@
 ]<kreiskriterium>
 
 #beweis[
-  Wir zeigen die Äquivalenz in dem wir beide Richtungen zeigen. Das kann man als Ringschluss mit zwei Aussagen sehen.
+  Wir zeigen die Äquivalenz, indem wir beide Richtungen zeigen. Das kann man als Ringschluss mit zwei Aussagen sehen.
   / $(1) ⇒ (2)$.: Den Kreis, auf dem $e$ liegt, können wir so zyklisch verschieben und gegebenenfalls umkehren, dass die Kante $e$ als Letztes von $w$ nach $u$ durchlaufen wird. Also gibt es in $G$ einen Kreis der Form $u v₁ … v_k w u$. Durch Weglassen des letzten Folgenglieds ergibt sich der Pfad $u v₁ … v_k w$. Dieser Pfad verwendet $e$ nicht, liegt also in $G - e$.
   // alt: Sei $v₁,v₂,…,v_k$ ein Kreis, auf dem $e$ liegt. Durch zyklisches Verschieben dürfen wir $u = v₁$ und $w = v₂$ annehmen. Dann ist $v₂,v₃,…,v_k$ eine Folge benachbarter Knoten von $w$ nach $u = v_k$, in der kein Knoten doppelt vorkommt, also ein Pfad. Er benutzt die Kante $e$ nicht: Seine Kanten sind ${v_i,v_(i+1)}$ für $i ∈ {2,…,k-1}$, und wegen $k ≥ 4$ ist $v_(k-1) ≠ v₂$. Rückwärts gelesen ist das ein Pfad von $u$ nach $w$ in $G - e$.
-  / $(2) ⇒ (1)$.: Sei $u v₁ … v_k w$ ein Pfad von $u$ nach $w$ in $G-e$. Da ${u,w}$ selbst keine Kanten in $G-e$ ist, gibt es mindestens einen Zwischenknoten (d.h. $k ≥ 1$).
+  / $(2) ⇒ (1)$.: Sei $u v₁ … v_k w$ ein Pfad von $u$ nach $w$ in $G-e$. Da ${u,w}$ selbst keine Kante in $G-e$ ist, gibt es mindestens einen Zwischenknoten (d.h. $k ≥ 1$).
     Durch Anhängen des Folgeglieds $u$ ergibt sich eine Folge $u v₁ … v_k w u$ in $G$ mit mindestens $4$ Gliedern. Diese ist ein Kreis.#qedhere
 ]
 
@@ -1641,7 +1649,7 @@
   + $G$ ist ein Baum.
   + Zwischen je zwei Knoten von $G$ gibt es _genau_ einen Pfad.
   + $G$ ist *minimal zusammenhängend*: $G$ ist zusammenhängend, aber für jede Kante $e ∈ E$ ist $G - e$ nicht zusammenhängend.
-  + $G$ ist *maximal azyklisch*: $G$ ist azyklisch, aber für je zwei nicht benachbarte Knoten $u,w$ enthält $G + {u,w}$ einen Kreis.
+  + $G$ ist *maximal azyklisch*: $G$ ist azyklisch, aber für je zwei nicht benachbarte Knoten $u ≠ w$ enthält $G + {u,w}$ einen Kreis.
 ]<baumkennzeichnung>
 
 #beweis[
@@ -1652,7 +1660,9 @@
   Der erste Ring zeigt, dass (1), (2) und (3) äquivalent sind, der zweite, dass (1), (2) und (4) äquivalent sind. Damit sind alle vier Aussagen äquivalent.
 
   / $(1) ⇒ (2)$.: Weil $G$ ein Baum ist, ist $G$ zusammenhängend, also gibt es zwischen je zwei Knoten _mindestens_ einen Pfad.
-    Angenommen, zwischen $x$ und $y$ gäbe es zwei verschiedene Pfade $P$ und $Q$. Dann gibt es eine Kante $e = {u,w}$, die nur auf einem der Pfade liegt. Wir dürfen _ohne Beschränkung der Allgemeinheit_ (o.B.d.A.)#footnote[Siehe folgende Bemerkung.] annehmen, dass sie auf $P$ liegt und in Richtung $u w$ durchlaufen wird.
+    Angenommen, zwischen $x$ und $y$ gäbe es zwei verschiedene Pfade $P$ und $Q$. Dann gibt es eine Kante $e = {u,w}$, die nur auf einem der Pfade liegt.#footnote[Hier ist eigentlich eine Hilfsaussage nötig: Könnte es nicht sein, dass $P$ und $Q$ die gleiche Kantenmenge durchlaufen sodass kein solches $e$ existiert? Wir lassen diese Lücke als Übungsaufgabe.]
+    
+    Wir dürfen _ohne Beschränkung der Allgemeinheit_ (o.B.d.A.)#footnote[Siehe folgende Bemerkung.] annehmen, dass sie auf $P$ liegt und in Richtung $u w$ durchlaufen wird.
     In $G - e$ gibt es dann einen Weg von $u$ nach $w$: erst auf $P$ rückwärts bis $x$, dann auf $Q$ bis $y$, dann auf $P$ rückwärts bis $w$. Keines der drei Stücke benutzt $e$. Nach @wegPfad gibt es in $G - e$ also auch einen Pfad von $u$ nach $w$, und nach @kreiskriterium liegt $e$ damit auf einem Kreis von $G$ — im Widerspruch zur Azyklizität.
 
   / $(2) ⇒ (3)$.: Weil es zwischen je zwei Knoten einen Pfad gibt, ist $G$ zusammenhängend. Sei $e = {u,w} ∈ E$ beliebig. Wir müssen zeigen, dass $G-e$ nicht zusammenhängend ist. Gäbe es in $G - e$ einen Pfad von $u$ nach $w$, so wären dieser und die Folge $u w$ zwei verschiedene Pfade von $u$ nach $w$ in $G$, im Widerspruch zu (2). Also gibt es keinen Pfad von $u$ nach $w$ in $G-e$, also ist $G - e$ nicht zusammenhängend.
@@ -2993,16 +3003,6 @@ Wollen wir hier Binärbäume haben?
 - Satz (geschlossene Formel): $C_n = 1/(n+1) binom(2n, n)$.
   - Bemerkung: Der Beweis (etwa mit dem Spiegelungsprinzip) ist optional; die Formel lässt sich per Induktion aus der Rekursion bestätigen.
 - Bemerkung: $C_n$ zählt *geordnete* Bäume, nicht Isomorphieklassen von Bäumen. Bei Binärbäumen sind linkes und rechtes Kind unterscheidbar; als Graphen wären viele dieser Bäume isomorph.
-
-
-#definition("Korrekte Klammerausdrücke")[
-  Die Menge $K$ der *korrekten Klammerausdrücke* ist rekursiv definiert:
-  + Das leere Wort ist in $K$.
-  + Sind $u, v ∈ K$, so ist auch $u v ∈ K$ (Hintereinanderschreiben).
-  + Ist $u ∈ K$, so ist auch $(u) ∈ K$.
-]
-
-- Beispiel: $(())()$ ist korrekt, $())($ nicht.
 //- Satz: In jedem korrekten Klammerausdruck ist die Anzahl der öffnenden gleich der Anzahl der schließenden Klammern.
 //- Beweis: Strukturelle Induktion über den Aufbau; ein Fall pro Regel.
 //- Übung: Zeigen Sie per struktureller Induktion, dass in jedem Präfix eines korrekten Klammerausdrucks mindestens so viele öffnende wie schließende Klammern vorkommen.
@@ -3308,7 +3308,7 @@ Das hier kam vom Relationskapitel wo es um bipartite Graphen mit fester Bipartit
   Zum Abschluss beweisen wir zwei klassische Sätze über Graphen. Beide stammen von Euler, und beide sind gute Beispiele dafür, wie man mit den Techniken dieser Vorlesung (Induktion, doppeltes Abzählen, Widerspruch) zu überraschenden Ergebnissen kommt.
 ]
 
-== Spannbäume und Charakterisierung von Bäumen
+== Spannbäume
 
 - Falls nötig: Definition Teilgraph, vermutlich aber verzichtbar:
 #definition("Teilgraph", kurz: $G_1 ⊆ G_2$)[
