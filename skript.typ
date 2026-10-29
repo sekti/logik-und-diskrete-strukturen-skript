@@ -1522,7 +1522,7 @@
 ]
 #stand[nach Mittwoch 28.10.2026]
 #satz[
-  Jeder Baum mit $n$ Knoten hat genau $n-1$ Kanten.
+  Sei $n ∈ ℕ⁺$. Hat ein Baum $n$ Knoten so hat er $n-1$ Kanten.
 ]<baumKanten>
 
 #beweis[
@@ -1552,23 +1552,6 @@
   / IS: Zu zeigen ist, dass $n$ ein Produkt von Primzahlen ist.
     / Fall 1\: $n$ ist eine Primzahl.: $n$ ist das Produkt bestehend aus einem primen Faktor (nämlich $n$).
     / Fall 2\: $n$ ist keine Primzahl.: Dann hat $n$ einen Teiler $a ∈ {2,…,n-1}$. Für $b := n/a$ gilt dann ebenfalls $b ∈ {2,…,n-1}$. Also ist $n = a ⋅ b$ das Produkt zweier kleinerer Zahlen. Nach Induktionsvoraussetzung sind $a$ und $b$ Produkte von Primzahlen, also ist es auch $n = a ⋅ b$.#qedhere
-]
-
-// Das ist irgendwie cool, aber nicht so lehrreich wie ich dachte:
-#uebung[
-  Finden Sie den Fehler in folgendem Induktions"beweis". Wir zeigen, dass für jedes $n ∈ ℕ$: Hat man $n$ Äpfel, so sind alle gleich schwer.
-  / IA: Für $n = 1$ ist nichts zu zeigen. ✓
-  / IV: Für ein $n > 1$ gelte: Hat man $n-1$ Äpfel, so sind alle gleich schwer.
-  / IS: Wir betrachten nun eine Menge von $n$ Äpfeln mit Gewichten $w₁,…,w_n$. Nach IV sind die ersten $n-1$ Äpfel gleich schwer. Ebenfalls nach IV sind die letzten $n-1$ jeweils gleich schwer. Es gilt also:
-    $
-      w₁ = & w₂ = w₃ = … = w_(n-2) = w_(n-1) \
-           & w₂ = w₃ = … = w_(n-2) = w_(n-1) = w_n
-    $
-    Somit haben alle $n$ Äpfel das Gewicht $w₂$, sind also gleich schwer.
-]
-
-#loesung[
-  Der Induktionsschritt schlägt für $n = 2$ fehl, weil dann $w_2$ nicht in beiden Gleichungen vorkommt (die Schreibweise suggeriert fälschlicherweise eine Überlappung).
 ]
 
 #bemerkung(slides: "titel")[Induktion in der Philosophie][
