@@ -2,6 +2,7 @@ name: Build PDF and update release
 
 on:
   push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -22,17 +23,15 @@ jobs:
         uses: typst-community/setup-typst@v4
 
       - name: Compile skript.pdf
-        run: typst compile --input kapitel=alle skript.typ skript.pdf
+        run: typst compile --input folien=false --input kapitel=alle skript.typ skript.pdf
 
-      - name: Upload PDF to latest release (create one if none exists)
+      - name: Upload PDF to release "latest" (create it if it does not exist)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          tag=$(gh release view --json tagName --jq .tagName 2>/dev/null || true)
-
-          if [ -n "$tag" ]; then
-            echo "Updating latest release: $tag"
-            gh release upload "$tag" skript.pdf --clobber
+          if gh release view latest >/dev/null 2>&1; then
+            echo "Updating release: latest"
+            gh release upload latest skript.pdf --clobber
           else
             echo "No release yet, creating one"
             gh release create latest skript.pdf \

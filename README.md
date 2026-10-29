@@ -4,8 +4,9 @@ Hier entsteht ein Vorlesungsskript für das Wintersemester 2026/2027 in Stuttgar
 
 ## Verwendung
 
-Die aktuelle PDF-Fassung steht in Ilias. Zum Lesen muss hier also nichts gebaut
-werden.
+Die aktuelle PDF-Fassung gibt es
+[hier](https://github.com/sekti/logik-und-diskrete-strukturen-skript/releases/latest/download/skript.pdf). Außerdem steht sie in
+Ilias. Zum Lesen muss hier also nichts gebaut werden.
 
 Wer das Skript selbst setzen möchte, braucht [Typst](https://typst.app). Im
 geklonten Verzeichnis genügt
