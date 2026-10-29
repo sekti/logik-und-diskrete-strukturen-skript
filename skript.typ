@@ -230,6 +230,28 @@
   #block(above: 1.2em, below: 1.8em,line(length: 100%, stroke: 2.5pt))
 ]
 
+// Bis hierher ist die Vorlesung gekommen, z.B. #stand[28.10.2026]. Unter dem
+// Titel erscheint ein Link auf die (letzte) so markierte Stelle.
+// Die Marke steht im Block, damit sie mit ihm auf die nächste Seite rutscht.
+#let stand(datum) = block(above: 1.5em, below: 1.5em, breakable: false)[
+  #metadata(datum)<vorlesungsstand>
+  #grid(
+    columns: (1fr, auto, 1fr),
+    column-gutter: 0.6em,
+    align: horizon,
+    line(length: 100%, stroke: 0.8pt),
+    text(size: 0.9em)[Stand der Vorlesung: #datum],
+    line(length: 100%, stroke: 0.8pt),
+  )
+]
+#let standLink = context {
+  let marken = query(<vorlesungsstand>)
+  if marken.len() > 0 {
+    let marke = marken.last()
+    link(marke.location(), text(fill: blue)[→ Zum Stand der Vorlesung (#marke.value)])
+  }
+}
+
 // begin{document}
 
 // Titel
@@ -240,6 +262,7 @@
   Dozent: Stefan Walzer\
   #text(size: 16pt)[Vorlesungsskript #if folienModus { [ — Projektionsfassung] }]
 
+  #standLink
 ]
 #v(2em)
 
@@ -1497,6 +1520,7 @@
   / azyklisch: _Intuitiv_: $G$ hat keinen Kreis und durch das _Löschen_ von Knoten und Kanten kann kein Kreis entstehen.\ _Formaler_: Angenommen $G - v$ hätte einen Kreis. Dieser Kreis wäre auch ein Kreis in $G$ — Widerspruch.
   / zusammenhängend: Seien $x,y ∈ V ∖ {v}$. Wir müssen zeigen, dass es einen Pfad von $x$ nach $y$ in $G - v$ gibt. Weil $G$ zusammenhängend ist, gibt es in $G$ einen Pfad von $x$ nach $y$. Dieser Pfad enthält $v$ nicht: Käme $v$ darin vor, so wäre $v$ wegen $x ≠ v$ und $y ≠ v$ ein innerer Knoten des Pfades und hätte damit zwei verschiedene Nachbarn auf dem Pfad, im Widerspruch zu $deg(v) = 1$. Der Pfad liegt also ganz in $G - v$. #qedhere
 ]
+#stand[nach Mittwoch 28.10.2026]
 #satz[
   Jeder Baum mit $n$ Knoten hat genau $n-1$ Kanten.
 ]<baumKanten>
