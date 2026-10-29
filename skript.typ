@@ -1520,7 +1520,8 @@
   / azyklisch: _Intuitiv_: $G$ hat keinen Kreis und durch das _Löschen_ von Knoten und Kanten kann kein Kreis entstehen.\ _Formaler_: Angenommen $G - v$ hätte einen Kreis. Dieser Kreis wäre auch ein Kreis in $G$ — Widerspruch.
   / zusammenhängend: Seien $x,y ∈ V ∖ {v}$. Wir müssen zeigen, dass es einen Pfad von $x$ nach $y$ in $G - v$ gibt. Weil $G$ zusammenhängend ist, gibt es in $G$ einen Pfad von $x$ nach $y$. Dieser Pfad enthält $v$ nicht: Käme $v$ darin vor, so wäre $v$ wegen $x ≠ v$ und $y ≠ v$ ein innerer Knoten des Pfades und hätte damit zwei verschiedene Nachbarn auf dem Pfad, im Widerspruch zu $deg(v) = 1$. Der Pfad liegt also ganz in $G - v$. #qedhere
 ]
-#stand[nach Mittwoch 28.10.2026]
+
+
 #satz[
   Sei $n ∈ ℕ⁺$. Hat ein Baum $n$ Knoten so hat er $n-1$ Kanten.
 ]<baumKanten>
@@ -1649,7 +1650,7 @@
   $ "z.Z." ∀x,y ∈ V: ∃ "Pfad" x…y "in" G-e $
   Seien dazu $x,y ∈ V$ beliebig. Weil $G$ zusammenhängend ist, gibt es einen Pfad von $x$ nach $y$ in $G$. Ersetzen wir darin die Kante $e$, falls sie vorkommt, durch den Umweg, so erhalten wir einen Weg von $x$ nach $y$ in $G - e$. Nach @wegPfad gibt es dann auch einen Pfad von $x$ nach $y$ in $G - e$.
 ]
-
+#stand[nach Donnerstag 29.10.2026]
 #satz[Charakterisierung von Bäumen][
   #set enum(numbering: "(1)")
   Sei $G = (V,E)$ ein Graph. Dann sind die folgenden vier Aussagen äquivalent.
