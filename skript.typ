@@ -3,7 +3,7 @@
 #let folienModus = if "folien" in sys.inputs { sys.inputs.folien == "true" } else { false }
 // Nur ein Kapitel setzen, z.B. 5 (im Editor deutlich schneller); none = alles.
 // Auf der Kommandozeile hat „--input kapitel=5“ bzw. „--input kapitel=alle“ Vorrang.
-#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { int(sys.inputs.kapitel) } } else { 4 }
+#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { int(sys.inputs.kapitel) } } else { 5 }
 
 // imports
   #import "@preview/ctheorems:2.0.0": *
@@ -1651,6 +1651,15 @@
   Seien dazu $x,y ∈ V$ beliebig. Weil $G$ zusammenhängend ist, gibt es einen Pfad von $x$ nach $y$ in $G$. Ersetzen wir darin die Kante $e$, falls sie vorkommt, durch den Umweg, so erhalten wir einen Weg von $x$ nach $y$ in $G - e$. Nach @wegPfad gibt es dann auch einen Pfad von $x$ nach $y$ in $G - e$.
 ]
 #stand[nach Donnerstag 29.10.2026]
+
+#uebung[
+  Sei $G = (V,E)$ ein Graph und $v ∈ V$. Zeigen Sie: Sind $P$ und $Q$ zwei verschiedene Pfade, die beide in $v$ beginnen, dann gibt es eine Kante $e ∈ E$, die auf nur einem der beiden Pfade vorkommt.
+]<verschiedenePfadeverschiedeneKanten>
+
+#skript[
+  Die Aufgabe ist Teil von Übungsblatt 2 (in leicht anderer Formulierung), daher keine Lösung hier.
+]
+
 #satz[Charakterisierung von Bäumen][
   #set enum(numbering: "(1)")
   Sei $G = (V,E)$ ein Graph. Dann sind die folgenden vier Aussagen äquivalent.
@@ -1668,7 +1677,7 @@
   Der erste Ring zeigt, dass (1), (2) und (3) äquivalent sind, der zweite, dass (1), (2) und (4) äquivalent sind. Damit sind alle vier Aussagen äquivalent.
 
   / $(1) ⇒ (2)$.: Weil $G$ ein Baum ist, ist $G$ zusammenhängend, also gibt es zwischen je zwei Knoten _mindestens_ einen Pfad.
-    Angenommen, zwischen $x$ und $y$ gäbe es zwei verschiedene Pfade $P$ und $Q$. Dann gibt es eine Kante $e = {u,w}$, die nur auf einem der Pfade liegt.#footnote[Hier ist eigentlich eine Hilfsaussage nötig: Könnte es nicht sein, dass $P$ und $Q$ die gleiche Kantenmenge durchlaufen sodass kein solches $e$ existiert? Wir lassen diese Lücke als Übungsaufgabe.]
+    Angenommen, von $x$ nach $y$ gäbe es zwei verschiedene Pfade $P$ und $Q$. Dann gibt es nach @verschiedenePfadeverschiedeneKanten eine Kante $e = {u,w}$, die nur auf einem der Pfade liegt.
     
     Wir dürfen _ohne Beschränkung der Allgemeinheit_ (o.B.d.A.)#footnote[Siehe folgende Bemerkung.] annehmen, dass sie auf $P$ liegt und in Richtung $u w$ durchlaufen wird.
     In $G - e$ gibt es dann einen Weg von $u$ nach $w$: erst auf $P$ rückwärts bis $x$, dann auf $Q$ bis $y$, dann auf $P$ rückwärts bis $w$. Keines der drei Stücke benutzt $e$. Nach @wegPfad gibt es in $G - e$ also auch einen Pfad von $u$ nach $w$, und nach @kreiskriterium liegt $e$ damit auf einem Kreis von $G$ — im Widerspruch zur Azyklizität.
@@ -1683,11 +1692,11 @@
   / $(4) ⇒ (1)$.: Azyklisch ist $G$ nach Voraussetzung. Für den Zusammenhang seien $u,w$ Knoten. Sind sie gleich oder benachbart, so gibt es einen Pfad von $u$ nach $w$. Andernfalls enthält $G' := G + {u,w}$ einen Kreis, weil $G$ maximal azyklisch ist. Dieser benutzt die Kante ${u,w}$, denn sonst wäre er schon ein Kreis in $G$. Nach @kreiskriterium gibt es also in $G = G' - {u,w}$ einen Pfad von $u$ nach $w$.#qedhere
 ]
 
-#bemerkung[„o.B.d.A.“][
+#bemerkung(slides: "titel")[„o.B.d.A.“][
   Die Floskel „ohne Beschränkung der Allgemeinheit“ bedeutet, dass wir eine Annahme treffen, die die allgemeine Gültigkeit des Beweises nicht beeinträchtigt. Im vorliegenden Fall wollen wir, dass $P$ den Pfad bezeichnet, auf dem $e$ vorkommt. Wäre $Q$ dieser Pfad, könnten wir den Beweis dennoch durchführen, bloß mit vertauschten Rollen von $P$ und $Q$. Wichtig ist hier, dass $P$ und $Q$ zuvor noch austauschbar waren. Analog waren $u$ und $w$ zunächst austauschbar, und wir haben uns erst anschließend dazu entschieden, die Bezeichnung $u$ für denjenigen Knoten zu verwenden, der zuerst auf $P$ liegt.
 ]
 
-#bemerkung[Zwölf zum Preis von fünf][
+#bemerkung(slides: "titel")[Zwölf zum Preis von fünf][
   Die vierfache Äquivalenz in @baumkennzeichnung ergibt $4 ⋅ 3 = 12$ Implikationen. Explizit beweisen mussten wir nur fünf davon. Ein einziger Ring über alle vier Aussagen hätte noch eine Implikation gespart (dafür wäre eine der Implikationen komplizierter gewesen).
 ]
 
@@ -1703,7 +1712,7 @@
   *Zu (2).* Wir fügen Kanten hinzu, solange das möglich ist, ohne einen Kreis zu erzeugen. Weil die Kantenzahl in jedem Schritt wächst und die Anzahl möglicher Kanten beschränkt ist, endet das Verfahren. Am Ende steht ein _maximal_ azyklischer Graph. Nach @baumkennzeichnung ist er ein Baum und hat nach @baumKanten genau $n-1$ Kanten. Da nur Kanten hinzugefügt wurden, gilt $m ≤ n-1$.
 ]
 
-#bemerkung[
+#bemerkung(slides: 1)[
   Eine andere Sicht auf die Tatsache, dass Bäume exakt $n-1$ Kanten haben (@baumKanten), ist also diese:
   - Jeder Graph mit _weniger_ Kanten ist nicht zusammenhängend.
   - Jeder Graph mit _mehr_ Kanten ist nicht azyklisch.
@@ -1723,21 +1732,21 @@
 
 === Potenzmenge
 
-#definition("Potenzmenge", kurz: $2^A$)[
+#definition[Potenzmenge][
   Sei $A$ eine Menge. Die *Potenzmenge* $2^A$ von $A$ ist die Menge aller Teilmengen von $A$:#footnote[Manche Autoren schreiben stattdessen $cal(P)(A)$.]
   $ 2^A := {Y | Y ⊆ A}. $
 ]
 
-#beispiel(kurz: $2^({1,2,3})$)[
+#beispiel[
   Die Potenzmenge von ${1,2,3}$ ist
   $ 2^({1,2,3}) = {∅, {1}, {2}, {3}, {1,2}, {1,3}, {2,3}, {1,2,3}}. $
-  Man beachte, dass $∅$ und ${1,2,3}$ dazugehören. Es gilt $|2^({1,2,3})| = 8 = 2³$, was die Schreibweise motiviert (wir werden später nochmal darauf zurückkommen).
+  Man beachte, dass $∅$ und ${1,2,3}$ dazugehören. Es gilt $|2^({1,2,3})| = 8 = 2³$, was die Schreibweise motiviert (darauf kommen wir in @sec:zaehlen zurück).
 ]
 
 === Kartesische Produkte
 
-#definition("Paar, kartesisches Produkt", kurz: $A × B$)[
-  Für zwei Objekte $a$ und $b$ ist $(a,b)$ das (geordnete) *Paar* mit *erster Komponente* $a$ und *zweiter Komponente* $b$. Für $a ≠ b$ sind die Paare $(a,b)$ und $(b,a)$ verschieden. Für Mengen $A$ und $B$ heißt
+#definition[Paar, kartesisches Produkt][
+  Für zwei Objekte $a$ und $b$ ist $(a,b)$ das (geordnete) *Paar* mit *erster Komponente* $a$ und *zweiter Komponente* $b$. Zwei Paare $(a,b)$ und $(a',b')$ sind genau dann gleich, wenn $a = a'$ und $b = b'$ gilt. Insbesondere sind für $a ≠ b$ die Paare $(a,b)$ und $(b,a)$ verschieden. Für Mengen $A$ und $B$ heißt
   $ A × B := {(a,b) | a ∈ A, b ∈ B} $
   das *kartesische Produkt* von $A$ und $B$.
 ]
@@ -1753,16 +1762,24 @@
 ]<produktgroesse>
 
 #begründung[
-  Für jede der $|A|$ Möglichkeiten für die erste Komponente gibt es $|B|$ Möglichkeiten für die zweite, und verschiedene Wahlen liefern verschiedene Paare.#footnote[Um die Aussage zu „beweisen“, müsste man die Konzepte von Multiplikation und Kardinalität genauer fassen, als wir es bislang getan haben. Siehe @sec:cardinality.]
+  Für jede der $|A|$ Möglichkeiten für die erste Komponente gibt es $|B|$ Möglichkeiten für die zweite, und verschiedene Wahlen liefern verschiedene Paare.#footnote[Um die Aussage zu „beweisen“, müsste man das Konzept von Kardinalität genauer fassen, als wir es bislang getan haben. Siehe @sec:cardinality.]
 ]
 
-#definition("Tupel", kurz: $A_1 × … × A_n$, $A^n$)[
-  Für $n$ Objekte $a₁,…,a_n$ nennen wir die Folge $(a₁,…,a_n)$ ein *$n$-Tupel*. Wir schreiben
+#definition[Tupel][
+  Sei $n ∈ ℕ$. Für $n$ Objekte $a₁,…,a_n$ nennen wir die Folge $(a₁,…,a_n)$ ein *$n$-Tupel*. Wir schreiben
   $ A_1 × … × A_n := {(a_1,…,a_n) | a_1 ∈ A_1, …, a_n ∈ A_n} $
   für das *kartesische Produkt* von $A₁,…,A_n$.
   Gilt $A_1 = … = A_n = A$, so schreiben wir kurz $A^n$.
 
   Für $n = 0$ gibt es genau ein Tupel, nämlich das leere Tupel $()$. Es gilt also $A^0 = {()}$. Insbesondere gilt $|A^0| = 1$.
+]
+
+#satz[
+  Für jede endliche Menge $A$ und jedes $n ∈ ℕ$ gilt $|A^n| = |A|^n$.
+]<tupelanzahl>
+
+#begründung[
+  Für jede der $n$ Komponenten gibt es unabhängig von den anderen $|A|$ Möglichkeiten, und verschiedene Wahlen liefern verschiedene Tupel. Für $n = 0$ ist das die Aussage $|A^0| = 1 = |A|^0$. Sie gilt auch für $A = ∅$, denn $0^0 = 1$ ist ein leeres Produkt (@leeresProdukt).
 ]
 
 #bemerkung[
@@ -1829,7 +1846,7 @@
 ]
 
 #loesung[
-  + $A^*$ enthält alle Folgen lateinischer Buchstaben beliebiger (endlicher) Länge, zum Beispiel $("a","b","b","a")$, $("w","u","r","s","t")$ und die leere Folge $()$. Die unendliche Folge $("a","a",…)$ ist _nicht_ in $A^*$, denn sie kommt in keiner der Mengen $A⁰$, $A¹$, … vor.
+  + $A^*$ enthält alle Folgen von Kleinbuchstaben beliebiger (endlicher) Länge, zum Beispiel $("a","b","b","a")$, $("w","u","r","s","t")$ und die leere Folge $()$. Die unendliche Folge $("a","a",…)$ ist _nicht_ in $A^*$, denn sie kommt in keiner der Mengen $A⁰$, $A¹$, … vor.
     Man nennt $A^*$ auch die Menge der *Wörter* über dem *Alphabet* $A$ und lässt dann Klammern und Kommas weg, z.B. $"abba" ∈ A^*$.
   + $V^+$ ist die Menge _nicht-leerer_ Folgen mit Komponenten aus $V$.
   + $W$ enthält nicht-leere Folgen von Knoten von $G$. Die Zusatzbedingung drückt aus, dass für je zwei aufeinanderfolgende Knoten die entsprechende Kante in $G$ existiert. Damit ist $W$ die Menge der gerichteten Wege in $G$. Wir lassen die Klammern und Kommas normalerweise weg.
@@ -1841,7 +1858,7 @@
   behelfen. Ignoriert man für die Paare in $A union.dot B$ die zweite Komponente, so entsteht der gewünschte Effekt.
 ]<disjunkteVereinigung>
 
-== Relationen Allgemein
+== Relationen allgemein
 
 #skript[
   Eine Relation hält fest, welche Objekte zueinander in einer bestimmten Beziehung stehen. Funktionen wie „$f(x) = x²$“ und Ordnungsrelationen wie „$≤$“ werden Spezialfälle sein.
