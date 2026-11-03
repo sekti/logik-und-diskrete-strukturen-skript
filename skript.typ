@@ -2,8 +2,9 @@
 // Editor; auf der Kommandozeile hat „--input folien=true/false“ Vorrang.
 #let folienModus = if "folien" in sys.inputs { sys.inputs.folien == "true" } else { false }
 // Nur ein Kapitel setzen, z.B. 5 (im Editor deutlich schneller); none = alles.
-// Auf der Kommandozeile hat „--input kapitel=5“ bzw. „--input kapitel=alle“ Vorrang.
-#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { int(sys.inputs.kapitel) } } else { 5 }
+// Lange Kapitel sind in Teile gespalten: 5.2 setzt nur Teil 2 von Kapitel 5.
+// Auf der Kommandozeile hat „--input kapitel=5“ (oder 5.2) bzw. „--input kapitel=alle“ Vorrang.
+#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { sys.inputs.kapitel } } else { 5.1 }
 
 // imports
   #import "@preview/ctheorems:2.0.0": *
@@ -215,9 +216,19 @@
 }
 // Kapitelweise setzen (siehe nurKapitel). Ein nicht genommener #if-Zweig wird
 // weder ausgewertet noch umbrochen; daher #if und kein Funktionsaufruf.
-#let zeige(n) = nurKapitel == none or nurKapitel == n
+// auswahl ist none (alles) oder (Kapitel, Teil), Teil none = ganzes Kapitel.
+#let auswahl = if nurKapitel == none { none } else {
+  let t = str(nurKapitel).split(".")
+  (int(t.at(0)), if t.len() > 1 { int(t.at(1)) } else { none })
+}
+#let zeige(n, teil: none) = (auswahl == none or auswahl.at(0) == n
+  and (auswahl.at(1) == none or teil == none or auswahl.at(1) == teil))
 // Stellt den Überschriftenzähler so, dass die Nummern auch im Einzelkapitel stimmen.
-#let kapitelstart(n) = if nurKapitel != none { counter(heading).update(n - 1) }
+#let kapitelstart(n) = if auswahl != none { counter(heading).update(n - 1) }
+// Dasselbe für einen späteren Teil eines Kapitels, der nach Abschnitt n.abschnitt
+// beginnt. Die Abschnittsnummer ist von Hand gepflegt; stimmt sie nicht, sind
+// nur im Einzelteil die Nummern verschoben.
+#let teilstart(n, abschnitt) = if auswahl != none and auswahl.at(1) != none { counter(heading).update((n, abschnitt)) }
 
 #let slidebreak() = {
   if folienModus { pagebreak() }
@@ -1719,7 +1730,7 @@
 ]
 ]
 
-#if zeige(5) [
+#if zeige(5, teil: 1) [
 #kapitelstart(5)
 #slidebreak()
 = Relationen und Funktionen
@@ -1794,11 +1805,11 @@
 
 === Einschub: Gerichtete Graphen
 
-#definition("Gerichteter Graph", kurz: $E ⊆ V × V$)[
+#definition[Gerichteter Graph][
   Ein *gerichteter Graph* ist ein Paar $G = (V,E)$ aus einer endlichen, nichtleeren Menge $V$ von Knoten und einer Menge $E ⊆ V × V$ von *gerichteten Kanten*. Für $(u,v) ∈ E$ sagen wir, die Kante führt *von* $u$ *nach* $v$.
 ]<gerichteterGraph>
 
-#bemerkung[Schlingen][
+#bemerkung(slides: "titel")[Schlingen][
   Eine gerichtete Kante der Form $(u,u)$ heißt *Schlinge*. Manche Autoren verbieten solche Kanten. Bei ungerichteten Graphen sind sie nach unserer Definition ausgeschlossen, weil Kanten dort zweielementige Mengen sind.
 ]
 
@@ -1829,7 +1840,7 @@
 
 === Vereinigung und Schnitt über eine Indexmenge
 
-#notation("Indizierte Vereinigung und Schnitt", kurz: [$union.big_(i ∈ I) A_i$, $inter.big_(i ∈ I) A_i$])[
+#notation[Indizierte Vereinigung und Schnitt][
   Sei $I$ eine Menge und sei für jedes $i ∈ I$ eine Menge $A_i$ gegeben. Dann schreiben wir
   $ union.big_(i ∈ I) A_i := {x | ∃i ∈ I: x ∈ A_i} $
   für die Vereinigung aller dieser Mengen und
@@ -1852,10 +1863,13 @@
   + $W$ enthält nicht-leere Folgen von Knoten von $G$. Die Zusatzbedingung drückt aus, dass für je zwei aufeinanderfolgende Knoten die entsprechende Kante in $G$ existiert. Damit ist $W$ die Menge der gerichteten Wege in $G$. Wir lassen die Klammern und Kommas normalerweise weg.
 ]
 
-#bemerkung[Disjunkte Vereinigung][
+#bemerkung(slides: "titel")[Disjunkte Vereinigung][
   Mengen können Elemente nicht doppelt enthalten. Manchmal will man aber, dass die Vereinigung $A ∪ B$ zwei Kopien eines Elements $x$ enthält, falls $x ∈ A$ und $x ∈ B$ gilt. Man kann sich dann mit der Definition
   $ A union.dot B := (A × {1}) ∪ (B × {2}) $
-  behelfen. Ignoriert man für die Paare in $A union.dot B$ die zweite Komponente, so entsteht der gewünschte Effekt.
+  behelfen. Zum Beispiel gilt:
+  $ &{"w","u","r","s","t"} union.dot {"b","r","o","t"}\
+  &= {("w",1),("u",1),("r",1),("s",1),("t",1),("b",2),("r",2),("o",2),("t",2)} $
+  Ignoriert man für die Paare in $A union.dot B$ die zweite Komponente, so entsteht der gewünschte Effekt. 
 ]<disjunkteVereinigung>
 
 == Relationen allgemein
@@ -1870,28 +1884,28 @@
   Im Fall $k = 2$ sprechen wir von einer *binären Relation zwischen $A_1$ und $A_2$*. Siehe auch @relationAufA.
 ]
 
-#beispiel[Eine dreistellige Relation][
+#beispiel(slides: 1)[Eine dreistellige Relation][
   Eine Datenbank könnte Prüfungsanmeldungen als eine Menge $R$ von Tripeln ablegen mit
   $ R ⊆ "Matrikelnummern" × "Modulnummern" × "Termine". $
   Damit ist $R$ eine $3$-stellige Relation (zwischen Matrikelnummern, Modulnummern und Terminen). Daher der Name _relationale Datenbank_.
 ]
 
 #bemerkung[Graphische Darstellung einer binären Relation][
-  Eine binäre Relation $E ⊆ X × Y$ kann man graphisch darstellen: Für jedes $x ∈ X$ gibt es einen Knoten links, für jedes $y ∈ Y$ einen Knoten rechts und für jedes Element $(x,y) ∈ E$ eine Kante zwischen den entsprechenden Knoten.#footnote[Man könnte fast sagen: Eine binäre Relation _ist_ ein gerichteter Graph $(X ∪ Y, E)$. Probleme dabei: Das geht nur, wenn $X$ und $Y$ disjunkt, endlich und nicht leer sind. Außerdem „vergisst“ der Graph für isolierte Knoten, ob sie nach links oder rechts gehören, was die Relation aber „weiß“.]
+  Eine binäre Relation $E ⊆ X × Y$ kann man graphisch darstellen: Für jedes $x ∈ X$ gibt es einen Knoten links, für jedes $y ∈ Y$ einen Knoten rechts und für jedes Element $(x,y) ∈ E$ eine Kante zwischen den entsprechenden Knoten.#footnote[Man könnte fast sagen: Eine binäre Relation _ist_ ein gerichteter Graph $(X ∪ Y, E)$. Probleme dabei: Das geht nur, wenn $X$ und $Y$ disjunkt, endlich und nicht leer sind. Außerdem „vergisst“ der Graph für isolierte Knoten, ob sie nach links oder rechts gehören, was die Relation aber „weiß“. Im Folgenden Beispiel könnte „rosa“ sinnvoll auf der linken, auf der rechten oder auf beiden Seiten auftauchen.]
 ]
 
 #beispiel[Kinder und Farben][
   Gegeben seien die Mengen $"Kinder"$ und $"Farben"$ sowie die binäre Relation $"mag" ⊆ "Kinder" × "Farben"$ mit
-  $ "Kinder" := {"Anna", "Ben", "Carla"}, quad "Farben" := {"rot", "blau", "grün", "braun"}. $
-  $ "mag" := {("Anna","rot"), ("Anna","blau"), ("Ben","blau"), ("Carla","grün")}. $
+  $ "Kinder" := {"anna", "ben", "carla"}, quad "Farben" := {"rot", "blau", "grün", "rosa"}. $
+  $ "mag" := {("anna","rot"), ("anna","blau"), ("ben","blau"), ("carla","grün")}. $
   Eine graphische Darstellung zeigt @magbild.
 ]
 #abbildung(slides: 0, caption: [
   Beispielrelation „mag“ zwischen Kindern und Farben.
 ])[#relationsbild(
-  ("Anna", "Ben", "Carla"),
-  ("rot", "blau", "grün", "braun"),
-  (("Anna", "rot"), ("Anna", "blau"), ("Ben", "blau"), ("Carla", "grün")),
+  ("anna", "ben", "carla"),
+  ("rot", "blau", "grün", "rosa"),
+  (("anna", "rot"), ("anna", "blau"), ("ben", "blau"), ("carla", "grün")),
 )]<magbild>
 
 
@@ -1916,7 +1930,7 @@
     column-gutter: 0.8em,
     [*linkstotal*], [links je _mindestens_ eine Kante],
     [*rechtstotal*], [rechts je _mindestens_ eine Kante],
-    [*rechtseindeutig*], [links je _höchstens_ eine Kante#footnote[Die Vorstellung ist, dass es _von_ jedem linken Knoten eine eindeutige Kante _nach rechts_ gibt.]],
+    [*rechtseindeutig*], [links je _höchstens_ eine Kante#footnote[Die Vorstellung ist, dass für jeden linken Knoten gilt: Wenn es überhaupt eine Kante _nach rechts_ gibt, so ist diese Kante eindeutig.]],
     [*linkseindeutig*], [rechts je _höchstens_ eine Kante],
   )
   In @magbild kann man direkt ablesen: „mag“ ist linkstotal, erfüllt aber keine der anderen Eigenschaften.
@@ -1939,11 +1953,11 @@
   Sei $x ∈ X$. Die Linkstotalität liefert ein $y ∈ Y$ mit $(x,y) ∈ f$. Für jedes $y' ∈ Y$ mit $(x,y') ∈ f$ gilt nach Rechtseindeutigkeit, dass $y = y'$ ist. Das zeigt die Eindeutigkeit.
 ]
 
-#definition[Argument $x$ und Funktionswert $f(x)$][
+#definition(slides: "titel")[Argument $x$ und Funktionswert $f(x)$][
   Für eine Funktion $f : X → Y$ und $x ∈ X$ schreiben wir $f(x)$ für das nach @eindeutigerFunktionswert eindeutige $y ∈ Y$ mit $(x,y) ∈ f$. Wir sagen, $y$ ist der *Funktionswert* zum *Argument* $x$.
 ]
 
-#notation[$x ↦ f(x)$][
+#notation(slides: "titel")[$x ↦ f(x)$][
   Häufig gibt man eine Funktion durch eine Rechenvorschrift an, etwa
   $ f: ℤ → ℕ, quad x ↦ x². $
   Gemeint ist hier $f ⊆ ℤ × ℕ$ mit $f = {(x,x²) | x ∈ ℤ}$.
@@ -1980,7 +1994,7 @@
   $ g ∘ f : X → Z, quad x ↦ g(f(x)). $
 ]
 
-#bemerkung[Folge][
+#bemerkung(slides: "titel")[Folge][
   Wir haben den Begriff der *Folge* bereits ohne Definition verwendet (z.B. in @wegpfadkreis). Jetzt können wir eine Definition nachliefern. Eine Folge $(a₁,…,a_n)$ mit $n ∈ ℕ$ Folgengliedern aus einer Menge $A$ ist eine Funktion
   $ f : {1,…,n} → A, quad i ↦ a_i. $
   Für $n = 0$ ergibt sich die leere Folge $()$. Eine unendliche Folge $(a₁,a₂,…)$ mit Folgengliedern aus $A$ ist eine Funktion
@@ -2279,7 +2293,10 @@
 #loesung[
   Wir können ungerichtete Graphen als gerichteten Graphen auffassen, wobei eine Kante ${u,v}$ den gerichteten Kanten $(u,v)$ und $(v,u)$ entspricht. Die Kantenrelation ist also notwendig symmetrisch. Weil wir keine Schlingen zugelassen haben, ist sie außerdem irreflexiv. Ungerichtete Graphen mit Knotenmenge $V$ entsprechen also genau den irreflexiven, symmetrischen Relationen auf $V$.
 ]
+]
 
+#if zeige(5, teil: 2) [
+#teilstart(5, 4)
 == Ordnungsrelationen
 
 #definition[Quasi-, Halb- und Totalordnung][
