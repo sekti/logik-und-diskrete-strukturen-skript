@@ -1884,7 +1884,7 @@
   Eine Relation hält fest, welche Objekte zueinander in einer bestimmten Beziehung stehen. Funktionen wie „$f(x) = x²$“ und Ordnungsrelationen wie „$≤$“ werden Spezialfälle sein.
 ]
 
-#definition("Relation", kurz: $R ⊆ A_1 × … × A_k$)[
+#definition[Relation][
   Sei $k ∈ ℕ⁺$. Eine *$k$-stellige Relation* ist gegeben durch Mengen $A_1, …, A_k$ sowie eine Teilmenge
   $ R ⊆ A_1 × … × A_k. $
   Im Fall $k = 2$ sprechen wir von einer *binären Relation zwischen $A_1$ und $A_2$*. Siehe auch @relationAufA.
