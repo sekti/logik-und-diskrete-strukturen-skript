@@ -1748,10 +1748,18 @@
   $ 2^A := {Y | Y ⊆ A}. $
 ]
 
+#satz[
+  Für eine endliche Menge $A$ gilt $|2^A| = 2^(|A|)$.
+]<potenzmengengroesse>
+
+#begründung[
+  Bilden wir eine Teilmenge $Y$ von $A$, so müssen wir für jedes Element von $A$ entscheiden, ob es in $Y$ enthalten sein soll oder nicht. Insofern ist eine Folge von $|A|$ unabhängigen Ja/Nein-Entscheidungen zu treffen, und jede Folge von Entscheidungen liefert eine andere Teilmenge. Dafür gibt es $2^(|A|)$ Möglichkeiten.#footnote[Um diese Aussage zu „beweisen“, müsste man das Konzept von Kardinalität genauer fassen, als wir es bislang getan haben. Siehe @sec:cardinality. Das gilt auch für zwei weitere Aussagen dieses Abschnitts.]
+]
+
 #beispiel[
   Die Potenzmenge von ${1,2,3}$ ist
   $ 2^({1,2,3}) = {∅, {1}, {2}, {3}, {1,2}, {1,3}, {2,3}, {1,2,3}}. $
-  Man beachte, dass $∅$ und ${1,2,3}$ dazugehören. Es gilt $|2^({1,2,3})| = 8 = 2³$, was die Schreibweise motiviert (darauf kommen wir in @sec:zaehlen zurück).
+  Man beachte, dass $∅$ und ${1,2,3}$ dazugehören. Es gilt $|2^({1,2,3})| = 8 = 2³$.
 ]
 
 === Kartesische Produkte
@@ -1773,24 +1781,22 @@
 ]<produktgroesse>
 
 #begründung[
-  Für jede der $|A|$ Möglichkeiten für die erste Komponente gibt es $|B|$ Möglichkeiten für die zweite, und verschiedene Wahlen liefern verschiedene Paare.#footnote[Um die Aussage zu „beweisen“, müsste man das Konzept von Kardinalität genauer fassen, als wir es bislang getan haben. Siehe @sec:cardinality.]
+  Für jede der $|A|$ Möglichkeiten für die erste Komponente gibt es $|B|$ Möglichkeiten für die zweite, und verschiedene Wahlen liefern verschiedene Paare.
 ]
 
 #definition[Tupel][
-  Sei $n ∈ ℕ$. Für $n$ Objekte $a₁,…,a_n$ nennen wir die Folge $(a₁,…,a_n)$ ein *$n$-Tupel*. Wir schreiben
+  Sei $n ∈ ℕ$. Für $n$ Objekte $a₁,…,a_n$ nennen wir die Folge $(a₁,…,a_n)$ ein *$n$-Tupel*.#footnote[Paare sind also $2$-Tupel.] Wir schreiben
   $ A_1 × … × A_n := {(a_1,…,a_n) | a_1 ∈ A_1, …, a_n ∈ A_n} $
   für das *kartesische Produkt* von $A₁,…,A_n$.
   Gilt $A_1 = … = A_n = A$, so schreiben wir kurz $A^n$.
-
-  Für $n = 0$ gibt es genau ein Tupel, nämlich das leere Tupel $()$. Es gilt also $A^0 = {()}$. Insbesondere gilt $|A^0| = 1$.
 ]
 
 #satz[
-  Für jede endliche Menge $A$ und jedes $n ∈ ℕ$ gilt $|A^n| = |A|^n$.
+  Für jede endliche Menge $A$ und $n ∈ ℕ$ gilt $|A^n| = |A|^n$.
 ]<tupelanzahl>
 
 #begründung[
-  Für jede der $n$ Komponenten gibt es unabhängig von den anderen $|A|$ Möglichkeiten, und verschiedene Wahlen liefern verschiedene Tupel. Für $n = 0$ ist das die Aussage $|A^0| = 1 = |A|^0$. Sie gilt auch für $A = ∅$, denn $0^0 = 1$ ist ein leeres Produkt (@leeresProdukt).
+  Für jede der $n$ Komponenten gibt es unabhängig von den anderen $|A|$ Möglichkeiten, und verschiedene Wahlen liefern verschiedene Tupel. Für $n = 0$ gibt es genau ein Tupel, nämlich das leere Tupel $()$. Es gilt also $A^0 = {()}$ und damit $|A^0| = 1 = |A|^0$. Das gilt auch für $A = ∅$, denn $0^0 = 1$ ist ein leeres Produkt (@leeresProdukt).
 ]
 
 #bemerkung[
@@ -1800,7 +1806,7 @@
 #bemerkung[
   Die drei Mengen $(A × B) × C$, $A × B × C$ und $A × (B × C)$ sind streng genommen verschieden. Ihre Elemente haben die Formen
   $ ((a,b),c), quad (a,b,c) quad "und" quad (a,(b,c)). $
-  Die Unterscheidung ist meist nebensächlich und wird selten sauber getroffen.
+  Die Unterscheidung ist meist nebensächlich und wird nicht immer sauber getroffen.
 ]
 
 === Einschub: Gerichtete Graphen
