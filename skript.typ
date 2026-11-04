@@ -1661,7 +1661,6 @@
   $ "z.Z." ∀x,y ∈ V: ∃ "Pfad" x…y "in" G-e $
   Seien dazu $x,y ∈ V$ beliebig. Weil $G$ zusammenhängend ist, gibt es einen Pfad von $x$ nach $y$ in $G$. Ersetzen wir darin die Kante $e$, falls sie vorkommt, durch den Umweg, so erhalten wir einen Weg von $x$ nach $y$ in $G - e$. Nach @wegPfad gibt es dann auch einen Pfad von $x$ nach $y$ in $G - e$.
 ]
-#stand[nach Donnerstag 29.10.2026]
 
 #uebung[
   Sei $G = (V,E)$ ein Graph und $v ∈ V$. Zeigen Sie: Sind $P$ und $Q$ zwei verschiedene Pfade, die beide in $v$ beginnen, dann gibt es eine Kante $e ∈ E$, die auf nur einem der beiden Pfade vorkommt.
@@ -1877,6 +1876,8 @@
   &= {("w",1),("u",1),("r",1),("s",1),("t",1),("b",2),("r",2),("o",2),("t",2)} $
   Ignoriert man für die Paare in $A union.dot B$ die zweite Komponente, so entsteht der gewünschte Effekt. 
 ]<disjunkteVereinigung>
+
+#stand[nach Mittwoch 04.11.2026]
 
 == Relationen allgemein
 
