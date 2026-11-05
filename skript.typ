@@ -1948,7 +1948,7 @@
 #definition[Funktion][
   Eine binäre Relation $f ⊆ X × Y$ zwischen zwei Mengen $X$ und $Y$ heißt *Funktion* (auch *Abbildung*), wenn sie linkstotal und rechtseindeutig ist.
 
-  In diesem Fall schreiben wir $f : X → Y$. Wir nennen $X$ den *Definitionsbereich* und $Y$ den *Wertebereich*. Etwas unsauber nennen wir auch $f$ allein eine Funktion, falls $X$ und $Y$ aus dem Kontext hervorgehen.#footnote[Siehe @einschränkung-auf-bild.]
+  In diesem Fall schreiben wir $f : X → Y$. Wir nennen $X$ den *Definitionsbereich* und $Y$ die *Zielmenge*. Etwas unsauber nennen wir auch $f$ allein eine Funktion, falls $X$ und $Y$ aus dem Kontext hervorgehen.#footnote[Siehe @einschränkung-auf-bild.]
 ]
 
 === Notationen und Begriffe
@@ -1993,7 +1993,7 @@
 ]<funktionenanzahl>
 
 #begründung[
-  Eine Funktion $f: X → Y$ ist durch die Wahl der Funktionswerte jedes einzelnen $x ∈ X$ festgelegt. Für jedes gibt es unabhängig von den anderen $|Y|$ Möglichkeiten, also $|Y|^(|X|)$ Möglichkeiten insgesamt.
+  Eine Funktion $f: X → Y$ ist durch die Wahl des Funktionswerts jedes einzelnen $x ∈ X$ festgelegt. Für jedes gibt es unabhängig von den anderen $|Y|$ Möglichkeiten, also $|Y|^(|X|)$ Möglichkeiten insgesamt.
 ]
 
 #definition("Verkettung", kurz: [$g ∘ f$])[
@@ -2002,7 +2002,7 @@
 ]
 
 #bemerkung(slides: "titel")[Folgen als Funktionen][
-  Eine Folge $(a₁,…,a_n)$ mit $n ∈ ℕ$ Folgengliedern aus einer Menge $A$ kann man auch auffassen als#footnote[Tatsächlich sind Folgen auf genau diese Weise mengentheoretisch definiert. Paare muss man anders fundieren, weil man diese für die Konstruktion von Funktionen braucht. Das Paare $(a,b)$ wird definiert als die Menge ${{a},{a,b}}$.] eine Funktion
+  Eine Folge $(a₁,…,a_n)$ mit $n ∈ ℕ$ Folgengliedern aus einer Menge $A$ kann man auch auffassen als#footnote[Tatsächlich sind Folgen auf genau diese Weise mengentheoretisch definiert. Paare muss man anders fundieren, weil man diese für die Konstruktion von Funktionen braucht. Das Paar $(a,b)$ wird definiert als die Menge ${{a},{a,b}}$.] eine Funktion
   $ f : {1,…,n} → A, quad i ↦ a_i. $
   Für $n = 0$ ergibt sich die leere Folge $()$. Eine unendliche Folge $(a₁,a₂,…)$ mit Folgengliedern aus $A$ ist eine Funktion
   $ f : ℕ⁺ → A, quad i ↦ a_i. $
@@ -2053,7 +2053,7 @@
 )]<injsurjbild>
 
 #bemerkung(slides: "titel")[Surjektivität ist nicht an $f$ erkennbar][
-  Für jede Funktion $f : X → Y$ ist die Funktion $f : X → f(X)$ surjektiv. Die zweite Funktion verwendet dieselbe Menge $f$ von Paaren, schränkt aber den Wertebereich auf das Bild $f(X)$ ein, also auf die Werte, die tatsächlich angenommen werden. Ob eine Funktion surjektiv ist, kann man daher an der Menge $f$ allein nicht ablesen. Der Wertebereich gehört deshalb zur Angabe einer Funktion dazu.
+  Für jede Funktion $f : X → Y$ ist die Funktion $f : X → f(X)$ surjektiv. Die zweite Funktion verwendet dieselbe Menge $f$ von Paaren, schränkt aber die Zielmenge auf das Bild $f(X)$ ein, also auf die Werte, die tatsächlich angenommen werden. Ob eine Funktion surjektiv ist, kann man daher an der Menge $f$ allein nicht ablesen. Die Zielmenge gehört deshalb zur Angabe einer Funktion dazu.
 ]<einschränkung-auf-bild>
 
 #satz[Injektivität in Funktionsschreibweise][
@@ -2073,8 +2073,8 @@
 #satz[Surjektivität in Funktionsschreibweise][
   #set enum(numbering: "(1)")
   Sei $f : X → Y$ eine Funktion. Dann sind äquivalent:
-  + $f$ ist surjektiv
-  + $Y ⊆ f(X)$
+  + $f$ ist surjektiv,
+  + $Y ⊆ f(X)$,
   + $Y = f(X)$.
 ]<surjkompakt>
 #beweis[
@@ -2108,9 +2108,8 @@
   Sind $f$ und $g$ bijektiv, so ist auch $g ∘ f$ bijektiv.
 ]
 
-#bemerkung[
-  Die Umkehrungen gelten nicht.
-  Sei $f : {1} → {1,2}$ mit $f(1) = 1$ und $g : {1,2} → {1}$ mit $g(1) = g(2) = 1$, dann ist $g ∘ f : {1} → {1}$ bijektiv, obwohl $f$ nicht surjektiv und $g$ nicht injektiv ist.
+#bemerkung(slides: "titel")[Die Umkehrungen gelten nicht][
+  Seien $f : {1} → {1,2}$ mit $f(1) = 1$ und $g : {1,2} → {1}$ mit $g(1) = g(2) = 1$. Dann ist $g ∘ f : {1} → {1}$ bijektiv, obwohl $f$ nicht surjektiv und $g$ nicht injektiv ist.
 ]
 
 #satz[
@@ -2127,8 +2126,7 @@
   Die erste Äquivalenz benutzt, dass die Elemente $f(x)$ für $x ∈ X$ genau dann paarweise verschieden sind, wenn sie eine Menge der Größe $|X|$ bilden. Die zweite Äquivalenz verwendet $f(X) ⊆ X$ und dass eine Teilmenge von $X$ mit $|X|$ Elementen bereits ganz $X$ sein muss.
 ]
 
-#bemerkung[
-  Für unendliche Mengen ist der Satz falsch. Beispiele für eine injektive aber nicht surjektive Funktion $f$ sowie eine surjektive aber nicht injektive Funktion $g$ sind
+#bemerkung(slides: "titel")[Für unendliche Mengen ist der Satz falsch][ Beispiele für eine injektive, aber nicht surjektive Funktion $f$ sowie eine surjektive, aber nicht injektive Funktion $g$ sind
   $ 
     f: ℕ → ℕ, " " n ↦ n+1 "und" g : ℕ → ℕ, " " n ↦ cases(0 &"falls" n = 0, n-1 &"falls" n > 0.)
   $
@@ -2142,7 +2140,7 @@
 ]
 
 #satz[
-  Sei $f: X → Y$ eine Funktion. Dann ist $f^(-1)$ genau dann eine Funktion von $Y$ nach $X$, wenn $f$ bijektiv ist.
+  Sei $f: X → Y$ eine Funktion. Dann ist $f^(-1)$ genau dann eine Funktion von $Y$ nach $X$, wenn $f$ bijektiv ist. In diesem Fall ist auch $f^(-1)$ bijektiv.
 ]<umkehrfunktion>
 
 #beweis[
@@ -2151,8 +2149,9 @@
     ⇔ & f "ist surjektiv und injektiv"  && #weil[Def. inj & surj]\
     ⇔ & f "ist rechtstotal und linkseindeutig" && #weil[links und rechts tauschen]\
     ⇔ & f^(-1) "ist linkstotal und rechtseindeutig" && #weil[Def. Funktion]\
-    ⇔ & f^(-1) "ist Funktion".#qedhere
+    ⇔ & f^(-1) "ist Funktion".
   $
+  Ist $f$ bijektiv, so wenden wir diese Äquivalenz auf die Funktion $f^(-1)$ an: Ihre Umkehrrelation $(f^(-1))^(-1) = f$ ist eine Funktion, also ist $f^(-1)$ bijektiv.
 ]
 
 #definition[Identitätsfunktion][
@@ -2175,7 +2174,7 @@
   Es ist möglich, dass Funktionen andere Funktionen als Argument bekommen oder als Wert liefern. Solche Funktionen heißen *Funktionen höherer Ordnung*; in der Programmierung ist das nicht selten.
 ]
 
-#beispiel[Eine Funktion verdoppeln][
+#beispiel(slides: "titel")[Eine Funktion verdoppeln][
   Die Funktion
   $ "doppelt": (ℕ → ℕ) → (ℕ → ℕ), quad g ↦ (n ↦ 2 ⋅ g(n)) $
   nimmt eine Funktion entgegen und liefert eine Funktion. Ist etwa $g$ die Funktion $n ↦ n²$, so ist $"doppelt"(g)$ die Funktion $n ↦ 2 ⋅ n²$.
@@ -2188,7 +2187,7 @@
   ```
 ]
 
-#beispiel[Filtern][
+#beispiel(slides: "titel")[Filtern][
   Die Funktion
   $ "filter": & (2^ℕ × (ℕ → {"wahr", "falsch"})) → 2^ℕ,\
               & (M,f) ↦ {x ∈ M | f(x) = "wahr" } $
@@ -2198,7 +2197,7 @@
   ```
 ]
 
-#bemerkung[
+#bemerkung(slides: "titel")[Weiter schachteln][
   Man kann natürlich weiter schachteln und Funktionen betrachten, die Funktionen höherer Ordnung verarbeiten. Das wird nur schnell verwirrend.
 ]
 
