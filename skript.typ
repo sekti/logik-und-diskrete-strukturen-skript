@@ -4,7 +4,7 @@
 // Nur ein Kapitel setzen, z.B. 5 (im Editor deutlich schneller); none = alles.
 // Lange Kapitel sind in Teile gespalten: 5.2 setzt nur Teil 2 von Kapitel 5.
 // Auf der Kommandozeile hat „--input kapitel=5“ (oder 5.2) bzw. „--input kapitel=alle“ Vorrang.
-#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { sys.inputs.kapitel } } else { 5.1 }
+#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { sys.inputs.kapitel } } else { 5 }
 
 // imports
   #import "@preview/ctheorems:2.0.0": *
@@ -2001,8 +2001,8 @@
   $ g ∘ f : X → Z, quad x ↦ g(f(x)). $
 ]
 
-#bemerkung(slides: "titel")[Folge][
-  Wir haben den Begriff der *Folge* bereits ohne Definition verwendet (z.B. in @wegpfadkreis). Jetzt können wir eine Definition nachliefern. Eine Folge $(a₁,…,a_n)$ mit $n ∈ ℕ$ Folgengliedern aus einer Menge $A$ ist eine Funktion
+#bemerkung(slides: "titel")[Folgen als Funktionen][
+  Eine Folge $(a₁,…,a_n)$ mit $n ∈ ℕ$ Folgengliedern aus einer Menge $A$ kann man auch auffassen als#footnote[Tatsächlich sind Folgen auf genau diese Weise mengentheoretisch definiert. Paare muss man anders fundieren, weil man diese für die Konstruktion von Funktionen braucht. Das Paare $(a,b)$ wird definiert als die Menge ${{a},{a,b}}$.] eine Funktion
   $ f : {1,…,n} → A, quad i ↦ a_i. $
   Für $n = 0$ ergibt sich die leere Folge $()$. Eine unendliche Folge $(a₁,a₂,…)$ mit Folgengliedern aus $A$ ist eine Funktion
   $ f : ℕ⁺ → A, quad i ↦ a_i. $
@@ -2016,7 +2016,7 @@
   / surjektiv: wenn sie rechtstotal ist,
   / bijektiv: wenn sie sowohl injektiv als auch surjektiv ist.
 
-  Gleichwertige und in der Praxis gebräuchlichere Formulierungen liefern @injdef und @surjkompakt.
+  Nützlichere Formulierungen liefern wir in @injdef und @surjkompakt.
 ]<def-inj-surj-bij>
 
 #let kinder = ("Anna", "Ben", "Cem")
@@ -2027,7 +2027,7 @@
   #text(size: 0.85em, titel)
 ]
 
-#abbildung(slides: 0, caption: [
+#abbildung(slides: 1, caption: [
   Vier Möglichkeiten bzgl. @def-inj-surj-bij.
 ])[#grid(
   columns: 2,
@@ -2052,8 +2052,8 @@
   ),
 )]<injsurjbild>
 
-#bemerkung[
-  Für jede Funktion $f : X → Y$ ist die Funktion $f : X → f(X)$ surjektiv. Die zweite Funktion verwendet dieselbe Menge $f$ von Paaren, schränkt aber den Wertebereich auf das Bild $f(X)$ ein, also auf die Werte, die tatsächlich angenommen werden. Der Wertebereich gehört deshalb zur Angabe einer Funktion dazu.
+#bemerkung(slides: "titel")[Surjektivität ist nicht an $f$ erkennbar][
+  Für jede Funktion $f : X → Y$ ist die Funktion $f : X → f(X)$ surjektiv. Die zweite Funktion verwendet dieselbe Menge $f$ von Paaren, schränkt aber den Wertebereich auf das Bild $f(X)$ ein, also auf die Werte, die tatsächlich angenommen werden. Ob eine Funktion surjektiv ist, kann man daher an der Menge $f$ allein nicht ablesen. Der Wertebereich gehört deshalb zur Angabe einer Funktion dazu.
 ]<einschränkung-auf-bild>
 
 #satz[Injektivität in Funktionsschreibweise][
@@ -2889,6 +2889,7 @@
   Sei $ℳ$ eine Menge von Mengen#footnote[Die Einschränkung auf eine beliebige Menge $ℳ$ hat wieder nur den Grund, dass es die Menge _aller_ Mengen nicht gibt.].
   + Auf $ℳ$ ist „höchstens so mächtig wie“ eine Quasiordnung.
   + Für $A,B ∈ ℳ$ impliziert $|A| ≤ |B| ∧ |B| ≤ |A|$, dass $|A| = |B|$.
+  TODO: Hier Äquivalenz statt Implikation behaupten. Dann wird der nächste Teil einfacher.
   + Gleichmächtigkeit auf $ℳ$ ist eine Äquivalenzrelation.
 ]<maechtigkeitOrdnung>
 
@@ -2907,7 +2908,7 @@
 == Endliche Mengen
 
 #skript[
-  Wir können nun formal nachbauen, was wir zuvor nur mit Rückgriff auf die Intuition einer „Anzahl von Elementen“ definieren könnten, nämlich die Kardinalität endlicher Mengen.
+  Wir können nun formal nachbauen, was wir zuvor nur mit Rückgriff auf die Intuition einer „Anzahl von Elementen“ definieren konnten, nämlich die Kardinalität endlicher Mengen.
 ]
 
 #satz[
@@ -2930,6 +2931,8 @@
 #skript[
   Die Beweise sind gute Übungen für Induktionsbeweise, aber ansonsten wenig lehrreich. Wir lassen sie weg.
 ]
+
+TODO: Da ist ein gutes Beispiel für eine geschachtelte Induktion drin. Doch machen? Teilweise? Jedenfalls alles mal ausformulieren.
 
 /*
 #beweisansatz[
