@@ -1877,8 +1877,6 @@
   Ignoriert man für die Paare in $A union.dot B$ die zweite Komponente, so entsteht der gewünschte Effekt. 
 ]<disjunkteVereinigung>
 
-#stand[nach Mittwoch 04.11.2026]
-
 == Relationen allgemein
 
 #skript[
@@ -2058,7 +2056,7 @@
 
 #satz[Injektivität in Funktionsschreibweise][
   Eine Funktion $f : X → Y$ ist genau dann injektiv, wenn gilt
-  $ ∀x,x' ∈ X: (f(x) = f(x') → x = x'). $
+  $ ∀x,x' ∈ X: f(x) = f(x') → x = x'. $
 ]<injdef>
 #beweis[
   Nach Definition ist $f : X → Y$ genau dann injektiv, wenn sie linkseindeutig ist, also:
@@ -2091,6 +2089,8 @@
   Die Bedingung $f(X) ⊆ Y$ durften wir deshalb dazuerfinden, weil sie für jedes $f : X → Y$ gilt.
 ]
 
+#stand[nach Donnerstag 05.11.2026]
+
 #satz[
   #set enum(numbering: "(1)")
   Seien $f: X → Y$ und $g: Y → Z$ Funktionen.
@@ -2105,11 +2105,11 @@
 ]
 
 #korollar[
-  Sind $f$ und $g$ bijektiv, so ist auch $g ∘ f$ bijektiv.
-]
+  Seien $f : X → Y$ und $g : Y → Z$ bijektiv. Dann ist auch $g ∘ f$ bijektiv.
+]<verkettungBij>
 
 #bemerkung(slides: "titel")[Die Umkehrungen gelten nicht][
-  Seien $f : {1} → {1,2}$ mit $f(1) = 1$ und $g : {1,2} → {1}$ mit $g(1) = g(2) = 1$. Dann ist $g ∘ f : {1} → {1}$ bijektiv, obwohl $f$ nicht surjektiv und $g$ nicht injektiv ist.
+  Seien $f : {1} → {1,2}$ mit $f(1) = 1$ und $g : {1,2} → {1}$ mit $g(1) = g(2) = 1$. Dann ist $g ∘ f : {1} → {1}$ bijektiv, obwohl $f$ nicht surjektiv und $g$ nicht injektiv ist. Was von den Umkehrungen übrig bleibt, zeigt @halbeUmkehrungen.
 ]
 
 #satz[
@@ -2166,6 +2166,22 @@
 
 #bemerkung[
   Die Schreibweise $f^(-1)$ wird in zwei Bedeutungen benutzt: für das Urbild $f^(-1)(B)$ einer _Menge_ $B ⊆ Y$ und für die Umkehrfunktion. Das Urbild gibt es für jede Funktion, die Umkehrfunktion nur für bijektive. Welche Bedeutung gemeint ist, erkennt man am Argument.
+]
+
+#uebung[Halbe Umkehrungen][
+  #set enum(numbering: "(1)")
+  Seien $f: X → Y$ und $g: Y → Z$ Funktionen. Zeigen Sie:
+  + Ist $g ∘ f$ injektiv, so ist $f$ injektiv.
+  + Ist $g ∘ f$ surjektiv, so ist $g$ surjektiv.
+  + Ist $Z = X$ und gilt $g ∘ f = id_X$ und $f ∘ g = id_Y$, so ist $f$ bijektiv und $f^(-1) = g$.
+]<halbeUmkehrungen>
+
+#loesung[
+  #set enum(numbering: "(1)")
+  + Seien $x,x' ∈ X$ mit $f(x) = f(x')$. Dann gilt $(g ∘ f)(x) = g(f(x)) = g(f(x')) = (g ∘ f)(x')$. Weil $g ∘ f$ injektiv ist, folgt $x = x'$.
+  + Sei $z ∈ Z$. Weil $g ∘ f$ surjektiv ist, gibt es ein $x ∈ X$ mit $g(f(x)) = z$. Für $y := f(x)$ gilt also $g(y) = z$.
+  + Die Identitäten sind bijektiv. Aus (1) und $g ∘ f = id_X$ folgt, dass $f$ injektiv ist. Aus (2), angewendet auf $f ∘ g = id_Y$, folgt, dass $f$ surjektiv ist. Also ist $f$ bijektiv, und nach @umkehrfunktion gibt es die Umkehrfunktion $f^(-1) : Y → X$. Für jedes $y ∈ Y$ gilt
+    $ g(y) = g(f(f^(-1)(y))) = (g ∘ f)(f^(-1)(y)) = f^(-1)(y). $
 ]
 
 === Funktionen höherer Ordnung
@@ -2770,7 +2786,7 @@
   / Symmetrie: Sei $φ$ ein Isomorphismus von $G_1$ nach $G_2$. Als Bijektion hat $φ$ eine Umkehrfunktion $φ^(-1): V_2 → V_1$ (siehe @umkehrfunktion), die ebenfalls bijektiv ist. Für $v', w' ∈ V_2$ seien $v := φ^(-1)(v')$ und $w := φ^(-1)(w')$. Dann gilt
     $ {v', w'} ∈ E_2 &⇔ {φ(v), φ(w)} ∈ E_2\ &⇔ {v, w} ∈ E_1 ⇔ {φ^(-1)(v'),φ^(-1)(w')} ∈ E_1. $
     Also ist $φ^(-1)$ ein Isomorphismus von $G_2$ nach $G_1$.
-  / Transitivität: Ist $φ$ ein Isomorphismus von $G_1$ nach $G_2$ und $ψ$ einer von $G_2$ nach $G_3$, so ist $ψ ∘ φ$ bijektiv (siehe @verkettungInjSurj), und für $v, w ∈ V_1$ gilt
+  / Transitivität: Ist $φ$ ein Isomorphismus von $G_1$ nach $G_2$ und $ψ$ einer von $G_2$ nach $G_3$, so ist $ψ ∘ φ$ bijektiv (siehe @verkettungBij), und für $v, w ∈ V_1$ gilt
     $ {v, w} ∈ E_1 ⇔ {φ(v), φ(w)} ∈ E_2 ⇔ {ψ(φ(v)), ψ(φ(w))} ∈ E_3. $
 ]
 
@@ -2897,7 +2913,7 @@
     / Reflexivität: $id_A : A → A$ ist injektiv, also folgt $|A| ≤ |A|$.
     / Transitivität: Seien $A, B, C ∈ ℳ$ mit $|A| ≤ |B|$ und $|B| ≤ |C|$. Das heißt, es gibt injektive Funktionen $f : A → B$ und $g : B → C$. Damit ist auch $g ∘ f : A → C$ injektiv (siehe @verkettungInjSurj), also gilt $|A| ≤ |C|$.
   + Das ist @csb in anderer Terminologie.
-  + Sei $R$ die Relation „höchstens so mächtig wie“. Die Gleichmächtigkeitsrelation ist genau $R ∩ R^(-1)$: Ist $f : A → B$ bijektiv, so sind $f$ und die Umkehrfunktion $f^(-1) : B → A$ (siehe @umkehrfunktion) injektiv, also gilt $|A| ≤ |B|$ und $|B| ≤ |A|$. Die Umkehrung ist die vorherige Aussage. Nach @uebQuasiAequivalenz ist $R ∩ R^(-1)$ eine Äquivalenzrelation.#footnote[Das lässt sich auch ohne @csb direkt zeigen: Die Identität, die Umkehrfunktion einer Bijektion und die Verkettung zweier Bijektionen sind wieder Bijektionen (siehe @umkehrfunktion und @verkettungInjSurj).]#qedhere
+  + Sei $R$ die Relation „höchstens so mächtig wie“. Die Gleichmächtigkeitsrelation ist genau $R ∩ R^(-1)$: Ist $f : A → B$ bijektiv, so sind $f$ und die Umkehrfunktion $f^(-1) : B → A$ (siehe @umkehrfunktion) injektiv, also gilt $|A| ≤ |B|$ und $|B| ≤ |A|$. Die Umkehrung ist die vorherige Aussage. Nach @uebQuasiAequivalenz ist $R ∩ R^(-1)$ eine Äquivalenzrelation.#footnote[Das lässt sich auch ohne @csb direkt zeigen: Die Identität, die Umkehrfunktion einer Bijektion und die Verkettung zweier Bijektionen sind wieder Bijektionen (siehe @umkehrfunktion und @verkettungBij).]#qedhere
 ]
 
 #korollar[Die Pointe von CSB][
