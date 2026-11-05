@@ -1898,7 +1898,7 @@
 ]
 
 #bemerkung[Graphische Darstellung einer binären Relation][
-  Eine binäre Relation $E ⊆ X × Y$ kann man graphisch darstellen: Für jedes $x ∈ X$ gibt es einen Knoten links, für jedes $y ∈ Y$ einen Knoten rechts und für jedes Element $(x,y) ∈ E$ eine Kante zwischen den entsprechenden Knoten.#footnote[Man könnte fast sagen: Eine binäre Relation _ist_ ein gerichteter Graph $(X ∪ Y, E)$. Probleme dabei: Das geht nur, wenn $X$ und $Y$ disjunkt, endlich und nicht leer sind. Außerdem „vergisst“ der Graph für isolierte Knoten, ob sie nach links oder rechts gehören, was die Relation aber „weiß“. Im Folgenden Beispiel könnte „rosa“ sinnvoll auf der linken, auf der rechten oder auf beiden Seiten auftauchen.]
+  Eine binäre Relation $R ⊆ X × Y$ kann man graphisch darstellen: Für jedes $x ∈ X$ gibt es einen Knoten links, für jedes $y ∈ Y$ einen Knoten rechts und für jedes Element $(x,y) ∈ R$ eine Kante zwischen den entsprechenden Knoten.#footnote[Man könnte fast sagen: Eine binäre Relation _ist_ ein gerichteter Graph $(X ∪ Y, R)$. Probleme dabei: $X ∪ Y$ muss endlich und nicht leer sein. Sind $X$ und $Y$ nicht disjunkt, fallen linke und rechte Knoten zusammen. Außerdem „vergisst“ der Graph für isolierte Knoten, ob sie nach links oder rechts gehören, was die Relation aber „weiß“. Im folgenden Beispiel könnte „rosa“ sinnvoll auf der linken, auf der rechten oder auf beiden Seiten auftauchen.]
 ]
 
 #beispiel[Kinder und Farben][
@@ -2019,7 +2019,7 @@
   Nützlichere Formulierungen liefern wir in @injdef und @surjkompakt.
 ]<def-inj-surj-bij>
 
-#let kinder = ("Anna", "Ben", "Cem")
+#let kinder = ("anna", "ben", "cem")
 #let fktbild(farben, paare) = relationsbild(kinder, farben, paare, abstand: 0.52, breite: 1.5)
 #let fallbild(bild, titel) = align(center)[
   #box(height: 1.9cm, align(horizon, bild))
@@ -2035,19 +2035,19 @@
   row-gutter: 10pt,
   align: center + top,
   fallbild(
-    fktbild(("rot", "blau", "grün"), (("Anna","rot"), ("Ben","rot"), ("Cem","blau"))),
+    fktbild(("rot", "blau", "grün"), (("anna","rot"), ("ben","rot"), ("cem","blau"))),
     [#strike[injektiv], #strike[surjektiv]],
   ),
   fallbild(
-    fktbild(("rot", "blau", "grün", "braun"), (("Anna","rot"), ("Ben","blau"), ("Cem","grün"))),
+    fktbild(("rot", "blau", "grün", "braun"), (("anna","rot"), ("ben","blau"), ("cem","grün"))),
     [injektiv, #strike[surjektiv]],
   ),
   fallbild(
-    fktbild(("rot", "blau"), (("Anna","rot"), ("Ben","rot"), ("Cem","blau"))),
+    fktbild(("rot", "blau"), (("anna","rot"), ("ben","rot"), ("cem","blau"))),
     [#strike[injektiv], surjektiv],
   ),
   fallbild(
-    fktbild(("rot", "blau", "grün"), (("Anna","rot"), ("Ben","blau"), ("Cem","grün"))),
+    fktbild(("rot", "blau", "grün"), (("anna","rot"), ("ben","blau"), ("cem","grün"))),
     [injektiv, surjektiv],
   ),
 )]<injsurjbild>
