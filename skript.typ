@@ -4,7 +4,7 @@
 // Nur ein Kapitel setzen, z.B. 5 (im Editor deutlich schneller); none = alles.
 // Lange Kapitel sind in Teile gespalten: 5.2 setzt nur Teil 2 von Kapitel 5.
 // Auf der Kommandozeile hat „--input kapitel=5“ (oder 5.2) bzw. „--input kapitel=alle“ Vorrang.
-#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { sys.inputs.kapitel } } else { 5 }
+#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { sys.inputs.kapitel } } else { 6 }
 
 // imports
   #import "@preview/ctheorems:2.0.0": *
@@ -2109,7 +2109,20 @@
 ]<verkettungBij>
 
 #bemerkung(slides: "titel")[Die Umkehrungen gelten nicht][
-  Seien $f : {1} → {1,2}$ mit $f(1) = 1$ und $g : {1,2} → {1}$ mit $g(1) = g(2) = 1$. Dann ist $g ∘ f : {1} → {1}$ bijektiv, obwohl $f$ nicht surjektiv und $g$ nicht injektiv ist. Was von den Umkehrungen übrig bleibt, zeigt @halbeUmkehrungen.
+  Seien $f : {1} → {1,2}$ mit $f(1) = 1$ und $g : {1,2} → {1}$ mit $g(1) = g(2) = 1$. Dann ist $g ∘ f : {1} → {1}$ bijektiv, obwohl $f$ nicht surjektiv und $g$ nicht injektiv ist.
+]
+
+#uebung[„Halbe Umkehrungen“ gelten][
+  #set enum(numbering: "(1)")
+  Seien $f: X → Y$ und $g: Y → Z$ Funktionen. Zeigen Sie:
+  + Ist $g ∘ f$ injektiv, so ist $f$ injektiv.
+  + Ist $g ∘ f$ surjektiv, so ist $g$ surjektiv.
+]<halbeUmkehrungen>
+
+#loesung[
+  #set enum(numbering: "(1)")
+  + Seien $x,x' ∈ X$ mit $f(x) = f(x')$. Dann gilt $(g ∘ f)(x) = g(f(x)) = g(f(x')) = (g ∘ f)(x')$. Weil $g ∘ f$ injektiv ist, folgt $x = x'$.
+  + Sei $z ∈ Z$. Weil $g ∘ f$ surjektiv ist, gibt es ein $x ∈ X$ mit $g(f(x)) = z$. Für $y := f(x)$ gilt also $g(y) = z$.
 ]
 
 #satz[
@@ -2166,22 +2179,6 @@
 
 #bemerkung[
   Die Schreibweise $f^(-1)$ wird in zwei Bedeutungen benutzt: für das Urbild $f^(-1)(B)$ einer _Menge_ $B ⊆ Y$ und für die Umkehrfunktion. Das Urbild gibt es für jede Funktion, die Umkehrfunktion nur für bijektive. Welche Bedeutung gemeint ist, erkennt man am Argument.
-]
-
-#uebung[Halbe Umkehrungen][
-  #set enum(numbering: "(1)")
-  Seien $f: X → Y$ und $g: Y → Z$ Funktionen. Zeigen Sie:
-  + Ist $g ∘ f$ injektiv, so ist $f$ injektiv.
-  + Ist $g ∘ f$ surjektiv, so ist $g$ surjektiv.
-  + Ist $Z = X$ und gilt $g ∘ f = id_X$ und $f ∘ g = id_Y$, so ist $f$ bijektiv und $f^(-1) = g$.
-]<halbeUmkehrungen>
-
-#loesung[
-  #set enum(numbering: "(1)")
-  + Seien $x,x' ∈ X$ mit $f(x) = f(x')$. Dann gilt $(g ∘ f)(x) = g(f(x)) = g(f(x')) = (g ∘ f)(x')$. Weil $g ∘ f$ injektiv ist, folgt $x = x'$.
-  + Sei $z ∈ Z$. Weil $g ∘ f$ surjektiv ist, gibt es ein $x ∈ X$ mit $g(f(x)) = z$. Für $y := f(x)$ gilt also $g(y) = z$.
-  + Die Identitäten sind bijektiv. Aus (1) und $g ∘ f = id_X$ folgt, dass $f$ injektiv ist. Aus (2), angewendet auf $f ∘ g = id_Y$, folgt, dass $f$ surjektiv ist. Also ist $f$ bijektiv, und nach @umkehrfunktion gibt es die Umkehrfunktion $f^(-1) : Y → X$. Für jedes $y ∈ Y$ gilt
-    $ g(y) = g(f(f^(-1)(y))) = (g ∘ f)(f^(-1)(y)) = f^(-1)(y). $
 ]
 
 === Funktionen höherer Ordnung
@@ -2926,39 +2923,79 @@
   Wir können nun formal nachbauen, was wir zuvor nur mit Rückgriff auf die Intuition einer „Anzahl von Elementen“ definieren konnten, nämlich die Kardinalität endlicher Mengen.
 ]
 
+#lemma[Schubfachprinzip, formal][
+  Sei $n ∈ ℕ$ und $k ∈ ℕ⁺$. Dann gibt es keine Injektion von ${1,…,n+k}$ nach ${1,…,n}$.
+]<schubfachFormal>
+
+#beweis[
+  Wir zeigen per Induktion folgende Aussage $A_n$ für jedes $n ∈ ℕ$:
+  $ A_n defiff ∀k ∈ ℕ⁺: ∄ f : {1,…,n+k} → {1,…,n}: f "ist injektiv" $
+
+  / IA: Angenommen $A₀$ gilt nicht. Dann müsste es ein $k > 0$ geben sowie eine Funktion $f : {1,…,k} → ∅$. Aus $1 ∈ {1,…,k}$ folgt $f(1) ∈ ∅$. Die leere Menge hat aber keine Elemente. Also gilt $A₀$.
+  / IV: Für ein $n ≥ 1$ gelte $A_(n-1)$.
+  / IS: Angenommen $A_n$ gilt nicht. Dann gibt es $k ∈ ℕ$ und eine Injektion $f : {1,…,n+k} → {1,…,n}$. Sei $y := f(n+k)$ und sei $τ : {1,…,n} → {1,…,n}$ die Bijektion, die $y$ und $n$ vertauscht und alle anderen Zahlen festhält. Dann ist $τ ∘ f$ injektiv (siehe @verkettungInjSurj) mit $(τ ∘ f)(n+k) = n$. Für $i ∈ {1,…,n+k-1}$ ist daher $(τ ∘ f)(i) ≠ n$. Also ist $i ↦ (τ ∘ f)(i)$ eine Injektion von ${1,…,n+k-1}$ nach ${1,…,n-1}$. Das widerspricht $A_(n-1)$.#qedhere
+]
+
+#definition("Endliche Mengen", kurz: [endlich, $|A| = n$])[
+  Eine Menge $A$ heißt *endlich*, wenn es ein $n ∈ ℕ$ gibt, sodass $A$ gleichmächtig zu ${1,…,n}$ ist. Für $n = 0$ ist das die leere Menge. Wir nennen $n$ dann die *Kardinalität* oder *Mächtigkeit* von $A$ und schreiben $|A| = n$. Andernfalls heißt $A$ *unendlich*.
+]<endlicheMenge>
+
+#korollar[Wohldefiniertheit][
+  Die Zahl $n$ in @endlicheMenge ist eindeutig bestimmt.
+]
+
+#beweis[
+  Angenommen, $A$ ist gleichmächtig zu ${1,…,n}$ und gleichmächtig zu ${1,…,m}$ mit $n < m$. Da Gleichmächtigkeit eine Äquivalenzrelation ist (siehe @maechtigkeitOrdnung), sind ${1,…,m}$ und ${1,…,n}$ gleichmächtig. Dann gibt es eine Bijektion von ${1,…,m}$ nach ${1,…,n}$ im Widerspruch zu @schubfachFormal.
+]
+
+#satz[Die Schreibweisen passen zusammen][
+  #set enum(numbering: "(1)")
+  Seien $A$ und $B$ endliche Mengen. Die Schreibweise $|A| ≤ |B|$ hat nun zwei Bedeutungen:
+  + Es existiert eine Injektion von $A$ nach $B$ (nach @maechtigkeit).
+  + Für $n := |A|$ und $m := |B|$ (nach @endlicheMenge) gilt $n ≤ m$.
+  Das ist kein Problem, denn beide Aussagen sind äquivalent. Dasselbe gilt für $|A| < |B|$ und $|A| = |B|$.
+]<schreibweisenPassen>
+
+#beweis[
+  Seien $n := |A|$ und $m := |B|$ und seien $α : A → {1,…,n}$ und $β : B → {1,…,m}$ Bijektionen.
+
+  #abbildung(slides: 1, caption: [
+    Die Bijektionen $α$ und $β$ übersetzen zwischen $f$ und $ι$.
+  ])[#schreibweisenbild()]
+
+  Wir zeigen die Äquivalenz von (1) und (2).
+  / (1) ⇒ (2): Sei $f : A → B$ injektiv. Durch Verketten (siehe @verkettungInjSurj) erhalten wir die Injektion $β ∘ f ∘ α^(-1) : {1,…,n} → {1,…,m}$. Nach @schubfachFormal folgt $n ≤ m$.
+  / (2) ⇒ (1): Gilt $n ≤ m$, so ist die Inklusion $ι : {1,…,n} → {1,…,m}$ injektiv. Durch Verketten erhalten wir die Injektion $β^(-1) ∘ ι ∘ α : A → B$.
+
+  Die Argumente für $|A| < |B|$ und $|A| = |B|$ lassen wir weg.
+]
+
+#bemerkung[Beweis von Offensichtlichem][
+  Wir widmen uns nun Aussagen, die offensichtlich wahr sind. Indem wir sie formal beweisen, gewinnen wir trotzdem etwas: Die Zuversicht, dass der neue Formalismus für Kardinalität das leistet, was er soll. Dieser Effekt verbraucht sich aber schnell und es wird langweilig. Also belassen wir es bei den exemparischen Aussagen im nächsten Satz. Danach werden wir dermassen offensichtliche Kardinalitätsaussagen einfach glauben.
+]
 #satz[
-  |∅| < |{1}| < |{1,2}| < … < |ℕ|.
-]
-- Bemerkung: Der Schritt $|{1,…,n}| < |{1,…,n+1}|$ ist das Schubfachprinzip: Es gibt keine Injektion von ${1,…,n+1}$ nach ${1,…,n}$. Das Zählkapitel verweist hierher.
-
-- Def: Eine Menge $A$ heißt *endlich*, wenn es ein $n ∈ ℕ$ gibt, sodass $A$ gleichmächtig zu ${1,…,n}$ ist. Wir sagen dann auch $A$ hat Mächtigkeit/Kardinalität $n$ und schreiben $|A| = n$. Andernfalls heißt $A$ *unendlich*.
-- Korollar (Wohldefiniertheit): Das $n$ ist eindeutig. Denn wäre $A$ gleichmächtig zu ${1,…,n}$ und zu ${1,…,m}$ mit $n < m$, so wären diese beiden gleichmächtig, im Widerspruch zum Satz oben.
-
-#satz[Kardinalitäten endlicher Mengen][
-  Seien $A$ und $B$ endliche Mengen. Dann gilt:
-  + Ist $x ∉ A$, so gilt $|A ∪ {x}| = |A| + 1$.
+  #set enum(numbering: "(1)")
+  Seien $A$,$B$ und $M$ endliche Mengen. Dann gilt:
+  + Ist $x ∉ M$ so gilt $|M ∪ {x}| = |M|+1$.
+  + Ist $x ∈ M$ so gilt $|M ∖ {x}| = |M|-1$.
   + Sind $A$ und $B$ disjunkt, so gilt $|A ∪ B| = |A| + |B|$.
-  + $|A ∪ B| = |A| + |B| - |A ∩ B|$
-  + $|A × B| = |A| ⋅ |B|$
-  + Jede Teilmenge $A' ⊆ A$ ist endlich, und es gilt $|A'| ≤ |A|$.
-]
+]<kardinalitaeten>
 
-#skript[
-  Die Beweise sind gute Übungen für Induktionsbeweise, aber ansonsten wenig lehrreich. Wir lassen sie weg.
+#beweis[
+  #set enum(numbering: "(1)")
+  + Sei $m = |M|$ und $μ : M → {1,…,m}$ eine Bijektion, die das bezeugt. Wir können $μ$ erweitern auf eine Bijektion der Form:
+    $ μ ∪ {(x,m+1)} : M ∪ {x} → {1,…,m+1} $
+    Also folgt $|M ∪ {x}| = m+1 = |M| + 1$.
+  + Der Beweis ist nur etwas schwerer als (1). Wir lassen ihn weg.
+  + Wir halten nun $A$ fest und zeigen durch Induktion über $n$: Für jede zu $A$ disjunkte Menge $B$ mit $|B| = n$ ist $A ∪ B$ endlich und $|A ∪ B| = |A| + |B|$.
+      / IA: Für $n = 0$ ist $B = ∅$ also $|A ∪ B| = |A| = |A| + |B|$. ✓
+      / IV: Für ein $n ≥ 1$ gelte die Aussage für $n-1$.
+      / IS: Sei $B$ disjunkt zu $A$ mit $|B| = n$. Wir wählen $b ∈ B$ beliebig, mit (2) folgt dann $|B ∖ {b}| = |B|-1$. Nach Induktion ist daher $A ∪ (B ∖ {b})$ endlich und es gilt
+      $ |A ∪ (B ∖ {b})| = |A| + |B ∖ {b}| = |A| + |B| - 1 $
+      Jetzt nehmen wir $b$ wieder hinzu:
+      $ |A ∪ B| &= |A ∪ (B ∖ {b}) ∪ {b}| =^("(1)") |A ∪ (B ∖ {b})| + 1 \
+      &= |A| + |B| - 1 +1 = |A| + |B|. #qedhere $
 ]
-
-TODO: Da ist ein gutes Beispiel für eine geschachtelte Induktion drin. Doch machen? Teilweise? Jedenfalls alles mal ausformulieren.
-
-/*
-#beweisansatz[
-  Beweis nicht in der Vorlesung. Mögliche Beweisansätze sind:
-  + Bijektion von $A$ nach ${1,…,|A|}$ auf Bijektion von $A ∪ {x}$ nach ${1,…,|A|+1}$ erweitern.
-  + Induktion über $|B|$ und (1).
-  + Induktion über $|A ∩ B|$ und (2).
-  + $A × B$ ist die disjunkte Vereinigung der $|A|$ Mengen ${a} × B$, jede gleichmächtig zu $B$. Induktion über $|A|$ und (2).
-  + Induktion über $|A|$: Entfernen eines Elements aus $A$ und gegebenenfalls aus $A'$.
-]
-*/
 
 == Abzählbare Mengen
 
@@ -2994,6 +3031,17 @@ TODO: Da ist ein gutes Beispiel für eine geschachtelte Induktion drin. Doch mac
 <sec:zaehlen>
 - Bemerkung: Summen- und Produktzeichen haben wir im Kapitel über Mengen eingeführt.
 - Technik: Gleichmächtigkeit durch Bijektion zeigen
+- Technik: Zeigen, dass eine Funktion bijektiv ist, indem man eine Funktion angibt und prüft, dass es sich um die Umkehrfunktion handelt.
+#satz[
+  Seien $f: X → Y$ und $g: Y → X$ Funktionen.
+  Gilt $g ∘ f = id_X$ und $f ∘ g = id_Y$, so sind $f$ und $g$ bijektiv und $f^(-1) = g$.
+]
+#beweis[
+  Die Identitäten $id_X$ und $id_Y$ sind bijektiv. Wegen $id_X = g ∘ f$ folgt aus @halbeUmkehrungen (1), dass $f$ injektiv ist. Wegen $id_Y = f ∘ g$ folgt aus @halbeUmkehrungen (2), dass $f$ surjektiv ist. Also ist $f$ bijektiv. Nach @umkehrfunktion gibt es die Umkehrfunktion $f^(-1) : Y → X$. Für jedes $y ∈ Y$ gilt
+    $ g(y) = g(f(f^(-1)(y))) = (g ∘ f)(f^(-1)(y)) = f^(-1)(y). $
+]
+
+
   - Beispiel: Kardinalität der Potenzmenge.
   /* War vorher bei Funktionen
   #bemerkung[

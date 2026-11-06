@@ -96,3 +96,28 @@
   })
   kette(zyk)
 })
+
+// Quadrat aus dem Satz „Die Schreibweisen passen zusammen“: Die Bijektionen
+// α und β verbinden A und B mit den Mengen {1,…,n} und {1,…,m}.
+#let schreibweisenbild() = canvas(length: 1em, {
+  import draw: *
+
+  let (links, rechts, oben, unten) = (0, 9, 3.6, 0)
+  let pfeil = (end: ">", fill: black, scale: 0.7)
+  let doppelpfeil = (start: ">", end: ">", fill: black, scale: 0.7)
+
+  content((links, oben), $A$)
+  content((rechts, oben), $B$)
+  content((links, unten), ${1,…,n}$)
+  content((rechts, unten), ${1,…,m}$)
+
+  line((links + 0.8, oben), (rechts - 0.8, oben), mark: pfeil)
+  line((links + 2.4, unten), (rechts - 2.4, unten), mark: pfeil)
+  line((links, oben - 0.7), (links, unten + 0.7), mark: doppelpfeil)
+  line((rechts, oben - 0.7), (rechts, unten + 0.7), mark: doppelpfeil)
+
+  content(((links + rechts) / 2, oben + 0.6), $f$)
+  content(((links + rechts) / 2, unten + 0.6), $ι$)
+  content((links - 0.5, (oben + unten) / 2), $α$)
+  content((rechts + 0.5, (oben + unten) / 2), $β$)
+})
