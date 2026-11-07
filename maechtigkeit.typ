@@ -121,3 +121,78 @@
   content((links - 0.5, (oben + unten) / 2), $α$)
   content((rechts + 0.5, (oben + unten) / 2), $β$)
 })
+
+// Cantorsche Paarungsfunktion: Das Paar (a,b) steht an der Stelle (a,b) des
+// Gitters und ist mit π(a,b) beschriftet. Die Diagonalen a + b = s werden von
+// oben links nach unten rechts durchlaufen; gestrichelt der Sprung zur
+// nächsten Diagonale.
+#let paarungsbild(diagonalen: 4) = canvas(length: 1em, {
+  import draw: *
+
+  let d = 3.2
+  let r = 0.7
+  let grau = luma(60%)
+  let hell = luma(75%)
+  let pfeil = (end: ">", fill: black, scale: 0.6)
+  let pi(a, b) = calc.quo((a + b) * (a + b + 1), 2) + a
+
+  // Pfeil von Gitterpunkt p nach q, an beiden Enden um r gekürzt.
+  let verbinde(p, q, ..stil) = {
+    let (x1, y1) = (p.at(0) * d, p.at(1) * d)
+    let (x2, y2) = (q.at(0) * d, q.at(1) * d)
+    let len = calc.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1))
+    let (ex, ey) = ((x2 - x1) / len, (y2 - y1) / len)
+    line((x1 + r * ex, y1 + r * ey), (x2 - r * ex, y2 - r * ey), ..stil)
+  }
+
+  // Achsen mit Koordinaten
+  let ende = (diagonalen + 0.7) * d
+  line((-0.9, -0.9), (ende, -0.9), stroke: grau, mark: (end: ">", fill: grau, scale: 0.6))
+  line((-0.9, -0.9), (-0.9, ende), stroke: grau, mark: (end: ">", fill: grau, scale: 0.6))
+  content((ende + 0.5, -0.9), text(fill: grau, $a$))
+  content((-0.9, ende + 0.5), text(fill: grau, $b$))
+  for i in range(diagonalen + 1) {
+    content((i * d, -1.6), text(fill: grau, size: 0.8em, str(i)))
+    content((-1.6, i * d), text(fill: grau, size: 0.8em, str(i)))
+  }
+
+  for s in range(diagonalen + 1) {
+    for a in range(s + 1) {
+      content((a * d, (s - a) * d), $#pi(a, s - a)$)
+      if a < s { verbinde((a, s - a), (a + 1, s - a - 1), mark: pfeil) }
+    }
+    if s < diagonalen {
+      verbinde((s, 0), (0, s + 1), stroke: (paint: hell, dash: "dashed"), mark: (end: ">", fill: hell, scale: 0.6))
+    }
+  }
+})
+
+// Aufzählung einer unendlichen Menge M ⊆ ℕ der Größe nach (hier M = ℙ).
+// Oben die Zahlen 0, 1, 2, …; Elemente von M schwarz und mit a_k beschriftet,
+// die übrigen Zahlen ausgegraut. Unten ℕ im selben Abstand; Pfeile von a_k
+// nach k. Die untere Zeile endet daher früher.
+#let aufzaehlbild(m: (2, 3, 5, 7, 11, 13), bis: 13) = canvas(length: 1em, {
+  import draw: *
+
+  let w = 1.75             // Abstand der Zahlen
+  let (yo, yu) = (0, -4.2) // Zeilen
+  let hell = luma(72%)
+  let pfeil = (end: ">", fill: black, scale: 0.6)
+
+  content((-1.6, yo), $M$)
+  content((-1.6, yu), $ℕ$)
+
+  for v in range(bis + 1) {
+    let k = m.position(x => x == v)
+    if k == none {
+      content((v * w, yo), text(fill: hell, str(v)))
+    } else {
+      content((v * w, yo), str(v))
+      content((v * w, yo + 0.95), $a_#k$)
+      content((k * w, yu), str(k))
+      line((v * w, yo - 0.5), (k * w, yu + 0.55), mark: pfeil)
+    }
+  }
+  content(((bis + 1) * w, yo), $…$)
+  content((m.len() * w, yu), $…$)
+})

@@ -2992,7 +2992,7 @@
   + Nach (2) sind $A ∖ (A ∩ B)$, $A ∩ B$ und $B ∖ (A ∩ B)$ endlich. Diese drei Mengen sind paarweise disjunkt mit Vereinigung $A ∪ B$. Also gilt
     $
       |A ∪ B| &= |(A ∖ (A ∩ B)) ∪ (A ∩ B) ∪ (B ∖ (A ∩ B))| \
-      &=^"2 × (2)" |A ∖ (A ∩ B)| + |A ∩ B| + |B ∖ (A ∩ B)| \
+      &=^"2 × (1)" |A ∖ (A ∩ B)| + |A ∩ B| + |B ∖ (A ∩ B)| \
       &=^"(3)" |A| - |A ∩ B| + |A ∩ B| + |B| - |A ∩ B| \
       &= |A| + |B| - |A ∩ B|. qedhere
     $
@@ -3000,16 +3000,75 @@
 
 == Abzählbare Mengen
 
-- Def: Eine Menge $A$ heißt abzählbar, wenn $|A| ≤ |ℕ|$, andernfalls heißt $A$ *überabzählbar*. Gilt $|A| = |ℕ|$, so heißt $A$ *abzählbar unendlich*.
-- Bemerkung: Nicht einheitlich, manchmal heißt abzählbar auch $|A| = |ℕ|$ also abzählbar unendlich. Mit höchstens abzählbar ist man auf der sicheren Seite.
-- Satz: Ist $A$ abzählbar, dann ist $A$ endlich oder abzählbar unendlich.
-- Beweis: Sei $f : A → ℕ$ injektiv; $A$ ist gleichmächtig zu $f(A) ⊆ ℕ$. Ist $f(A)$ endlich, fertig. Sonst $f(A)$ der Größe nach aufzählen („komprimieren“): $a_0 := min f(A)$, $a_(k+1) := min(f(A) ∖ {a_0,…,a_k})$ (Extremalprinzip). Injektiv nach Konstruktion; surjektiv, weil unterhalb jedes $x ∈ f(A)$ nur endlich viele Elemente liegen, $x$ also nach endlich vielen Schritten an der Reihe ist. Braucht Teilmengen endlicher Mengen sind endlich (Satz oben).
-- Satz: Beispiele für abzählbar unendliche Mengen.
-  - |ℕ⁺| = |ℕ| (Hilberts Hotel)
-  - |ℤ| = |ℕ|
-  - |ℕ × {1,2}| = |ℕ| (Hilbert Bus)
-  - |ℕ × ℕ| = |ℕ| (Cantorsche Paarung oder mit Cantor-Schröder-Bernstein über die Injektionen $n ↦ (n,0)$ und $(a,b) ↦ 2^a 3^b$; Eindeutigkeit der Primfaktorzerlegung ohne Beweis).
-  - $|ℕ^*| = |ℕ|$
+#definition("Abzählbarkeit", kurz: [abzählbar, überabzählbar])[
+  Eine Menge $A$ heißt *abzählbar*, wenn $|A| ≤ |ℕ|$ gilt, andernfalls *überabzählbar*. Gilt $|A| = |ℕ|$, so heißt $A$ *abzählbar unendlich*.#footnote[Manche Autoren zählen die endlichen Mengen nicht zu den abzählbaren Mengen, machen also die Unterscheidung zwischen endlich ($|A| < |ℕ|$), abzählbar ($|A| = |ℕ|$) und überabzählbar ($|A| > |ℕ|$).]
+]<abzaehlbar>
+
+#bemerkung(slides: "titel")[Gibt es mehr natürliche Zahlen als Primzahlen?][
+  Die Menge $ℙ$ der Primzahlen ist zwar unendlich, aber die Menge $ℕ ∖ ℙ$ der „Nichtprimzahlen“ ist es ebenfalls. Gilt also $|ℙ| < |ℕ|$? Der folgende Satz gibt eine negative Antwort.
+]
+
+#satz[
+  Eine Menge $A$ ist genau dann abzählbar, wenn sie endlich oder abzählbar unendlich ist. Als Formel
+  $ |A| ≤ |ℕ| ⇔ (∃n ∈ ℕ: |A| = n) ∨ |A| = |ℕ|. $
+]<abzaehlbarFaelle>
+
+#beweis[
+  / $⇐$: Die Rückrichtung ist ziemlich klar. Im ersten Fall gilt $|A| = n$ für ein $n ∈ ℕ$ und wir erhalten eine Injektion von $A$ nach ${1,…,n}$. Im zweiten Fall gilt $|A| = |ℕ|$ und wir erhalten eine Bijektion von $A$ nach $ℕ$. In beiden Fällen haben wir also direkt die gewünschte Injektion von $A$ nach $ℕ$.
+  / $⇐$: Aus $|A| ≤ |ℕ|$ erhalten wir eine Injektion $f : A → ℕ$. Sei $M := f(A)$, dann ist $f : A → M$ eine Bijektion (siehe @einschränkung-auf-bild).
+    / Fall 1\: $M$ ist endlich.: Wegen $|A| = |M|$ ist auch $A$ endlich und die linke Seite der Disjunktion erfüllt.
+    / Fall 2\: $M$ ist unendlich.: Wir zählen $M$ der Größe nach auf:
+      $ M = {a₀,a₁,a₂,a₃,…} "mit" a₀ < a₁ < a₂ < … $
+      Formal definieren wir dazu für $k = 0, 1, 2, …$ nacheinander
+      $ a_k := min(M ∖ {a_0,…,a_(k-1)}). $
+      Weil $M$ unendlich ist, ist für jedes $k ∈ ℕ$ ein frisches $a_k ∈ M$ übrig. Weil wir aufsteigend vorgehen wird jedes $n ∈ M$ spätestens nach $n+1$ Schritten das Minimum sein. Also ist die Abbildung $k ↦ a_k$ eine Bijektion von $ℕ$ nach $M$. Hier ist eine Illustration:
+      $ #aufzaehlbild() $
+      Es gilt also $|A| = |M|$ und $|M| = |ℕ|$, also auch $|A| = |ℕ|$.#qedhere
+]
+
+#satz[Abzählbar unendliche Mengen][
+  #set enum(numbering: "(1)")
+  Die folgenden Mengen sind abzählbar unendlich:
+  + $ℕ⁺$,
+  + $ℤ$,
+  + $ℕ × {1,2}$,
+  + $ℕ × ℕ$,
+  + $ℕ^* := union.big_(k ∈ ℕ) ℕ^k$, die Menge aller endlichen Folgen natürlicher Zahlen.
+]<abzaehlbarBeispiele>
+
+#beweis[
+  #set enum(numbering: "(1)")
+  + Die Funktion $ℕ → ℕ⁺$, $n ↦ n+1$ ist eine Bijektion.
+  + Die Funktion
+    $ f : ℤ → ℕ, quad z ↦ cases(2z & "falls" z ≥ 0, -2z-1 & "falls" z < 0) $
+    ist eine Bijektion: Jede gerade Zahl $2k$ hat genau das Urbild $k$, jede ungerade Zahl $2k+1$ genau das Urbild $-k-1$.
+  + Ebenso ist $ℕ × {1,2} → ℕ$, $(n,1) ↦ 2n$, $(n,2) ↦ 2n+1$ eine Bijektion.
+  + Nach @csb genügen Injektionen in beide Richtungen. Die Funktion $ℕ → ℕ × ℕ$, $n ↦ (n,0)$ ist injektiv. Wir zeigen, dass auch
+    $ h : ℕ × ℕ → ℕ, quad (a,b) ↦ 2^a ⋅ 3^b $
+    injektiv ist. Sei $2^a ⋅ 3^b = 2^c ⋅ 3^d$ und ohne Einschränkung $a ≤ c$. Dann gilt $3^b = 2^(c-a) ⋅ 3^d$. Die linke Seite ist ungerade, also ist auch die rechte ungerade, und es folgt $c = a$. Aus $3^b = 3^d$ folgt dann $b = d$.
+  + Nach (4) gibt es eine Bijektion $g : ℕ × ℕ → ℕ$. Wir definieren Funktionen $φ_k : ℕ^k → ℕ$ durch $φ_0(()) := 0$ und für $k ≥ 1$ durch
+    $ φ_k (a_1,…,a_k) := g(φ_(k-1)(a_1,…,a_(k-1)), a_k). $
+    Durch Induktion über $k$ folgt, dass jedes $φ_k$ injektiv ist: Für $k = 0$ hat $ℕ^0 = {()}$ nur ein Element. Für $k ≥ 1$ folgt aus $φ_k (a_1,…,a_k) = φ_k (b_1,…,b_k)$ wegen der Injektivität von $g$, dass $a_k = b_k$ und $φ_(k-1)(a_1,…,a_(k-1)) = φ_(k-1)(b_1,…,b_(k-1))$ gilt. Nach IV ist dann auch $(a_1,…,a_(k-1)) = (b_1,…,b_(k-1))$.
+
+    Jede Folge $t ∈ ℕ^*$ hat genau eine Länge $k$, also $t ∈ ℕ^k$. Wir setzen $ψ(t) := g(k, φ_k (t))$. Aus $ψ(t) = ψ(t')$ folgt wegen der Injektivität von $g$, dass $t$ und $t'$ dieselbe Länge $k$ haben und $φ_k (t) = φ_k (t')$ gilt, also $t = t'$. Damit ist $ψ : ℕ^* → ℕ$ injektiv. Zusammen mit der Injektion $ℕ → ℕ^*$, $n ↦ (n)$ folgt die Behauptung mit @csb.#qedhere
+]
+
+#bemerkung[Hilberts Hotel][
+  Ein Hotel hat unendlich viele Zimmer mit den Nummern $0, 1, 2, …$, und alle sind belegt. Kommt ein neuer Gast, so zieht jeder Gast von Zimmer $n$ in Zimmer $n+1$, und Zimmer $0$ wird frei. Das ist die Bijektion aus (1). Kommt ein Bus mit unendlich vielen neuen Gästen $0, 1, 2, …$, so zieht jeder bisherige Gast von Zimmer $n$ in Zimmer $2n$, und der neue Gast $n$ bekommt Zimmer $2n+1$. Das ist die Bijektion aus (3).
+]
+
+#bemerkung[Echte Teilmengen][
+  Nach (1) ist $ℕ$ gleichmächtig zu seiner echten Teilmenge $ℕ⁺$. Bei endlichen Mengen geht das nicht: Eine Bijektion von $A$ auf eine echte Teilmenge $A' ⊊ A$ wäre als Funktion $A → A$ injektiv, aber nicht surjektiv. Das widerspricht @endlichInjSurj.
+]
+
+#bemerkung[Cantorsche Paarungsfunktion][
+  Für (4) kann man auch direkt eine Bijektion angeben. Man nummeriert die Paare entlang der Diagonalen durch (@paarungBild). Das ergibt die *Cantorsche Paarungsfunktion*
+  $ π : ℕ × ℕ → ℕ, quad (a,b) ↦ ((a+b)(a+b+1))/2 + a. $
+]
+
+#abbildung(slides: 1, caption: [
+  Die Cantorsche Paarungsfunktion: Am Gitterpunkt $(a,b)$ steht $π(a,b)$.
+])[#paarungsbild()]<paarungBild>
 
 == Cantors Diagonalargument
 
