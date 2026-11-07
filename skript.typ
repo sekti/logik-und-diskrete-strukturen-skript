@@ -2971,13 +2971,37 @@
 ]
 
 #bemerkung[Beweis von Offensichtlichem][
-  Wir widmen uns nun Aussagen, die offensichtlich wahr sind. Indem wir sie formal beweisen, gewinnen wir trotzdem etwas: Die Zuversicht, dass der neue Formalismus für Kardinalität das leistet, was er soll. Dieser Effekt verbraucht sich aber schnell und es wird langweilig. Also belassen wir es bei den exemparischen Aussagen im nächsten Satz. Danach werden wir dermassen offensichtliche Kardinalitätsaussagen einfach glauben.
+  Wir widmen uns nun Aussagen, die offensichtlich wahr sind. Indem wir sie formal beweisen, gewinnen wir trotzdem etwas: die Zuversicht, dass der neue Formalismus für Kardinalität das leistet, was er soll. Dieser Effekt verbraucht sich aber schnell und es wird langweilig. Also belassen wir es bei den exemplarischen Aussagen im nächsten Satz. Danach werden wir dermaßen offensichtliche Kardinalitätsaussagen einfach glauben.
 ]
 #satz[
   #set enum(numbering: "(1)")
-  Seien $A$,$B$ und $M$ endliche Mengen. Dann gilt:
-  + Ist $x ∉ M$ so gilt $|M ∪ {x}| = |M|+1$.
-  + Ist $x ∈ M$ so gilt $|M ∖ {x}| = |M|-1$.
+  Seien $A$ und $B$ endliche Mengen. Dann gilt:
+  + Jede Teilmenge $A' ⊆ A$ ist endlich mit $|A'| ≤ |A|$.
+  + Sind $A$ und $B$ disjunkt, so ist $A ∪ B$ endlich mit $|A ∪ B| = |A| + |B|$.
+  + $A ∪ B$ ist endlich mit $|A ∪ B| = |A| + |B| - |A ∩ B|$.
+]<kardinalitaeten>
+
+#beweis[
+  #set enum(numbering: "(1)")
+  + Sei $α : A → {1,…,|A|}$ eine Bijektion. Auf $A'$ eingeschränkt ist $α$ eine Injektion $A' → {1,…,|A|}$. Nach dem Extremalprinzip gibt es also eine kleinste Zahl $k ∈ ℕ$, für die eine Injektion $f : A' → {1,…,k}$ existiert, und es gilt $k ≤ |A|$. Wir zeigen, dass $f$ surjektiv ist. Andernfalls gäbe es ein $v ∈ {1,…,k}$, das nicht als Wert von $f$ vorkommt. Sei $τ : {1,…,k} → {1,…,k}$ die Bijektion, die $v$ und $k$ vertauscht und alle anderen Zahlen festhält. Dann nimmt die injektive Funktion $τ ∘ f$ den Wert $k$ nicht an, ist also eine Injektion $A' → {1,…,k-1}$. Das widerspricht der Wahl von $k$. Also ist $f$ eine Bijektion, und es folgt $|A'| = k ≤ |A|$.
+  + Sei $n := |A|$ und $m := |B|$, und seien $α : A → {1,…,n}$ und $β : B → {1,…,m}$ Bijektionen. Weil $A$ und $B$ disjunkt sind, liegt jedes Element von $A ∪ B$ in genau einer der beiden Mengen. Daher ist
+    $ γ : A ∪ B → {1,…,n+m}, quad y ↦ cases(α(y) & "falls" y ∈ A, n + β(y) & "falls" y ∈ B) $
+    eine Funktion. Sie bildet $A$ bijektiv auf ${1,…,n}$ ab und $B$ bijektiv auf ${n+1,…,n+m}$. Diese beiden Mengen sind disjunkt mit Vereinigung ${1,…,n+m}$, also ist $γ$ eine Bijektion.
+  + Nach (1) sind $B ∖ A$ und $A ∩ B$ endlich. Die Mengen $A$ und $B ∖ A$ sind disjunkt mit Vereinigung $A ∪ B$, die Mengen $A ∩ B$ und $B ∖ A$ sind disjunkt mit Vereinigung $B$. Aus (2) folgt also
+    $ |A ∪ B| = |A| + |B ∖ A| quad "und" quad |B| = |A ∩ B| + |B ∖ A|. $
+    Einsetzen von $|B ∖ A| = |B| - |A ∩ B|$ in die erste Gleichung ergibt die Behauptung.#qedhere
+]
+
+#bemerkung[Einzelne Elemente][
+  Für $x ∉ A$ folgt aus (2) mit $B = {x}$, dass $|A ∪ {x}| = |A| + 1$. Für $x ∈ A$ ist $A$ die disjunkte Vereinigung von $A ∖ {x}$ und ${x}$, also $|A ∖ {x}| = |A| - 1$.
+]
+
+/* Bisherige Fassung mit Induktion:
+#satz[
+  #set enum(numbering: "(1)")
+  Seien $A$, $B$ und $M$ endliche Mengen. Dann gilt:
+  + Ist $x ∉ M$, so gilt $|M ∪ {x}| = |M|+1$.
+  + Ist $x ∈ M$, so gilt $|M ∖ {x}| = |M|-1$.
   + Sind $A$ und $B$ disjunkt, so gilt $|A ∪ B| = |A| + |B|$.
 ]<kardinalitaeten>
 
@@ -2987,15 +3011,16 @@
     $ μ ∪ {(x,m+1)} : M ∪ {x} → {1,…,m+1} $
     Also folgt $|M ∪ {x}| = m+1 = |M| + 1$.
   + Der Beweis ist nur etwas schwerer als (1). Wir lassen ihn weg.
-  + Wir halten nun $A$ fest und zeigen durch Induktion über $n$: Für jede zu $A$ disjunkte Menge $B$ mit $|B| = n$ ist $A ∪ B$ endlich und $|A ∪ B| = |A| + |B|$.
-      / IA: Für $n = 0$ ist $B = ∅$ also $|A ∪ B| = |A| = |A| + |B|$. ✓
+  + Wir halten nun $A$ fest und zeigen durch Induktion über $n$: Für jede zu $A$ disjunkte Menge $B$ mit $|B| = n$ ist $|A ∪ B| = |A| + |B|$.
+      / IA: Für $n = 0$ ist $B = ∅$, also $|A ∪ B| = |A| = |A| + |B|$. ✓
       / IV: Für ein $n ≥ 1$ gelte die Aussage für $n-1$.
-      / IS: Sei $B$ disjunkt zu $A$ mit $|B| = n$. Wir wählen $b ∈ B$ beliebig, mit (2) folgt dann $|B ∖ {b}| = |B|-1$. Nach Induktion ist daher $A ∪ (B ∖ {b})$ endlich und es gilt
-      $ |A ∪ (B ∖ {b})| = |A| + |B ∖ {b}| = |A| + |B| - 1 $
+      / IS: Sei $B$ disjunkt zu $A$ mit $|B| = n$. Wir wählen $b ∈ B$ beliebig, mit (2) folgt dann $|B ∖ {b}| = |B|-1$. Also:
+      $ |A ∪ (B ∖ {b})| =^("IV") |A| + |B ∖ {b}| = |A| + |B| - 1 $
       Jetzt nehmen wir $b$ wieder hinzu:
       $ |A ∪ B| &= |A ∪ (B ∖ {b}) ∪ {b}| =^("(1)") |A ∪ (B ∖ {b})| + 1 \
-      &= |A| + |B| - 1 +1 = |A| + |B|. #qedhere $
+      &= |A| + |B| - 1 + 1 = |A| + |B|. #qedhere $
 ]
+*/
 
 == Abzählbare Mengen
 
