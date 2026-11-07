@@ -168,9 +168,10 @@
 })
 
 // Aufzählung einer unendlichen Menge M ⊆ ℕ der Größe nach (hier M = ℙ).
-// Oben die Zahlen 0, 1, 2, …; Elemente von M schwarz und mit a_k beschriftet,
-// die übrigen Zahlen ausgegraut. Unten ℕ im selben Abstand; Pfeile von a_k
-// nach k. Die untere Zeile endet daher früher.
+// Oben ℕ, unten die Zahlen 0, 1, 2, … im selben Abstand; davon die Elemente
+// von M schwarz und mit a_k beschriftet, die übrigen ausgegraut. Pfeile von k
+// nach a_k, passend zur Bijektion ℕ → M, k ↦ a_k. Die obere Zeile endet daher
+// früher.
 #let aufzaehlbild(m: (2, 3, 5, 7, 11, 13), bis: 13) = canvas(length: 1em, {
   import draw: *
 
@@ -179,20 +180,20 @@
   let hell = luma(72%)
   let pfeil = (end: ">", fill: black, scale: 0.6)
 
-  content((-1.6, yo), $M$)
-  content((-1.6, yu), $ℕ$)
+  content((-1.6, yo), $ℕ$)
+  content((-1.6, yu), $M$)
 
   for v in range(bis + 1) {
     let k = m.position(x => x == v)
     if k == none {
-      content((v * w, yo), text(fill: hell, str(v)))
+      content((v * w, yu), text(fill: hell, str(v)))
     } else {
-      content((v * w, yo), str(v))
-      content((v * w, yo + 0.95), $a_#k$)
-      content((k * w, yu), str(k))
-      line((v * w, yo - 0.5), (k * w, yu + 0.55), mark: pfeil)
+      content((v * w, yu), str(v))
+      content((v * w, yu - 0.95), $a_#k$)
+      content((k * w, yo), str(k))
+      line((k * w, yo - 0.5), (v * w, yu + 0.55), mark: pfeil)
     }
   }
-  content(((bis + 1) * w, yo), $…$)
-  content((m.len() * w, yu), $…$)
+  content((m.len() * w, yo), $…$)
+  content(((bis + 1) * w, yu), $…$)
 })

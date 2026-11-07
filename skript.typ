@@ -3014,14 +3014,14 @@
 ]<abzaehlbarFaelle>
 
 #beweis[
-  / $⇐$: Die Rückrichtung ist ziemlich klar. Im ersten Fall gilt $|A| = n$ für ein $n ∈ ℕ$ und wir erhalten eine Injektion von $A$ nach ${1,…,n}$. Im zweiten Fall gilt $|A| = |ℕ|$ und wir erhalten eine Bijektion von $A$ nach $ℕ$. In beiden Fällen haben wir also direkt die gewünschte Injektion von $A$ nach $ℕ$.
-  / $⇐$: Aus $|A| ≤ |ℕ|$ erhalten wir eine Injektion $f : A → ℕ$. Sei $M := f(A)$, dann ist $f : A → M$ eine Bijektion (siehe @einschränkung-auf-bild).
+  / $⇐$: Die Rückrichtung ist ziemlich klar. Im ersten Fall gilt $|A| = n$ für ein $n ∈ ℕ$ und wir erhalten eine Bijektion von $A$ nach ${1,…,n}$. Im zweiten Fall gilt $|A| = |ℕ|$ und wir erhalten eine Bijektion von $A$ nach $ℕ$. In beiden Fällen haben wir eine Injektion von $A$ nach $ℕ$.
+  / $⇒$: Aus $|A| ≤ |ℕ|$ erhalten wir eine Injektion $f : A → ℕ$. Sei $M := f(A)$, dann ist $f : A → M$ eine Bijektion (siehe @einschränkung-auf-bild).
     / Fall 1\: $M$ ist endlich.: Wegen $|A| = |M|$ ist auch $A$ endlich und die linke Seite der Disjunktion erfüllt.
     / Fall 2\: $M$ ist unendlich.: Wir zählen $M$ der Größe nach auf:
       $ M = {a₀,a₁,a₂,a₃,…} "mit" a₀ < a₁ < a₂ < … $
       Formal definieren wir dazu für $k = 0, 1, 2, …$ nacheinander
       $ a_k := min(M ∖ {a_0,…,a_(k-1)}). $
-      Weil $M$ unendlich ist, ist für jedes $k ∈ ℕ$ ein frisches $a_k ∈ M$ übrig. Weil wir aufsteigend vorgehen wird jedes $n ∈ M$ spätestens nach $n+1$ Schritten das Minimum sein. Also ist die Abbildung $k ↦ a_k$ eine Bijektion von $ℕ$ nach $M$. Hier ist eine Illustration:
+      Weil $M$ unendlich ist, ist für jedes $k ∈ ℕ$ ein frisches $a_k ∈ M$ übrig. Weil wir aufsteigend vorgehen, wird jedes $n ∈ M$ spätestens nach $n+1$ Schritten das Minimum sein. Also ist die Abbildung $k ↦ a_k$ eine Bijektion von $ℕ$ nach $M$. Hier ist eine Illustration:
       $ #aufzaehlbild() $
       Es gilt also $|A| = |M|$ und $|M| = |ℕ|$, also auch $|A| = |ℕ|$.#qedhere
 ]
