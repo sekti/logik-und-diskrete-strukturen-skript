@@ -129,8 +129,8 @@
 #let paarungsbild(diagonalen: 4) = canvas(length: 1em, {
   import draw: *
 
-  let d = 3.2
-  let r = 0.7
+  let d = 2.4
+  let r = 0.6
   let grau = luma(60%)
   let hell = luma(75%)
   let pfeil = (end: ">", fill: black, scale: 0.6)

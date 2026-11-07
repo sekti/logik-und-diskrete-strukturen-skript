@@ -1555,7 +1555,7 @@
 
 #satz[Primfaktorzerlegung][
   Jedes $n ∈ ℕ⁺$ ist ein Produkt von Primzahlen.#footnote[Eine *Primzahl* ist eine natürliche Zahl $p ≥ 2$, deren einzige Teiler $1$ und $p$ sind.]
-]
+]<primfaktorzerlegung>
 
 #beweis[
   Starke Induktion über $n$ mit Startwert $n₀ = 1$.
@@ -1859,7 +1859,7 @@
   + $A^* := union.big_(n ∈ ℕ) A^n$ für $A = {"a","b","c",…,"z"}$
   + $V^+ := union.big_(n ∈ ℕ⁺) V^n$ für eine Menge $V$
   + $W := {(v₀, … ,v_ℓ) ∈ V^+ | ∀i ∈ {0,…,ℓ-1}: (v_i,v_(i+1)) ∈ E}$ für einen gerichteten Graphen $G = (V,E)$.
-]
+]<wortmenge>
 
 #loesung[
   + $A^*$ enthält alle Folgen von Kleinbuchstaben beliebiger (endlicher) Länge, zum Beispiel $("a","b","b","a")$, $("w","u","r","s","t")$ und die leere Folge $()$. Die unendliche Folge $("a","a",…)$ ist _nicht_ in $A^*$, denn sie kommt in keiner der Mengen $A⁰$, $A¹$, … vor.
@@ -3021,54 +3021,45 @@
       $ M = {a₀,a₁,a₂,a₃,…} "mit" a₀ < a₁ < a₂ < … $
       Formal definieren wir dazu für $k = 0, 1, 2, …$ nacheinander
       $ a_k := min(M ∖ {a_0,…,a_(k-1)}). $
-      Weil $M$ unendlich ist, ist für jedes $k ∈ ℕ$ ein frisches $a_k ∈ M$ übrig. Weil wir aufsteigend vorgehen, wird jedes $n ∈ M$ spätestens nach $n+1$ Schritten das Minimum sein. Also ist die Abbildung $k ↦ a_k$ eine Bijektion von $ℕ$ nach $M$. Hier ist eine Illustration:
+      Weil $M$ unendlich ist, ist für jedes $k ∈ ℕ$ ein frisches $a_k ∈ M$ übrig. Weil wir aufsteigend vorgehen, wird jedes $n ∈ M$ spätestens nach $n$ Schritten das Minimum sein. Also ist die Abbildung $k ↦ a_k$ eine Bijektion von $ℕ$ nach $M$. Hier ist eine Illustration:
       $ #aufzaehlbild() $
       Es gilt also $|A| = |M|$ und $|M| = |ℕ|$, also auch $|A| = |ℕ|$.#qedhere
 ]
 
-#satz[Abzählbar unendliche Mengen][
+#uebung[Abzählbar unendliche Mengen][
   #set enum(numbering: "(1)")
-  Die folgenden Mengen sind abzählbar unendlich:
-  + $ℕ⁺$,
+  Argumentieren Sie, dass die folgenden Mengen abzählbar unendlich sind.#footnote[Die Lösung wird Beweisideen geben, aber nicht haarklein ausformulieren.]
+  + $ℕ ∪ {-1}$,
   + $ℤ$,
-  + $ℕ × {1,2}$,
   + $ℕ × ℕ$,
-  + $ℕ^* := union.big_(k ∈ ℕ) ℕ^k$, die Menge aller endlichen Folgen natürlicher Zahlen.
+  + $ℕ^* := union.big_(k ∈ ℕ) ℕ^k$. (Die Notation kennen wir aus @wortmenge. Hier ist $ℕ^*$ die Menge der endlichen Folgen natürlicher Zahlen.)
 ]<abzaehlbarBeispiele>
 
-#beweis[
-  #set enum(numbering: "(1)")
-  + Die Funktion $ℕ → ℕ⁺$, $n ↦ n+1$ ist eine Bijektion.
-  + Die Funktion
-    $ f : ℤ → ℕ, quad z ↦ cases(2z & "falls" z ≥ 0, -2z-1 & "falls" z < 0) $
-    ist eine Bijektion: Jede gerade Zahl $2k$ hat genau das Urbild $k$, jede ungerade Zahl $2k+1$ genau das Urbild $-k-1$.
-  + Ebenso ist $ℕ × {1,2} → ℕ$, $(n,1) ↦ 2n$, $(n,2) ↦ 2n+1$ eine Bijektion.
-  + Nach @csb genügen Injektionen in beide Richtungen. Die Funktion $ℕ → ℕ × ℕ$, $n ↦ (n,0)$ ist injektiv. Wir zeigen, dass auch
-    $ h : ℕ × ℕ → ℕ, quad (a,b) ↦ 2^a ⋅ 3^b $
-    injektiv ist. Sei $2^a ⋅ 3^b = 2^c ⋅ 3^d$ und ohne Einschränkung $a ≤ c$. Dann gilt $3^b = 2^(c-a) ⋅ 3^d$. Die linke Seite ist ungerade, also ist auch die rechte ungerade, und es folgt $c = a$. Aus $3^b = 3^d$ folgt dann $b = d$.
-  + Nach (4) gibt es eine Bijektion $g : ℕ × ℕ → ℕ$. Wir definieren Funktionen $φ_k : ℕ^k → ℕ$ durch $φ_0(()) := 0$ und für $k ≥ 1$ durch
-    $ φ_k (a_1,…,a_k) := g(φ_(k-1)(a_1,…,a_(k-1)), a_k). $
-    Durch Induktion über $k$ folgt, dass jedes $φ_k$ injektiv ist: Für $k = 0$ hat $ℕ^0 = {()}$ nur ein Element. Für $k ≥ 1$ folgt aus $φ_k (a_1,…,a_k) = φ_k (b_1,…,b_k)$ wegen der Injektivität von $g$, dass $a_k = b_k$ und $φ_(k-1)(a_1,…,a_(k-1)) = φ_(k-1)(b_1,…,b_(k-1))$ gilt. Nach IV ist dann auch $(a_1,…,a_(k-1)) = (b_1,…,b_(k-1))$.
+#loesung[
+  Wir müssen in allen Fällen eine Bijektion zwischen der jeweiligen Menge und $ℕ$ angeben.
+  / Bijektion $ℕ ∪ {-1} → ℕ$.: 
+  $ f : ℕ ∪ {-1} → ℕ, quad x ↦ x + 1. $
+  / Bijektion $ℤ → ℕ$.: Wir bilden die nichtnegativen Zahlen auf die geraden und die negativen Zahlen auf die ungeraden Zahlen ab:
+    $ f : ℤ → ℕ, quad z ↦ cases(2z & "falls" z ≥ 0, -2z-1 & "falls" z < 0.) $
+    Als Wertetabelle sieht das so aus:
+    [Claude: Hier Wertetabelle einfügen, oben z, unten f(z), starten mit pünktchen, dann -4 bis +4 angeben, dann Pünktchen.]
+  / Bijektion $ℕ × ℕ → ℕ$.: Wir fassen die Paare $(x,y) ∈ ℕ × ℕ$ als Gitterpunkte in der Ebene auf und nummerieren die sie entlang der Diagonalen durch:
+    $ #box(scale(75%,reflow : true)[#paarungsbild()]) $
+    Bemerkung: Dabei ergibt sich folgende Bijektion, die sich *Cantorsche Paarungsfunktion* nennt:
+    $ π : ℕ × ℕ → ℕ, quad (a,b) ↦ ((a+b)(a+b+1))/2 + a. $
+  / Bijektion $ℕ^* → ℕ$.:
+    Nach @csb genügt es, Injektionen in beide Richtungen anzugeben. In der Rückrichtung bilden wir jede Zahl auf eine Folge der Länge $1$ ab:
+    $ g : ℕ → ℕ^*, quad n ↦ (n). $
+    Die andere Richtung ist etwas komplizierter. Seien $p_1 < p_2 < p_3 < …$ die Primzahlen, also $p_1 = 2$, $p_2 = 3$, $p_3 = 5$ und so weiter. Wir setzen
+    $ f : ℕ^* → ℕ, quad (n_1,…,n_k) ↦ product_(i=1)^k p_i^(n_i+1) = p_1^(n_1+1) ⋅ … ⋅ p_k^(n_k+1). $
+    Zum Beispiel ist $ψ(0,2) = 2^1 ⋅ 3^3 = 54$ und $ψ(0,2,0) = 2^1 ⋅ 3^3 ⋅ 5^1 = 270$. Die leere Folge wird auf das leere Produkt $1$ abgebildet.
 
-    Jede Folge $t ∈ ℕ^*$ hat genau eine Länge $k$, also $t ∈ ℕ^k$. Wir setzen $ψ(t) := g(k, φ_k (t))$. Aus $ψ(t) = ψ(t')$ folgt wegen der Injektivität von $g$, dass $t$ und $t'$ dieselbe Länge $k$ haben und $φ_k (t) = φ_k (t')$ gilt, also $t = t'$. Damit ist $ψ : ℕ^* → ℕ$ injektiv. Zusammen mit der Injektion $ℕ → ℕ^*$, $n ↦ (n)$ folgt die Behauptung mit @csb.#qedhere
+    Die Injektivität folgt aus dem *Fundamentalsatz der Arithmetik* (den wir hier nicht beweisen). Nach diesem ist die Zerlegung einer Zahl in Primfaktoren bis auf die Reihenfolge eindeutig. An $ψ(n_1,…,n_k)$ kann man also ablesen, wie oft jede Primzahl als Faktor vorkommt. Daraus erhält man die Folge zurück: Die Länge $k$ ist die Anzahl der verschiedenen Primfaktoren, und $n_i$ ist die Vielfachheit von $p_i$ minus $1$. Also ist $ψ$ injektiv. #footnote[Ohne das „$+1$“ im Exponenten ginge das nicht: Dann hätten $(0,2)$ und $(0,2,0)$ beide den Wert $2^0 ⋅ 3^2 = 9$.]
 ]
 
 #bemerkung[Hilberts Hotel][
-  Ein Hotel hat unendlich viele Zimmer mit den Nummern $0, 1, 2, …$, und alle sind belegt. Kommt ein neuer Gast, so zieht jeder Gast von Zimmer $n$ in Zimmer $n+1$, und Zimmer $0$ wird frei. Das ist die Bijektion aus (1). Kommt ein Bus mit unendlich vielen neuen Gästen $0, 1, 2, …$, so zieht jeder bisherige Gast von Zimmer $n$ in Zimmer $2n$, und der neue Gast $n$ bekommt Zimmer $2n+1$. Das ist die Bijektion aus (3).
+  Varianten der letzten Übung sind Gegenstand eines von David Hilbert erdachten Gedankenexperiments. In einem Hotel mit abzählbar unendlich vielen Zimmern, die allesamt belegt sind, kann man dadurch, dass man die Gäste anders auf die Zimmer verteilt, Platz für neue Gäste schaffen. Für Hotels mit endlich vielen Zimmer wäre das absurd. Siehe z.B. #link("https://de.wikipedia.org/wiki/Hilberts_Hotel", "Wikipedia").
 ]
-
-#bemerkung[Echte Teilmengen][
-  Nach (1) ist $ℕ$ gleichmächtig zu seiner echten Teilmenge $ℕ⁺$. Bei endlichen Mengen geht das nicht: Eine Bijektion von $A$ auf eine echte Teilmenge $A' ⊊ A$ wäre als Funktion $A → A$ injektiv, aber nicht surjektiv. Das widerspricht @endlichInjSurj.
-]
-
-#bemerkung[Cantorsche Paarungsfunktion][
-  Für (4) kann man auch direkt eine Bijektion angeben. Man nummeriert die Paare entlang der Diagonalen durch (@paarungBild). Das ergibt die *Cantorsche Paarungsfunktion*
-  $ π : ℕ × ℕ → ℕ, quad (a,b) ↦ ((a+b)(a+b+1))/2 + a. $
-]
-
-#abbildung(slides: 1, caption: [
-  Die Cantorsche Paarungsfunktion: Am Gitterpunkt $(a,b)$ steht $π(a,b)$.
-])[#paarungsbild()]<paarungBild>
 
 == Cantors Diagonalargument
 
