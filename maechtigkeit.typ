@@ -197,3 +197,71 @@
   content((m.len() * w, yo), $…$)
   content(((bis + 1) * w, yu), $…$)
 })
+
+// Der unendliche Baum T mit Knotenmenge {0,1}^*, bis zur Tiefe `tiefe`. Jeder
+// Knoten ist mit seinem Wort beschriftet, darunter grau seine Nummer bei
+// ebenenweiser Aufzählung. Der Ast `ast` (mindestens tiefe + 1 Einträge) ist fett.
+#let binaerbaum(tiefe: 3, ast: (0, 1, 1, 0)) = canvas(length: 1em, {
+  import draw: *
+
+  let s = 2.6   // Abstand der Blätter
+  let h = 3.4   // Abstand der Ebenen
+  let breite = calc.pow(2, tiefe) * s
+  let pos(k, j) = ((j + 0.5) * breite / calc.pow(2, k), -k * h)
+  let grau = luma(55%)
+  let normal = (paint: luma(40%), thickness: 0.6pt)
+  let fett = (paint: black, thickness: 1.6pt)
+
+  // Index des Ast-Knotens in Tiefe k
+  let astj(k) = range(k).fold(0, (j, i) => 2 * j + ast.at(i))
+  let wort(k, j) = if k == 0 { $ε$ } else {
+    let b = str(j, base: 2)
+    $#("0" * (k - b.len()) + b)$
+  }
+
+  for k in range(tiefe + 1) {
+    for j in range(calc.pow(2, k)) {
+      let (x, y) = pos(k, j)
+      content((x, y), wort(k, j))
+      content((x, y - 1.0), text(fill: grau, str(calc.pow(2, k) - 1 + j)))
+      let aufAst = astj(k) == j
+      for b in (0, 1) {
+        let istAst = aufAst and ast.at(k) == b
+        if k < tiefe {
+          let (x2, y2) = pos(k + 1, 2 * j + b)
+          line((x + (x2 - x) * 0.2, y - 1.5), (x2, y2 + 0.55),
+            stroke: if istAst { fett } else { normal })
+        } else {
+          // angedeutete Fortsetzung
+          let dx = (2 * b - 1) * s / 4
+          line((x, y - 1.5), (x + dx, y - 2.6),
+            stroke: (..(if istAst { fett } else { normal }), dash: "dotted"))
+        }
+      }
+    }
+  }
+})
+
+// Das Diagonalargument als Tabelle: Zeile k enthält den Ast p_k, die
+// Diagonaleinträge sind hinterlegt, d entsteht durch Umdrehen der Diagonale.
+#let diagonaltabelle(aeste: ((0, 1, 1, 0), (1, 1, 0, 1), (0, 0, 0, 1), (1, 0, 1, 1))) = {
+  let n = aeste.len()
+  let d = range(n).map(k => 1 - aeste.at(k).at(k))
+  let hervor(x) = text(fill: farbeA, weight: "bold", str(x))
+  table(
+    columns: n + 2,
+    stroke: none,
+    align: center,
+    inset: (x: 0.7em, y: 0.4em),
+    fill: (x, y) => if x == y and 1 <= y and y <= n { farbeA.transparentize(80%) },
+    table.vline(x: 1),
+    [], ..range(1, n + 1).map(i => [#i]), $…$,
+    table.hline(),
+    ..for k in range(n) {
+      ($p_#(k + 1)$, ..aeste.at(k).map(str), $…$)
+    },
+    $⋮$, ..range(n).map(_ => $⋮$), [],
+    table.hline(),
+    $d$, ..d.map(hervor), $…$,
+  )
+}

@@ -3063,12 +3063,73 @@
 
 == Cantors Diagonalargument
 
-- Satz (Cantors Diagonalargument): Für jede Menge $M$ gilt $|M| < |2^M|$.
-- Bild: Diagonalargument für ℕ.
-- Bemerkung: $2^ℕ$ entspricht den reellen Zahlen in $[0,1]$, Binärdarstellung.
-- Visuelle Darstellung: Betrachte unendlichen Binärbaum. Er hat abzählbar viele Knoten aber überabzählbar viele absteigende Pfade.
+#skript[
+  Alle unendlichen Mengen, die wir bisher untersucht haben, waren abzählbar. Gibt es überhaupt überabzählbare Mengen? Der folgende Satz zeigt, dass es zu jeder Menge eine mächtigere gibt.
+]
 
-== Korollar: Es gibt mehr Probleme als Programme
+#satz[Cantor][
+  Für jede Menge $M$ gilt $|M| < |2^M|$.
+]<cantor>
+
+#beweis[
+  Die Funktion $M → 2^M$, $x ↦ {x}$ ist injektiv, also gilt $|M| ≤ |2^M|$. Es bleibt zu zeigen, dass es keine Bijektion $f : M → 2^M$ gibt. Wir zeigen sogar, dass keine Funktion $f : M → 2^M$ surjektiv ist.
+
+  Sei also $f : M → 2^M$ eine Funktion. Jedem $x ∈ M$ ist eine Teilmenge $f(x) ⊆ M$ zugeordnet, und $x$ kann in $f(x)$ liegen oder nicht. Wir betrachten
+  $ D := {x ∈ M | x ∉ f(x)} ∈ 2^M. $
+  Angenommen, es gibt ein $y ∈ M$ mit $f(y) = D$. Nach Definition von $D$ gilt $y ∈ D$ genau dann, wenn $y ∉ f(y)$ gilt, also genau dann, wenn $y ∉ D$ gilt. Das ist ein Widerspruch. Also liegt $D$ nicht im Bild von $f$, und $f$ ist nicht surjektiv.
+]
+
+#bemerkung[Verwandtschaft mit Russells Antinomie][
+  Die Menge $D$ ist nach demselben Muster gebaut wie die Menge $R = {m ∈ ℳ | m ∉ m}$ aus @mengeAllerMengen. Dort folgte ein Widerspruch in der Mengenlehre. Hier folgt nur, dass es ein $y$ mit $f(y) = D$ nicht gibt.
+]
+
+#bemerkung[Teilmengen als Funktionen][
+  Sei $A$ eine Menge. Jeder Teilmenge $Y ⊆ A$ entspricht die Funktion
+  $ χ_Y : A → {0,1}, quad a ↦ cases(1 & "falls" a ∈ Y, 0 & "falls" a ∉ Y). $
+  Die Abbildung $2^A → {0,1}^A$, $Y ↦ χ_Y$ ist eine Bijektion. Ihre Umkehrfunktion bildet $g : A → {0,1}$ auf ${a ∈ A | g(a) = 1}$ ab. Das erklärt die Schreibweise $2^A$: Fasst man die Zahl $2$ als die Menge ${0,1}$ auf, so ist $2^A$ die Menge aller Funktionen von $A$ nach ${0,1}$ (siehe @funktionenanzahl).
+]
+
+#korollar[
+  Ist $M$ abzählbar unendlich, so sind $2^M$ und ${0,1}^M$ überabzählbar.
+]<cantorKorollar>
+
+#beweis[
+  Angenommen, $2^M$ ist abzählbar, also $|2^M| ≤ |ℕ|$. Wegen $|ℕ| = |M|$ folgt mit der Transitivität aus @maechtigkeitOrdnung $|2^M| ≤ |M|$. Zusammen mit $|M| ≤ |2^M|$ folgt $|M| = |2^M|$, im Widerspruch zu @cantor. Wäre ${0,1}^M$ abzählbar, so wegen $|2^M| = |{0,1}^M|$ auch $2^M$.
+]
+
+#beispiel[Ein unendlicher Baum][
+  Wir schreiben $ε$ für das leere Wort $()$ und lassen wie in @wortmenge Klammern und Kommas weg. Für ein Wort $w ∈ {0,1}^*$ und $b ∈ {0,1}$ sei $w b$ das Wort, das durch Anhängen von $b$ an $w$ entsteht. Wir betrachten den unendlichen Graphen $T := ({0,1}^*, E)$ mit
+  $ E := {{w, w b} | w ∈ {0,1}^*, b ∈ {0,1}}. $
+  Jeder Knoten $w$ ist also mit den beiden Knoten $w 0$ und $w 1$ der nächsten Ebene verbunden (@baumBild).
+
+  #abbildung(slides: 1, caption: [
+    Die ersten Ebenen des Baumes $T$. Unter jedem Knoten steht grau seine Nummer bei ebenenweiser Aufzählung. Fett: der Anfang des Astes $(0,1,1,0,…)$.
+  ])[#binaerbaum()]<baumBild>
+
+  *Die Knotenmenge ist abzählbar unendlich.* Wir nummerieren die Knoten Ebene für Ebene von links nach rechts. Formal ordnen wir dem Wort $w$ die Zahl mit der Binärdarstellung $1 w$ minus $1$ zu, zum Beispiel $01 ↦ 101_2 - 1 = 4$. Das ist eine Bijektion ${0,1}^* → ℕ$.
+
+  *Die Menge der Äste ist überabzählbar.* Startet man bei $ε$ und geht stets zu einem der beiden Knoten der nächsten Ebene, so durchläuft man einen _Ast_
+  $ ε, quad b_1, quad b_1 b_2, quad b_1 b_2 b_3, quad … $
+  Er ist durch die unendliche Folge $(b_1, b_2, b_3, …) ∈ {0,1}^(ℕ⁺)$ der Abzweigungen bestimmt, und jede solche Folge beschreibt einen Ast. Nach @cantorKorollar ist ${0,1}^(ℕ⁺)$ überabzählbar. Der Baum hat also abzählbar viele Knoten, aber überabzählbar viele Äste.
+]
+
+#beispiel[Woher der Name „Diagonalargument“ kommt][
+  Für $M = ℕ⁺$ lässt sich der Beweis von @cantor in der Sprache der Äste nachvollziehen. Sei $p_1, p_2, p_3, …$ eine beliebige Folge von Ästen, und sei $p_k (i)$ die $i$-te Abzweigung von $p_k$. Wir tragen die Äste als Zeilen in eine Tabelle ein (@diagonalBild). Der Ast $d$ mit
+  $ d(k) := 1 - p_k (k) quad "für alle" k ∈ ℕ⁺ $
+  entsteht durch Umdrehen der Einträge auf der Diagonalen. Er biegt an der $k$-ten Stelle anders ab als $p_k$ und kommt deshalb in der Folge nicht vor. Also gibt es keine Aufzählung aller Äste. Der Ast $d$ ist dabei gerade $χ_D$ für die Menge $D$ aus dem Beweis von @cantor, wenn man $p_k$ als $χ_(f(k))$ liest.
+
+  #abbildung(slides: 1, caption: [
+    Das Diagonalargument: $d$ unterscheidet sich von jedem $p_k$ an der Stelle $k$.
+  ])[#diagonaltabelle()]<diagonalBild>
+]
+
+#bemerkung[Es gibt überabzählbar viele reelle Zahlen][
+  Reelle Zahlen haben wir nicht formal eingeführt. Mit Schulwissen können wir trotzdem folgern, dass $ℝ$ überabzählbar ist. Wir ordnen jedem Ast $(b_1, b_2, b_3, …)$ die Dezimalzahl $0","b_1 b_2 b_3 … ∈ [0,1]$ zu, die nur die Ziffern $0$ und $1$ verwendet.#footnote[Liest man die Folge dagegen als Binärzahl, so ist die Abbildung nicht injektiv, denn $0","0111…_2 = 0","1000…_2$.] Diese Abbildung ist injektiv: Unterscheiden sich zwei Äste zuerst an der Stelle $k$, so unterscheiden sich die zugehörigen Zahlen um mindestens
+  $ 10^(-k) - (10^(-k-1) + 10^(-k-2) + …) = 10^(-k) - 1/9 ⋅ 10^(-k) > 0. $
+  Also gilt $|{0,1}^(ℕ⁺)| ≤ |[0,1]|$, und wegen $[0,1] ⊆ ℝ$ auch $|{0,1}^(ℕ⁺)| ≤ |ℝ|$. Wäre $ℝ$ abzählbar, so wegen der Transitivität auch ${0,1}^(ℕ⁺)$.
+]
+
+== Exkurs: Es gibt mehr Probleme als Programme
 
 - Korollar: Es gibt nur abzählbar viele Python-Programme (ein Programm ist eine endliche Zeichenfolge).
 - Korollar: Es gibt eine Teilmenge von $ℕ$, die kein Computerprogramm aufzählt. Denn es gibt nur abzählbar viele Programme, aber überabzählbar viele Teilmengen von $ℕ$.
