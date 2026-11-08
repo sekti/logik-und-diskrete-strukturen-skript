@@ -2900,8 +2900,7 @@
 #satz[
   Sei $ℳ$ eine Menge von Mengen#footnote[Die Einschränkung auf eine beliebige Menge $ℳ$ hat wieder nur den Grund, dass es die Menge _aller_ Mengen nicht gibt.].
   + Auf $ℳ$ ist „höchstens so mächtig wie“ eine Quasiordnung.
-  + Für $A,B ∈ ℳ$ impliziert $|A| ≤ |B| ∧ |B| ≤ |A|$, dass $|A| = |B|$.
-  TODO: Hier Äquivalenz statt Implikation behaupten. Dann wird der nächste Teil einfacher.
+  + Für $A,B ∈ ℳ$ gilt $|A| = |B| ⇔ |A| ≤ |B| ∧ |B| ≤ |A|$.
   + Gleichmächtigkeit auf $ℳ$ ist eine Äquivalenzrelation.
 ]<maechtigkeitOrdnung>
 
@@ -2909,13 +2908,21 @@
   + Es sind Reflexivität und Transitivität zu zeigen.
     / Reflexivität: $id_A : A → A$ ist injektiv, also folgt $|A| ≤ |A|$.
     / Transitivität: Seien $A, B, C ∈ ℳ$ mit $|A| ≤ |B|$ und $|B| ≤ |C|$. Das heißt, es gibt injektive Funktionen $f : A → B$ und $g : B → C$. Damit ist auch $g ∘ f : A → C$ injektiv (siehe @verkettungInjSurj), also gilt $|A| ≤ |C|$.
-  + Das ist @csb in anderer Terminologie.
-  + Sei $R$ die Relation „höchstens so mächtig wie“. Die Gleichmächtigkeitsrelation ist genau $R ∩ R^(-1)$: Ist $f : A → B$ bijektiv, so sind $f$ und die Umkehrfunktion $f^(-1) : B → A$ (siehe @umkehrfunktion) injektiv, also gilt $|A| ≤ |B|$ und $|B| ≤ |A|$. Die Umkehrung ist die vorherige Aussage. Nach @uebQuasiAequivalenz ist $R ∩ R^(-1)$ eine Äquivalenzrelation.#footnote[Das lässt sich auch ohne @csb direkt zeigen: Die Identität, die Umkehrfunktion einer Bijektion und die Verkettung zweier Bijektionen sind wieder Bijektionen (siehe @umkehrfunktion und @verkettungBij).]#qedhere
+  +
+    / $⇒$: Ist $f : A → B$ bijektiv, so sind $f$ und die Umkehrfunktion $f^(-1) : B → A$ (siehe @umkehrfunktion) injektiv.
+    / $⇐$: Das ist @csb in anderer Terminologie.
+  + Sei $R$ die Relation „höchstens so mächtig wie“. Nach (2) ist die Gleichmächtigkeitsrelation genau $R ∩ R^(-1)$. Nach @uebQuasiAequivalenz ist das eine Äquivalenzrelation.#footnote[Das lässt sich auch ohne @csb direkt zeigen: Die Identität, die Umkehrfunktion einer Bijektion und die Verkettung zweier Bijektionen sind wieder Bijektionen (siehe @umkehrfunktion und @verkettungBij).]#qedhere
 ]
 
 #korollar[Die Pointe von CSB][
   Um zu zeigen, dass zwei Mengen $A$ und $B$ gleichmächtig sind, genügt es, Injektionen in beide Richtungen anzugeben.
 ]
+
+#bemerkung[Rechnen mit Mächtigkeiten][
+  Die Relationen $=$, $≤$ und $<$ zwischen Mächtigkeiten (und $≥$, $>$ in umgekehrter Richtung gelesen) vertragen sich miteinander so, wie man es von Zahlen gewohnt ist. Zum Beispiel folgt aus $|A| < |B|$ und $|B| ≤ |C|$, dass $|A| < |C|$ gilt, und man darf Mengen durch gleichmächtige Mengen ersetzen. Die Beweise ergeben sich aus der Transitivität und aus @csb, wir lassen sie weg.#footnote[Auch je zwei Mengen sind vergleichbar, d.h. es gilt $|A| ≤ |B|$ oder $|B| ≤ |A|$. Der Beweis benötigt allerdings das sogenannte Auswahlaxiom und geht über diese Vorlesung hinaus.]
+
+  Vorsicht ist dagegen beim Übergang von $⊆$ zu $≤$ geboten: Aus $A ⊊ B$ folgt $|A| ≤ |B|$, aber nicht $|A| < |B|$ (siehe @abzaehlbarBeispiele).
+]<rechnenMaechtigkeit>
 
 == Endliche Mengen
 
@@ -3064,7 +3071,7 @@
 == Cantors Diagonalargument
 
 #skript[
-  Alle unendlichen Mengen, die wir bisher untersucht haben, waren abzählbar. Gibt es überhaupt überabzählbare Mengen? Der folgende Satz zeigt, dass es zu jeder Menge eine mächtigere gibt.
+  Alle unendlichen Mengen, die wir bisher untersucht haben, waren abzählbar. Der folgende Satz impliziert, dass es auch überabzählbare Mengen gibt, weil es zu _jeder_ Menge eine mächtigere gibt.
 ]
 
 #satz[Cantor][
@@ -3072,29 +3079,31 @@
 ]<cantor>
 
 #beweis[
-  Die Funktion $M → 2^M$, $x ↦ {x}$ ist injektiv, also gilt $|M| ≤ |2^M|$. Es bleibt zu zeigen, dass es keine Bijektion $f : M → 2^M$ gibt. Wir zeigen sogar, dass keine Funktion $f : M → 2^M$ surjektiv ist.
+  Die Funktion $M → 2^M$, $x ↦ {x}$ ist injektiv, also gilt $|M| ≤ |2^M|$. Es bleibt $|M| ≠ |2^M|$ zu zeigen, dass es also keine Bijektion $f : M → 2^M$ gibt.
 
-  Sei also $f : M → 2^M$ eine Funktion. Jedem $x ∈ M$ ist eine Teilmenge $f(x) ⊆ M$ zugeordnet, und $x$ kann in $f(x)$ liegen oder nicht. Wir betrachten
+  Sei also $f : M → 2^M$ eine beliebige Funktion. Jedem $x ∈ M$ ist eine Teilmenge $f(x) ⊆ M$ zugeordnet, und $x$ kann in $f(x)$ liegen oder nicht. Wir betrachten
   $ D := {x ∈ M | x ∉ f(x)} ∈ 2^M. $
-  Angenommen, es gibt ein $y ∈ M$ mit $f(y) = D$. Nach Definition von $D$ gilt $y ∈ D$ genau dann, wenn $y ∉ f(y)$ gilt, also genau dann, wenn $y ∉ D$ gilt. Das ist ein Widerspruch. Also liegt $D$ nicht im Bild von $f$, und $f$ ist nicht surjektiv.
+  Wäre $f$ surjektiv, gäbe es $y ∈ M$ mit $f(y) = D$. Dann gilt:
+  $ y ∈ D ⇔^("Def" D) y ∉ f(y) ⇔^("Wahl von" y) y ∉ D. $
+  Das ist ein Widerspruch. Also ist $f$ nicht surjektiv, insbesondere also nicht bijektiv.
 ]
 
 #bemerkung[Verwandtschaft mit Russells Antinomie][
-  Die Menge $D$ ist nach demselben Muster gebaut wie die Menge $R = {m ∈ ℳ | m ∉ m}$ aus @mengeAllerMengen. Dort folgte ein Widerspruch in der Mengenlehre. Hier folgt nur, dass es ein $y$ mit $f(y) = D$ nicht gibt.
+  Die Menge $D$ ist nach demselben Muster gebaut wie die Menge $R = {m ∈ ℳ | m ∉ m}$ aus @mengeAllerMengen. Tatsächlich stammt die Inspiration für Russells Barierparadoxon vom Satz von Cantor.
 ]
 
 #bemerkung[Teilmengen als Funktionen][
   Sei $A$ eine Menge. Jeder Teilmenge $Y ⊆ A$ entspricht die Funktion
   $ χ_Y : A → {0,1}, quad a ↦ cases(1 & "falls" a ∈ Y, 0 & "falls" a ∉ Y). $
   Die Abbildung $2^A → {0,1}^A$, $Y ↦ χ_Y$ ist eine Bijektion. Ihre Umkehrfunktion bildet $g : A → {0,1}$ auf ${a ∈ A | g(a) = 1}$ ab. Das erklärt die Schreibweise $2^A$: Fasst man die Zahl $2$ als die Menge ${0,1}$ auf, so ist $2^A$ die Menge aller Funktionen von $A$ nach ${0,1}$ (siehe @funktionenanzahl).
-]
+]<teilmengenFunktionen>
 
 #korollar[
   Ist $M$ abzählbar unendlich, so sind $2^M$ und ${0,1}^M$ überabzählbar.
 ]<cantorKorollar>
 
 #beweis[
-  Angenommen, $2^M$ ist abzählbar, also $|2^M| ≤ |ℕ|$. Wegen $|ℕ| = |M|$ folgt mit der Transitivität aus @maechtigkeitOrdnung $|2^M| ≤ |M|$. Zusammen mit $|M| ≤ |2^M|$ folgt $|M| = |2^M|$, im Widerspruch zu @cantor. Wäre ${0,1}^M$ abzählbar, so wegen $|2^M| = |{0,1}^M|$ auch $2^M$.
+  Nach @cantor und @teilmengenFunktionen gilt $|ℕ| = |M| < |2^M| = |{0,1}^M|$. Nach @rechnenMaechtigkeit ist daher weder $|2^M| ≤ |ℕ|$ noch $|{0,1}^M| ≤ |ℕ|$.
 ]
 
 #beispiel[Ein unendlicher Baum][
