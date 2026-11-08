@@ -2919,7 +2919,7 @@
 ]
 
 #bemerkung[Rechnen mit Mächtigkeiten][
-  Die Relationen $=$, $≤$ und $<$ zwischen Mächtigkeiten (und $≥$, $>$ in umgekehrter Richtung gelesen) vertragen sich miteinander so, wie man es von Zahlen gewohnt ist. Zum Beispiel folgt aus $|A| < |B|$ und $|B| ≤ |C|$, dass $|A| < |C|$ gilt, und man darf Mengen durch gleichmächtige Mengen ersetzen. Die Beweise ergeben sich aus der Transitivität und aus @csb, wir lassen sie weg.#footnote[Auch je zwei Mengen sind vergleichbar, d.h. es gilt $|A| ≤ |B|$ oder $|B| ≤ |A|$. Der Beweis benötigt allerdings das sogenannte Auswahlaxiom und geht über diese Vorlesung hinaus.]
+  @maechtigkeitOrdnung zeigt, dass sich die Relationen $=$, $≤$ und $<$ zwischen Mächtigkeiten (und $≥$, $>$ in umgekehrter Richtung gelesen) so miteinander vertragen, wie wir das von Zahlen gewohnt sind. Zum Beispiel folgt aus $|A| < |B| ≤ |C| = |D|$ dass $|A| < |D|$ gilt.#footnote[Auch je zwei Mengen sind vergleichbar, d.h. es gilt $|A| ≤ |B|$ oder $|B| ≤ |A|$. Der Beweis benötigt allerdings das sogenannte Auswahlaxiom und geht über diese Vorlesung hinaus.]
 
   Vorsicht ist dagegen beim Übergang von $⊆$ zu $≤$ geboten: Aus $A ⊊ B$ folgt $|A| ≤ |B|$, aber nicht $|A| < |B|$ (siehe @abzaehlbarBeispiele).
 ]<rechnenMaechtigkeit>
@@ -3079,17 +3079,25 @@
 ]<cantor>
 
 #beweis[
-  Die Funktion $M → 2^M$, $x ↦ {x}$ ist injektiv, also gilt $|M| ≤ |2^M|$. Es bleibt $|M| ≠ |2^M|$ zu zeigen, dass es also keine Bijektion $f : M → 2^M$ gibt.
+  Die Funktion $M → 2^M$, $x ↦ {x}$ ist injektiv, also gilt $|M| ≤ |2^M|$. Es bleibt $|M| ≠ |2^M|$ zu zeigen, d.h. dass es keine Bijektion $f : M → 2^M$ gibt.
 
-  Sei also $f : M → 2^M$ eine beliebige Funktion. Jedem $x ∈ M$ ist eine Teilmenge $f(x) ⊆ M$ zugeordnet, und $x$ kann in $f(x)$ liegen oder nicht. Wir betrachten
+  Sei also $f : M → 2^M$ eine beliebige Funktion. Jedem $x ∈ M$ ist eine Teilmenge $f(x) ⊆ M$ zugeordnet. Wir betrachten
   $ D := {x ∈ M | x ∉ f(x)} ∈ 2^M. $
   Wäre $f$ surjektiv, gäbe es $y ∈ M$ mit $f(y) = D$. Dann gilt:
   $ y ∈ D ⇔^("Def" D) y ∉ f(y) ⇔^("Wahl von" y) y ∉ D. $
   Das ist ein Widerspruch. Also ist $f$ nicht surjektiv, insbesondere also nicht bijektiv.
 ]
 
+#bemerkung[Der Name „Diagonalargument“][
+  Wendet man den Beweis auf $M = ℕ$ an, so lässt sich eine hypothetische Bijektion $f : ℕ → 2^ℕ$ tabellarisch darstellen.
+
+  $ #scale(100%)[#diagonalbild()] $
+
+  Die Menge $D = {n ∈ ℕ | n ∉ f(n)}$ ist das Komplement der Diagonalen. Somit unterscheidet sich $D$ von jeder Zeile. Also kann $D$ nicht im Bild von $f$ liegen, im Widerspruch zur Surjektivität von $f$.
+]
+
 #bemerkung[Verwandtschaft mit Russells Antinomie][
-  Die Menge $D$ ist nach demselben Muster gebaut wie die Menge $R = {m ∈ ℳ | m ∉ m}$ aus @mengeAllerMengen. Tatsächlich stammt die Inspiration für Russells Barierparadoxon vom Satz von Cantor.
+  Die Menge $D$ ist nach demselben Muster gebaut wie die Menge $R = {m ∈ ℳ | m ∉ m}$ aus @mengeAllerMengen. Tatsächlich stammt die Inspiration für Russells Barbierparadoxon vom Satz von Cantor.
 ]
 
 #bemerkung[Teilmengen als Funktionen][
@@ -3120,16 +3128,6 @@
   *Die Menge der Äste ist überabzählbar.* Startet man bei $ε$ und geht stets zu einem der beiden Knoten der nächsten Ebene, so durchläuft man einen _Ast_
   $ ε, quad b_1, quad b_1 b_2, quad b_1 b_2 b_3, quad … $
   Er ist durch die unendliche Folge $(b_1, b_2, b_3, …) ∈ {0,1}^(ℕ⁺)$ der Abzweigungen bestimmt, und jede solche Folge beschreibt einen Ast. Nach @cantorKorollar ist ${0,1}^(ℕ⁺)$ überabzählbar. Der Baum hat also abzählbar viele Knoten, aber überabzählbar viele Äste.
-]
-
-#beispiel[Woher der Name „Diagonalargument“ kommt][
-  Für $M = ℕ⁺$ lässt sich der Beweis von @cantor in der Sprache der Äste nachvollziehen. Sei $p_1, p_2, p_3, …$ eine beliebige Folge von Ästen, und sei $p_k (i)$ die $i$-te Abzweigung von $p_k$. Wir tragen die Äste als Zeilen in eine Tabelle ein (@diagonalBild). Der Ast $d$ mit
-  $ d(k) := 1 - p_k (k) quad "für alle" k ∈ ℕ⁺ $
-  entsteht durch Umdrehen der Einträge auf der Diagonalen. Er biegt an der $k$-ten Stelle anders ab als $p_k$ und kommt deshalb in der Folge nicht vor. Also gibt es keine Aufzählung aller Äste. Der Ast $d$ ist dabei gerade $χ_D$ für die Menge $D$ aus dem Beweis von @cantor, wenn man $p_k$ als $χ_(f(k))$ liest.
-
-  #abbildung(slides: 1, caption: [
-    Das Diagonalargument: $d$ unterscheidet sich von jedem $p_k$ an der Stelle $k$.
-  ])[#diagonaltabelle()]<diagonalBild>
 ]
 
 #bemerkung[Es gibt überabzählbar viele reelle Zahlen][

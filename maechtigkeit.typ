@@ -242,26 +242,44 @@
   }
 })
 
-// Das Diagonalargument als Tabelle: Zeile k enthält den Ast p_k, die
-// Diagonaleinträge sind hinterlegt, d entsteht durch Umdrehen der Diagonale.
-#let diagonaltabelle(aeste: ((0, 1, 1, 0), (1, 1, 0, 1), (0, 0, 0, 1), (1, 0, 1, 1))) = {
-  let n = aeste.len()
-  let d = range(n).map(k => 1 - aeste.at(k).at(k))
-  let hervor(x) = text(fill: farbeA, weight: "bold", str(x))
-  table(
-    columns: n + 2,
-    stroke: none,
-    align: center,
-    inset: (x: 0.7em, y: 0.4em),
-    fill: (x, y) => if x == y and 1 <= y and y <= n { farbeA.transparentize(80%) },
-    table.vline(x: 1),
-    [], ..range(1, n + 1).map(i => [#i]), $…$,
-    table.hline(),
-    ..for k in range(n) {
-      ($p_#(k + 1)$, ..aeste.at(k).map(str), $…$)
-    },
-    $⋮$, ..range(n).map(_ => $⋮$), [],
-    table.hline(),
-    $d$, ..d.map(hervor), $…$,
-  )
+// Das Diagonalargument für eine (hypothetische) Bijektion f : ℕ → 2^ℕ. Zeile n
+// zeigt die Menge f(n), das Element i steht dabei in Spalte i. Ein "…" am Ende
+// einer Menge bedeutet, dass sie unendlich weitergeht. Die Diagonale ist
+// hinterlegt, darunter in Rot die Menge D = {n | n ∉ f(n)}.
+#let diagonalbild(
+  mengen: ((0, 2, 4, "…"), (), (1, 2, 3), (0, 5), (4, 5, "…"), (0, 1, 2, 3)),
+) = {
+  let bis = mengen.len() - 1
+  let d = range(bis + 1).filter(n => not mengen.at(n).contains(n)) + ("…",)
+
+  // Zellen einer Zeile: die Spalten 0, …, bis, dann eine Spalte für "…"
+  let zeile(m) = range(bis + 2).map(i => {
+    if i <= bis and m.contains(i) { $#i$ } else if i == bis + 1 { $…$ } else { [] }
+  })
+
+  // Feste Zellmaße, damit der Diagonalstreifen genau passt.
+  let (w0, w, h) = (2.2em, 1.4em, 1.4em)
+  let mitte(zeile, spalte) = (w0 + spalte * w + w / 2, zeile * h + h / 2)
+
+  box({
+    // Streifen hinter der Tabelle, von Zelle (0,0) bis in die Zeile ⋮ / Spalte …
+    place(top + left, line(
+      start: mitte(1, 0), end: mitte(bis + 2, bis + 1),
+      stroke: (paint: farbeA.transparentize(75%), thickness: 1.3em, cap: "round"),
+    ))
+    table(
+      columns: (w0,) + range(bis + 2).map(_ => w),
+      rows: h,
+      stroke: none,
+      align: center + horizon,
+      inset: 0pt,
+      table.vline(x: 1),
+      $n$, table.cell(colspan: bis + 2)[Elemente von $f(n)$],
+      table.hline(),
+      ..for n in range(bis + 1) { ($#n$, ..zeile(mengen.at(n))) },
+      $⋮$, ..range(bis + 2).map(_ => []),
+      table.hline(),
+      $D$, ..zeile(d),
+    )
+  })
 }
