@@ -237,7 +237,7 @@
 // Grenze zwischen dem ausformulierten Teil und den bloßen Stichpunkten
 #let stichpunktgrenze = [
   #block(above: 1.8em, below: 1.2em,line(length: 100%, stroke: 2.5pt))
-  #align(center)[Ende des lesbaren Teils (es folgen Entwurf und Stichpunkte)]
+  #align(center)[Ende des ausformulierten Teils (es folgen Entwürfe und Stichpunkte)]
   #block(above: 1.2em, below: 1.8em,line(length: 100%, stroke: 2.5pt))
 ]
 
@@ -2821,8 +2821,6 @@
   ))
   Dass es keine weiteren gibt, kann man durch Fallunterscheidung zeigen (Gibt es einen Knoten von Grad 0? Gibt es einen Knoten von Grad 3?).
 ]
-
-#stichpunktgrenze
 ]
 
 #if zeige(6) [
@@ -3134,6 +3132,7 @@
   Ein Programm _entscheidet_ eine Menge $L ⊆ ℕ$, wenn es bei jeder Eingabe $n ∈ ℕ$ anhält und genau dann „ja“ ausgibt, wenn $n ∈ L$ gilt. Jedes Programm entscheidet höchstens eine Menge.
   Weil es überabzählbar viele Teilmengen von $ℕ$ gibt, muss es eine Menge $L ⊆ ℕ$ geben, die kein Programm entscheidet, d.h. _unentscheidbare Probleme_.#footnote[Dieses Argument liefert kein konkretes unentscheidbares Problem. Dass es auch _interessante_ unentscheidbare Probleme gibt, etwa das Halteproblem, ist Inhalt einer späteren Vorlesung über Formale Sprachen und Berechenbarkeit. Auch dort ist ein Diagonalargument der Kern des Beweises.]
 ]
+#stichpunktgrenze
 ]
 
 #if zeige(7) [
