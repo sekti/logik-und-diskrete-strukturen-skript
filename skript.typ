@@ -2004,7 +2004,7 @@
   $ f : {1,…,n} → A, quad i ↦ a_i. $
   Für $n = 0$ ergibt sich die leere Folge $()$. Eine unendliche Folge $(a₁,a₂,…)$ mit Folgengliedern aus $A$ ist eine Funktion
   $ f : ℕ⁺ → A, quad i ↦ a_i. $
-]
+]<folgenAlsFunktionen>
 
 === Injektiv, surjektiv, bijektiv
 
@@ -3035,7 +3035,7 @@
 
 #uebung[Abzählbar unendliche Mengen][
   #set enum(numbering: "(1)")
-  Argumentieren Sie, dass die folgenden Mengen abzählbar unendlich sind.#footnote[Die Lösung wird Beweisideen geben, aber nicht haarklein ausformulieren.]
+  Argumentieren Sie, dass die folgenden Mengen abzählbar unendlich sind.#footnote[Die Lösung wird Beweisideen angeben, aber nicht haarklein ausformulieren.]
   + $ℕ ∪ {-1}$,
   + $ℤ$,
   + $ℕ × ℕ$,
@@ -3088,10 +3088,10 @@
   Das ist ein Widerspruch. Also ist $f$ nicht surjektiv, insbesondere also nicht bijektiv.
 ]
 
-#bemerkung[Der Name „Diagonalargument“][
+#bemerkung(slides: 1)[Der Name „Diagonalargument“][
   Wendet man den Beweis auf $M = ℕ$ an, so lässt sich eine hypothetische Bijektion $f : ℕ → 2^ℕ$ tabellarisch darstellen.
 
-  $ #scale(100%)[#diagonalbild()] $
+  $ #diagonalbild() $
 
   Die Menge $D = {n ∈ ℕ | n ∉ f(n)}$ ist das Komplement der Diagonalen. Somit unterscheidet sich $D$ von jeder Zeile. Also kann $D$ nicht im Bild von $f$ liegen, im Widerspruch zur Surjektivität von $f$.
 ]
@@ -3100,47 +3100,40 @@
   Die Menge $D$ ist nach demselben Muster gebaut wie die Menge $R = {m ∈ ℳ | m ∉ m}$ aus @mengeAllerMengen. Tatsächlich stammt die Inspiration für Russells Barbierparadoxon vom Satz von Cantor.
 ]
 
-#bemerkung[Teilmengen als Funktionen][
-  Sei $A$ eine Menge. Jeder Teilmenge $Y ⊆ A$ entspricht die Funktion
-  $ χ_Y : A → {0,1}, quad a ↦ cases(1 & "falls" a ∈ Y, 0 & "falls" a ∉ Y). $
-  Die Abbildung $2^A → {0,1}^A$, $Y ↦ χ_Y$ ist eine Bijektion. Ihre Umkehrfunktion bildet $g : A → {0,1}$ auf ${a ∈ A | g(a) = 1}$ ab. Das erklärt die Schreibweise $2^A$: Fasst man die Zahl $2$ als die Menge ${0,1}$ auf, so ist $2^A$ die Menge aller Funktionen von $A$ nach ${0,1}$ (siehe @funktionenanzahl).
+#satz[
+  Für jede Menge $A$ gilt $|2^A| = |{0,1}^A|$.
 ]<teilmengenFunktionen>
 
-#korollar[
-  Ist $M$ abzählbar unendlich, so sind $2^M$ und ${0,1}^M$ überabzählbar.
-]<cantorKorollar>
-
 #beweis[
-  Nach @cantor und @teilmengenFunktionen gilt $|ℕ| = |M| < |2^M| = |{0,1}^M|$. Nach @rechnenMaechtigkeit ist daher weder $|2^M| ≤ |ℕ|$ noch $|{0,1}^M| ≤ |ℕ|$.
+  Wir konstruieren eine Bijektion $f: 2^A → {0,1}^A$ (also von der Potenzmenge von $A$ zur Menge der Funktionen von $A$ nach ${0,1}$). Für $Y ⊆ A$ ist $f(Y)$ die *charakteristische Funktion* $χ_Y$ von $Y$:
+  $ χ_Y : A → {0,1}, quad a ↦ cases(1 & "falls" a ∈ Y, 0 & "falls" a ∉ Y.) $
+  Zur Injektivität: Sind $Y, Y' ⊆ A$ verschieden, so gibt es ein $a ∈ A$, das in genau einer der beiden Mengen liegt, und dann gilt $χ_Y (a) ≠ χ_(Y') (a)$, also $χ_Y ≠ χ_(Y')$.\
+  Zur Surjektivität: Zu $g : A → {0,1}$ setzen wir $Y := {a ∈ A | g(a) = 1}$, dann gilt $f(Y) = χ_Y = g$.
 ]
 
-#beispiel[Ein unendlicher Baum][
-  Wir schreiben $ε$ für das leere Wort $()$ und lassen wie in @wortmenge Klammern und Kommas weg. Für ein Wort $w ∈ {0,1}^*$ und $b ∈ {0,1}$ sei $w b$ das Wort, das durch Anhängen von $b$ an $w$ entsteht. Wir betrachten den unendlichen Graphen $T := ({0,1}^*, E)$ mit
-  $ E := {{w, w b} | w ∈ {0,1}^*, b ∈ {0,1}}. $
-  Jeder Knoten $w$ ist also mit den beiden Knoten $w 0$ und $w 1$ der nächsten Ebene verbunden (@baumBild).
+#bemerkung[Unendliche Binärfolgen][
+  Eine Funktion $g : ℕ → {0,1}$ lässt sich als unendliche Folge $(g(0), g(1), g(2), …)$ auffassen (siehe @folgenAlsFunktionen). Somit ist ${0,1}^ℕ$ die Menge der unendlichen Binärfolgen.
+]
+
+#beispiel[Unendliche und endliche Folgen][
+  Die Menge ${0,1}^*$ der endlichen Binärfolgen ist abzählbar, denn sie ist eine Teilmenge von $ℕ^*$ (siehe @abzaehlbarBeispiele). Die Menge ${0,1}^ℕ$ der unendlichen Binärfolgen ist dagegen überabzählbar, denn nach @cantor und @teilmengenFunktionen gilt $|ℕ| < |2^ℕ| = |{0,1}^ℕ|$. Es gibt also mehr unendliche als endliche Binärfolgen. Wir formulieren diese Einsicht nochmal mithilfe eines unendlichen Graphen $G = (V,E)$ mit $ V = {0,1}^* "und" E := {{w, w b} | w ∈ V, b ∈ {0,1}}. $
+  In der Visualisierung in @baumBild entspricht jeder Knoten der endlichen Folge der Kantenbeschriftungen auf dem Weg von der Wurzel (dem obersten Knoten) zu ihm. Ein _Ast_ ist ein Weg, der an der Wurzel beginnt und unendlich nach unten weiterläuft. Er entspricht der unendlichen Folge seiner Kantenbeschriftungen, die Menge der Äste entspricht also ${0,1}^ℕ$. Der Baum hat damit abzählbar viele Knoten, aber überabzählbar viele Äste.
 
   #abbildung(slides: 1, caption: [
-    Die ersten Ebenen des Baumes $T$. Unter jedem Knoten steht grau seine Nummer bei ebenenweiser Aufzählung. Fett: der Anfang des Astes $(0,1,1,0,…)$.
+    Die ersten Ebenen des Baumes der Binärfolgen. Der rote Knoten entspricht der Folge $(1,0)$, die Wurzel der leeren Folge $()$. Fett ist der Anfang des Astes zur Folge $(0,1,1,0,…)$.
   ])[#binaerbaum()]<baumBild>
-
-  *Die Knotenmenge ist abzählbar unendlich.* Wir nummerieren die Knoten Ebene für Ebene von links nach rechts. Formal ordnen wir dem Wort $w$ die Zahl mit der Binärdarstellung $1 w$ minus $1$ zu, zum Beispiel $01 ↦ 101_2 - 1 = 4$. Das ist eine Bijektion ${0,1}^* → ℕ$.
-
-  *Die Menge der Äste ist überabzählbar.* Startet man bei $ε$ und geht stets zu einem der beiden Knoten der nächsten Ebene, so durchläuft man einen _Ast_
-  $ ε, quad b_1, quad b_1 b_2, quad b_1 b_2 b_3, quad … $
-  Er ist durch die unendliche Folge $(b_1, b_2, b_3, …) ∈ {0,1}^(ℕ⁺)$ der Abzweigungen bestimmt, und jede solche Folge beschreibt einen Ast. Nach @cantorKorollar ist ${0,1}^(ℕ⁺)$ überabzählbar. Der Baum hat also abzählbar viele Knoten, aber überabzählbar viele Äste.
 ]
 
 #bemerkung[Es gibt überabzählbar viele reelle Zahlen][
-  Reelle Zahlen haben wir nicht formal eingeführt. Mit Schulwissen können wir trotzdem folgern, dass $ℝ$ überabzählbar ist. Wir ordnen jedem Ast $(b_1, b_2, b_3, …)$ die Dezimalzahl $0","b_1 b_2 b_3 … ∈ [0,1]$ zu, die nur die Ziffern $0$ und $1$ verwendet.#footnote[Liest man die Folge dagegen als Binärzahl, so ist die Abbildung nicht injektiv, denn $0","0111…_2 = 0","1000…_2$.] Diese Abbildung ist injektiv: Unterscheiden sich zwei Äste zuerst an der Stelle $k$, so unterscheiden sich die zugehörigen Zahlen um mindestens
-  $ 10^(-k) - (10^(-k-1) + 10^(-k-2) + …) = 10^(-k) - 1/9 ⋅ 10^(-k) > 0. $
-  Also gilt $|{0,1}^(ℕ⁺)| ≤ |[0,1]|$, und wegen $[0,1] ⊆ ℝ$ auch $|{0,1}^(ℕ⁺)| ≤ |ℝ|$. Wäre $ℝ$ abzählbar, so wegen der Transitivität auch ${0,1}^(ℕ⁺)$.
+  Reelle Zahlen haben wir nicht formal eingeführt. Mit Schulwissen können wir trotzdem folgern, dass $ℝ$ überabzählbar ist. Wir ordnen jeder unendlichen Binärfolge $(b_0, b_1, b_2, …)$ die Dezimalzahl $0","b_0 b_1 b_2 … ∈ [0,1]$ zu, die nur die Ziffern $0$ und $1$ verwendet. Diese Abbildung ist injektiv: Verschiedene Folgen führen zu verschiedenen Zahlen.#footnote[Mit Ziffernfolgen aus ${0,…,9}$ wäre das falsch, denn die Ziffernfolgen 0,09999… und 0,10000… sind verschieden, bedeuten aber dieselbe Zahl.] Also gilt $|{0,1}^ℕ| ≤ |[0,1]|$, und wegen $[0,1] ⊆ ℝ$ auch $|{0,1}^ℕ| ≤ |ℝ|$. Da ${0,1}^ℕ$ überabzählbar ist, ist es auch $ℝ$. Tatsächlich gilt $|2^ℕ| = |ℝ|$.
 ]
 
-== Exkurs: Es gibt mehr Probleme als Programme
+#bemerkung[Ausblick: Mehr Probleme als Programme][
+  Ein Programm ist eine endliche Folge von Bits in diesem Sinne ein Element von ${0,1}^*$. Nach @abzaehlbarBeispiele gibt es also nur abzählbar viele Programme.
 
-- Korollar: Es gibt nur abzählbar viele Python-Programme (ein Programm ist eine endliche Zeichenfolge).
-- Korollar: Es gibt eine Teilmenge von $ℕ$, die kein Computerprogramm aufzählt. Denn es gibt nur abzählbar viele Programme, aber überabzählbar viele Teilmengen von $ℕ$.
-  - Ausblick: Es gibt also unentscheidbare _Probleme_, das heißt solche, die von keinem Algorithmus gelöst werden. Dass es _interessante_ unentscheidbare Probleme gibt (etwa das Halteproblem), ist Inhalt einer zukünftigen Vorlesung über Formale Sprachen und Berechenbarkeit.
+  Ein Programm _entscheidet_ eine Menge $L ⊆ ℕ$, wenn es bei jeder Eingabe $n ∈ ℕ$ anhält und genau dann „ja“ ausgibt, wenn $n ∈ L$ gilt. Jedes Programm entscheidet höchstens eine Menge.
+  Weil es überabzählbar viele Teilmengen von $ℕ$ gibt, muss es eine Menge $L ⊆ ℕ$ geben, die kein Programm entscheidet, d.h. _unentscheidbare Probleme_.#footnote[Dieses Argument liefert kein konkretes unentscheidbares Problem. Dass es auch _interessante_ unentscheidbare Probleme gibt, etwa das Halteproblem, ist Inhalt einer späteren Vorlesung über Formale Sprachen und Berechenbarkeit. Auch dort ist ein Diagonalargument der Kern des Beweises.]
+]
 ]
 
 #if zeige(7) [

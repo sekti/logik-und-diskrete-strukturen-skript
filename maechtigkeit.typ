@@ -198,45 +198,50 @@
   content(((bis + 1) * w, yu), $…$)
 })
 
-// Der unendliche Baum T mit Knotenmenge {0,1}^*, bis zur Tiefe `tiefe`. Jeder
-// Knoten ist mit seinem Wort beschriftet, darunter grau seine Nummer bei
-// ebenenweiser Aufzählung. Der Ast `ast` (mindestens tiefe + 1 Einträge) ist fett.
-#let binaerbaum(tiefe: 3, ast: (0, 1, 1, 0)) = canvas(length: 1em, {
+// Der unendliche Baum der Binärfolgen bis zur Tiefe `tiefe`. Knoten sind
+// unbeschriftete Punkte, Kanten nach links mit 0, nach rechts mit 1 beschriftet.
+// Der Knoten zur Folge `markiert` ist hervorgehoben, der Ast `ast` (mindestens
+// tiefe + 1 Einträge, der letzte für die angedeutete Fortsetzung) ist fett.
+#let binaerbaum(tiefe: 3, markiert: (1, 0), ast: (0, 1, 1, 0)) = canvas(length: 1em, {
   import draw: *
 
-  let s = 2.6   // Abstand der Blätter
-  let h = 3.4   // Abstand der Ebenen
+  let s = 2.2   // Abstand der Blätter
+  let h = 2.6   // Abstand der Ebenen
   let breite = calc.pow(2, tiefe) * s
   let pos(k, j) = ((j + 0.5) * breite / calc.pow(2, k), -k * h)
-  let grau = luma(55%)
-  let normal = (paint: luma(40%), thickness: 0.6pt)
-  let fett = (paint: black, thickness: 1.6pt)
-
+  let stil = (paint: luma(30%), thickness: 0.7pt)
+  let fett = (paint: black, thickness: 1.8pt)
+  let mj = markiert.fold(0, (j, b) => 2 * j + b)
   // Index des Ast-Knotens in Tiefe k
-  let astj(k) = range(k).fold(0, (j, i) => 2 * j + ast.at(i))
-  let wort(k, j) = if k == 0 { $ε$ } else {
-    let b = str(j, base: 2)
-    $#("0" * (k - b.len()) + b)$
-  }
+  let astj(k) = ast.slice(0, k).fold(0, (j, b) => 2 * j + b)
 
   for k in range(tiefe + 1) {
     for j in range(calc.pow(2, k)) {
       let (x, y) = pos(k, j)
-      content((x, y), wort(k, j))
-      content((x, y - 1.0), text(fill: grau, str(calc.pow(2, k) - 1 + j)))
-      let aufAst = astj(k) == j
       for b in (0, 1) {
-        let istAst = aufAst and ast.at(k) == b
+        let aufAst = astj(k) == j and ast.at(k) == b
         if k < tiefe {
           let (x2, y2) = pos(k + 1, 2 * j + b)
-          line((x + (x2 - x) * 0.2, y - 1.5), (x2, y2 + 0.55),
-            stroke: if istAst { fett } else { normal })
+          line((x, y), (x2, y2), stroke: if aufAst { fett } else { stil })
+          // Beschriftung neben der Kantenmitte, senkrecht zur Kante nach außen
+          let (a, len) = (calc.abs(x2 - x), calc.sqrt((x2 - x) * (x2 - x) + h * h))
+          let (nx, ny) = ((2 * b - 1) * h / len, a / len)
+          content(((x + x2) / 2 + 0.5 * nx, (y + y2) / 2 + 0.5 * ny), $#b$)
         } else {
           // angedeutete Fortsetzung
-          let dx = (2 * b - 1) * s / 4
-          line((x, y - 1.5), (x + dx, y - 2.6),
-            stroke: (..(if istAst { fett } else { normal }), dash: "dotted"))
+          line((x, y), (x + (2 * b - 1) * s / 4, y - 0.45 * h),
+            stroke: (..(if aufAst { fett } else { stil }), dash: "dotted"))
         }
+      }
+    }
+  }
+  // Knoten zuletzt, damit sie über den Kanten liegen
+  for k in range(tiefe + 1) {
+    for j in range(calc.pow(2, k)) {
+      if k == markiert.len() and j == mj {
+        circle(pos(k, j), radius: 0.22, fill: farbeA, stroke: none)
+      } else {
+        circle(pos(k, j), radius: 0.15, fill: black, stroke: none)
       }
     }
   }
