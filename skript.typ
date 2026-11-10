@@ -4,7 +4,7 @@
 // Nur ein Kapitel setzen, z.B. 5 (im Editor deutlich schneller); none = alles.
 // Lange Kapitel sind in Teile gespalten: 5.2 setzt nur Teil 2 von Kapitel 5.
 // Auf der Kommandozeile hat „--input kapitel=5“ (oder 5.2) bzw. „--input kapitel=alle“ Vorrang.
-#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { sys.inputs.kapitel } } else { 6 }
+#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { sys.inputs.kapitel } } else { 5 }
 
 // imports
   #import "@preview/ctheorems:2.0.0": *
@@ -2072,6 +2072,7 @@
   #set enum(numbering: "(1)")
   Sei $f : X → Y$ eine Funktion. Dann sind äquivalent:
   + $f$ ist surjektiv,
+  + $∀y ∈ Y: ∃x ∈ X: f(x) = y$,
   + $Y ⊆ f(X)$,
   + $Y = f(X)$.
 ]<surjkompakt>
@@ -2101,7 +2102,7 @@
 #beweis[
   #set enum(numbering: "(1)")
   + Wir rechnen die Bedingung aus @injdef für $g ∘ f$ nach. Seien $x,x' ∈ X$ mit $(g ∘ f)(x) = (g ∘ f)(x')$, also $g(f(x)) = g(f(x'))$. Weil $g$ injektiv ist, folgt $f(x) = f(x')$, und weil $f$ injektiv ist, folgt $x = x'$.
-  + Wir rechnen die Rechtstotalität von $g ∘ f$ nach. Sei $z ∈ Z$. Weil $g$ surjektiv ist, gibt es ein $y ∈ Y$ mit $g(y) = z$. Weil $f$ surjektiv ist, gibt es ein $x ∈ X$ mit $f(x) = y$. Damit gilt $(g ∘ f)(x) = g(f(x)) = g(y) = z$.#qedhere
+  + Wir arbeiten mit der Formulierung von Surjektivität aus @surjkompakt (2). Sei $z ∈ Z$. Wir müssen ein $x ∈ X$ finden mit $(g ∘ f)(x) = z$. Weil $g$ surjektiv ist, gibt es ein $y ∈ Y$ mit $g(y) = z$. Weil $f$ surjektiv ist, gibt es ein $x ∈ X$ mit $f(x) = y$. Damit gilt $(g ∘ f)(x) = g(f(x)) = g(y) = z$.#qedhere
 ]
 
 #korollar[
@@ -2147,7 +2148,7 @@
 
 === Die Umkehrfunktion
 
-#definition("Umkehrrelation", kurz: $R^(-1)$)[
+#definition[Umkehrrelation][
   Sei $R ⊆ X × Y$ eine binäre Relation. Die *Umkehrrelation* ist
   $ R^(-1) := {(y,x) | (x,y) ∈ R} ⊆ Y × X. $
 ]
@@ -2172,13 +2173,23 @@
   $ id_X : X → X, quad x ↦ x. $
 ]
 
-#notation("Umkehrfunktion", kurz: $f^(-1)$)[
-  Ist $f: X → Y$ bijektiv, so heißt die Funktion $f^(-1): Y → X$ die *Umkehrfunktion* von $f$. Es gilt
-  $ f^(-1) ∘ f = id_X quad "und" quad f ∘ f^(-1) = id_Y. $
+#notation[Umkehrfunktion][
+  Ist $f: X → Y$ bijektiv, so heißt die Funktion $f^(-1): Y → X$ die *Umkehrfunktion* von $f$.
+]
+#satz[
+  Ist $f : X → Y$ bijektiv so gilt $ f^(-1) ∘ f = id_X quad "und" quad f ∘ f^(-1) = id_Y. $
+]
+#beweis[
+  Wir zeigen nur $f^(-1) ∘ f = id_X$, die andere folgt analog). Sei dafür $x ∈ X$ beliebig. Sei $y := f(x)$. Dann folgt
+  $ y = f(x) ⇒ (x,y) ∈ f ⇒ (y,x) ∈ f^(-1) ⇒ f^(-1)(y) = x. $
+  Damit folgt $(f^(-1) ∘ f)(x) = f^(-1)(f(x)) = f^(-1)(y) = x = id_(X)(x)$. Weil $f^(-1) ∘ f$ und $id_X$ auf dem gesamten Definitionsbereich übereinstimmen, sind sie gleich.
 ]
 
-#bemerkung[
-  Die Schreibweise $f^(-1)$ wird in zwei Bedeutungen benutzt: für das Urbild $f^(-1)(B)$ einer _Menge_ $B ⊆ Y$ und für die Umkehrfunktion. Das Urbild gibt es für jede Funktion, die Umkehrfunktion nur für bijektive. Welche Bedeutung gemeint ist, erkennt man am Argument.
+#bemerkung(slides: "titel")[Notationskonflikt?][
+  Wir haben nun zwei Notationen in der $f^(-1)$ vorkommt. Für $B ⊆ Y$ sind definiert:
+  + $f^(-1)(B)$, das Urbild von $B$ unter $f$.
+  + $f^(-1)(B)$, das Bild von $B$ unter der Umkehrfunktion $f^(-1)$.
+  Falls $f$ bijektiv ist, so sind beide Interpretationen sinnvoll. Zum Glück führen in diesem Fall beide zum selben Ergebnis.
 ]
 
 === Funktionen höherer Ordnung
@@ -2187,7 +2198,7 @@
   Es ist möglich, dass Funktionen andere Funktionen als Argument bekommen oder als Wert liefern. Solche Funktionen heißen *Funktionen höherer Ordnung*; in der Programmierung ist das nicht selten.
 ]
 
-#beispiel(slides: "titel")[Eine Funktion verdoppeln][
+#beispiel(slides: 1)[Eine Funktion verdoppeln][
   Die Funktion
   $ "doppelt": (ℕ → ℕ) → (ℕ → ℕ), quad g ↦ (n ↦ 2 ⋅ g(n)) $
   nimmt eine Funktion entgegen und liefert eine Funktion. Ist etwa $g$ die Funktion $n ↦ n²$, so ist $"doppelt"(g)$ die Funktion $n ↦ 2 ⋅ n²$.
@@ -2196,11 +2207,13 @@
   ```ts
   const doppelt =
     (g: (n: number) => number) =>
-    (n: number) => 2 * g(n);
+    ((n: number) => 2 * g(n));
+  const quadrat = (n: number) => n * n;
+  doppelt(quadrat)(7)   // 98
   ```
 ]
 
-#beispiel(slides: "titel")[Filtern][
+#beispiel(slides: 1)[Filtern][
   Die Funktion
   $ "filter": & (2^ℕ × (ℕ → {"wahr", "falsch"})) → 2^ℕ,\
               & (M,f) ↦ {x ∈ M | f(x) = "wahr" } $
@@ -2217,13 +2230,13 @@
 == Relationen auf einer Menge
 <relationenAufEinerMenge>
 
-#notation("Infixschreibweise", kurz: $a R b$)[
-  Ist $R ⊆ X × Y$ eine binäre Relation, so schreiben wir statt $(a,b) ∈ R$ auch $a R b$, zum Beispiel $3 ≤ 5$ statt $(3,5) ∈ "≤"$.
-]
-
 #definition[Relation auf _einer_ Menge][
   Ist $A$ eine Menge und $R ⊆ A × A$ eine binäre Relation, so nennen wir $R$ eine *Relation auf $A$*.
 ]<relationAufA>
+
+#notation("Infixschreibweise", kurz: $a R b$)[
+  Ist $R$ eine Relation auf $A$, so schreiben wir statt $(a,b) ∈ R$ auch $a R b$, zum Beispiel $3 ≤ 5$ statt $(3,5) ∈ "≤"$.
+]
 
 #beispiel[
   Einige Relationen auf einer Menge kennen wir bereits.
@@ -2244,7 +2257,7 @@
 ]<bspRelationen>
 
 #bemerkung[Ist „$=$“ eine Relation?][
-  Für jede Menge $A$ ist die Gleichheit auf $A$ die Relation ${(a,a) | a ∈ A} ⊆ A × A$.
+  Für jede Menge $A$ ist die Gleichheit auf $A$ die Relation $id_A = {(a,a) | a ∈ A} ⊆ A × A$.
 
   Eine Gleichheit „an sich“ für beliebige Objekte ist keine Relation in unserem Sinne: Die Gesamtheit aller Paare $(a,a)$ für beliebige Objekte $a$ ist keine Menge. Siehe @mengeAllerMengen. Ähnliches gilt für „$∈$“ und „$⊆$“.
 ]
@@ -2286,7 +2299,7 @@
 ]
 
 #beobachtung[Eigenschaften im Bild][
-  Ist $E$ eine Relation auf $V$, so ist $G = (V,E)$ ein gerichteter Graph (potentiell mit Schlingen) und umgekehrt (in beiden Fällen ist nur $E ⊆ V × V$ gefordert).#footnote[Man spricht daher auch von der _Kantenrelation_ eines Graphen.]
+  Ist $E$ eine Relation auf einer (endlichen, nichtleeren) Menge $V$, so ist $G = (V,E)$ ein gerichteter Graph (potentiell mit Schlingen) und umgekehrt (in beiden Fällen ist nur $E ⊆ V × V$ gefordert).#footnote[Man spricht daher auch von der _Kantenrelation_ eines Graphen.]
 ]
 
 #uebung[Relationseigenschaften graphisch][
@@ -2310,7 +2323,7 @@
 ]
 
 #loesung[
-  Wir können ungerichtete Graphen als gerichteten Graphen auffassen, wobei eine Kante ${u,v}$ den gerichteten Kanten $(u,v)$ und $(v,u)$ entspricht. Die Kantenrelation ist also notwendig symmetrisch. Weil wir keine Schlingen zugelassen haben, ist sie außerdem irreflexiv. Ungerichtete Graphen mit Knotenmenge $V$ entsprechen also genau den irreflexiven, symmetrischen Relationen auf $V$.
+  Wir können ungerichtete Graphen als gerichtete Graphen auffassen, wobei eine Kante ${u,v}$ den gerichteten Kanten $(u,v)$ und $(v,u)$ entspricht. Die Kantenrelation ist also notwendig symmetrisch. Weil wir keine Schlingen zugelassen haben, ist sie außerdem irreflexiv. Ungerichtete Graphen mit Knotenmenge $V$ entsprechen also genau den irreflexiven, symmetrischen Relationen auf $V$.
 ]
 ]
 
