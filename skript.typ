@@ -16,6 +16,7 @@
   #import "@preview/cetz:0.4.2" as cetz
   #import "@preview/ratchet:0.0.4": *
 
+
 // Styling
   #set text(size: 12pt, lang: "de", costs: (hyphenation: 50%))
   #show: thm-rules.with(qed-symbol: $square$)
@@ -2177,16 +2178,16 @@
   Ist $f: X → Y$ bijektiv, so heißt die Funktion $f^(-1): Y → X$ die *Umkehrfunktion* von $f$.
 ]
 #satz[
-  Ist $f : X → Y$ bijektiv so gilt $ f^(-1) ∘ f = id_X quad "und" quad f ∘ f^(-1) = id_Y. $
+  Ist $f : X → Y$ bijektiv, so gilt $ f^(-1) ∘ f = id_X quad "und" quad f ∘ f^(-1) = id_Y. $
 ]
 #beweis[
-  Wir zeigen nur $f^(-1) ∘ f = id_X$, die andere folgt analog). Sei dafür $x ∈ X$ beliebig. Sei $y := f(x)$. Dann folgt
+  Wir zeigen nur $f^(-1) ∘ f = id_X$ (die andere Gleichung folgt analog). Sei dafür $x ∈ X$ beliebig. Sei $y := f(x)$. Dann folgt
   $ y = f(x) ⇒ (x,y) ∈ f ⇒ (y,x) ∈ f^(-1) ⇒ f^(-1)(y) = x. $
   Damit folgt $(f^(-1) ∘ f)(x) = f^(-1)(f(x)) = f^(-1)(y) = x = id_(X)(x)$. Weil $f^(-1) ∘ f$ und $id_X$ auf dem gesamten Definitionsbereich übereinstimmen, sind sie gleich.
 ]
 
 #bemerkung(slides: "titel")[Notationskonflikt?][
-  Wir haben nun zwei Notationen in der $f^(-1)$ vorkommt. Für $B ⊆ Y$ sind definiert:
+  Wir haben nun zwei Notationen, in denen $f^(-1)$ vorkommt. Für $B ⊆ Y$ sind definiert:
   + $f^(-1)(B)$, das Urbild von $B$ unter $f$.
   + $f^(-1)(B)$, das Bild von $B$ unter der Umkehrfunktion $f^(-1)$.
   Falls $f$ bijektiv ist, so sind beide Interpretationen sinnvoll. Zum Glück führen in diesem Fall beide zum selben Ergebnis.
@@ -2234,12 +2235,11 @@
   Ist $A$ eine Menge und $R ⊆ A × A$ eine binäre Relation, so nennen wir $R$ eine *Relation auf $A$*.
 ]<relationAufA>
 
-#notation("Infixschreibweise", kurz: $a R b$)[
+#notation[Infixschreibweise][
   Ist $R$ eine Relation auf $A$, so schreiben wir statt $(a,b) ∈ R$ auch $a R b$, zum Beispiel $3 ≤ 5$ statt $(3,5) ∈ "≤"$.
 ]
 
-#beispiel[
-  Einige Relationen auf einer Menge kennen wir bereits.
+#beispiel(slides: "titel")[Relationen auf einer Menge die wir schon kennen][
   #table(
     columns: 4,
     column-gutter: 0.8em,
@@ -2256,7 +2256,7 @@
   $ a divides b defiff ∃k ∈ ℕ: a⋅k = b. $
 ]<bspRelationen>
 
-#bemerkung[Ist „$=$“ eine Relation?][
+#bemerkung(slides: "titel")[Ist „$=$“ eine Relation?][
   Für jede Menge $A$ ist die Gleichheit auf $A$ die Relation $id_A = {(a,a) | a ∈ A} ⊆ A × A$.
 
   Eine Gleichheit „an sich“ für beliebige Objekte ist keine Relation in unserem Sinne: Die Gesamtheit aller Paare $(a,a)$ für beliebige Objekte $a$ ist keine Menge. Siehe @mengeAllerMengen. Ähnliches gilt für „$∈$“ und „$⊆$“.
@@ -2277,7 +2277,7 @@
 ]<relationseigenschaftenA>
 
 #uebung[
-  Betrachten Sie die Relationen aus @bspRelationen und darüber hinaus die Relation $V$ auf der Menge der Menschen, wobei $m₁ V m₂$ genau dann gelte, wenn $m₁$ ein Elternteil oder ein Kind von $m₂$ ist.
+  Betrachten Sie die Relationen aus @bspRelationen und darüber hinaus die *Disjunktheitsrelation* $D$ auf $2^ℕ$, definiert durch $M₁ D M₂ defiff M₁ ∩ M₂ = ∅$.
 
   Stellen Sie tabellarisch dar, welche der Relationen welche Eigenschaften aus @relationseigenschaftenA haben.
 ]<uebEigenschaften>
@@ -2294,11 +2294,15 @@
     [$≤$ auf $ℤ$], [✓], [–], [–], [✓], [✓], [✓],
     [$=$ auf $ℕ$], [✓], [–], [✓], [✓], [✓], [–],
     [$⊆$ auf $2^({1,…,9})$], [✓], [–], [–], [✓], [✓], [–],
-    [$V$ auf Menschen], [–], [✓], [✓], [–], [–], [–],
+    [$D$ auf $2^ℕ$], [–], [–], [✓], [–], [–], [–],
   )))
 ]
 
-#beobachtung[Eigenschaften im Bild][
+#bemerkung(slides: "titel")[Vermeintliche Gegenteile][
+  An @uebEigenschaften sieht man, dass die Eigenschaften _reflexiv_ und _irreflexiv_ nicht Gegenteile voneinander sind. Die Eigenschaften können gleichzeitig vorliegen oder gleichzeitig nicht vorliegen. Dasselbe gilt für _symmetrisch_ und _antisymmetrisch_.
+]
+
+#beobachtung[Gerichtete Graphen sind Relationen][
   Ist $E$ eine Relation auf einer (endlichen, nichtleeren) Menge $V$, so ist $G = (V,E)$ ein gerichteter Graph (potentiell mit Schlingen) und umgekehrt (in beiden Fällen ist nur $E ⊆ V × V$ gefordert).#footnote[Man spricht daher auch von der _Kantenrelation_ eines Graphen.]
 ]
 
