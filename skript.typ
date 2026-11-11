@@ -2544,7 +2544,7 @@
   Die Wörter `Apfel` und `aPFEl` sind gleich _bis auf_ Groß- und Kleinschreibung. Für eine Suchfunktion ist das relevant: Suchen Sie nach `Apfel`, so sollte die Suche auch `aPFEl` finden; beide Wörter sind _äquivalent_. Der _Repräsentant_ `Apfel` steht stellvertretend für eine Menge von Wörtern -- seine _Äquivalenzklasse_.
 ]<bspGleichBisAuf>
 
-#definition("Äquivalenzrelation", kurz: [reflexiv, symmetrisch, transitiv])[
+#definition[Äquivalenzrelation][
   Sei $A$ eine Menge. Eine Relation $~$ auf $A$ heißt *Äquivalenzrelation*, wenn sie reflexiv, symmetrisch und transitiv ist (siehe @relationseigenschaftenA).
 ]<aequivalenzrelation>
 
@@ -2651,8 +2651,6 @@
   + Ist $𝒵$ eine Partition von $A$, so ist
     $ a ≡_𝒵 b defiff ∃Z ∈ 𝒵: a ∈ Z ∧ b ∈ Z $
     eine Äquivalenzrelation auf $A$.
-  + Die beiden Konstruktionen machen einander rückgängig. Formal gilt $quot(A, ≡_𝒵) = 𝒵$, und die Relation $≡_(quot(A, ~))$ stimmt mit $~$ überein.
-  //Die Äquivalenzklassen von $≡_𝒵$ sind genau die Teile von $𝒵$, und die Partition $quot(A, ~)$ liefert über (2) wieder die Relation $~$.
 ]<partitionAequivalenz>
 
 #beweis[
@@ -2662,8 +2660,18 @@
     $ a ≡_𝒵 b &defiff ∃Z ∈ 𝒵: a ∈ Z ∧ b ∈ Z && #weil[$x ∈ Z ⇔ Z = Z_x$] \
               &⇔ ∃Z ∈ 𝒵: Z = Z_a ∧ Z = Z_b \
               &⇔ Z_a = Z_b. $
-    Im letzten Schritt folgt „$⇒$“ aus $Z_a = Z = Z_b$, und für „$⇐$“ wählt man $Z := Z_a$. Mit der Funktion $f : A → 𝒵$, $x ↦ Z_x$ gilt also $a ≡_𝒵 b ⇔ f(a) = f(b)$. Nach @induziert ist $≡_𝒵$ daher eine Äquivalenzrelation.
-  + Für die erste Gleichung verwenden wir die Notation aus (2):
+    Mit der Funktion $f : A → 𝒵$, $x ↦ Z_x$ gilt also
+    $ a ≡_𝒵 b ⇔ f(a) = f(b). $
+    Nach @induziert ist $≡_𝒵$ daher eine Äquivalenzrelation.#qedhere
+]
+
+#bemerkung[
+  Die beiden Konstruktionen in @partitionAequivalenz machen einander rückgängig. Formal gilt $quot(A, ≡_𝒵) = 𝒵$, und die Relation $≡_(quot(A, ~))$ stimmt mit $~$ überein.
+  // Beweis rausgekürzt, siehe unten.
+]
+
+/* Beweis der Bemerkung:
++ Für die erste Gleichung verwenden wir die Notation aus (2):
     $ quot(A, ≡_𝒵) &= {[a]_(≡_𝒵) | a ∈ A} && #weil[Def. $[a]$] \
                    &= {{b ∈ A | a ≡_𝒵 b} | a ∈ A} && #weil[nach (2)] \
                    &= {{b ∈ A | Z_a = Z_b} | a ∈ A} && #weil[$Z_a = Z_b ⇔ b ∈ Z_a$] \
@@ -2676,8 +2684,8 @@
                          ⇔& ∃c ∈ A: a ~ c ∧ c ~ b \
                          ⇔& a ~ b.
     $
-    Im letzten Schritt folgt „$⇒$“ aus der Transitivität, und für „$⇐$“ wählt man $c := b$ und benutzt $b ~ b$ (Reflexivität).#qedhere
-]
+    Im letzten Schritt folgt „$⇒$“ aus der Transitivität, und für „$⇐$“ wählt man $c := b$ und benutzt $b ~ b$ (Reflexivität).
+*/
 
 #bemerkung[
   In @sec:modulo sehen wir die _Modulorechnung_. Dort liegt neben einer Äquivalenzrelation zusätzliche Struktur vor. Die Notation ist dort eine andere.
@@ -2685,7 +2693,7 @@
 
 === Zusammenhangskomponenten
 
-#definition("Erreichbarkeit in ungerichteten Graphen", kurz: $v ↭_G w$)[
+#definition[Erreichbarkeit in ungerichteten Graphen][
   Sei $G = (V,E)$ ein ungerichteter Graph. Für $v,w ∈ V$ schreiben wir $v ↭_G w$, falls es einen Weg von $v$ nach $w$ gibt. Wenn klar ist, welcher Graph gemeint ist, lassen wir den Index weg.
 ]<erreichbarkeitungerichtet>
 
@@ -2743,25 +2751,26 @@
   Sei $G$ ein gerichteter Graph. Die Äquivalenzklassen von $↭_G$ heißen *starke Zusammenhangskomponenten* von $G$.
 ]<starkeZhk>
 
-#abbildung(slides: 0, caption: [
-  Ein gerichteter Graph mit den starken Zusammenhangskomponenten ${1,2,3}$, ${4,5}$, ${6}$ und ${7}$. Zwischen verschiedenen Komponenten verlaufen alle Kanten in dieselbe Richtung.
-])[#graphbild(
-  (
-    "1": (0, 0), "2": (1.1, 0.7), "3": (1.1, -0.7),
-    "4": (2.5, 0.7), "5": (2.5, -0.7),
-    "7": (3.9, 0.7), "6": (3.9, -0.7),
-  ),
-  (
-    ("1", "2"), ("2", "3"), ("3", "1"), ("2", "4"),
-    ("4", "5"), ("5", "4"), ("4", "7"), ("7", "6"), ("5", "6"),
-  ),
-  gerichtet: true,
-  radius: 0.22,
-)]<starkbild>
+#beispiel[
+  Folgender gerichteter Graph hat die starken Zusammenhangskomponenten ${1,2,3}$, ${4,5}$, ${6}$ und ${7}$.
+  $ #graphbild(
+    (
+      "1": (0, 0), "2": (1.1, 0.7), "3": (1.1, -0.7),
+      "4": (2.5, 0.7), "5": (2.5, -0.7),
+      "7": (3.9, 0.7), "6": (3.9, -0.7),
+    ),
+    (
+      ("1", "2"), ("2", "3"), ("3", "1"), ("2", "4"),
+      ("4", "5"), ("5", "4"), ("4", "7"), ("7", "6"), ("5", "6"),
+    ),
+    gerichtet: true,
+    radius: 0.22,
+  ) $
+]
 
 === Graphisomorphie
 
-#definition("Graphisomorphismus", kurz: $G_1 ≅ G_2$)[
+#definition[Graphisomorphismus][
   Seien $G_1 = (V_1,E_1)$ und $G_2 = (V_2,E_2)$ Graphen. Ein *Isomorphismus* von $G_1$ nach $G_2$ ist eine bijektive Abbildung $φ: V_1 → V_2$ mit
   $ ∀v,w ∈ V_1: quad {v,w} ∈ E_1 ⇔ {φ(v),φ(w)} ∈ E_2. $
   Wir schreiben $G_1 ≅ G_2$, falls ein solcher Isomorphismus existiert, und nennen $G_1$ und $G_2$ dann *isomorph*.
