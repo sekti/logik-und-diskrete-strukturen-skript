@@ -54,6 +54,9 @@
   // würde für ausgeblendete Umgebungen einen leeren Block mit Abstand erzeugen.
   #let folienAbstand = if folienModus { (above: 3pt, below: 3pt) } else { (:) }
   #show table: set table(stroke: none)
+  // Tabellen nicht umbrechen. Falls eine lange Tabelle doch umbrechen soll:
+  // Ausnahme per Label, z.B. `if it.at("label", default: none) == <lang> { it } else { … }`.
+  #show table: it => block(breakable: false, it)
 
 // Functionality
 
@@ -745,7 +748,7 @@
 
 #definition(slides: "titel")[Weg, Pfad, Zyklus, Kreis][
   Gegeben sei ein Graph $G = (V,E)$ und eine Folge $(v₀,…,v_ℓ)$ von Knoten aus $V$ für ein $ℓ ∈ ℕ$, im Folgenden meist in Kurzschreibweise als $v₀ … v_ℓ$. Wir nennen die Knotenfolge *Weg* / *Pfad* / *Zyklus* / *Kreis* unter folgenden Bedingungen.#footnote[Die englischen Bezeichnungen sind in der Literatur weitgehend einheitlich, die deutschen nicht.]
-  #block(breakable: false,table(
+  #table(
     columns: 3,
     [Konzept], [englisch], [Bedingung],
     table.hline(),
@@ -753,7 +756,7 @@
     [Pfad], [path], [Weg und $|{v_0,…,v_ℓ}| = ℓ+1$ ],
     [Zyklus], [closed walk], [Weg und $v₀ = v_ℓ$ ],
     [Kreis], [cycle], [Zyklus und $|{v₀,…,v_ℓ}| = ℓ$ und $ℓ ≥ 3$],
-  ))
+  )
   Ein Pfad ist also ein Weg ohne wiederholte Knoten und ein Kreis ein Zyklus, bei dem $v₀ = v_ℓ$ die einzige Wiederholung ist. Die *Länge* eines Wegs/Pfads/Zyklus/Kreises ist die Anzahl der „Schritte“, also $ℓ$. Einen Weg bzw. Pfad $v₀ … v_ℓ$ nennen wir auch einen Weg bzw. Pfad *von $v₀$ nach $v_ℓ$*.
 
   Die Bedingung $ℓ ≥ 3$ beim Kreis schließt aus, dass man eine Kante einfach hin und zurück durchläuft: Die Folge $v₀ v₁ v₀$ ist ein Zyklus der Länge 2, aber kein Kreis. Ein Kreis hat also mindestens die Länge 3.
@@ -917,7 +920,7 @@
 #loesung[
   Die Wahrheitstabelle für $P ↔ Q$ haben wir schon. Die Wahrheitstabelle für die andere Formel erhalten wir Schritt für Schritt aus Wahrheitstabellen ihrer Teilformeln.
 
-  #block(breakable: false, width: 110%)[
+  #block(width: 110%)[
     #table(
       columns: 7,
       align: center,
@@ -2239,7 +2242,7 @@
   Ist $R$ eine Relation auf $A$, so schreiben wir statt $(a,b) ∈ R$ auch $a R b$, zum Beispiel $3 ≤ 5$ statt $(3,5) ∈ "≤"$.
 ]
 
-#beispiel(slides: "titel")[Relationen auf einer Menge die wir schon kennen][
+#beispiel(slides: "titel")[Relationen auf einer Menge, die wir schon kennen][
   #table(
     columns: 4,
     column-gutter: 0.8em,
@@ -2287,7 +2290,7 @@
     columns: 7,
     align: (left, center, center, center, center, center, center),
     column-gutter: 0.5em,
-    [], [refl.], [irrefl.], [symm.], [antis.], [trans.], [total],
+    table.header([], [refl.], [irrefl.], [symm.], [antis.], [trans.], [total]),
     table.hline(),
     [$divides$ auf $ℕ$], [✓], [–], [–], [✓], [✓], [–],
     [$<$ auf $ℤ$], [–], [✓], [–], [✓], [✓], [–],
@@ -2295,7 +2298,9 @@
     [$=$ auf $ℕ$], [✓], [–], [✓], [✓], [✓], [–],
     [$⊆$ auf $2^({1,…,9})$], [✓], [–], [–], [✓], [✓], [–],
     [$D$ auf $2^ℕ$], [–], [–], [✓], [–], [–], [–],
+    [$∅$ auf $∅$], [✓], [✓], [✓], [✓], [✓], [✓],
   )))
+  Die letzte Zeile dient als Beispiel für folgende Bemerkung.
 ]
 
 #bemerkung(slides: "titel")[Vermeintliche Gegenteile][
@@ -2316,7 +2321,7 @@
     [*reflexiv*], [an jedem Knoten liegt eine Schlinge,],
     [*irreflexiv*], [es gibt keine Schlinge,],
     [*symmetrisch*], [zu jeder Kante $(u,v)$ gibt es die Gegenkante $(v,u)$,],
-    [*antisymmetrisch*], [verschiedene Knoten $u ≠ v$ sind durch höchstens eine Kante verbunden,],
+    [*antisymmetrisch*], [zu keiner Kante $(u,v)$ gibt es die Gegenkante $(v,u)$, außer wenn $u = v$,],
     [*transitiv*], [gibt es einen Weg $u v w$, so gibt es auch die direkte Kante $(u,w)$,],
     [*total*], [je zwei Knoten $u$ und $v$ sind durch $(u,v)$ oder $(v,u)$ verbunden; für $u = v$ heißt das, dass an jedem Knoten eine Schlinge liegt.],
   )
@@ -2382,7 +2387,7 @@
 
 === Erreichbarkeit in gerichteten Graphen
 
-#definition("Erreichbarkeit in gerichteten Graphen", kurz: $u ⇝_G v$)[
+#definition[Erreichbarkeit in gerichteten Graphen][
   Sei $G = (V,E)$ ein gerichteter Graph und seien $u,v ∈ V$. Wir schreiben
   $ u ⇝_G v defiff "es gibt einen gerichteten Weg von" u "nach" v $
   und sagen dann, $v$ ist von $u$ aus *erreichbar*. Ist $G$ aus dem Zusammenhang klar, schreiben wir nur $u ⇝ v$.
