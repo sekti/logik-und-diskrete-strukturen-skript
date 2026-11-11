@@ -55,8 +55,8 @@
   #let folienAbstand = if folienModus { (above: 3pt, below: 3pt) } else { (:) }
   #show table: set table(stroke: none)
   // Tabellen nicht umbrechen. Falls eine lange Tabelle doch umbrechen soll:
-  // Ausnahme per Label, z.B. `if it.at("label", default: none) == <lang> { it } else { … }`.
-  #show table: it => block(breakable: false, it)
+  // Ausnahme per Label <lang>
+  #show table: it => if it.at("label", default: none) == <lang> { it } else { block(breakable: false, it) }
 
 // Functionality
 
@@ -2094,8 +2094,6 @@
   Die Bedingung $f(X) ⊆ Y$ durften wir deshalb dazuerfinden, weil sie für jedes $f : X → Y$ gilt.
 ]
 
-#stand[nach Donnerstag 05.11.2026]
-
 #satz[
   #set enum(numbering: "(1)")
   Seien $f: X → Y$ und $g: Y → Z$ Funktionen.
@@ -2265,6 +2263,16 @@
   Eine Gleichheit „an sich“ für beliebige Objekte ist keine Relation in unserem Sinne: Die Gesamtheit aller Paare $(a,a)$ für beliebige Objekte $a$ ist keine Menge. Siehe @mengeAllerMengen. Ähnliches gilt für „$∈$“ und „$⊆$“.
 ]
 
+#stand[nach Mittwoch 11.11.2026]
+
+#bemerkung(slides: "titel")[Unendlicher Graph][
+  Wir können die Forderung, dass die Knotenmenge eines (gerichteten oder ungerichteten) Graphen endlich und nichtleer ist, fallen lassen. Die meisten Begriffe (Grad, Pfad, Kreis, zusammenhängend, azyklisch, Baum) behalten ihre Bedeutung. #footnote[Manche Sätze gelten nicht mehr, z.B. „$G = (V,E) "ist Baum" ⇔ G "zusammenhängend" ∧ |E| = |V|-1$“.]
+]
+
+#beobachtung[Gerichtete Graphen sind Relationen][
+  Ist $E$ eine Relation auf einer Menge $V$, so ist $G = (V,E)$ ein gerichteter Graph (potentiell unendlich, potentiell mit Schlingen) und umgekehrt (in beiden Fällen ist nur $E ⊆ V × V$ gefordert). Man nennt die Kantenmenge daher auch die _Kantenrelation_ des gerichteten Graphen.
+]
+
 #definition[Eigenschaften von Relationen][
   Sei $A$ eine Menge und $R$ eine Relation auf $A$. Dann heißt $R$
   #table(
@@ -2276,8 +2284,24 @@
     [*antisymmetrisch*], [falls $∀a,b ∈ A: (a R b ∧ b R a) → a = b$,],
     [*transitiv*], [falls $∀a,b,c ∈ A: (a R b ∧ b R c) → a R c$,],
     [*total*], [falls $∀a,b ∈ A: a R b ∨ b R a$.],
-  )
+  )<lang>
 ]<relationseigenschaftenA>
+
+#uebung[Relationseigenschaften graphisch][
+  Formulieren Sie die Eigenschaften reflexiv, irreflexiv, symmetrisch, antisymmetrisch, transitiv, total einer Relation $E$ auf $V$ als Eigenschaften des Graphen $G = (V,E)$.
+]
+#loesung[
+  #table(
+    columns: 2,
+    align: (right, left),
+    [*reflexiv*], [an jedem Knoten liegt eine Schlinge,],
+    [*irreflexiv*], [es gibt keine Schlinge,],
+    [*symmetrisch*], [zu jeder Kante $(u,v)$ gibt es die Gegenkante $(v,u)$,],
+    [*antisymmetrisch*], [zu keiner Kante $(u,v)$ gibt es die Gegenkante $(v,u)$, außer wenn $u = v$,],
+    [*transitiv*], [gibt es einen Weg $u v w$, so gibt es auch die direkte Kante $(u,w)$,],
+    [*total*], [je zwei Knoten $u$ und $v$ sind durch $(u,v)$ oder $(v,u)$ verbunden; für $u = v$ heißt das, dass an jedem Knoten eine Schlinge liegt.],
+  )<lang>
+]
 
 #uebung[
   Betrachten Sie die Relationen aus @bspRelationen und darüber hinaus die *Disjunktheitsrelation* $D$ auf $2^ℕ$, definiert durch $M₁ D M₂ defiff M₁ ∩ M₂ = ∅$.
@@ -2307,33 +2331,14 @@
   An @uebEigenschaften sieht man, dass die Eigenschaften _reflexiv_ und _irreflexiv_ nicht Gegenteile voneinander sind. Die Eigenschaften können gleichzeitig vorliegen oder gleichzeitig nicht vorliegen. Dasselbe gilt für _symmetrisch_ und _antisymmetrisch_.
 ]
 
-#beobachtung[Gerichtete Graphen sind Relationen][
-  Ist $E$ eine Relation auf einer (endlichen, nichtleeren) Menge $V$, so ist $G = (V,E)$ ein gerichteter Graph (potentiell mit Schlingen) und umgekehrt (in beiden Fällen ist nur $E ⊆ V × V$ gefordert).#footnote[Man spricht daher auch von der _Kantenrelation_ eines Graphen.]
-]
-
-#uebung[Relationseigenschaften graphisch][
-  Formulieren Sie die Eigenschaften reflexiv, irreflexiv, symmetrisch, antisymmetrisch, transitiv, total einer Relation $E$ auf $V$ als Eigenschaften des Graphen $G = (V,E)$.
-]
-#loesung[
-  #table(
-    columns: 2,
-    align: (right, left),
-    [*reflexiv*], [an jedem Knoten liegt eine Schlinge,],
-    [*irreflexiv*], [es gibt keine Schlinge,],
-    [*symmetrisch*], [zu jeder Kante $(u,v)$ gibt es die Gegenkante $(v,u)$,],
-    [*antisymmetrisch*], [zu keiner Kante $(u,v)$ gibt es die Gegenkante $(v,u)$, außer wenn $u = v$,],
-    [*transitiv*], [gibt es einen Weg $u v w$, so gibt es auch die direkte Kante $(u,w)$,],
-    [*total*], [je zwei Knoten $u$ und $v$ sind durch $(u,v)$ oder $(v,u)$ verbunden; für $u = v$ heißt das, dass an jedem Knoten eine Schlinge liegt.],
-  )
-]
-
+/*
 #uebung[
   Welche Relationen lassen sich durch einen _ungerichteten_ Graphen darstellen?
 ]
 
 #loesung[
   Wir können ungerichtete Graphen als gerichtete Graphen auffassen, wobei eine Kante ${u,v}$ den gerichteten Kanten $(u,v)$ und $(v,u)$ entspricht. Die Kantenrelation ist also notwendig symmetrisch. Weil wir keine Schlingen zugelassen haben, ist sie außerdem irreflexiv. Ungerichtete Graphen mit Knotenmenge $V$ entsprechen also genau den irreflexiven, symmetrischen Relationen auf $V$.
-]
+]*/
 ]
 
 #if zeige(5, teil: 2) [
@@ -2377,12 +2382,13 @@
     [$divides$ auf $ℕ$], [✓], [✓], [✓], [–], [Halbordnung],
     [$R$ auf $2^({1,…,9})$], [✓], [✓], [–], [✓], [Quasiordnung],
   )))
+  /*
   Wir begründen nur die überraschenden Einträge:
   - „$<$“ ist antisymmetrisch, weil die Prämisse $a < b ∧ b < a$ der Implikation unerfüllbar ist.
   - „$⊆$“ ist nicht total, weil ${1}$ und ${2}$ unvergleichbar sind.
   - „$divides$“ ist nicht total, weil $2$ und $3$ unvergleichbar sind.
   - „$divides$“ ist auf $ℕ$ antisymmetrisch: Für $a,b ∈ ℕ⁺$ folgt aus $a divides b$ und $b divides a$ schon $a = b$. Zur Null: $0 divides b$ erzwingt $b = 0$.
-  - $R$ ist nicht antisymmetrisch, denn ${1} R {2}$ und ${2} R {1}$, aber ${1} ≠ {2}$.
+  - $R$ ist nicht antisymmetrisch, denn ${1} R {2}$ und ${2} R {1}$, aber ${1} ≠ {2}$.*/
 ]
 
 === Erreichbarkeit in gerichteten Graphen
@@ -2399,7 +2405,7 @@
 
 #beweis[
   / Reflexivität: Sei $v ∈ V$. Die einelementige Folge $v$ ist ein gerichteter Weg der Länge $ℓ = 0$ von $v$ nach $v$. Er bezeugt $v ⇝ v$.
-  / Transitivität: Gelte $u ⇝ v$ und $v ⇝ w$. Zu zeigen ist $u ⇝ w$. Für $u = v$ oder $v = w$ ist das trivial. Andernfalls gibt es einen gerichteten Weg $u x₁ … x_k v$ von $u$ nach $v$ (mit $k ∈ ℕ$) und einen gerichteten Weg $v y₁ … y_ℓ w$ von $v$ nach $w$ (mit $ℓ ∈ ℕ$). Durch Zusammensetzen ergibt sich ein gerichteter Weg $u x₁ … x_k v y₁ … y_ℓ w$ von $u$ nach $w$. Somit gilt $u ⇝ w$.#qedhere
+  / Transitivität: Gelte $u ⇝ v$ und $v ⇝ w$. Das heißt, es gibt einen Weg von $u$ nach $v$ sowie einen Weg von $v$ nach $w$. Durch Aneinanderhängen ergibt sich ein Weg von $u$ nach $w$. Damit gilt $u ⇝ w$.#qedhere
 ]
 
 #definition[Azyklisch, DAG][
@@ -2411,7 +2417,7 @@
 ]<zyklusGibtKreis>
 
 #beweis[
-  Sei $v₀ v₁ … v_k$ ein gerichteter Zyklus mit kürzester positiver Länge $k > 0$ (wir verwenden das Extremalprinzip, siehe @extremalprinzip). Wir behaupten, dass er ein Kreis ist, dass also $v₀ = v_k$ die einzige Wiederholung ist. Andernfalls gäbe es nämlich $0 ≤ i < j ≤ k$ mit $v_i = v_j$ und $(i,j) ≠ (0,k)$. Dann wäre $v_i … v_j$ ein gerichteter Zyklus der Länge $j - i$ mit $1 ≤ j - i < k$, im Widerspruch zur Wahl von $k$. Also ist $v₀ … v_k$ ein gerichteter Kreis.
+  Der Beweis ist sehr ähnlich zu @wegPfad und verwendet das Extremalprinzip. Ein gerichteter Zyklus _kürzester_ positiver Länge ist ein gerichteter Kreis.
 ]
 
 #satz[
@@ -2419,18 +2425,19 @@
 ]<dagHalbordnung>
 
 #beweis[
-  Nach @erreichbarkeitQuasi ist $⇝_G$ eine Quasiordnung. Zu zeigen bleibt die Antisymmetrie. Wir zeigen die Kontraposition: Ist $⇝_G$ nicht antisymmetrisch, so hat $G$ einen gerichteten Kreis.
+  Nach @erreichbarkeitQuasi ist $⇝_G$ eine Quasiordnung. Zu zeigen bleibt die Antisymmetrie. Wir zeigen die Kontraposition: Ist $⇝_G$ nicht antisymmetrisch, so hat $G$ einen gerichteten Kreis, ist also kein DAG.
 
   Sei also $⇝_G$ nicht antisymmetrisch. Dann gibt es $u,v ∈ V$ mit $u ≠ v$, $u ⇝ v$ sowie $v ⇝ u$. Es ergeben sich also gerichtete Wege von $u$ nach $v$ sowie von $v$ nach $u$. Hängen wir sie zusammen, ergibt sich ein gerichteter Zyklus der Länge mindestens $2$. Nach @zyklusGibtKreis enthält $G$ also einen gerichteten Kreis.
 ]
 
-#uebung[
+/*
+#bemerkung[
   Zeigen Sie: Die Umkehrung von @dagHalbordnung gilt nicht (aus spitzfindigen Gründen).
 ]
 
 #loesung[
   Nehmen wir einen beliebigen DAG (dessen Erreichbarkeitsrelation also eine Halbordnung ist) und fügen Schlingen hinzu, so ist der resultierende Graph kein DAG mehr. Die Erreichbarkeitsrelation ist aber immer noch die gleiche, also immer noch eine Halbordnung.
-]
+]*/
 
 #beispiel[Abhängigkeiten][
   Ein DAG drückt häufig zeitliche oder logische Abhängigkeiten aus. Ein Beispiel ist @modulDag. Ein gerichteter Kreis wäre eine zirkuläre Abhängigkeit und damit problematisch.
@@ -2515,10 +2522,10 @@
 == Äquivalenzrelationen
 
 #skript[
-  Oft wollen wir Objekte als gleich behandeln, obwohl sie es streng genommen nicht sind. Informell sprechen wir von Gleichheit _bis auf_ etwas#footnote[Jargonhaft spricht man manchmal von Gleichheit _modulo_ etwas.]. Äquivalenzrelationen fassen diese Idee präzise.
+  Oft wollen wir Objekte als gleich behandeln, obwohl sie es eigentlich nicht sind. Informell sprechen wir von Gleichheit _bis auf_ etwas#footnote[Jargonhaft spricht man manchmal von Gleichheit _modulo_ etwas.]. Äquivalenzrelationen fassen diese Idee präzise.
 ]
 
-#beispiel[Gleichheit „bis auf“][
+#beispiel(slides: "titel")[Gleichheit „bis auf“][
   Die folgenden Dreiecke sind kongruent, also gleich _bis auf_ Verschieben, Drehen und Spiegeln. Die beiden Graphen sind gleich _bis auf_ die Namen der Knoten (siehe @isomorphismus).
   #grid(
     columns: 3,
@@ -2549,7 +2556,7 @@
   $ a = a, quad quad a = b ⇔ b = a, quad quad a = b ∧ b = c ⇒ a = c. qedhere $
 ]
 
-#definition("Äquivalenzklasse, Repräsentant", kurz: $[a]$)[
+#definition[Äquivalenzklasse, Repräsentant][
   Sei $~$ eine Äquivalenzrelation auf $A$ und $a ∈ A$. Die *Äquivalenzklasse* von $a$ ist
   $ [a]_~ := {b ∈ A | a ~ b}. $
   Die Elemente einer Äquivalenzklasse sind ihre *Repräsentanten*. Die Menge der Äquivalenzklassen
@@ -2856,10 +2863,6 @@
 ]
 
 == Eine Vorbereitung
-
-#bemerkung[Unendlicher Graph][
-  Wir können die Forderung, dass die Knotenmenge eines (gerichteten oder ungerichteten) Graphen endlich ist, fallen lassen. Die meisten Begriffe (Grad, Pfad, Kreis, zusammenhängend, azyklisch, Baum) behalten ihre Bedeutung. #footnote[Manche Sätze gelten nicht mehr, z.B. „$G = (V,E) "ist Baum" ⇔ G "zusammenhängend" ∧ |E| = |V|-1$“.]
-]
 
 #satz[Cantor-Schröder-Bernstein][
   Seien $A$ und $B$ Mengen, $f : A → B$ injektiv sowie $g : B → A$ injektiv. Dann gibt es auch eine Bijektion $h : A → B$.
