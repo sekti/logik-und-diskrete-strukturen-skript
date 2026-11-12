@@ -2266,11 +2266,31 @@
 #stand[nach Mittwoch 11.11.2026]
 
 #bemerkung(slides: "titel")[Unendlicher Graph][
-  Wir können die Forderung, dass die Knotenmenge eines (gerichteten oder ungerichteten) Graphen endlich und nichtleer ist, fallen lassen. Die meisten Begriffe (Grad, Pfad, Kreis, zusammenhängend, azyklisch, Baum) behalten ihre Bedeutung. #footnote[Manche Sätze gelten nicht mehr, z.B. „$G = (V,E) "ist Baum" ⇔ G "zusammenhängend" ∧ |E| = |V|-1$“.]
+  Man kann auch dann von einem (gerichteten oder ungerichteten) Graphen sprechen, wenn die Knotenmenge unendlich ist. Die meisten Begriffe (Grad, Pfad, Kreis, zusammenhängend, azyklisch, Baum) behalten ihre Bedeutung. Beispiele:
+  - Der ungerichtete Graph $(ℤ, {{z, z+1} | z ∈ ℤ})$:
+    #align(center, cetz.canvas(length: 1em, {
+      import cetz.draw: *
+      let d = 2.5
+      for z in range(-2, 2) { line((z * d, 0), ((z + 1) * d, 0), stroke: 0.7pt) }
+      for s in (-1, 1) {
+        line((s * 2 * d, 0), (s * 2.6 * d, 0), stroke: (thickness: 0.7pt, dash: "dotted"))
+        content((s * 3 * d, 0), $⋯$)
+      }
+      for z in range(-2, 3) {
+        circle((z * d, 0), radius: 0.15, fill: black, stroke: none)
+        content((z * d, -0.8), $#z$)
+      }
+    }))
+  - Der *unendliche (gerichtete) Binärbaum*
+    $ ({0,1}^*, {(w, w b) | w ∈ {0,1}^*, b ∈ {0,1}}). $
+    Ohne Knotenbeschriftungen gezeichnet:
+    #align(center, binaerbaum(markiert: none, ast: (), gerichtet: true, beschriftet: false, s: 1.4, h: 1.7))
+  Der erste Graph ist ein Baum im Sinne von azyklisch und zusammenhängend. Der zweite Graph ist ein Baum in dem Sinne, dass der zugehörige ungerichtete Graph azyklisch und zusammenhängend ist.
+  Manche Ergebnisse gelten für unendliche Bäume aber nicht mehr. Zum Beispiel haben beide Bäume keine Blätter, anders als es @blattlemma für endliche Bäume garantiert.
 ]
 
 #beobachtung[Gerichtete Graphen sind Relationen][
-  Ist $E$ eine Relation auf einer Menge $V$, so ist $G = (V,E)$ ein gerichteter Graph (potentiell unendlich, potentiell mit Schlingen) und umgekehrt (in beiden Fällen ist nur $E ⊆ V × V$ gefordert). Man nennt die Kantenmenge daher auch die _Kantenrelation_ des gerichteten Graphen.
+  Ist $E$ eine Relation auf einer Menge $V ≠ ∅$, so ist $G = (V,E)$ ein gerichteter Graph (potentiell unendlich, potentiell mit Schlingen) und umgekehrt (in beiden Fällen ist nur $E ⊆ V × V$ gefordert). Man nennt die Kantenmenge daher auch die _Kantenrelation_ des gerichteten Graphen.
 ]
 
 #definition[Eigenschaften von Relationen][
@@ -2365,6 +2385,7 @@
   + $<$ auf $ℕ$,
   + $⊆$ auf $2^ℕ$,
   + $divides$ auf $ℕ$,
+  + $P$ auf ${0,1}^*$ mit $w P w' defiff w "ist Präfix von" w'$
   + $R$ auf $ℤ$ mit $x R y defiff |x| ≤ |y|$.
 ]<uebOrdnungen>
 
@@ -2380,6 +2401,7 @@
     [$<$ auf $ℕ$], [–], [✓], [✓], [–], [keine Ordnung#footnote[Man nennt $<$ eine *strikte Totalordnung*, mit den Anforderungen _irreflexiv_, _transitiv_ und _total_. Es gibt auch den Begriff der *strikten Halbordnung*, mit den Anforderungen _irreflexiv_ und _transitiv_. Die Unterschiede zu den nicht-strikten Varianten sind mathematisch uninteressant.]],
     [$⊆$ auf $2^ℕ$], [✓], [✓], [✓], [–], [Halbordnung],
     [$divides$ auf $ℕ$], [✓], [✓], [✓], [–], [Halbordnung],
+    [$P$ auf ${0,1}^*$], [✓], [✓], [✓], [–], [Halbordnung],
     [$R$ auf $ℤ$], [✓], [✓], [–], [✓], [Quasiordnung],
   )))
   /*
@@ -3146,6 +3168,8 @@
 #bemerkung[Unendliche Binärfolgen][
   Eine Funktion $g : ℕ → {0,1}$ lässt sich als unendliche Folge $(g(0), g(1), g(2), …)$ auffassen (siehe @folgenAlsFunktionen). Somit ist ${0,1}^ℕ$ die Menge der unendlichen Binärfolgen.
 ]
+
+TODO: Wir haben den unendlichen Binärbaum schonmal gesehen. Wir können darauf aufbauen und hoffentlich hier ein bisschen kürzen.
 
 #beispiel[Unendliche und endliche Folgen][
   Die Menge ${0,1}^*$ der endlichen Binärfolgen ist abzählbar, denn sie ist eine Teilmenge von $ℕ^*$ (siehe @abzaehlbarBeispiele). Die Menge ${0,1}^ℕ$ der unendlichen Binärfolgen ist dagegen überabzählbar, denn nach @cantor und @teilmengenFunktionen gilt $|ℕ| < |2^ℕ| = |{0,1}^ℕ|$. Es gibt also mehr unendliche als endliche Binärfolgen. Wir formulieren diese Einsicht nochmal mithilfe eines unendlichen Graphen $G = (V,E)$ mit $ V = {0,1}^* "und" E := {{w, w b} | w ∈ V, b ∈ {0,1}}. $
