@@ -2385,7 +2385,7 @@
   + $<$ auf $ℕ$,
   + $⊆$ auf $2^ℕ$,
   + $divides$ auf $ℕ$,
-  + $P$ auf ${0,1}^*$ mit $w P w' defiff w "ist Präfix von" w'$
+  + $P$ auf ${0,1}^*$ mit $w P w' defiff w "ist Präfix von" w'$,
   + $R$ auf $ℤ$ mit $x R y defiff |x| ≤ |y|$.
 ]<uebOrdnungen>
 
@@ -2398,7 +2398,7 @@
     [], [refl.], [trans.], [antis.], [total], [stärkster erfüllter Begriff],
     table.hline(),
     [$≤$ auf $ℕ$], [✓], [✓], [✓], [✓], [Totalordnung],
-    [$<$ auf $ℕ$], [–], [✓], [✓], [–], [keine Ordnung#footnote[Man nennt $<$ eine *strikte Totalordnung*, mit den Anforderungen _irreflexiv_, _transitiv_ und _total_. Es gibt auch den Begriff der *strikten Halbordnung*, mit den Anforderungen _irreflexiv_ und _transitiv_. Die Unterschiede zu den nicht-strikten Varianten sind mathematisch uninteressant.]],
+    [$<$ auf $ℕ$], [–], [✓], [✓], [–], [keine Ordnung#footnote[Man nennt $<$ eine *strikte Totalordnung*, mit den Anforderungen _irreflexiv_, _transitiv_ und $∀a,b ∈ A: a ≠ b → (a R b ∨ b R a)$. Es gibt auch den Begriff der *strikten Halbordnung*, mit den Anforderungen _irreflexiv_ und _transitiv_. Die Unterschiede zu den nicht-strikten Varianten sind mathematisch uninteressant.]],
     [$⊆$ auf $2^ℕ$], [✓], [✓], [✓], [–], [Halbordnung],
     [$divides$ auf $ℕ$], [✓], [✓], [✓], [–], [Halbordnung],
     [$P$ auf ${0,1}^*$], [✓], [✓], [✓], [–], [Halbordnung],
