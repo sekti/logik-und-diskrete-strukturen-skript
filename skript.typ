@@ -2365,7 +2365,7 @@
   + $<$ auf $ℕ$,
   + $⊆$ auf $2^ℕ$,
   + $divides$ auf $ℕ$,
-  + $R$ auf $2^({1,…,9})$ mit $X R Y defiff |X| ≤ |Y|$.
+  + $R$ auf $ℤ$ mit $x R y defiff |x| ≤ |y|$.
 ]<uebOrdnungen>
 
 #loesung[
@@ -2380,7 +2380,7 @@
     [$<$ auf $ℕ$], [–], [✓], [✓], [–], [keine Ordnung#footnote[Man nennt $<$ eine *strikte Totalordnung*, mit den Anforderungen _irreflexiv_, _transitiv_ und _total_. Es gibt auch den Begriff der *strikten Halbordnung*, mit den Anforderungen _irreflexiv_ und _transitiv_. Die Unterschiede zu den nicht-strikten Varianten sind mathematisch uninteressant.]],
     [$⊆$ auf $2^ℕ$], [✓], [✓], [✓], [–], [Halbordnung],
     [$divides$ auf $ℕ$], [✓], [✓], [✓], [–], [Halbordnung],
-    [$R$ auf $2^({1,…,9})$], [✓], [✓], [–], [✓], [Quasiordnung],
+    [$R$ auf $ℤ$], [✓], [✓], [–], [✓], [Quasiordnung],
   )))
   /*
   Wir begründen nur die überraschenden Einträge:
