@@ -2459,11 +2459,11 @@
   Nehmen wir einen beliebigen DAG (dessen Erreichbarkeitsrelation also eine Halbordnung ist) und fügen Schlingen hinzu, so ist der resultierende Graph kein DAG mehr. Die Erreichbarkeitsrelation ist aber immer noch die gleiche, also immer noch eine Halbordnung.
 ]*/
 
-#beispiel[Abhängigkeiten][
+#beispiel(slides: "titel")[Abhängigkeiten][
   Ein DAG drückt häufig zeitliche oder logische Abhängigkeiten aus. Ein Beispiel ist @modulDag. Ein gerichteter Kreis wäre eine zirkuläre Abhängigkeit und damit problematisch.
 ]
 
-#abbildung(slides: 0, caption: [
+#abbildung(slides: 1, caption: [
   Einige Informatikmodule. Eine Kante von $a$ nach $b$ bedeutet, dass $b$ auf den Inhalten von $a$ aufbaut.
 ])[#textgraphbild(
   (
@@ -2487,17 +2487,17 @@
   gerichtet: true,
 )]<modulDag>
 
-#bemerkung[Topologische Sortierung][
+#bemerkung(slides: "titel")[Topologische Sortierung][
   Eine *topologische Sortierung* einer Halbordnung $≼$ auf einer endlichen Menge $A$ ist eine Totalordnung $⊑$ auf $A$ mit $"≼" ⊆ "⊑"$ (d.h. aus $a ≼ b$ folgt $a ⊑ b$). Ist $≼$ die Erreichbarkeitsrelation in @modulDag, so entspricht $⊑$ einer Reihenfolge, in der man die Module belegen kann, also z.B.
   $ "LDS" ⊑ "FSB" ⊑ "PSE" ⊑ "DSA" ⊑ "PPR" ⊑ "KTA". $
   Wie man eine solche Reihenfolge findet, ist Thema der Vorlesung Datenstrukturen und Algorithmen.
 ]
 
-#bemerkung[Hasse-Diagramm][
+#bemerkung(slides: "titel")[Hasse-Diagramm][
   Eine sparsame visuelle Darstellung einer Halbordnung $≼$ auf einer endlichen Menge ist das *Hasse-Diagramm* — ein bestimmter gerichteter Graph. Eine Kante $(a,b)$ drückt $a ≼ b$ aus. Man lässt aber alle Kanten weg, die sich aus Reflexivität und Transitivität automatisch ergeben. Die Richtung der Kanten ist implizit von unten nach oben. Die Erreichbarkeitsrelation ist genau $≼$.
 ]
 
-#abbildung(slides: 0, caption: [
+#abbildung(slides: 1, caption: [
   Hasse-Diagramm der Teilmengenrelation $⊆$ auf $2^({1,2,3})$.
 ])[#textgraphbild(
   (
@@ -2519,7 +2519,7 @@
   ),
 )]<hasseTeilmengen>
 
-#abbildung(slides: 0, caption: [
+#abbildung(slides: 1, caption: [
   Hasse-Diagramm der Teilbarkeitsrelation $divides$ auf ${0,1,…,12}$. Wegen $a ⋅ 0 = 0$ gilt $a divides 0$ für jedes $a$; die $0$ ist also das größte Element.
 ])[#textgraphbild(
   (
