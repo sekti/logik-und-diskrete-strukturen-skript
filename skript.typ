@@ -2263,8 +2263,6 @@
   Eine Gleichheit „an sich“ für beliebige Objekte ist keine Relation in unserem Sinne: Die Gesamtheit aller Paare $(a,a)$ für beliebige Objekte $a$ ist keine Menge. Siehe @mengeAllerMengen. Ähnliches gilt für „$∈$“ und „$⊆$“.
 ]
 
-#stand[nach Mittwoch 11.11.2026]
-
 #bemerkung(slides: "titel")[Unendlicher Graph][
   Man kann auch dann von einem (gerichteten oder ungerichteten) Graphen sprechen, wenn die Knotenmenge unendlich ist. Die meisten Begriffe (Grad, Pfad, Kreis, zusammenhängend, azyklisch, Baum) behalten ihre Bedeutung. Beispiele:
   - Der ungerichtete Graph $(ℤ, {{z, z+1} | z ∈ ℤ})$:
@@ -2586,6 +2584,7 @@
   heißt *Quotientenmenge*, gesprochen „$A$ modulo $~$“. Wir schreiben $[a]$ statt $[a]_~$, wenn die Relation aus dem Kontext klar ist.
 ]<aequivalenzklasse>
 
+#stand[nach Donnerstag 12.11.2026, (1) + (2) gezeigt]
 #lemma[Eigenschaften von Äquivalenzklassen][
   #set enum(numbering: "(1)")
   Sei $~$ eine Äquivalenzrelation auf $A$ und seien $a, b ∈ A$. Dann gilt:
