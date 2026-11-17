@@ -4,7 +4,7 @@
 #import "@preview/cetz:0.4.2": canvas, draw
 
 // Zwei kongruente Dreiecke: das zweite ist das erste, gedreht und verschoben.
-#let kongruenzbild(winkel: 75deg, versatz: (3.6, -0.25)) = canvas({
+#let kongruenzbild(winkel: 75deg, versatz: (2.8, -0.25)) = canvas({
   import draw: *
 
   let ecken = ((0, 0), (1.8, 0), (0.5, 1.2))

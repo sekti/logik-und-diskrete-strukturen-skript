@@ -2547,22 +2547,28 @@
 
 #beispiel(slides: "titel")[Gleichheit „bis auf“][
   Die folgenden Dreiecke sind kongruent, also gleich _bis auf_ Verschieben, Drehen und Spiegeln. Die beiden Graphen sind gleich _bis auf_ die Namen der Knoten (siehe @isomorphismus).
-  #grid(
-    columns: 3,
-    column-gutter: 2.5em,
-    align: center,
-    kongruenzbild(),
-    graphbild(
-      ("1": (0, 1.1), "2": (1.1, 1.1), "3": (1.1, 0), "4": (0, 0)),
-      (("1", "2"), ("2", "3"), ("3", "4"), ("4", "1")),
-    ),
-    graphbild(
-      ("A": (0, 1.1), "B": (1.1, 1.1), "C": (0, 0), "D": (1.1, 0)),
-      (("A", "B"), ("B", "D"), ("D", "C"), ("C", "A")),
-    ),
-  )
   Die Wörter `Apfel` und `aPFEl` sind gleich _bis auf_ Groß- und Kleinschreibung. Für eine Suchfunktion ist das relevant: Suchen Sie nach `Apfel`, so sollte die Suche auch `aPFEl` finden; beide Wörter sind _äquivalent_. Der _Repräsentant_ `Apfel` steht stellvertretend für eine Menge von Wörtern -- seine _Äquivalenzklasse_.
 ]<bspGleichBisAuf>
+
+#abbildung(slides: 1, caption:[Drei Beispiele für „gleich bis auf …“.])[
+  #grid(
+    columns: 3,
+    column-gutter: 1em,
+    align: center,
+    kongruenzbild(),
+    [#block(breakable: false)[ // breakable: false scheint nicht zu funktionieren
+      #graphbild(
+      ("1": (0, 1.1), "2": (1.1, 1.1), "3": (1.1, 0), "4": (0, 0)),
+      (("1", "2"), ("2", "3"), ("3", "4"), ("4", "1")),)#graphbild(
+      ("A": (0, 1.1), "B": (1.1, 1.1), "C": (0, 0), "D": (1.1, 0)),
+      (("A", "B"), ("B", "D"), ("D", "C"), ("C", "A")),
+    )]],
+    [`Apfel` \ `apFEL`],
+    [gleich bis auf Drehen und Spiegeln],
+    [gleich bis auf Umbenennen der Knoten],
+    [gleich bis auf Groß- und Kleinschreibung]
+  )
+]
 
 #definition[Äquivalenzrelation][
   Sei $A$ eine Menge. Eine Relation $~$ auf $A$ heißt *Äquivalenzrelation*, wenn sie reflexiv, symmetrisch und transitiv ist (siehe @relationseigenschaftenA).
@@ -2624,11 +2630,11 @@
   Im letzten Schritt durchläuft $f(a)$ genau die Menge $f(A)$, wenn $a$ die Menge $A$ durchläuft.
 ]
 
-#bemerkung[
+#bemerkung(slides: "titel")[$f$ vergisst das Unwesentliche][
   Die Funktion $f$ vergisst genau die Information, die $~$ für unwesentlich erklärt. Wählen wir als $f$ die Funktion, die einen String in Großbuchstaben verwandelt (z.B. $f(#[`ApFel`]) = #[`APFEL`]$), dann ergibt sich über @induziert die Äquivalenzrelation $~$, die Strings für äquivalent erklärt, wenn sie sich nur in Groß- und Kleinschreibung unterscheiden (z.B. $#[`apfel`] ~ #[`apFEL`]$).
 ]
 
-#definition("Partition")[
+#definition[Partition][
   Sei $A$ eine Menge. Eine Menge $𝒵 ⊆ 2^A$ heißt *Partition* (auch *Zerlegung*) von $A$, wenn gilt:
   #set enum(numbering: "(1)")
   + $∅ ∉ 𝒵$, und
@@ -2686,8 +2692,8 @@
     Nach @induziert ist $≡_𝒵$ daher eine Äquivalenzrelation.#qedhere
 ]
 
-#bemerkung[
-  Die beiden Konstruktionen in @partitionAequivalenz machen einander rückgängig. Formal gilt $quot(A, ≡_𝒵) = 𝒵$, und die Relation $≡_(quot(A, ~))$ stimmt mit $~$ überein.
+#bemerkung(slides: "titel")[$quot(A, ≡_𝒵) = 𝒵$ und $≡_(quot(A, ~)) = ~$][
+  Die beiden Konstruktionen in @partitionAequivalenz machen einander rückgängig. Formal stimmen die Partitionen $quot(A, ≡_𝒵)$ und $𝒵$ überein, und die Relationen $≡_(quot(A, ~))$ und $~$ stimmen überein.
   // Beweis rausgekürzt, siehe unten.
 ]
 
@@ -2708,7 +2714,7 @@
     Im letzten Schritt folgt „$⇒$“ aus der Transitivität, und für „$⇐$“ wählt man $c := b$ und benutzt $b ~ b$ (Reflexivität).
 */
 
-#bemerkung[
+#bemerkung(slides: "titel")[Modulorechnung][
   In @sec:modulo sehen wir die _Modulorechnung_. Dort liegt neben einer Äquivalenzrelation zusätzliche Struktur vor. Die Notation ist dort eine andere.
 ]
 
@@ -2728,7 +2734,7 @@
   / Transitivität: Angenommen $u ↭ v$ und $v ↭ w$. Den Weg von $u$ nach $v$ und den Weg von $v$ nach $w$ können wir zu einem Weg von $u$ nach $w$ zusammensetzen. Also gilt $u ↭ w$. #qedhere
 ]
 
-#definition("Zusammenhangskomponente")[
+#definition[Zusammenhangskomponente][
   Sei $G = (V,E)$ ein ungerichteter Graph. Die Elemente von $quot(V, ↭_G)$, also die Äquivalenzklassen, heißen *Zusammenhangskomponenten* von $G$.
 ]<zhk>
 
@@ -2813,7 +2819,7 @@
   $ φ = {(1,a),(2,d),(3,b),(4,e),(5,c),(6,f)}. $
 ]
 
-#bemerkung[
+#bemerkung(slides: "titel")[Gleich bis auf Knotennamen][
   Isomorphe Graphen sind „derselbe Graph mit anderen Knotennamen“. Jede Eigenschaft, die sich ohne Rückgriff auf die Knotennamen formulieren lässt, hat ein Graph daher genau dann, wenn jeder zu ihm isomorphe Graph sie hat. Beispiele sind die Knoten- und Kantenzahl, das Vorkommen von Knoten bestimmten Grades, das Vorkommen von Wegen und Kreisen bestimmter Länge und der Zusammenhang.
 ]<invarianten>
 
@@ -2843,14 +2849,15 @@
     $ {v', w'} ∈ E_2 &⇔ {φ(v), φ(w)} ∈ E_2\ &⇔ {v, w} ∈ E_1 ⇔ {φ^(-1)(v'),φ^(-1)(w')} ∈ E_1. $
     Also ist $φ^(-1)$ ein Isomorphismus von $G_2$ nach $G_1$.
   / Transitivität: Ist $φ$ ein Isomorphismus von $G_1$ nach $G_2$ und $ψ$ einer von $G_2$ nach $G_3$, so ist $ψ ∘ φ$ bijektiv (siehe @verkettungBij), und für $v, w ∈ V_1$ gilt
-    $ {v, w} ∈ E_1 ⇔ {φ(v), φ(w)} ∈ E_2 ⇔ {ψ(φ(v)), ψ(φ(w))} ∈ E_3. $
+    $ {v, w} ∈ E_1 &⇔ {φ(v), φ(w)} ∈ E_2\
+     &⇔ {ψ(φ(v)), ψ(φ(w))} ∈ E_3.#qedhere $
 ]
 
-#bemerkung[
+#bemerkung(slides: "titel")[Die Menge aller Graphen?][
   Wir haben uns auf die Menge $𝒢$ eingeschränkt, weil die Gesamtheit aller Graphen keine Menge bildet, was für unseren Begriff von Relation aber nötig ist. Verloren geht dadurch nichts: Jeder Graph ist isomorph zu einem Graphen aus $𝒢$, man nummeriert einfach die Knoten durch.
 ]
 
-#definition("Unbeschrifteter Graph")[
+#definition[Unbeschrifteter Graph][
   Ein *unbeschrifteter Graph* (englisch „unlabeled graph“) ist eine Äquivalenzklasse bezüglich Isomorphie, also ein Element von
   $quot(𝒢, ≅).$
 ]<unbeschriftet>
