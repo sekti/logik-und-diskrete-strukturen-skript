@@ -2568,7 +2568,7 @@
         (("A", "B"), ("B", "D"), ("D", "C"), ("C", "A")),
       ),
     ),
-    [`Apfel` \ `aPFEl`],
+    [`Apfel` \ `aPFEl` \ `APFEL` \ `apfel`],
     [gleich bis auf Verschieben, Drehen und Spiegeln],
     [gleich bis auf Umbenennen der Knoten],
     [gleich bis auf Groß- und Kleinschreibung]
@@ -2654,9 +2654,7 @@
 #beispiel[
   Sei
   $ M := {"à","â","å","b","c","ç","d","e","è"}. $
-  Eine Partition von $M$ in artgleiche Buchstaben ist
-  $ 𝒵 := {{"à","â","å"},{"b"},{"c","ç"},{"d"},{"e","è"}}. $
-  Andererseits können wir eine Äquivalenzrelation $~$ auf $M$ definieren, bei der zwei Buchstaben genau dann in Relation stehen, wenn sie artgleich sind. Als gerichteter Graph dargestellt ergibt sich:
+  Sei $~$ die Äquivalenzrelation auf $M$, bei der zwei Buchstaben genau dann in Relation stehen, wenn sie artgleich sind. Als gerichteter Graph dargestellt ergibt sich:
   #align(center, graphbild(
     (
       "à": (0, 0), "â": (1.2, 0), "å": (0.6, -1.05),
@@ -2677,9 +2675,23 @@
     radius: 0.22,
     schlingen: ("à": 135deg, "â": 45deg, "å": 270deg),
   ))
-  Die Relation $~$ geht im Sinne von @induziert aus der Funktion $f : M → {"A", …, "Z"}$ hervor, die jedem Buchstaben seinen Grundbuchstaben zuordnet, also $f = {"à" ↦ "A", "â" ↦ "A", "å" ↦ "A", "b" ↦ "B", …, "è" ↦ "E"}$. Für $x, y ∈ M$ gilt nämlich $x ~ y ⇔ f(x) = f(y)$.
-
-  Der folgende Satz zeigt, dass Partitionen und Äquivalenzrelationen zwei Sichtweisen auf dasselbe Konzept sind: Man kann $𝒵$ aus $~$ gewinnen und umgekehrt.
+  Die Menge der Äquivalenzklassen ist
+  $ quot(M, ~) = {{"à","â","å"},{"b"},{"c","ç"},{"d"},{"e","è"}}. $
+  Die Relation $~$ geht im Sinne von @induziert aus der Funktion $f : M → {"A", …, "E"}$ hervor, die jedem Buchstaben seinen Grundbuchstaben zuordnet; als binäre Relation dargestellt:
+  #align(center, relationsbild(
+    ("à", "â", "å", "b", "c", "ç", "d", "e", "è"),
+    ("A", "B", "C", "D", "E"),
+    (
+      ("à", "A"), ("â", "A"), ("å", "A"),
+      ("b", "B"),
+      ("c", "C"), ("ç", "C"),
+      ("d", "D"),
+      ("e", "E"), ("è", "E"),
+    ),
+    abstand: 0.45, breite: 1.8, mittig: true,
+  ))
+  Für $x, y ∈ M$ gilt nämlich $x ~ y ⇔ f(x) = f(y)$. A
+  Die Menge $quot(M, ~)$ ist eine Partition von $M$ in artgleiche Buchstaben. Der folgende Satz zeigt, dass das kein Zufall ist: Partitionen und Äquivalenzrelationen sind zwei Sichtweisen auf dasselbe Konzept.
 ]
 
 #satz[Äquivalenzrelationen und Partitionen][

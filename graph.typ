@@ -134,7 +134,9 @@
 //
 //   links, rechts: Listen von Beschriftungen, z.B. ("Anna", "Ben")
 //   paare:         Liste von Paaren daraus, z.B. (("Anna", "rot"),)
-#let relationsbild(links, rechts, paare, abstand: 0.6, breite: 2.8, luft: 0.12) = canvas({
+// mittig: true setzt jedes rechte Element auf die mittlere Höhe seiner
+// Partner links (statt gleichmäßig verteilt). Gedacht für Funktionen.
+#let relationsbild(links, rechts, paare, abstand: 0.6, breite: 2.8, luft: 0.12, mittig: false) = canvas({
   import draw: *
 
   let pos = (:)
@@ -142,7 +144,13 @@
     pos.insert(a, (-breite / 2, (links.len() - 1 - 2 * i) * abstand / 2))
   }
   for (j, b) in rechts.enumerate() {
-    pos.insert(b, (breite / 2, (rechts.len() - 1 - 2 * j) * abstand / 2))
+    let partner = paare.filter(e => e.at(1) == b).map(e => pos.at(e.at(0)).at(1))
+    let y = if mittig and partner.len() > 0 {
+      partner.sum() / partner.len()
+    } else {
+      (rechts.len() - 1 - 2 * j) * abstand / 2
+    }
+    pos.insert(b, (breite / 2, y))
   }
 
   for e in paare {
