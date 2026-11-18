@@ -2283,7 +2283,7 @@
     $ ({0,1}^*, {(w, w b) | w ∈ {0,1}^*, b ∈ {0,1}}). $
     Ohne Knotenbeschriftungen gezeichnet:
     #align(center, binaerbaum(markiert: none, ast: (), gerichtet: true, beschriftet: false, s: 1.4, h: 1.7))
-  Der erste Graph ist ein Baum im Sinne von azyklisch und zusammenhängend. Der zweite Graph ist ein Baum in dem Sinne, dass der zugehörige ungerichtete Graph azyklisch und zusammenhängend ist.
+  Der erste Graph ist ein Baum im Sinne von azyklisch und zusammenhängend. Der zweite Graph ist ein Baum in dem Sinne, dass der zugehörige ungerichtete Graph (siehe @zusammenhangGerichtet) azyklisch und zusammenhängend ist.
   Manche Ergebnisse gelten für unendliche Bäume aber nicht mehr. Zum Beispiel haben beide Bäume keine Blätter, anders als es @blattlemma für endliche Bäume garantiert.
 ]
 
@@ -2546,11 +2546,12 @@
 ]
 
 #beispiel(slides: "titel")[Gleichheit „bis auf“][
-  Die folgenden Dreiecke sind kongruent, also gleich _bis auf_ Verschieben, Drehen und Spiegeln. Die beiden Graphen sind gleich _bis auf_ die Namen der Knoten (siehe @isomorphismus).
+  Die Dreiecke in @abbGleichBisAuf sind kongruent, also gleich _bis auf_ Verschieben, Drehen und Spiegeln. Die beiden Graphen sind gleich _bis auf_ die Namen der Knoten (siehe @isomorphismus).
   Die Wörter `Apfel` und `aPFEl` sind gleich _bis auf_ Groß- und Kleinschreibung. Für eine Suchfunktion ist das relevant: Suchen Sie nach `Apfel`, so sollte die Suche auch `aPFEl` finden; beide Wörter sind _äquivalent_. Der _Repräsentant_ `Apfel` steht stellvertretend für eine Menge von Wörtern -- seine _Äquivalenzklasse_.
 ]<bspGleichBisAuf>
 
 #abbildung(slides: 1, caption:[Drei Beispiele für „gleich bis auf …“.])[
+  #set par(justify: false)
   #grid(
     columns: 3,
     column-gutter: 1em,
@@ -2567,12 +2568,12 @@
         (("A", "B"), ("B", "D"), ("D", "C"), ("C", "A")),
       ),
     ),
-    [`Apfel` \ `apFEL`],
-    [gleich bis auf Drehen und Spiegeln],
+    [`Apfel` \ `aPFEl`],
+    [gleich bis auf Verschieben, Drehen und Spiegeln],
     [gleich bis auf Umbenennen der Knoten],
     [gleich bis auf Groß- und Kleinschreibung]
   )
-]
+]<abbGleichBisAuf>
 
 #definition[Äquivalenzrelation][
   Sei $A$ eine Menge. Eine Relation $~$ auf $A$ heißt *Äquivalenzrelation*, wenn sie reflexiv, symmetrisch und transitiv ist (siehe @relationseigenschaftenA).
@@ -2612,9 +2613,9 @@
 ]
 
 #bemerkung[Kanonische Projektion][
-  Ist $~$ eine Äquivalenzrelation auf $A$, dann nennt man die Abbildung $π : A → quot(A, ~), a ↦ [a]_~$ die _kanonische Projektion_. Nach @klassenEigenschaften gilt dann
+  Ist $~$ eine Äquivalenzrelation auf $A$, dann nennt man die Abbildung $π : A → quot(A, ~), quad a ↦ [a]_~$ die _kanonische Projektion_. Nach @klassenEigenschaften (2) gilt dann
   $ a ~ b ⇔ π(a) = π(b). $
-  Jede Äquivalenzrelationen lässt sich also durch eine Funktion definieren. Folgender Satz zeigt dass umgekehrt jede Funktion eine Äquivalenzrelation definiert.
+  Jede Äquivalenzrelation lässt sich also durch eine Funktion definieren. Folgender Satz zeigt, dass umgekehrt jede Funktion eine Äquivalenzrelation definiert.
 ]
 
 #satz[Äquivalenzrelationen aus Funktionen][
@@ -2762,7 +2763,7 @@
 #uebung[
   Sei $A$ eine nichtleere Menge und $~$ eine Äquivalenzrelation auf $A$. Zeigen Sie:
   $ class("normal", ~) = A × A ⇔ |quot(A,~)| = 1. $
-]
+]<uebEineKlasse>
 
 #loesung[
   $
@@ -2771,11 +2772,15 @@
     ⇔ & quot(A,~) = {A} \
     ⇔ & |quot(A,~)| = 1.
   $
-  Die Rückrichtung im letzten Schritt folgt weil $quot(A,~)$ eine Partition von $A$ sein muss.
+  Die Rückrichtung im letzten Schritt folgt, weil $quot(A,~)$ nach @partitionAequivalenz (1) eine Partition von $A$ ist und ihr einziger Teil daher jedes $a ∈ A$ enthält.
 ]
 
 #korollar[
   Ein ungerichteter Graph ist genau dann zusammenhängend, wenn er genau eine Zusammenhangskomponente hat.
+]
+
+#beweis[
+  Sei $G = (V,E)$ ein ungerichteter Graph. Nach @wegPfad ist $G$ genau dann zusammenhängend, wenn $↭_G = V × V$ gilt. Wegen $V ≠ ∅$ folgt die Behauptung mit @uebEineKlasse.
 ]
 
 
@@ -2786,15 +2791,16 @@
 
 #loesung[
   Sei $S := R ∩ R^(-1)$. Für beliebige $a,b ∈ A$ gilt
-    $ a S b ⇔ a R b ∧ b R a $
-  / Reflexivität: Als Quasiordnung ist $R$ reflexiv. Damit ist auch $R^(-1)$ reflexiv. Aus $a R a$ folgt $a S a$.
+    $ a S b ⇔ a R b ∧ b R a. $
+  / Reflexivität: Als Quasiordnung ist $R$ reflexiv. Aus $a R a$ folgt also $a S a$.
   / Symmetrie: Dies gilt sogar für jede Relation $R$:
   $ a S b ⇔ a R b ∧ b R a ⇔ b R a ∧ a R b ⇔ b S a. $
   / Transitivität: Es gilt:
   $   &a S b ∧ b S c &&#weil[Def. von $S$]\
     ⇔&a R b ∧ b R a ∧ b R c ∧ c R b &&#weil[Trans. von $R$]\
     ⇒&a R c ∧  c R a&&#weil[Def. von $S$]\
-    ⇒&a S c $
+    ⇒&a S c. $
+  Damit ist $S$ reflexiv, symmetrisch und transitiv, also eine Äquivalenzrelation.
 ]
 
 #korollar[
@@ -2810,8 +2816,8 @@
 ]<starkeZhk>
 
 #definition[Zusammenhang von gerichteten Graphen][
-  Ein gerichteter Graph $G = (V,E)$ heißt _zusammenhängend_ wenn der ungerichtete Graph $(V,{{u,w} | (u,w) ∈ E})$ zusammenhängend ist. Er heißt _stark zusammenhängend_ wenn es genau eine starke Zusammenhangskomponente gibt.
-]
+  Ein gerichteter Graph $G = (V,E)$ heißt *zusammenhängend*, wenn der zugehörige ungerichtete Graph $(V,{{u,w} | (u,w) ∈ E, u ≠ w})$ zusammenhängend ist. Er heißt *stark zusammenhängend*, wenn es genau eine starke Zusammenhangskomponente gibt.
+]<zusammenhangGerichtet>
 
 #beispiel[
   Folgender gerichteter Graph hat die starken Zusammenhangskomponenten ${1,2,3}$, ${4,5}$, ${6}$ und ${7}$.
@@ -2828,7 +2834,7 @@
     gerichtet: true,
     radius: 0.22,
   ) $
-  Er ist zusammenhängend aber nicht stark zusammenhängend.
+  Er ist zusammenhängend, aber nicht stark zusammenhängend.
 ]
 
 === Graphisomorphie
@@ -2886,7 +2892,8 @@
     Also ist $φ^(-1)$ ein Isomorphismus von $G_2$ nach $G_1$.
   / Transitivität: Ist $φ$ ein Isomorphismus von $G_1$ nach $G_2$ und $ψ$ einer von $G_2$ nach $G_3$, so ist $ψ ∘ φ$ bijektiv (siehe @verkettungBij), und für $v, w ∈ V_1$ gilt
     $ {v, w} ∈ E_1 &⇔ {φ(v), φ(w)} ∈ E_2\
-     &⇔ {ψ(φ(v)), ψ(φ(w))} ∈ E_3.#qedhere $
+     &⇔ {ψ(φ(v)), ψ(φ(w))} ∈ E_3. $
+     Also ist $ψ ∘ φ$ ein Isomorphismus von $G_1$ nach $G_3$. #qedhere
 ]
 
 #bemerkung(slides: "titel")[Die Menge aller Graphen?][
