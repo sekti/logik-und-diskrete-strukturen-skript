@@ -39,9 +39,11 @@
     show "≡": math.scripts
     it
   }
-  // Quotientenmenge $quot(A, ~)$. Mit $A \/ ~$ bekommt die Relation rechts
-  // vom Schrägstrich Relationsabstände, die dort nicht hingehören.
-  #let quot(a, r) = $#a slash class("normal", #r)$
+  // Relationszeichen als Objekt, z.B. $nrm(~) = A × A$. Sonst bekommt es
+  // Relationsabstände, die dort nicht hingehören.
+  #let nrm(r) = math.class("normal", r)
+  // Quotientenmenge $quot(A, ~)$, analog zu nrm.
+  #let quot(a, r) = $#a slash nrm(#r)$
   #show link: it => if type(it.dest) == str {
     text(fill: blue)[#it]
   } else {
@@ -2613,7 +2615,7 @@
 ]
 
 #bemerkung[Kanonische Projektion][
-  Ist $~$ eine Äquivalenzrelation auf $A$, dann nennt man die Abbildung $π : A → quot(A, ~), quad a ↦ [a]_~$ die _kanonische Projektion_. Nach @klassenEigenschaften (2) gilt dann
+  Ist $~$ eine Äquivalenzrelation auf $A$, dann nennt man die Abbildung $π : A → quot(A, ~)$ mit $a ↦ [a]_~$ die _kanonische Projektion_. Nach @klassenEigenschaften (2) gilt dann
   $ a ~ b ⇔ π(a) = π(b). $
   Jede Äquivalenzrelation lässt sich also durch eine Funktion definieren. Folgender Satz zeigt, dass umgekehrt jede Funktion eine Äquivalenzrelation definiert.
 ]
@@ -2690,7 +2692,7 @@
     ),
     abstand: 0.45, breite: 1.8, mittig: true,
   ))
-  Für $x, y ∈ M$ gilt nämlich $x ~ y ⇔ f(x) = f(y)$. A
+  Für $x, y ∈ M$ gilt nämlich $x ~ y ⇔ f(x) = f(y)$.
   Die Menge $quot(M, ~)$ ist eine Partition von $M$ in artgleiche Buchstaben. Der folgende Satz zeigt, dass das kein Zufall ist: Partitionen und Äquivalenzrelationen sind zwei Sichtweisen auf dasselbe Konzept.
 ]
 
@@ -2715,7 +2717,7 @@
     Nach @induziert ist $≡_𝒵$ daher eine Äquivalenzrelation.#qedhere
 ]
 
-#bemerkung(slides: "titel")[$quot(A, ≡_𝒵) = 𝒵$ und $≡_(quot(A, ~)) = ~$][
+#bemerkung(slides: "titel")[$quot(A, ≡_𝒵) = 𝒵$ und $nrm(≡_(quot(A, ~))) = nrm(~)$][
   Die beiden Konstruktionen in @partitionAequivalenz machen einander rückgängig. Formal stimmen die Partitionen $quot(A, ≡_𝒵)$ und $𝒵$ überein, und die Relationen $≡_(quot(A, ~))$ und $~$ stimmen überein.
   // Beweis rausgekürzt, siehe unten.
 ]
@@ -2774,12 +2776,12 @@
 
 #uebung[
   Sei $A$ eine nichtleere Menge und $~$ eine Äquivalenzrelation auf $A$. Zeigen Sie:
-  $ class("normal", ~) = A × A ⇔ |quot(A,~)| = 1. $
+  $ nrm(~) = A × A ⇔ |quot(A,~)| = 1. $
 ]<uebEineKlasse>
 
 #loesung[
   $
-      & class("normal", ~) = A × A && #weil[Def. $[a]$] \
+      & nrm(~) = A × A && #weil[Def. $[a]$] \
     ⇔ & ∀a ∈ A: [a] = A && #weil[$A ≠ ∅$] \
     ⇔ & quot(A,~) = {A} \
     ⇔ & |quot(A,~)| = 1.
@@ -2792,7 +2794,7 @@
 ]
 
 #beweis[
-  Sei $G = (V,E)$ ein ungerichteter Graph. Nach @wegPfad ist $G$ genau dann zusammenhängend, wenn $↭_G = V × V$ gilt. Wegen $V ≠ ∅$ folgt die Behauptung mit @uebEineKlasse.
+  Sei $G = (V,E)$ ein ungerichteter Graph. Nach @wegPfad ist $G$ genau dann zusammenhängend, wenn $nrm(↭_G) = V × V$ gilt. Wegen $V ≠ ∅$ folgt die Behauptung mit @uebEineKlasse.
 ]
 
 
@@ -2816,7 +2818,7 @@
 ]
 
 #korollar[
-  Sei $G = (V,E)$ ein _gerichteter_ Graph. Dann ist $↭_G := ⇝_G ∩ ⇝_G^(-1)$ eine Äquivalenzrelation auf $V$.#footnote[Für $u ↭_G v$ wird also ein gerichteter Weg von $u$ nach $v$ und ein gerichteter Weg von $v$ nach $u$ verlangt.]
+  Sei $G = (V,E)$ ein _gerichteter_ Graph. Dann ist $nrm(↭_G) := nrm(⇝_G) ∩ nrm(⇝_G^(-1))$ eine Äquivalenzrelation auf $V$.#footnote[Für $u ↭_G v$ wird also ein gerichteter Weg von $u$ nach $v$ und ein gerichteter Weg von $v$ nach $u$ verlangt.]
 ]<starkAequivalenz>
 
 #beweis[
