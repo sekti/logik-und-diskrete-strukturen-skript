@@ -2554,15 +2554,19 @@
   #grid(
     columns: 3,
     column-gutter: 1em,
+    row-gutter: 5pt,
     align: center,
     kongruenzbild(),
-    [#block(breakable: false)[ // breakable: false scheint nicht zu funktionieren
-      #graphbild(
-      ("1": (0, 1.1), "2": (1.1, 1.1), "3": (1.1, 0), "4": (0, 0)),
-      (("1", "2"), ("2", "3"), ("3", "4"), ("4", "1")),)#graphbild(
-      ("A": (0, 1.1), "B": (1.1, 1.1), "C": (0, 0), "D": (1.1, 0)),
-      (("A", "B"), ("B", "D"), ("D", "C"), ("C", "A")),
-    )]],
+    stack(dir: ltr, spacing: 0.6em,
+      graphbild(
+        ("1": (0, 1.1), "2": (1.1, 1.1), "3": (1.1, 0), "4": (0, 0)),
+        (("1", "2"), ("2", "3"), ("3", "4"), ("4", "1")),
+      ),
+      graphbild(
+        ("A": (0, 1.1), "B": (1.1, 1.1), "C": (0, 0), "D": (1.1, 0)),
+        (("A", "B"), ("B", "D"), ("D", "C"), ("C", "A")),
+      ),
+    ),
     [`Apfel` \ `apFEL`],
     [gleich bis auf Drehen und Spiegeln],
     [gleich bis auf Umbenennen der Knoten],
@@ -2607,22 +2611,26 @@
   + Sei $c ∈ [a] ∩ [b]$. Dann gilt $a ~ c$ und $b ~ c$, mit der Symmetrie also auch $c ~ b$ und mit der Transitivität $a ~ b$. Nach (2) folgt $[a] = [b]$. #qedhere
 ]
 
+#bemerkung[Kanonische Projektion][
+  Ist $~$ eine Äquivalenzrelation auf $A$, dann nennt man die Abbildung $π : A → quot(A, ~), a ↦ [a]_~$ die _kanonische Projektion_. Nach @klassenEigenschaften gilt dann
+  $ a ~ b ⇔ π(a) = π(b). $
+  Jede Äquivalenzrelationen lässt sich also durch eine Funktion definieren. Folgender Satz zeigt dass umgekehrt jede Funktion eine Äquivalenzrelation definiert.
+]
+
 #satz[Äquivalenzrelationen aus Funktionen][
-  Sei $A$ eine Menge und $~$ eine Relation auf $A$. Dann ist $~$ genau dann eine Äquivalenzrelation, wenn es eine Menge $K$ und eine Funktion $f : A → K$ gibt mit
-  $ ∀a, b ∈ A: quad a ~ b ⇔ f(a) = f(b). $
-  Die Äquivalenzklassen sind die Urbilder $f^(-1)({k})$ für $k ∈ f(A)$.
+  Sei $f : A → K$ eine Funktion und $~$ die Relation auf $A$ mit
+  $ a ~ b defiff f(a) = f(b). $
+  Dann ist $~$ eine Äquivalenzrelation. Ihre Äquivalenzklassen sind die Urbilder $f^(-1)({k})$ für $k ∈ f(A)$.
 ]<induziert>
 
 #beweis[
-  „$⇐$“: Zu zeigen ist, dass $~$ eine Äquivalenzrelation ist. Das folgt daraus, dass die Gleichheit auf $K$ eine Äquivalenzrelation ist (@gleichheitAequivalenz). Exemplarisch für die Transitivität:
+  Dass $~$ eine Äquivalenzrelation ist, folgt daraus, dass die Gleichheit auf $K$ eine Äquivalenzrelation ist (@gleichheitAequivalenz). Exemplarisch für die Transitivität:
   $
     a ~ b ∧ b ~ c ⇒ f(a) = f(b) ∧ f(b) = f(c) ⇒ f(a) = f(c) ⇒ a ~ c.
   $
-  „$⇒$“: Wähle $K := quot(A, ~)$ und $f : A → K$ mit $a ↦ [a]$. Man nennt $f$ auch die _kanonische Projektion_. Dann gilt $f(a) = f(b) ⇔ [a] = [b] ⇔ a ~ b$ nach @klassenEigenschaften (2).
-
   Die Äquivalenzklassen sind:
   $
-    quot(A, ~) &= {[a] | a ∈ A} = {{b ∈ A | a ~ b} | a ∈ A} && #weil[Voraussetzung über $f$] \
+    quot(A, ~) &= {[a] | a ∈ A} = {{b ∈ A | a ~ b} | a ∈ A} && #weil[Def. $~$] \
                &= {{b ∈ A | f(a) = f(b)} | a ∈ A} && #weil[Def. Urbild] \
                &= {f^(-1)({f(a)}) | a ∈ A} \
                &= {f^(-1)({k}) | k ∈ f(A)}.
@@ -2668,6 +2676,8 @@
     radius: 0.22,
     schlingen: ("à": 135deg, "â": 45deg, "å": 270deg),
   ))
+  Die Relation $~$ geht im Sinne von @induziert aus der Funktion $f : M → {"A", …, "Z"}$ hervor, die jedem Buchstaben seinen Grundbuchstaben zuordnet, also $f = {"à" ↦ "A", "â" ↦ "A", "å" ↦ "A", "b" ↦ "B", …, "è" ↦ "E"}$. Für $x, y ∈ M$ gilt nämlich $x ~ y ⇔ f(x) = f(y)$.
+
   Der folgende Satz zeigt, dass Partitionen und Äquivalenzrelationen zwei Sichtweisen auf dasselbe Konzept sind: Man kann $𝒵$ aus $~$ gewinnen und umgekehrt.
 ]
 
@@ -2731,7 +2741,7 @@
 #beweis[
   / Reflexivität: Die einelementige Folge $v$ ist ein Weg der Länge $0$ von $v$ nach $v$.
   / Symmetrie: Angenommen $v ↭ w$. Kanten sind ungerichtet, also können wir den Weg von $v$ nach $w$ umkehren, um einen Weg von $w$ nach $v$ zu erhalten.#footnote[Diese Symmetrie rechtfertigt das symmetrische Symbol $↭$.] Also gilt $w ↭ v$.
-  / Transitivität: Angenommen $u ↭ v$ und $v ↭ w$. Den Weg von $u$ nach $v$ und den Weg von $v$ nach $w$ können wir zu einem Weg von $u$ nach $w$ zusammensetzen. Also gilt $u ↭ w$. #qedhere
+  / Transitivität: Angenommen $u ↭ v$ und $v ↭ w$. Den Weg von $u$ nach $v$ und den Weg von $v$ nach $w$ können wir zu einem Weg von $u$ nach $w$ zusammensetzen. Also gilt $u ↭ w$.#qedhere
 ]
 
 #definition[Zusammenhangskomponente][
@@ -2748,6 +2758,27 @@
   ),
   (("1", "2"), ("1", "3"), ("2", "3"), ("3", "4"), ("5", "6"), ("6", "7")),
 )]<zhkbild>
+
+#uebung[
+  Sei $A$ eine nichtleere Menge und $~$ eine Äquivalenzrelation auf $A$. Zeigen Sie:
+  $ class("normal", ~) = A × A ⇔ |quot(A,~)| = 1. $
+]
+
+#loesung[
+  $
+      & class("normal", ~) = A × A && #weil[Def. $[a]$] \
+    ⇔ & ∀a ∈ A: [a] = A && #weil[$A ≠ ∅$] \
+    ⇔ & quot(A,~) = {A} \
+    ⇔ & |quot(A,~)| = 1.
+  $
+  Die Rückrichtung im letzten Schritt folgt weil $quot(A,~)$ eine Partition von $A$ sein muss.
+]
+
+#korollar[
+  Ein ungerichteter Graph ist genau dann zusammenhängend, wenn er genau eine Zusammenhangskomponente hat.
+]
+
+
 
 #uebung[
   Sei $R$ eine Quasiordnung auf einer Menge $A$. Zeigen Sie, dass $R ∩ R^(-1)$ eine Äquivalenzrelation auf $A$ ist.
@@ -2774,9 +2805,13 @@
   Nach @erreichbarkeitQuasi ist $⇝_G$ eine Quasiordnung. Die Behauptung folgt mit @uebQuasiAequivalenz.
 ]
 
-#definition("Starke Zusammenhangskomponente")[
+#definition[Starke Zusammenhangskomponente][
   Sei $G$ ein gerichteter Graph. Die Äquivalenzklassen von $↭_G$ heißen *starke Zusammenhangskomponenten* von $G$.
 ]<starkeZhk>
+
+#definition[Zusammenhang von gerichteten Graphen][
+  Ein gerichteter Graph $G = (V,E)$ heißt _zusammenhängend_ wenn der ungerichtete Graph $(V,{{u,w} | (u,w) ∈ E})$ zusammenhängend ist. Er heißt _stark zusammenhängend_ wenn es genau eine starke Zusammenhangskomponente gibt.
+]
 
 #beispiel[
   Folgender gerichteter Graph hat die starken Zusammenhangskomponenten ${1,2,3}$, ${4,5}$, ${6}$ und ${7}$.
@@ -2793,6 +2828,7 @@
     gerichtet: true,
     radius: 0.22,
   ) $
+  Er ist zusammenhängend aber nicht stark zusammenhängend.
 ]
 
 === Graphisomorphie
