@@ -2991,7 +2991,7 @@
   Ob in einem Hörsaal genauso viele Personen wie Stühle sind, lässt sich ohne Zählen feststellen: Man bittet alle, sich zu setzen. Wenn jeder sitzt und kein Stuhl frei ist, so gibt es gleich viele Personen wie Stühle. Das suggeriert, dass das Konzept „gleich viel“ grundlegender ist als Zählen.
 ]
 
-#definition("Mächtigkeit", kurz: [$|A| = |B|$, $|A| ≤ |B|$, $|A| < |B|$])[
+#definition[Mächtigkeit][
   Seien $A$ und $B$ Mengen.
 
   #box(width: 110%, table(
@@ -3064,8 +3064,8 @@
   / IS: Angenommen, $A_n$ gilt nicht. Dann gibt es $k ∈ ℕ⁺$ und eine Injektion $f : {1,…,n+k} → {1,…,n}$. Sei $y := f(n+k)$ und sei $τ : {1,…,n} → {1,…,n}$ die Bijektion, die $y$ und $n$ vertauscht und alle anderen Zahlen festhält. Dann ist $τ ∘ f$ injektiv (siehe @verkettungInjSurj) mit $(τ ∘ f)(n+k) = n$. Für $i ∈ {1,…,n+k-1}$ ist daher $(τ ∘ f)(i) ≠ n$. Also ist $i ↦ (τ ∘ f)(i)$ eine Injektion von ${1,…,n+k-1}$ nach ${1,…,n-1}$. Das widerspricht $A_(n-1)$.#qedhere
 ]
 
-#definition("Endliche Mengen", kurz: [endlich, $|A| = n$])[
-  Eine Menge $A$ heißt *endlich*, wenn es ein $n ∈ ℕ$ gibt, sodass $A$ gleichmächtig zu ${1,…,n}$ ist. Für $n = 0$ ist das die leere Menge. Wir nennen $n$ dann die *Kardinalität* oder *Mächtigkeit* von $A$ und schreiben $|A| = n$. Andernfalls heißt $A$ *unendlich*.
+#definition[Endliche Mengen][
+  Eine Menge $A$ heißt *endlich*, wenn es ein $n ∈ ℕ$ gibt, sodass $A$ gleichmächtig zu ${1,…,n}$ ist.#footnote[Für $n = 0$ ist ${1,…,n} = ∅$.] Wir nennen $n$ dann die *Kardinalität* oder *Mächtigkeit* von $A$ und schreiben $|A| = n$. Andernfalls heißt $A$ *unendlich*.
 ]<endlicheMenge>
 
 #korollar[Wohldefiniertheit][
@@ -3143,7 +3143,7 @@
 
 == Abzählbare Mengen
 
-#definition("Abzählbarkeit", kurz: [abzählbar, überabzählbar])[
+#definition[Abzählbarkeit][
   Eine Menge $A$ heißt *abzählbar*, wenn $|A| ≤ |ℕ|$ gilt, andernfalls *überabzählbar*. Gilt $|A| = |ℕ|$, so heißt $A$ *abzählbar unendlich*.#footnote[Manche Autoren zählen die endlichen Mengen nicht zu den abzählbaren Mengen, machen also die Unterscheidung zwischen endlich ($|A| < |ℕ|$), abzählbar ($|A| = |ℕ|$) und überabzählbar ($|A| > |ℕ|$).]
 ]<abzaehlbar>
 
@@ -3570,13 +3570,13 @@ Das hier kam vom Relationskapitel wo es um bipartite Graphen mit fester Bipartit
 ]*/
 
 
-#satz(kurz: [bipartit $⇔$ 2-färbbar])[
+#satz[
   Ein Graph ist genau dann bipartit, wenn er 2-färbbar ist.
 ]
 
 - Beweis: Die beiden Farbklassen sind gerade die Mengen $A$ und $B$ der Bipartition.
 
-#satz(kurz: [bipartit $⇔$ keine ungeraden Kreise])[
+#satz[
   Ein Graph ist genau dann bipartit, wenn er keinen Kreis ungerader Länge enthält.
 ]
 
@@ -3677,7 +3677,7 @@ Das hier kam vom Relationskapitel wo es um bipartite Graphen mit fester Bipartit
 == Spannbäume
 
 - Falls nötig: Definition Teilgraph, vermutlich aber verzichtbar:
-#definition("Teilgraph", kurz: $G_1 ⊆ G_2$)[
+#definition[Teilgraph][
   Seien $G_1 = (V_1,E_1)$ und $G_2 = (V_2,E_2)$ Graphen. Wir schreiben $G_1 ⊆ G_2$ und nennen $G_1$ einen *Teilgraphen* von $G_2$, falls $V_1 ⊆ V_2$ und $E_1 ⊆ E_2$.
 
   Für $W ⊆ V$ heißt
