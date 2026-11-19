@@ -4,7 +4,7 @@
 // Nur ein Kapitel setzen, z.B. 5 (im Editor deutlich schneller); none = alles.
 // Lange Kapitel sind in Teile gespalten: 5.2 setzt nur Teil 2 von Kapitel 5.
 // Auf der Kommandozeile hat „--input kapitel=5“ (oder 5.2) bzw. „--input kapitel=alle“ Vorrang.
-#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { sys.inputs.kapitel } } else { 5 }
+#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { sys.inputs.kapitel } } else { 6 }
 
 // imports
   #import "@preview/ctheorems:2.0.0": *
@@ -2774,12 +2774,12 @@
   (("1", "2"), ("1", "3"), ("2", "3"), ("3", "4"), ("5", "6"), ("6", "7")),
 )]<zhkbild>
 
-#uebung[
-  Sei $A$ eine nichtleere Menge und $~$ eine Äquivalenzrelation auf $A$. Zeigen Sie:
+#lemma[
+  Sei $A$ eine nichtleere Menge und $~$ eine Äquivalenzrelation auf $A$. Dann gilt:
   $ nrm(~) = A × A ⇔ |quot(A,~)| = 1. $
 ]<uebEineKlasse>
 
-#loesung[
+#beweis[
   $
       & nrm(~) = A × A && #weil[Def. $[a]$] \
     ⇔ & ∀a ∈ A: [a] = A && #weil[$A ≠ ∅$] \
@@ -2919,8 +2919,8 @@
   $quot(𝒢, ≅).$
 ]<unbeschriftet>
 
-#konvention[Sprechweise][
-  In der Galerie in @galerie haben wir bereits Graphen ohne Beschriftungen gemalt. Tatsächlich ist z.B. mit $P_5$ am ehesten ein unbeschrifteter Graph gemeint, d.h. eine Äquivalenzklasse. Die Definition mit Knotenmenge ${1,2,3,4,5}$ in @graphengallerie-uebung liefert nur einen von vielen möglichen Repräsentanten.
+#bemerkung[„Der Pfad $P_5$“][
+  In der Galerie in @galerie haben wir bereits Graphen ohne Beschriftungen gemalt. Tatsächlich ist z.B. mit $P_5$ am ehesten der entsprechende unbeschrifteter Graph gemeint, d.h. eine Äquivalenzklasse. Die Definition mit Knotenmenge ${1,2,3,4,5}$ in @graphengallerie-uebung liefert nur einen von vielen möglichen Repräsentanten.
 ]
 
 #uebung[
@@ -2964,7 +2964,7 @@
 
 
 #beweis[
-  Wir nehmen ohne Einschränkung an, dass $A$ und $B$ disjunkt sind#footnote[Andernfalls betrachten wir die disjunkten Mengen $A' = A × {1}$ sowie $B' = B × {2}$. Aus $f$ und $g$ erhält man auch die Injektionen $f' : A' → B'$ mit $(a,1) ↦ (f(a),2)$ sowie $g' : B' → A'$ mit $(b,2) ↦ (g(b),1)$. Mit dem folgenden Argument für disjunkte $A'$ und $B'$ erhalten wir eine Bijektion $h' : A' → B'$. Zusammen mit den offensichtlichen Bijektionen $h_A : A → A × {1}$ sowie $h_B : B × {2} → B$ ergibt sich die gewünschte Bijektion $h_B ∘ h' ∘ h_A: A → B$.].
+  Wir nehmen ohne Einschränkung an, dass $A$ und $B$ disjunkt sind#footnote[Andernfalls betrachten wir die disjunkten Mengen $A' = A × {1}$ sowie $B' = B × {2}$. Seien $ι_A : A → A × {1}$ mit $a ↦ (a,1)$ und $ι_B : B × {2} → B$ mit $b ↦ (b,2)$. Dann ist $ι_B ∘ f ∘ h_A^(-1) : A' → B'$ injektiv und $ι_A ∘ g ∘ ι_B^(-1) : B' → A'$ injektiv. Das folgende Argument liefert die Bijektion $h': A' → B'$ und wir erhalten die gewünschte Bijektion $ι_B^(-1) ∘ h' ∘ ι_A : A → B$.].
   Wir betrachten den gerichteten Graphen $G = (V,E)$ mit den potentiell unendlichen Knoten- und Kantenmengen
   $ V = A ∪ B "und" E = {(a,f(a)) | a ∈ A } ∪ {(b,g(b)) | b ∈ B }. $
   Jeder Knoten $v ∈ V$ hat genau eine ausgehende Kante (weil $f$ und $g$ Funktionen sind) und höchstens eine eingehende Kante (weil $f$ und $g$ injektiv sind). Daraus folgt, dass es für die Zusammenhangskomponenten#footnote[Mit der (schwachen) Zusammenhangskomponente eines gerichteten Graphen sind die Zusammenhangskomponenten des zugrundeliegenden ungerichteten Graphen $(V,{{x,y} | (x,y) ∈ E })$ gemeint.] des Graphen nur folgende vier Möglichkeiten gibt (@csbTypen). Wir stellen $A$-Knoten rot und $B$-Knoten blau dar.
@@ -3095,8 +3095,20 @@
 ]
 
 #bemerkung[Beweis von Offensichtlichem][
-  Wir widmen uns nun Aussagen, die offensichtlich wahr sind. Indem wir sie formal beweisen, gewinnen wir trotzdem etwas: die Zuversicht, dass der neue Formalismus für Kardinalität das leistet, was er soll. Dieser Effekt verbraucht sich aber schnell und es wird langweilig. Also belassen wir es bei den exemplarischen Aussagen im nächsten Satz. Danach werden wir dermaßen offensichtliche Kardinalitätsaussagen einfach glauben.
+  Wir widmen uns nun Aussagen, die offensichtlich wahr sind. Indem wir sie formal beweisen, gewinnen wir trotzdem etwas: die Zuversicht, dass der neue Formalismus für Kardinalität das leistet, was er soll. Dieser Effekt verbraucht sich aber schnell und es wird langweilig. Wir zeigen exemplarisch einige Aussagen. Danach werden wir dermaßen offensichtliche Kardinalitätsaussagen einfach glauben.
 ]
+
+#lemma[
+  Ist $C ⊆ {1,…,n}$ so ist $C$ endlich und es gilt $|C| ≤ n$.
+]<teilmenge-1n-endlich>
+
+#beweis[
+  Wir zeigen das mit Induktion über $n$.
+    / IA: Ist $n = 0$ so folgt $C = ∅$ und damit $|C| = 0$.
+    / IV: Die Behauptung gelte für ein $n$ und jedes $C ⊆ {1,…,n}$.
+    / IS: Sei nun $C ⊆ {1,…,n+1}$. Falls $n+1 ∉ C$ so gilt $C ⊆ {1,…,n}$ und nach IV ist $C$ endlich mit $|C| ≤ n$. Andernfalls sei $C' := C ∖ {n+1}$. Wegen $C' ⊆ {1,…,n}$ ist nach IV $C'$ endlich mit $k := |C'| ≤ n$. Sei $f : C' → {1,…,k}$ eine entsprechende Bijektion. Dann ist $f ∪ {(n+1,k+1)} : C → {1,…,k+1}$ eine Bijektion. Also ist $C$ endlich mit $|C| = k+1 ≤ n+1$.#qedhere
+]
+
 #satz[
   #set enum(numbering: "(1)")
   Seien $A$ und $B$ endliche Mengen. Dann gilt:
@@ -3108,16 +3120,14 @@
 
 #beweis[
   #set enum(numbering: "(1)")
-  + Sei $n := |A|$ und $m := |B|$, und seien $α : A → {1,…,n}$ und $β : B → {1,…,m}$ Bijektionen. Weil $A$ und $B$ disjunkt sind, liegt jedes Element von $A ∪ B$ in genau einer der beiden Mengen. Daher ist
-    $ γ : A ∪ B → {1,…,n+m}, quad y ↦ cases(α(y) & "falls" y ∈ A, n + β(y) & "falls" y ∈ B) $
-    eine Funktion. Sie bildet $A$ bijektiv auf ${1,…,n}$ ab und $B$ bijektiv auf ${n+1,…,n+m}$. Diese beiden Mengen sind disjunkt mit Vereinigung ${1,…,n+m}$, also ist $γ$ eine Bijektion.
-  + Sei $α : A → {1,…,|A|}$ eine Bijektion. Auf $A'$ eingeschränkt ist $α$ eine Injektion $A' → {1,…,|A|}$. Nach dem Extremalprinzip gibt es also eine kleinste Zahl $k ∈ ℕ$, für die eine Injektion $f : A' → {1,…,k}$ existiert, und es gilt $k ≤ |A|$. Wir zeigen, dass $f$ surjektiv ist. Andernfalls gäbe es ein $v ∈ {1,…,k}$, das nicht als Wert von $f$ vorkommt. Sei $τ : {1,…,k} → {1,…,k}$ die Bijektion, die $v$ und $k$ vertauscht und alle anderen Zahlen festhält. Dann nimmt die injektive Funktion $τ ∘ f$ den Wert $k$ nicht an, ist also eine Injektion $A' → {1,…,k-1}$. Das widerspricht der Wahl von $k$. Also ist $f$ eine Bijektion, und es folgt $|A'| = k ≤ |A|$.
+  + Sei $n := |A|$ und $m := |B|$, und seien $α : A → {1,…,n}$ und $β : B → {1,…,m}$ Bijektionen. „Verschieben“ von $β$ ergibt die Bijektion $β': B → {n+1,…,n+m}$ mit $b ↦ β(b)+n$. Die Definitionsmengen und Zielmengen von $α$ und $β'$ sind jeweils disjunkt, damit ist $α ∪ β' : A ∪ B → {1,…,n} ∪ {n+1,…,n+m}$ eine Bijektion. Sie bezeugt $|A ∪ B| = n+m$.
+  + Weil $A$ endlich ist gibt es ein $n ∈ ℕ$ und eine Bijektion $f : A → {1,…,n}$. Eingeschränkt auf $A'$ ergibt sich eine Bijektion $f' : A' → f(A')$, also gilt $|A'| = |f(A')|$ und wegen $f(A') ⊆ {1,…,n}$ folgt $|f(A')| ≤ n$ aus @teilmenge-1n-endlich.
   + Nach (2) ist $A ∖ B$ endlich. Die Mengen $A ∖ B$ und $B$ sind disjunkt mit Vereinigung $A$. Aus (1) folgt also $|A| = |A ∖ B| + |B|$.
   + Nach (2) sind $A ∖ (A ∩ B)$, $A ∩ B$ und $B ∖ (A ∩ B)$ endlich. Diese drei Mengen sind paarweise disjunkt mit Vereinigung $A ∪ B$. Also gilt
     $
       |A ∪ B| &= |(A ∖ (A ∩ B)) ∪ (A ∩ B) ∪ (B ∖ (A ∩ B))| \
       &=^"2 × (1)" |A ∖ (A ∩ B)| + |A ∩ B| + |B ∖ (A ∩ B)| \
-      &=^"(3)" |A| - |A ∩ B| + |A ∩ B| + |B| - |A ∩ B| \
+      &=^"2 × (3)" |A| - |A ∩ B| + |A ∩ B| + |B| - |A ∩ B| \
       &= |A| + |B| - |A ∩ B|. qedhere
     $
 ]
