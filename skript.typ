@@ -3099,21 +3099,28 @@
 ]
 
 #lemma[
-  Ist $C ⊆ {1,…,n}$ so ist $C$ endlich und es gilt $|C| ≤ n$.
+  Sei $n ∈ ℕ$ und $C ⊆ {1,…,n}$. Dann ist $C$ endlich mit $|C| ≤ n$.
 ]<teilmenge-1n-endlich>
 
 #beweis[
   Wir zeigen das mit Induktion über $n$.
-    / IA: Ist $n = 0$ so folgt $C = ∅$ und damit $|C| = 0$.
+    / IA: Ist $n = 0$, so folgt $C = ∅$ und damit $|C| = 0$.
     / IV: Die Behauptung gelte für ein $n$ und jedes $C ⊆ {1,…,n}$.
-    / IS: Sei nun $C ⊆ {1,…,n+1}$. Falls $n+1 ∉ C$ so gilt $C ⊆ {1,…,n}$ und nach IV ist $C$ endlich mit $|C| ≤ n$. Andernfalls sei $C' := C ∖ {n+1}$. Wegen $C' ⊆ {1,…,n}$ ist nach IV $C'$ endlich mit $k := |C'| ≤ n$. Sei $f : C' → {1,…,k}$ eine entsprechende Bijektion. Dann ist $f ∪ {(n+1,k+1)} : C → {1,…,k+1}$ eine Bijektion. Also ist $C$ endlich mit $|C| = k+1 ≤ n+1$.#qedhere
+    / IS: Sei nun $C ⊆ {1,…,n+1}$. Falls $n+1 ∉ C$, so gilt $C ⊆ {1,…,n}$ und nach IV ist $C$ endlich mit $|C| ≤ n ≤ n+1$. Andernfalls sei $C' := C ∖ {n+1}$. Wegen $C' ⊆ {1,…,n}$ ist nach IV $C'$ endlich mit $k := |C'| ≤ n$. Sei $f : C' → {1,…,k}$ eine entsprechende Bijektion. Dann ist $f ∪ {(n+1,k+1)} : C → {1,…,k+1}$ eine Bijektion. Also ist $C$ endlich mit $|C| = k+1 ≤ n+1$.#qedhere
+]
+
+#korollar[
+  Teilmengen endlicher Mengen sind endlich
+]<teilmengeEndlich>
+
+#beweis[
+  Sei $A$ endlich mit $n := |A|$ und sei $f : A → {1,…,n}$ eine Bijektion. Ist nun $A' ⊆ A$, so ergibt die Einschränkung von $f$ auf $A'$ eine Bijektion von $A'$ nach $f(A')$. Nach @teilmenge-1n-endlich ist $f(A') ⊆ {1,…,n}$ endlich mit $|f(A')| ≤ n$, also ist auch $A'$ endlich mit $|A'| = |f(A')| ≤ n$.
 ]
 
 #satz[
   #set enum(numbering: "(1)")
   Seien $A$ und $B$ endliche Mengen. Dann gilt:
   + Sind $A$ und $B$ disjunkt, so ist $A ∪ B$ endlich mit $|A ∪ B| = |A| + |B|$.
-  + Jede Teilmenge $A' ⊆ A$ ist endlich mit $|A'| ≤ |A|$.
   + Ist $B ⊆ A$, so ist $A ∖ B$ endlich mit $|A ∖ B| = |A| - |B|$.
   + $A ∪ B$ ist endlich mit $|A ∪ B| = |A| + |B| - |A ∩ B|$.
 ]<kardinalitaeten>
@@ -3121,14 +3128,12 @@
 #beweis[
   #set enum(numbering: "(1)")
   + Sei $n := |A|$ und $m := |B|$, und seien $α : A → {1,…,n}$ und $β : B → {1,…,m}$ Bijektionen. „Verschieben“ von $β$ ergibt die Bijektion $β': B → {n+1,…,n+m}$ mit $b ↦ β(b)+n$. Die Definitionsmengen und Zielmengen von $α$ und $β'$ sind jeweils disjunkt, damit ist $α ∪ β' : A ∪ B → {1,…,n} ∪ {n+1,…,n+m}$ eine Bijektion. Sie bezeugt $|A ∪ B| = n+m$.
-  + Weil $A$ endlich ist gibt es ein $n ∈ ℕ$ und eine Bijektion $f : A → {1,…,n}$. Eingeschränkt auf $A'$ ergibt sich eine Bijektion $f' : A' → f(A')$, also gilt $|A'| = |f(A')|$ und wegen $f(A') ⊆ {1,…,n}$ folgt $|f(A')| ≤ n$ aus @teilmenge-1n-endlich.
-  + Nach (2) ist $A ∖ B$ endlich. Die Mengen $A ∖ B$ und $B$ sind disjunkt mit Vereinigung $A$. Aus (1) folgt also $|A| = |A ∖ B| + |B|$.
-  + Nach (2) sind $A ∖ (A ∩ B)$, $A ∩ B$ und $B ∖ (A ∩ B)$ endlich. Diese drei Mengen sind paarweise disjunkt mit Vereinigung $A ∪ B$. Also gilt
+  + Nach @teilmengeEndlich ist $A ∖ B$ endlich. Die Mengen $A ∖ B$ und $B$ sind disjunkt mit Vereinigung $A$. Aus (1) folgt also $|A| = |A ∖ B| + |B|$.
+  + Nach @teilmengeEndlich ist $B ∖ A$ endlich. Die Mengen $A$ und $B ∖ A$ sind disjunkt mit Vereinigung $A ∪ B$. Mit (1) folgt
     $
-      |A ∪ B| &= |(A ∖ (A ∩ B)) ∪ (A ∩ B) ∪ (B ∖ (A ∩ B))| \
-      &=^"2 × (1)" |A ∖ (A ∩ B)| + |A ∩ B| + |B ∖ (A ∩ B)| \
-      &=^"2 × (3)" |A| - |A ∩ B| + |A ∩ B| + |B| - |A ∩ B| \
-      &= |A| + |B| - |A ∩ B|. qedhere
+      |A ∪ B| &= |A| + |B ∖ A|\ 
+              &= |A| + |B ∖ (A ∩ B)|  && #weil[(2)] \
+              &= |A| + |B| - |A ∩ B|. qedhere
     $
 ]
 
