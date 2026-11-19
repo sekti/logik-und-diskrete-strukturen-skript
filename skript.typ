@@ -2597,7 +2597,6 @@
   heißt *Quotientenmenge*, gesprochen „$A$ modulo $~$“. Wir schreiben $[a]$ statt $[a]_~$, wenn die Relation aus dem Kontext klar ist.
 ]<aequivalenzklasse>
 
-#stand[nach Donnerstag 12.11.2026, (1) + (2) gezeigt]
 #lemma[Eigenschaften von Äquivalenzklassen][
   #set enum(numbering: "(1)")
   Sei $~$ eine Äquivalenzrelation auf $A$ und seien $a, b ∈ A$. Dann gilt:
@@ -2855,7 +2854,7 @@
 
 #definition[Graphisomorphismus][
   Seien $G_1 = (V_1,E_1)$ und $G_2 = (V_2,E_2)$ Graphen. Ein *Isomorphismus* von $G_1$ nach $G_2$ ist eine bijektive Abbildung $φ: V_1 → V_2$ mit
-  $ ∀v,w ∈ V_1: quad {v,w} ∈ E_1 ⇔ {φ(v),φ(w)} ∈ E_2. $
+  $ ∀v,w ∈ V_1: quad {v,w} ∈ E_1 ↔ {φ(v),φ(w)} ∈ E_2. $
   Wir schreiben $G_1 ≅ G_2$, falls ein solcher Isomorphismus existiert, und nennen $G_1$ und $G_2$ dann *isomorph*.
 ]<isomorphismus>
 
@@ -2878,6 +2877,8 @@
 #bemerkung(slides: "titel")[Gleich bis auf Knotennamen][
   Isomorphe Graphen sind „derselbe Graph mit anderen Knotennamen“. Jede Eigenschaft, die sich ohne Rückgriff auf die Knotennamen formulieren lässt, hat ein Graph daher genau dann, wenn jeder zu ihm isomorphe Graph sie hat. Beispiele sind die Knoten- und Kantenzahl, das Vorkommen von Knoten bestimmten Grades, das Vorkommen von Wegen und Kreisen bestimmter Länge und der Zusammenhang.
 ]<invarianten>
+
+#stand[nach Mittwoch 18.11.2026]
 
 #uebung[
   Begründen Sie, dass die folgenden beiden Graphen _nicht_ isomorph sind.
@@ -2910,7 +2911,7 @@
      Also ist $ψ ∘ φ$ ein Isomorphismus von $G_1$ nach $G_3$. #qedhere
 ]
 
-#bemerkung(slides: "titel")[Die Menge aller Graphen?][
+#bemerkung[Die Menge aller Graphen?][
   Wir haben uns auf die Menge $𝒢$ eingeschränkt, weil die Gesamtheit aller Graphen keine Menge bildet, was für unseren Begriff von Relation aber nötig ist. Verloren geht dadurch nichts: Jeder Graph ist isomorph zu einem Graphen aus $𝒢$, man nummeriert einfach die Knoten durch.
 ]
 
@@ -2953,7 +2954,7 @@
 <sec:cardinality>
 
 #skript[
-  Wir haben bereits die Schreibweise $|A| = n$ verwendet für „$A$ hat $n$ Elemente“. Wir haben aber nie definiert, was „$n$ Elemente haben“ bedeutet. Vergessen Sie jetzt die alte Schreibweise, wir machen das ganze jetzt nochmal „richtig“.
+  Wir haben bereits die Schreibweise $|A| = n$ verwendet für „$A$ hat $n$ Elemente“. Wir haben aber nie definiert, was „$n$ Elemente haben“ bedeutet. Das holen wir jetzt nach: Wir definieren $|A|$ formal und prüfen, dass die Definition zu unserer bisherigen Vorstellung passt.
 ]
 
 == Eine Vorbereitung
@@ -2964,10 +2965,10 @@
 
 
 #beweis[
-  Wir nehmen ohne Einschränkung an, dass $A$ und $B$ disjunkt sind#footnote[Andernfalls betrachten wir die disjunkten Mengen $A' = A × {1}$ sowie $B' = B × {2}$. Seien $ι_A : A → A × {1}$ mit $a ↦ (a,1)$ und $ι_B : B × {2} → B$ mit $b ↦ (b,2)$. Dann ist $ι_B ∘ f ∘ h_A^(-1) : A' → B'$ injektiv und $ι_A ∘ g ∘ ι_B^(-1) : B' → A'$ injektiv. Das folgende Argument liefert die Bijektion $h': A' → B'$ und wir erhalten die gewünschte Bijektion $ι_B^(-1) ∘ h' ∘ ι_A : A → B$.].
+  Wir nehmen ohne Einschränkung an, dass $A$ und $B$ disjunkt sind#footnote[Andernfalls betrachten wir die disjunkten Mengen $A' = A × {1}$ sowie $B' = B × {2}$. Seien $ι_A : A → A × {1}$ mit $a ↦ (a,1)$ und $ι_B : B → B × {2}$ mit $b ↦ (b,2)$. Dann ist $ι_B ∘ f ∘ ι_A^(-1) : A' → B'$ injektiv und $ι_A ∘ g ∘ ι_B^(-1) : B' → A'$ injektiv. Das folgende Argument liefert die Bijektion $h': A' → B'$ und wir erhalten die gewünschte Bijektion $ι_B^(-1) ∘ h' ∘ ι_A : A → B$.].
   Wir betrachten den gerichteten Graphen $G = (V,E)$ mit den potentiell unendlichen Knoten- und Kantenmengen
-  $ V = A ∪ B "und" E = {(a,f(a)) | a ∈ A } ∪ {(b,g(b)) | b ∈ B }. $
-  Jeder Knoten $v ∈ V$ hat genau eine ausgehende Kante (weil $f$ und $g$ Funktionen sind) und höchstens eine eingehende Kante (weil $f$ und $g$ injektiv sind). Daraus folgt, dass es für die Zusammenhangskomponenten#footnote[Mit der (schwachen) Zusammenhangskomponente eines gerichteten Graphen sind die Zusammenhangskomponenten des zugrundeliegenden ungerichteten Graphen $(V,{{x,y} | (x,y) ∈ E })$ gemeint.] des Graphen nur folgende vier Möglichkeiten gibt (@csbTypen). Wir stellen $A$-Knoten rot und $B$-Knoten blau dar.
+  $ V = A ∪ B quad "und" quad E = {(a,f(a)) | a ∈ A } ∪ {(b,g(b)) | b ∈ B }. $
+  Jeder Knoten $v ∈ V$ hat genau eine ausgehende Kante (weil $f$ und $g$ Funktionen sind) und höchstens eine eingehende Kante (weil $f$ und $g$ injektiv sind). Daraus folgt, dass es für die Zusammenhangskomponenten des Graphen#footnote[Genauer: Für die Zusammenhangskomponenten des zugehörigen ungerichteten Graphen.] nur folgende vier Möglichkeiten gibt (@csbTypen). Wir stellen $A$-Knoten rot und $B$-Knoten blau dar.
   #abbildung(slides: 1, caption: [
     Die vier möglichen Typen von Zusammenhangskomponenten. Jede Kante ist mit der Funktion beschriftet, zu der sie gehört.
   ])[#csbtypen(modus: "fg")]<csbTypen>
@@ -2976,11 +2977,12 @@
   + Ein „Doppelstrahl“, der in beide Richtungen unendlich ist.
   + Ein Kreis, der genauso viele $A$-Knoten wie $B$-Knoten enthält.
   Wir sagen, ein Knoten ist vom Typ 1, 2, 3 oder 4, wenn er in einer entsprechenden Komponente ist. Wir definieren nun die gewünschte Bijektion zwischen den roten und blauen Knoten:
-  $ h : A → B, quad a ↦ cases(f(a) & "falls" a "vom Typ 1, 3 oder 4 ist",g^(-1)(a) & "falls" a "vom Typ 2 ist.") $
+  $ h : A → B, quad a ↦ cases(f(a) & "falls" a "vom Typ 1, 3 oder 4 ist,", "das" b ∈ B "mit" g(b) = a & "falls" a "vom Typ 2 ist.") $
+  Das $b$ im zweiten Fall existiert, weil der Strahl an einem $B$-Knoten beginnt und $a$ daher eine eingehende Kante hat. Es ist eindeutig, weil $g$ injektiv ist.
   Intuitiv gesprochen machen wir für einen $A$-Knoten vom Typ 1, 3 oder 4 einen Schritt in Pfeilrichtung, für einen $A$-Knoten vom Typ 2 dagegen einen Schritt entgegen der Pfeilrichtung (@csbBijektion).
   #abbildung(slides: 1, caption: [
     Die Bijektion $h$ (fett) in den vier Typen von Komponenten. Bei Typ 2 geht $h$ entgegen der Pfeilrichtung, sonst in Pfeilrichtung.
-  ])[#csbtypen(modus: "h")]<csbBijektion> Es ist leicht zu sehen, dass $h(a)$ in derselben Komponente wie $a$ ist und innerhalb jeder Komponente eine Bijektion ist. Damit ist $h$ auch insgesamt eine Bijektion.
+  ])[#csbtypen(modus: "h")]<csbBijektion> Es ist leicht zu sehen, dass $h(a)$ in derselben Komponente wie $a$ ist und $h$ innerhalb jeder Komponente eine Bijektion ist. Damit ist $h$ auch insgesamt eine Bijektion.
 ]
 
 == Mächtigkeit neu gedacht
@@ -3003,18 +3005,19 @@
   ))
 ]<maechtigkeit>
 
-#bemerkung[Lesart der Schreibweise][
+#bemerkung(slides: "titel")[Lesart der Schreibweise][
   Die Schreibweise legt nahe, dass die Größen $|A|$ und $|B|$ gebildet und anschließend verglichen werden. So ist es _nicht_ gemeint: $|A| = |B|$, $|A| ≤ |B|$ und $|A| < |B|$ sind jeweils als Ganzes zu lesen. Sie dürfen sich vorstellen, dass $|⋅| = |⋅|$ eine Relation ist.
 ]
 
 #uebung[
   Seien $A$ und $B$ beliebige Mengen mit $A ⊆ B$. Zeigen Sie: $|A| = |A|$ und $|A| ≤ |B|$.
-]
+]<uebInklusion>
 #loesung[
   Auf $A$ ist die Identität $id_A$ eine Bijektion, also gilt $|A| = |A|$. Die *Inklusion* $ι : A → B$, $a ↦ a$ ist injektiv, also gilt $|A| ≤ |B|$.
 ]
 
 #satz[
+  #set enum(numbering: "(1)")
   Sei $ℳ$ eine Menge von Mengen#footnote[Die Einschränkung auf eine beliebige Menge $ℳ$ hat wieder nur den Grund, dass es die Menge _aller_ Mengen nicht gibt.].
   + Auf $ℳ$ ist „höchstens so mächtig wie“ eine Quasiordnung.
   + Für $A,B ∈ ℳ$ gilt $|A| = |B| ⇔ |A| ≤ |B| ∧ |B| ≤ |A|$.
@@ -3022,21 +3025,22 @@
 ]<maechtigkeitOrdnung>
 
 #beweis[
+  #set enum(numbering: "(1)")
   + Es sind Reflexivität und Transitivität zu zeigen.
-    / Reflexivität: $id_A : A → A$ ist injektiv, also folgt $|A| ≤ |A|$.
+    / Reflexivität: Für $A ∈ ℳ$ gilt $|A| ≤ |A|$ nach @uebInklusion (mit $B = A$).
     / Transitivität: Seien $A, B, C ∈ ℳ$ mit $|A| ≤ |B|$ und $|B| ≤ |C|$. Das heißt, es gibt injektive Funktionen $f : A → B$ und $g : B → C$. Damit ist auch $g ∘ f : A → C$ injektiv (siehe @verkettungInjSurj), also gilt $|A| ≤ |C|$.
   +
     / $⇒$: Ist $f : A → B$ bijektiv, so sind $f$ und die Umkehrfunktion $f^(-1) : B → A$ (siehe @umkehrfunktion) injektiv.
     / $⇐$: Das ist @csb in anderer Terminologie.
-  + Sei $R$ die Relation „höchstens so mächtig wie“. Nach (2) ist die Gleichmächtigkeitsrelation genau $R ∩ R^(-1)$. Nach @uebQuasiAequivalenz ist das eine Äquivalenzrelation.#footnote[Das lässt sich auch ohne @csb direkt zeigen: Die Identität, die Umkehrfunktion einer Bijektion und die Verkettung zweier Bijektionen sind wieder Bijektionen (siehe @umkehrfunktion und @verkettungBij).]#qedhere
+  + Sei $R$ die Relation „höchstens so mächtig wie“. Nach (2) ist die Gleichmächtigkeitsrelation genau $R ∩ R^(-1)$. Nach @uebQuasiAequivalenz ist das eine Äquivalenzrelation.#footnote[Das lässt sich auch ohne @csb direkt zeigen: Die Identität, die Umkehrfunktion einer Bijektion und die Verkettung zweier Bijektionen sind Bijektionen (siehe @umkehrfunktion und @verkettungBij).]#qedhere
 ]
 
-#korollar[Die Pointe von CSB][
-  Um zu zeigen, dass zwei Mengen $A$ und $B$ gleichmächtig sind, genügt es, Injektionen in beide Richtungen anzugeben.
+#technik[Die Pointe von CSB][
+  Wir wollen zeigen, dass zwei Mengen $A$ und $B$ gleichmächtig sind. Wir geben dazu Injektionen in beide Richtungen an. Dann folgt die Gleichmächtigkeit aus Cantor-Schröder-Bernstein.
 ]
 
-#bemerkung[Rechnen mit Mächtigkeiten][
-  @maechtigkeitOrdnung zeigt, dass sich die Relationen $=$, $≤$ und $<$ zwischen Mächtigkeiten (und $≥$, $>$ in umgekehrter Richtung gelesen) so miteinander vertragen, wie wir das von Zahlen gewohnt sind. Zum Beispiel folgt aus $|A| < |B| ≤ |C| = |D|$ dass $|A| < |D|$ gilt.#footnote[Auch je zwei Mengen sind vergleichbar, d.h. es gilt $|A| ≤ |B|$ oder $|B| ≤ |A|$. Der Beweis benötigt allerdings das sogenannte Auswahlaxiom und geht über diese Vorlesung hinaus.]
+#bemerkung(slides: "titel")[Rechnen mit Mächtigkeiten][
+  @maechtigkeitOrdnung zeigt, dass sich die Relationen $=$, $≤$ und $<$ zwischen Mächtigkeiten (und $≥$, $>$ in umgekehrter Richtung gelesen) so miteinander vertragen, wie wir das von Zahlen gewohnt sind. Zum Beispiel folgt aus $|A| < |B| ≤ |C| = |D|$, dass $|A| < |D|$ gilt.#footnote[Auch je zwei Mengen sind vergleichbar, d.h. es gilt $|A| ≤ |B|$ oder $|B| ≤ |A|$. Der Beweis benötigt allerdings das sogenannte Auswahlaxiom und geht über diese Vorlesung hinaus.]
 
   Vorsicht ist dagegen beim Übergang von $⊆$ zu $≤$ geboten: Aus $A ⊊ B$ folgt $|A| ≤ |B|$, aber nicht $|A| < |B|$ (siehe @abzaehlbarBeispiele).
 ]<rechnenMaechtigkeit>
@@ -3053,11 +3057,11 @@
 
 #beweis[
   Wir zeigen per Induktion folgende Aussage $A_n$ für jedes $n ∈ ℕ$:
-  $ A_n defiff ∀k ∈ ℕ⁺: ∄ f : {1,…,n+k} → {1,…,n}: f "ist injektiv" $
+  $ A_n defiff ∀k ∈ ℕ⁺: ∄ f : {1,…,n+k} → {1,…,n}: f "ist injektiv". $
 
-  / IA: Angenommen $A₀$ gilt nicht. Dann müsste es ein $k > 0$ geben sowie eine Funktion $f : {1,…,k} → ∅$. Aus $1 ∈ {1,…,k}$ folgt $f(1) ∈ ∅$. Die leere Menge hat aber keine Elemente. Also gilt $A₀$.
+  / IA: Angenommen, $A₀$ gilt nicht. Dann müsste es ein $k > 0$ geben sowie eine Funktion $f : {1,…,k} → ∅$. Aus $1 ∈ {1,…,k}$ folgt $f(1) ∈ ∅$. Die leere Menge hat aber keine Elemente. Also gilt $A₀$.
   / IV: Für ein $n ≥ 1$ gelte $A_(n-1)$.
-  / IS: Angenommen $A_n$ gilt nicht. Dann gibt es $k ∈ ℕ$ und eine Injektion $f : {1,…,n+k} → {1,…,n}$. Sei $y := f(n+k)$ und sei $τ : {1,…,n} → {1,…,n}$ die Bijektion, die $y$ und $n$ vertauscht und alle anderen Zahlen festhält. Dann ist $τ ∘ f$ injektiv (siehe @verkettungInjSurj) mit $(τ ∘ f)(n+k) = n$. Für $i ∈ {1,…,n+k-1}$ ist daher $(τ ∘ f)(i) ≠ n$. Also ist $i ↦ (τ ∘ f)(i)$ eine Injektion von ${1,…,n+k-1}$ nach ${1,…,n-1}$. Das widerspricht $A_(n-1)$.#qedhere
+  / IS: Angenommen, $A_n$ gilt nicht. Dann gibt es $k ∈ ℕ⁺$ und eine Injektion $f : {1,…,n+k} → {1,…,n}$. Sei $y := f(n+k)$ und sei $τ : {1,…,n} → {1,…,n}$ die Bijektion, die $y$ und $n$ vertauscht und alle anderen Zahlen festhält. Dann ist $τ ∘ f$ injektiv (siehe @verkettungInjSurj) mit $(τ ∘ f)(n+k) = n$. Für $i ∈ {1,…,n+k-1}$ ist daher $(τ ∘ f)(i) ≠ n$. Also ist $i ↦ (τ ∘ f)(i)$ eine Injektion von ${1,…,n+k-1}$ nach ${1,…,n-1}$. Das widerspricht $A_(n-1)$.#qedhere
 ]
 
 #definition("Endliche Mengen", kurz: [endlich, $|A| = n$])[
@@ -3069,7 +3073,7 @@
 ]
 
 #beweis[
-  Angenommen, $A$ ist gleichmächtig zu ${1,…,n}$ und gleichmächtig zu ${1,…,m}$ mit $n < m$. Da Gleichmächtigkeit eine Äquivalenzrelation ist (siehe @maechtigkeitOrdnung), sind ${1,…,m}$ und ${1,…,n}$ gleichmächtig. Dann gibt es eine Bijektion von ${1,…,m}$ nach ${1,…,n}$ im Widerspruch zu @schubfachFormal.
+  Angenommen, $A$ ist gleichmächtig zu ${1,…,n}$ und gleichmächtig zu ${1,…,m}$ mit $n < m$. Da Gleichmächtigkeit eine Äquivalenzrelation ist (siehe @maechtigkeitOrdnung), sind ${1,…,m}$ und ${1,…,n}$ gleichmächtig. Mit $k := m - n ∈ ℕ⁺$ gibt es also eine Bijektion von ${1,…,n+k}$ nach ${1,…,n}$. Diese ist insbesondere injektiv, im Widerspruch zu @schubfachFormal.
 ]
 
 #satz[Die Schreibweisen passen zusammen][
@@ -3081,7 +3085,7 @@
 ]<schreibweisenPassen>
 
 #beweis[
-  Seien $n := |A|$ und $m := |B|$ und seien $α : A → {1,…,n}$ und $β : B → {1,…,m}$ Bijektionen.
+  Seien $n := |A|$ und $m := |B|$, und seien $α : A → {1,…,n}$ und $β : B → {1,…,m}$ Bijektionen.
 
   #abbildung(slides: 1, caption: [
     Die Bijektionen $α$ und $β$ übersetzen zwischen $f$ und $ι$.
@@ -3110,7 +3114,7 @@
 ]
 
 #korollar[
-  Teilmengen endlicher Mengen sind endlich
+  Teilmengen endlicher Mengen sind endlich.
 ]<teilmengeEndlich>
 
 #beweis[
