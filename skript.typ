@@ -2878,8 +2878,6 @@
   Isomorphe Graphen sind „derselbe Graph mit anderen Knotennamen“. Jede Eigenschaft, die sich ohne Rückgriff auf die Knotennamen formulieren lässt, hat ein Graph daher genau dann, wenn jeder zu ihm isomorphe Graph sie hat. Beispiele sind die Knoten- und Kantenzahl, das Vorkommen von Knoten bestimmten Grades, das Vorkommen von Wegen und Kreisen bestimmter Länge und der Zusammenhang.
 ]<invarianten>
 
-#stand[nach Mittwoch 18.11.2026]
-
 #uebung[
   Begründen Sie, dass die folgenden beiden Graphen _nicht_ isomorph sind.
   #align(center, grid(
@@ -3045,81 +3043,73 @@
   Vorsicht ist dagegen beim Übergang von $⊆$ zu $≤$ geboten: Aus $A ⊊ B$ folgt $|A| ≤ |B|$, aber nicht $|A| < |B|$ (siehe @abzaehlbarBeispiele).
 ]<rechnenMaechtigkeit>
 
+#stand[nach Donnerstag 19.11.2026]
+
 == Endliche Mengen
 
 #skript[
   Wir können nun formal nachbauen, was wir zuvor nur mit Rückgriff auf die Intuition einer „Anzahl von Elementen“ definieren konnten, nämlich die Kardinalität endlicher Mengen.
 ]
 
-#lemma[Schubfachprinzip, formal][
-  Sei $n ∈ ℕ$ und $k ∈ ℕ⁺$. Dann gibt es keine Injektion von ${1,…,n+k}$ nach ${1,…,n}$.
+#lemma[
+  Sei $n ∈ ℕ$ beliebig. Es gibt keine Bijektion von ${1,…,n+1}$ nach ${1,…,n}$.
+]<verschiedenGross>
+
+#beweisansatz[
+  Man kann eine Induktion führen.
+  / IA: Für $n = 0$ gibt es überhaupt keine Funktion $f: {1} → ∅$. ✓
+  / IS: Eine hypothetische Bijektion $f : {1,…,n+1} → {1,…n}$ kann man in eine Bijektion von ${1,…,n}$ nach ${1,…n-1}$ umbauen. Diese widerspricht der IV.
+]
+
+#korollar[
+  $|∅| < |{1}| < |{1,2}| < |{1,2,3}| < … < |ℕ|.$
+]<endlichKette>
+
+#beweis[
+  Aus $∅ ⊆ {1} ⊆ {1,2} ⊆ … ⊆ ℕ$ erhält man an jeder Stelle "$≤$" mit @uebInklusion. Aus @verschiedenGross erhält man alle „$≠$“ außer das letzte. Wir müssen noch für beliebiges $n ∈ ℕ$ zeigen dass $|{1,…,n}| ≠ |ℕ|$. Wäre $|{1,…,n}| = |ℕ|$, so würde gelten $ |{1,…,n+1}| ≤ |ℕ| = |{1,…,n}| < |{1,…,n+1}|. $ Daraus folgt#footnote[In @rechnenMaechtigkeit wurde das "versprochen". Können Sie es auch beweisen?] $|{1,…,n+1}| < |{1,…,n+1}|$, was absurd ist.
+]
+
+#korollar[Schubfachprinzip, formal][
+  Seien $m, n ∈ ℕ$ mit $m < n$. Dann gibt es keine Injektion von ${1,…,n}$ nach ${1,…,m}$.
 ]<schubfachFormal>
 
 #beweis[
-  Wir zeigen per Induktion folgende Aussage $A_n$ für jedes $n ∈ ℕ$:
-  $ A_n defiff ∀k ∈ ℕ⁺: ∄ f : {1,…,n+k} → {1,…,n}: f "ist injektiv". $
-
-  / IA: Angenommen, $A₀$ gilt nicht. Dann müsste es ein $k > 0$ geben sowie eine Funktion $f : {1,…,k} → ∅$. Aus $1 ∈ {1,…,k}$ folgt $f(1) ∈ ∅$. Die leere Menge hat aber keine Elemente. Also gilt $A₀$.
-  / IV: Für ein $n ≥ 1$ gelte $A_(n-1)$.
-  / IS: Angenommen, $A_n$ gilt nicht. Dann gibt es $k ∈ ℕ⁺$ und eine Injektion $f : {1,…,n+k} → {1,…,n}$. Sei $y := f(n+k)$ und sei $τ : {1,…,n} → {1,…,n}$ die Bijektion, die $y$ und $n$ vertauscht und alle anderen Zahlen festhält. Dann ist $τ ∘ f$ injektiv (siehe @verkettungInjSurj) mit $(τ ∘ f)(n+k) = n$. Für $i ∈ {1,…,n+k-1}$ ist daher $(τ ∘ f)(i) ≠ n$. Also ist $i ↦ (τ ∘ f)(i)$ eine Injektion von ${1,…,n+k-1}$ nach ${1,…,n-1}$. Das widerspricht $A_(n-1)$.#qedhere
+  Angenommen es gäbe eine solche Injektion. Die Inklusion liefert die Injektion in die Gegenrichtung. Mit Cantor-Schröder-Bernstein folgt $|{1,…,n}| = |{1,…,m}|$, im Widerspruch zu @endlichKette.
 ]
 
 #definition[Endliche Mengen][
   Eine Menge $A$ heißt *endlich*, wenn es ein $n ∈ ℕ$ gibt, sodass $A$ gleichmächtig zu ${1,…,n}$ ist.#footnote[Für $n = 0$ ist ${1,…,n} = ∅$.] Wir nennen $n$ dann die *Kardinalität* oder *Mächtigkeit* von $A$ und schreiben $|A| = n$. Andernfalls heißt $A$ *unendlich*.
 ]<endlicheMenge>
 
-#korollar[Wohldefiniertheit][
-  Die Zahl $n$ in @endlicheMenge ist eindeutig bestimmt.
-]
-
-#beweis[
-  Angenommen, $A$ ist gleichmächtig zu ${1,…,n}$ und gleichmächtig zu ${1,…,m}$ mit $n < m$. Da Gleichmächtigkeit eine Äquivalenzrelation ist (siehe @maechtigkeitOrdnung), sind ${1,…,m}$ und ${1,…,n}$ gleichmächtig. Mit $k := m - n ∈ ℕ⁺$ gibt es also eine Bijektion von ${1,…,n+k}$ nach ${1,…,n}$. Diese ist insbesondere injektiv, im Widerspruch zu @schubfachFormal.
+#bemerkung(slides: "titel")[Wohldefiniertheit][
+  Die Zahl $n$ in @endlicheMenge ist eindeutig bestimmt. Denn wäre $A$ gleichmächtig zu ${1,…,n}$ und gleichmächtig zu ${1,…,m}$ mit $m < n$, dann wären ${1,…,m}$ und ${1,…,n}$ gleichmächtig, im Widerspruch zu @endlichKette.
 ]
 
 #satz[Die Schreibweisen passen zusammen][
   #set enum(numbering: "(1)")
-  Seien $A$ und $B$ endliche Mengen. Die Schreibweise $|A| ≤ |B|$ hat nun zwei Bedeutungen:
-  + Es existiert eine Injektion von $A$ nach $B$ (nach @maechtigkeit).
-  + Für $n := |A|$ und $m := |B|$ (nach @endlicheMenge) gilt $n ≤ m$.
+  Seien $A$ und $B$ endliche Mengen mit $n := |A|$ und $m := |B|$. Die Schreibweise $|A| ≤ |B|$ hat nun zwei Bedeutungen:
+  + Nach @maechtigkeit: Es existiert eine Injektion $f: A → B$.
+  + Nach @endlicheMenge: Es gilt $n ≤ m$.
   Das ist kein Problem, denn beide Aussagen sind äquivalent. Dasselbe gilt für $|A| < |B|$ und $|A| = |B|$.
 ]<schreibweisenPassen>
 
 #beweis[
-  Seien $n := |A|$ und $m := |B|$, und seien $α : A → {1,…,n}$ und $β : B → {1,…,m}$ Bijektionen.
-
+  Seien $α : A → {1,…,n}$ und $β : B → {1,…,m}$ Bijektionen.
   #abbildung(slides: 1, caption: [
     Die Bijektionen $α$ und $β$ übersetzen zwischen $f$ und $ι$.
   ])[#schreibweisenbild()]
-
-  Wir zeigen die Äquivalenz von (1) und (2).
-  / (1) ⇒ (2): Sei $f : A → B$ injektiv. Durch Verketten (siehe @verkettungInjSurj) erhalten wir die Injektion $β ∘ f ∘ α^(-1) : {1,…,n} → {1,…,m}$. Nach @schubfachFormal folgt $n ≤ m$.
-  / (2) ⇒ (1): Gilt $n ≤ m$, so ist die Inklusion $ι : {1,…,n} → {1,…,m}$ injektiv. Durch Verketten erhalten wir die Injektion $β^(-1) ∘ ι ∘ α : A → B$.
+  Eine Injektion $ι: {1,…,n} → {1,…,m}$ existiert genau dann, wenn $n ≤ m$ gilt. In diesem Fall erhält man eine Injektion $β^(-1) ∘ ι ∘ α : A → B$ durch Verkettung. Umgekehrt liefert eine Injektion $f : A → B$ auch eine Injektion $β ∘ f ∘ α^(-1) : {1,…,n} → {1,…,m}$.
 
   Die Argumente für $|A| < |B|$ und $|A| = |B|$ lassen wir weg.
 ]
 
-#bemerkung[Beweis von Offensichtlichem][
-  Wir widmen uns nun Aussagen, die offensichtlich wahr sind. Indem wir sie formal beweisen, gewinnen wir trotzdem etwas: die Zuversicht, dass der neue Formalismus für Kardinalität das leistet, was er soll. Dieser Effekt verbraucht sich aber schnell und es wird langweilig. Wir zeigen exemplarisch einige Aussagen. Danach werden wir dermaßen offensichtliche Kardinalitätsaussagen einfach glauben.
+#bemerkung[
+  Folgende Aussagen sind ziemlich offensichtlich. Man könnte meinen, dass sie zu grundlegend sind um eine Rechtfertigung zuzulassen. Aber das stimmt nicht: Mit den Techniken dieses Kapitels könnten wir sie formal beweisen. Dass das geht ist interessant. An den Beweisen selbst lernt man aber nicht viel neues, also belassen wir es bei dem Versprechen, dass es _ginge_. Auch später werden wir offensichtliche Kardinalitätsaussagen nun einfach verwenden.
 ]
 
-#lemma[
-  Sei $n ∈ ℕ$ und $C ⊆ {1,…,n}$. Dann ist $C$ endlich mit $|C| ≤ n$.
-]<teilmenge-1n-endlich>
-
-#beweis[
-  Wir zeigen das mit Induktion über $n$.
-    / IA: Ist $n = 0$, so folgt $C = ∅$ und damit $|C| = 0$.
-    / IV: Die Behauptung gelte für ein $n$ und jedes $C ⊆ {1,…,n}$.
-    / IS: Sei nun $C ⊆ {1,…,n+1}$. Falls $n+1 ∉ C$, so gilt $C ⊆ {1,…,n}$ und nach IV ist $C$ endlich mit $|C| ≤ n ≤ n+1$. Andernfalls sei $C' := C ∖ {n+1}$. Wegen $C' ⊆ {1,…,n}$ ist nach IV $C'$ endlich mit $k := |C'| ≤ n$. Sei $f : C' → {1,…,k}$ eine entsprechende Bijektion. Dann ist $f ∪ {(n+1,k+1)} : C → {1,…,k+1}$ eine Bijektion. Also ist $C$ endlich mit $|C| = k+1 ≤ n+1$.#qedhere
-]
-
-#korollar[
+#satz[
   Teilmengen endlicher Mengen sind endlich.
 ]<teilmengeEndlich>
-
-#beweis[
-  Sei $A$ endlich mit $n := |A|$ und sei $f : A → {1,…,n}$ eine Bijektion. Ist nun $A' ⊆ A$, so ergibt die Einschränkung von $f$ auf $A'$ eine Bijektion von $A'$ nach $f(A')$. Nach @teilmenge-1n-endlich ist $f(A') ⊆ {1,…,n}$ endlich mit $|f(A')| ≤ n$, also ist auch $A'$ endlich mit $|A'| = |f(A')| ≤ n$.
-]
 
 #satz[
   #set enum(numbering: "(1)")
@@ -3128,18 +3118,6 @@
   + Ist $B ⊆ A$, so ist $A ∖ B$ endlich mit $|A ∖ B| = |A| - |B|$.
   + $A ∪ B$ ist endlich mit $|A ∪ B| = |A| + |B| - |A ∩ B|$.
 ]<kardinalitaeten>
-
-#beweis[
-  #set enum(numbering: "(1)")
-  + Sei $n := |A|$ und $m := |B|$, und seien $α : A → {1,…,n}$ und $β : B → {1,…,m}$ Bijektionen. „Verschieben“ von $β$ ergibt die Bijektion $β': B → {n+1,…,n+m}$ mit $b ↦ β(b)+n$. Die Definitionsmengen und Zielmengen von $α$ und $β'$ sind jeweils disjunkt, damit ist $α ∪ β' : A ∪ B → {1,…,n} ∪ {n+1,…,n+m}$ eine Bijektion. Sie bezeugt $|A ∪ B| = n+m$.
-  + Nach @teilmengeEndlich ist $A ∖ B$ endlich. Die Mengen $A ∖ B$ und $B$ sind disjunkt mit Vereinigung $A$. Aus (1) folgt also $|A| = |A ∖ B| + |B|$.
-  + Nach @teilmengeEndlich ist $B ∖ A$ endlich. Die Mengen $A$ und $B ∖ A$ sind disjunkt mit Vereinigung $A ∪ B$. Mit (1) folgt
-    $
-      |A ∪ B| &= |A| + |B ∖ A|\ 
-              &= |A| + |B ∖ (A ∩ B)|  && #weil[(2)] \
-              &= |A| + |B| - |A ∩ B|. qedhere
-    $
-]
 
 == Abzählbare Mengen
 
