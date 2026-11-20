@@ -3125,26 +3125,20 @@
   Eine Menge $A$ heißt *abzählbar*, wenn $|A| ≤ |ℕ|$ gilt, andernfalls *überabzählbar*. Gilt $|A| = |ℕ|$, so heißt $A$ *abzählbar unendlich*.#footnote[Manche Autoren zählen die endlichen Mengen nicht zu den abzählbaren Mengen, machen also die Unterscheidung zwischen endlich ($|A| < |ℕ|$), abzählbar ($|A| = |ℕ|$) und überabzählbar ($|A| > |ℕ|$).]
 ]<abzaehlbar>
 
-#bemerkung(slides: "titel")[Gibt es mehr natürliche Zahlen als Primzahlen?][
-  Die Menge $ℙ$ der Primzahlen ist zwar unendlich, aber die Menge $ℕ ∖ ℙ$ der „Nichtprimzahlen“ ist es ebenfalls. Gilt also $|ℙ| < |ℕ|$? Der folgende Satz gibt eine negative Antwort.
+#bemerkung(slides: "titel")[$|A| < |ℕ| ⇒ A "ist endlich"$][
+  Es gibt unendlich viele Primzahlen, aber "gefühlt" gibt es viel mehr natürliche Zahlen als Primzahlen. Man könnte daher vermuten, dass es unendliche Mengen gibt, die weniger mächtig sind als $ℕ$. Der folgende Satz widerspricht.
 ]
 
 #satz[
-  Eine Menge $A$ ist genau dann abzählbar, wenn sie endlich oder abzählbar unendlich ist. Als Formel
+  Eine Menge $A$ ist genau dann abzählbar, wenn sie endlich oder abzählbar unendlich ist. Als Formel:
   $ |A| ≤ |ℕ| ⇔ (∃n ∈ ℕ: |A| = n) ∨ |A| = |ℕ|. $
 ]<abzaehlbarFaelle>
 
 #beweis[
-  / $⇐$: Die Rückrichtung ist ziemlich klar. Im ersten Fall gilt $|A| = n$ für ein $n ∈ ℕ$ und wir erhalten eine Bijektion von $A$ nach ${1,…,n}$. Im zweiten Fall gilt $|A| = |ℕ|$ und wir erhalten eine Bijektion von $A$ nach $ℕ$. In beiden Fällen haben wir eine Injektion von $A$ nach $ℕ$.
-  / $⇒$: Aus $|A| ≤ |ℕ|$ erhalten wir eine Injektion $f : A → ℕ$. Sei $M := f(A)$, dann ist $f : A → M$ eine Bijektion (siehe @einschränkung-auf-bild).
-    / Fall 1\: $M$ ist endlich.: Wegen $|A| = |M|$ ist auch $A$ endlich und die linke Seite der Disjunktion erfüllt.
-    / Fall 2\: $M$ ist unendlich.: Wir zählen $M$ der Größe nach auf:
-      $ M = {a₀,a₁,a₂,a₃,…} "mit" a₀ < a₁ < a₂ < … $
-      Formal definieren wir dazu für $k = 0, 1, 2, …$ nacheinander
-      $ a_k := min(M ∖ {a_0,…,a_(k-1)}). $
-      Weil $M$ unendlich ist, ist für jedes $k ∈ ℕ$ ein frisches $a_k ∈ M$ übrig. Weil wir aufsteigend vorgehen, wird jedes $n ∈ M$ spätestens nach $n$ Schritten das Minimum sein. Also ist die Abbildung $k ↦ a_k$ eine Bijektion von $ℕ$ nach $M$. Hier ist eine Illustration:
-      $ #aufzaehlbild() $
-      Es gilt also $|A| = |M|$ und $|M| = |ℕ|$, also auch $|A| = |ℕ|$.#qedhere
+  / $⇐$: Gilt $|A| = n$ für ein $n ∈ ℕ$ so erhalten wir eine Bijektion von $A$ nach ${1,…,n}$. Gilt $|A| = |ℕ|$ so erhalten wir eine Bijektion von $A$ nach $ℕ$. In beiden Fällen haben wir eine Injektion von $A$ nach $ℕ$.
+  / $⇒$: Wir wählen nacheinander Elemente $a₁, a₂, …$, wobei jedes $a_(i+1)$ beliebig aus $A ∖ {a₁,…,a_i}$ gewählt wird.
+    / Fall 1\: Der Prozess endet.: Für ein $n ∈ ℕ$ gilt $A ∖ {a₁,…,a_n} = ∅$, also $A = {a₁,…,a_n}$. Dann ist $i ↦ a_i$ eine Bijektion von ${1,…,n}$ nach $A$, also gilt $|A| = n$.
+    / Fall 2\: Der Prozess endet nicht.: Wir erhalten eine unendliche Folge paarweise verschiedener Elemente $a₁, a₂, …$. Dann ist $ℕ → A$, $n ↦ a_(n+1)$ eine Injektion, also gilt $|ℕ| ≤ |A|$. Mit $|A| ≤ |ℕ|$ und @csb folgt $|A| = |ℕ|$.#qedhere
 ]
 
 #uebung[Abzählbar unendliche Mengen][
