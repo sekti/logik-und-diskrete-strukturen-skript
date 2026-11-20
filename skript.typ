@@ -3038,7 +3038,7 @@
 ]
 
 #bemerkung(slides: "titel")[Rechnen mit Mächtigkeiten][
-  @maechtigkeitOrdnung zeigt, dass sich die Relationen $=$, $≤$ und $<$ zwischen Mächtigkeiten (und $≥$, $>$ in umgekehrter Richtung gelesen) so miteinander vertragen, wie wir das von Zahlen gewohnt sind. Zum Beispiel folgt aus $|A| < |B| ≤ |C| = |D|$, dass $|A| < |D|$ gilt.#footnote[Auch je zwei Mengen sind vergleichbar, d.h. es gilt $|A| ≤ |B|$ oder $|B| ≤ |A|$. Der Beweis benötigt allerdings das sogenannte Auswahlaxiom und geht über diese Vorlesung hinaus.]
+  @maechtigkeitOrdnung zeigt, dass sich die Relationen $=$, $≤$ und $<$ zwischen Mächtigkeiten (und $≥$, $>$ in umgekehrter Richtung gelesen) so miteinander vertragen, wie wir das von Zahlen gewohnt sind. Zum Beispiel folgt aus $|A| < |B| ≤ |C| = |D|$, dass $|A| < |D|$ gilt. Die Beweise solcher Regeln überlassen wir Ihnen.#footnote[Auch je zwei Mengen sind vergleichbar, d.h. es gilt $|A| ≤ |B|$ oder $|B| ≤ |A|$. Der Beweis benötigt allerdings das sogenannte Auswahlaxiom und geht über diese Vorlesung hinaus.]
 
   Vorsicht ist dagegen beim Übergang von $⊆$ zu $≤$ geboten: Aus $A ⊊ B$ folgt $|A| ≤ |B|$, aber nicht $|A| < |B|$ (siehe @abzaehlbarBeispiele).
 ]<rechnenMaechtigkeit>
@@ -3052,13 +3052,13 @@
 ]
 
 #lemma[
-  Sei $n ∈ ℕ$ beliebig. Es gibt keine Bijektion von ${1,…,n+1}$ nach ${1,…,n}$.
+  Sei $n ∈ ℕ$. Es gibt keine Bijektion von ${1,…,n+1}$ nach ${1,…,n}$.
 ]<verschiedenGross>
 
 #beweisansatz[
   Man kann eine Induktion führen.
   / IA: Für $n = 0$ gibt es überhaupt keine Funktion $f: {1} → ∅$. ✓
-  / IS: Eine hypothetische Bijektion $f : {1,…,n+1} → {1,…n}$ kann man in eine Bijektion von ${1,…,n}$ nach ${1,…n-1}$ umbauen. Diese widerspricht der IV.
+  / IS: Eine hypothetische Bijektion $f : {1,…,n+1} → {1,…,n}$ kann man in eine Bijektion von ${1,…,n}$ nach ${1,…,n-1}$ umbauen. Diese widerspricht der IV.
 ]
 
 #korollar[
@@ -3066,7 +3066,7 @@
 ]<endlichKette>
 
 #beweis[
-  Aus $∅ ⊆ {1} ⊆ {1,2} ⊆ … ⊆ ℕ$ erhält man an jeder Stelle "$≤$" mit @uebInklusion. Aus @verschiedenGross erhält man alle „$≠$“ außer das letzte. Wir müssen noch für beliebiges $n ∈ ℕ$ zeigen dass $|{1,…,n}| ≠ |ℕ|$. Wäre $|{1,…,n}| = |ℕ|$, so würde gelten $ |{1,…,n+1}| ≤ |ℕ| = |{1,…,n}| < |{1,…,n+1}|. $ Daraus folgt#footnote[In @rechnenMaechtigkeit wurde das "versprochen". Können Sie es auch beweisen?] $|{1,…,n+1}| < |{1,…,n+1}|$, was absurd ist.
+  Aus $∅ ⊆ {1} ⊆ {1,2} ⊆ … ⊆ ℕ$ erhält man an jeder Stelle „$≤$“ mit @uebInklusion. Aus @verschiedenGross erhält man alle „$≠$“ zwischen endlichen Mengen ${1,…,n}$. Wir müssen noch für beliebiges $n ∈ ℕ$ zeigen, dass $|{1,…,n}| ≠ |ℕ|$. Wäre $|{1,…,n}| = |ℕ|$, so würde gelten $ |{1,…,n+1}| ≤ |ℕ| = |{1,…,n}| < |{1,…,n+1}|. $ Daraus folgt#footnote[In @rechnenMaechtigkeit wurde das „versprochen“. Können Sie es auch beweisen?] $|{1,…,n+1}| < |{1,…,n+1}|$, was absurd ist.
 ]
 
 #korollar[Schubfachprinzip, formal][
@@ -3074,7 +3074,7 @@
 ]<schubfachFormal>
 
 #beweis[
-  Angenommen es gäbe eine solche Injektion. Die Inklusion liefert die Injektion in die Gegenrichtung. Mit Cantor-Schröder-Bernstein folgt $|{1,…,n}| = |{1,…,m}|$, im Widerspruch zu @endlichKette.
+  Angenommen, es gäbe eine solche Injektion. Die Inklusion liefert die Injektion in die Gegenrichtung. Mit Cantor-Schröder-Bernstein folgt $|{1,…,n}| = |{1,…,m}|$, im Widerspruch zu @endlichKette.
 ]
 
 #definition[Endliche Mengen][
@@ -3098,13 +3098,13 @@
   #abbildung(slides: 1, caption: [
     Die Bijektionen $α$ und $β$ übersetzen zwischen $f$ und $ι$.
   ])[#schreibweisenbild()]
-  Eine Injektion $ι: {1,…,n} → {1,…,m}$ existiert genau dann, wenn $n ≤ m$ gilt. In diesem Fall erhält man eine Injektion $β^(-1) ∘ ι ∘ α : A → B$ durch Verkettung. Umgekehrt liefert eine Injektion $f : A → B$ auch eine Injektion $β ∘ f ∘ α^(-1) : {1,…,n} → {1,…,m}$.
+  Eine Injektion $ι: {1,…,n} → {1,…,m}$ existiert genau dann, wenn $n ≤ m$ gilt („⇐“ per Inklusion, „⇒“ nach @schubfachFormal). In diesem Fall erhält man eine Injektion $β^(-1) ∘ ι ∘ α : A → B$ durch Verkettung. Umgekehrt liefert eine Injektion $f : A → B$ auch eine Injektion $β ∘ f ∘ α^(-1) : {1,…,n} → {1,…,m}$.
 
   Die Argumente für $|A| < |B|$ und $|A| = |B|$ lassen wir weg.
 ]
 
 #bemerkung[
-  Folgende Aussagen sind ziemlich offensichtlich. Man könnte meinen, dass sie zu grundlegend sind um eine Rechtfertigung zuzulassen. Aber das stimmt nicht: Mit den Techniken dieses Kapitels könnten wir sie formal beweisen. Dass das geht ist interessant. An den Beweisen selbst lernt man aber nicht viel neues, also belassen wir es bei dem Versprechen, dass es _ginge_. Auch später werden wir offensichtliche Kardinalitätsaussagen nun einfach verwenden.
+  Folgende Aussagen sind ziemlich offensichtlich. Man könnte meinen, dass sie zu grundlegend sind, um eine Rechtfertigung zuzulassen. Aber das stimmt nicht: Mit den Techniken dieses Kapitels könnten wir sie formal beweisen. Dass das geht, ist interessant. An den Beweisen selbst lernt man aber nicht viel Neues, also belassen wir es bei dem Versprechen, dass es _ginge_. Auch später werden wir offensichtliche Kardinalitätsaussagen einfach verwenden.
 ]
 
 #satz[
