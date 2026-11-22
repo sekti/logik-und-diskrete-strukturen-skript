@@ -3125,8 +3125,8 @@
   Eine Menge $A$ heißt *abzählbar*, wenn $|A| ≤ |ℕ|$ gilt, andernfalls *überabzählbar*. Gilt $|A| = |ℕ|$, so heißt $A$ *abzählbar unendlich*.#footnote[Manche Autoren zählen die endlichen Mengen nicht zu den abzählbaren Mengen, machen also die Unterscheidung zwischen endlich ($|A| < |ℕ|$), abzählbar ($|A| = |ℕ|$) und überabzählbar ($|A| > |ℕ|$).]
 ]<abzaehlbar>
 
-#bemerkung(slides: "titel")[Gibt es unendliche Mengen kleiner als $ℕ$?][
-  Es gibt unendlich viele Primzahlen, aber "gefühlt" gibt es viel mehr natürliche Zahlen als Primzahlen. Man könnte daher vermuten, dass es unendliche Mengen gibt, die weniger mächtig sind als $ℕ$. Der folgende Satz widerspricht.
+#bemerkung(slides: "titel")[$ℕ$ ist die kleinste unendliche Menge.][
+  Es gibt unendlich viele Primzahlen, aber "gefühlt" gibt es viel mehr natürliche Zahlen als Primzahlen. Man könnte daher vermuten, dass es unendliche Mengen gibt, die weniger mächtig sind als $ℕ$. Das ist falsch, wie folgender Satz zeigt.
 ]
 
 #satz[
@@ -3135,10 +3135,10 @@
 ]<abzaehlbarFaelle>
 
 #beweis[
-  / $⇐$: Gilt $|A| = n$ für ein $n ∈ ℕ$ so erhalten wir eine Bijektion von $A$ nach ${1,…,n}$. Gilt $|A| = |ℕ|$ so erhalten wir eine Bijektion von $A$ nach $ℕ$. In beiden Fällen haben wir eine Injektion von $A$ nach $ℕ$.
-  / $⇒$: Wir wählen nacheinander Elemente $a₁, a₂, …$, wobei jedes $a_(i+1)$ beliebig aus $A ∖ {a₁,…,a_i}$ gewählt wird.
+  / $⇐$: Gilt $|A| = |ℕ|$ so folgt $|A| ≤ |ℕ|$ direkt. Andernfalls gilt $|A| = n$ für ein $n ∈ ℕ$ also $|A| = |{1,…,n}|$. Wegen ${1,…,n} ⊆ ℕ$ folgt $|A| ≤ |ℕ|$ mit @uebInklusion.
+  / $⇒$: Wir wählen nacheinander verschiedene Elemente $a₁, a₂, …$, mit anderen Worten $a_(i+1)$ wird beliebig aus $A ∖ {a₁,…,a_i}$ gewählt.
     / Fall 1\: Der Prozess endet.: Für ein $n ∈ ℕ$ gilt $A ∖ {a₁,…,a_n} = ∅$, also $A = {a₁,…,a_n}$. Dann ist $i ↦ a_i$ eine Bijektion von ${1,…,n}$ nach $A$, also gilt $|A| = n$.
-    / Fall 2\: Der Prozess endet nicht.: Wir erhalten eine unendliche Folge paarweise verschiedener Elemente $a₁, a₂, …$. Dann ist $ℕ → A$, $n ↦ a_(n+1)$ eine Injektion, also gilt $|ℕ| ≤ |A|$. Mit $|A| ≤ |ℕ|$ und @csb folgt $|A| = |ℕ|$.#qedhere
+    / Fall 2\: Der Prozess endet nicht.: Wir erhalten eine unendliche Folge verschiedener Elemente $a₁, a₂, …$. Dann ist $ℕ → A$, $n ↦ a_(n+1)$ eine Injektion, also gilt $|ℕ| ≤ |A|$. Mit $|A| ≤ |ℕ|$ und @csb folgt $|A| = |ℕ|$.#qedhere
 ]
 
 #uebung[Abzählbar unendliche Mengen][
@@ -3151,7 +3151,7 @@
 ]<abzaehlbarBeispiele>
 
 #loesung[
-  Wir müssen in allen Fällen eine Bijektion zwischen der jeweiligen Menge und $ℕ$ angeben.
+  Alle Fälle verlangen nach einer Bijektion zwischen der jeweiligen Menge und $ℕ$.
   / Bijektion $ℕ ∪ {-1} → ℕ$.: 
   $ f : ℕ ∪ {-1} → ℕ, quad x ↦ x + 1. $
   / Bijektion $ℤ → ℕ$.: Wir bilden die nichtnegativen Zahlen auf die geraden und die negativen Zahlen auf die ungeraden Zahlen ab:
@@ -3167,20 +3167,20 @@
         table.vline(x: 1),
       )
     $
-  / Bijektion $ℕ × ℕ → ℕ$.: Wir fassen die Paare $(x,y) ∈ ℕ × ℕ$ als Gitterpunkte in der Ebene auf und nummerieren sie entlang der Diagonalen durch:
+  / Bijektion $ℕ × ℕ → ℕ$.: Wir fassen die Paare $(a,b) ∈ ℕ × ℕ$ als Gitterpunkte in der Ebene auf und nummerieren sie entlang der Diagonalen durch:
     $ #box(scale(75%,reflow : true)[#paarungsbild()]) $
-    Bemerkung: Dabei ergibt sich folgende Bijektion, die sich *Cantorsche Paarungsfunktion* nennt:
+    Dabei ergibt sich folgende Bijektion, die sich *Cantorsche Paarungsfunktion* nennt:
     $ π : ℕ × ℕ → ℕ, quad (a,b) ↦ ((a+b)(a+b+1))/2 + a. $
   / Bijektion $ℕ^* → ℕ$.:
     Nach @csb genügt es, Injektionen in beide Richtungen anzugeben. In der Rückrichtung bilden wir jede Zahl auf eine Folge der Länge $1$ ab:
     $ g : ℕ → ℕ^*, quad n ↦ (n). $
-    Überraschend ist die Hinrichtung. Eine Möglichkeit verwendet den *Fundamentalsatz der Arithmetik*, das heißt, dass jede Zahl eine _eindeutige_ Primfaktorzerlegung hat. Seien dafür $p_1 < p_2 < p_3 < …$ die Primzahlen. Wir setzen
+    Schwieriger ist die Hinrichtung. Eine Möglichkeit verwendet den *Fundamentalsatz der Arithmetik*, das heißt, dass jede positive natürliche Zahl eine _eindeutige_ Primfaktorzerlegung hat. Seien dafür $p_1 < p_2 < p_3 < …$ die Primzahlen. Wir setzen
     $ f : ℕ^* → ℕ, quad (n_1,…,n_k) ↦ p_1^(n_1+1) ⋅ … ⋅ p_k^(n_k+1). $
-    Zum Beispiel ist $f((0,2)) = 2^1 ⋅ 3^3 = 54$ und $f((0,2,0)) = 2^1 ⋅ 3^3 ⋅ 5^1 = 270$. Die leere Folge wird auf das leere Produkt $1$ abgebildet. Der Fundamentalsatz der Arithmetik garantiert, dass man aus der Zahl $p_1^(n_1+1) ⋅ … ⋅ p_k^(n_k+1)$ die Folge $(n_1+1,…,n_k+1)$ rekonstruieren kann, also ist $f$ injektiv. Das "$+1$" in jeder Komponente ist nötig, sonst hätten die verschiedenen Folgen $(0,2)$ und $(0,2,0)$ denselbe Funktionswert $2^0 ⋅ 3^2 = 2^0 ⋅ 3^2 ⋅ 5^0$.
+    Zum Beispiel ist $f((0,2)) = 2^1 ⋅ 3^3 = 54$ und $f((0,2,0)) = 2^1 ⋅ 3^3 ⋅ 5^1 = 270$. Die leere Folge wird auf das leere Produkt $1$ abgebildet. Der Fundamentalsatz der Arithmetik garantiert, dass man aus der Zahl $p_1^(n_1+1) ⋅ … ⋅ p_k^(n_k+1)$ die Folge $(n_1+1,…,n_k+1)$ rekonstruieren kann, also ist $f$ injektiv. Das "$+1$" in jeder Komponente ist nötig, sonst hätten die verschiedenen Folgen $(0,2)$ und $(0,2,0)$ denselben Funktionswert $2^0 ⋅ 3^2 = 2^0 ⋅ 3^2 ⋅ 5^0$.
 ]
 
 #bemerkung[Hilberts Hotel][
-  Varianten der letzten Übung sind Gegenstand eines von David Hilbert erdachten Gedankenexperiments. In einem Hotel mit abzählbar unendlich vielen Zimmern, die allesamt belegt sind, kann man dadurch, dass man die Gäste anders auf die Zimmer verteilt, Platz für neue Gäste schaffen. Für Hotels mit endlich vielen Zimmer wäre das absurd. Siehe z.B. #link("https://de.wikipedia.org/wiki/Hilberts_Hotel", "Wikipedia").
+  Varianten der letzten Übung sind Gegenstand eines von David Hilbert erdachten Gedankenexperiments. In einem Hotel mit abzählbar unendlich vielen Zimmern, die allesamt belegt sind, kann man dadurch, dass man die Gäste anders auf die Zimmer verteilt, Platz für neue Gäste schaffen. Für Hotels mit endlich vielen Zimmern wäre das absurd. Siehe z.B. #link("https://de.wikipedia.org/wiki/Hilberts_Hotel", "Wikipedia").
 ]
 
 == Cantors Diagonalargument
