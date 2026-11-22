@@ -3066,7 +3066,7 @@
 ]<endlichKette>
 
 #beweis[
-  Aus $∅ ⊆ {1} ⊆ {1,2} ⊆ … ⊆ ℕ$ erhält man an jeder Stelle „$≤$“ mit @uebInklusion. Aus @verschiedenGross erhält man alle „$≠$“ zwischen endlichen Mengen ${1,…,n}$. Wir müssen noch für beliebiges $n ∈ ℕ$ zeigen, dass $|{1,…,n}| ≠ |ℕ|$. Wäre $|{1,…,n}| = |ℕ|$, so würde gelten $ |{1,…,n+1}| ≤ |ℕ| = |{1,…,n}| < |{1,…,n+1}|. $ Daraus folgt#footnote[In @rechnenMaechtigkeit wurde das „versprochen“. Können Sie es auch beweisen?] $|{1,…,n+1}| < |{1,…,n+1}|$, was absurd ist.
+  Aus $∅ ⊆ {1} ⊆ {1,2} ⊆ … ⊆ ℕ$ erhält man an jeder Stelle „$≤$“ mit @uebInklusion. Aus @verschiedenGross erhält man alle „$≠$“ zwischen endlichen Mengen. Wir müssen noch für beliebiges $n ∈ ℕ$ zeigen, dass $|{1,…,n}| ≠ |ℕ|$. Wäre $|{1,…,n}| = |ℕ|$, so würde gelten $ |{1,…,n+1}| ≤ |ℕ| = |{1,…,n}| < |{1,…,n+1}|. $ Daraus folgt#footnote[In @rechnenMaechtigkeit wurde das „versprochen“. Können Sie es auch beweisen?] $|{1,…,n+1}| < |{1,…,n+1}|$, was absurd ist.
 ]
 
 #korollar[Schubfachprinzip, formal][
@@ -3125,7 +3125,7 @@
   Eine Menge $A$ heißt *abzählbar*, wenn $|A| ≤ |ℕ|$ gilt, andernfalls *überabzählbar*. Gilt $|A| = |ℕ|$, so heißt $A$ *abzählbar unendlich*.#footnote[Manche Autoren zählen die endlichen Mengen nicht zu den abzählbaren Mengen, machen also die Unterscheidung zwischen endlich ($|A| < |ℕ|$), abzählbar ($|A| = |ℕ|$) und überabzählbar ($|A| > |ℕ|$).]
 ]<abzaehlbar>
 
-#bemerkung(slides: "titel")[$|A| < |ℕ| ⇒ A "ist endlich"$][
+#bemerkung(slides: "titel")[Gibt es unendliche Mengen kleiner als $ℕ$?][
   Es gibt unendlich viele Primzahlen, aber "gefühlt" gibt es viel mehr natürliche Zahlen als Primzahlen. Man könnte daher vermuten, dass es unendliche Mengen gibt, die weniger mächtig sind als $ℕ$. Der folgende Satz widerspricht.
 ]
 
@@ -3147,7 +3147,7 @@
   + $ℕ ∪ {-1}$,
   + $ℤ$,
   + $ℕ × ℕ$,
-  + $ℕ^* := union.big_(k ∈ ℕ) ℕ^k$. (Die Notation kennen wir aus @wortmenge. Hier ist $ℕ^*$ die Menge der endlichen Folgen natürlicher Zahlen.)
+  + $ℕ^* := union.big_(k ∈ ℕ) ℕ^k$. (Wie in @wortmenge ist $ℕ^*$ die Menge der _endlichen_ Folgen natürlicher Zahlen.)
 ]<abzaehlbarBeispiele>
 
 #loesung[
@@ -3157,19 +3157,26 @@
   / Bijektion $ℤ → ℕ$.: Wir bilden die nichtnegativen Zahlen auf die geraden und die negativen Zahlen auf die ungeraden Zahlen ab:
     $ f : ℤ → ℕ, quad z ↦ cases(2z & "falls" z ≥ 0, -2z-1 & "falls" z < 0.) $
     Als Wertetabelle sieht das so aus:
-    [Claude: Hier Wertetabelle einfügen, oben z, unten f(z), starten mit pünktchen, dann -4 bis +4 angeben, dann Pünktchen.]
-  / Bijektion $ℕ × ℕ → ℕ$.: Wir fassen die Paare $(x,y) ∈ ℕ × ℕ$ als Gitterpunkte in der Ebene auf und nummerieren die sie entlang der Diagonalen durch:
+    $
+      #table(
+        columns: (auto,) + (2.2em,) * 11,
+        align: (center,) + (right,)*11,
+        [$z$], [$…$], [$-4$], [$-3$], [$-2$], [$-1$], [$0$], [$1$], [$2$], [$3$], [$4$], [$…$],
+        table.hline(),
+        [$f(z)$], [$…$], [$7$], [$5$], [$3$], [$1$], [$0$], [$2$], [$4$], [$6$], [$8$], [$…$],
+        table.vline(x: 1),
+      )
+    $
+  / Bijektion $ℕ × ℕ → ℕ$.: Wir fassen die Paare $(x,y) ∈ ℕ × ℕ$ als Gitterpunkte in der Ebene auf und nummerieren sie entlang der Diagonalen durch:
     $ #box(scale(75%,reflow : true)[#paarungsbild()]) $
     Bemerkung: Dabei ergibt sich folgende Bijektion, die sich *Cantorsche Paarungsfunktion* nennt:
     $ π : ℕ × ℕ → ℕ, quad (a,b) ↦ ((a+b)(a+b+1))/2 + a. $
   / Bijektion $ℕ^* → ℕ$.:
     Nach @csb genügt es, Injektionen in beide Richtungen anzugeben. In der Rückrichtung bilden wir jede Zahl auf eine Folge der Länge $1$ ab:
     $ g : ℕ → ℕ^*, quad n ↦ (n). $
-    Die andere Richtung ist etwas komplizierter. Seien $p_1 < p_2 < p_3 < …$ die Primzahlen, also $p_1 = 2$, $p_2 = 3$, $p_3 = 5$ und so weiter. Wir setzen
-    $ f : ℕ^* → ℕ, quad (n_1,…,n_k) ↦ product_(i=1)^k p_i^(n_i+1) = p_1^(n_1+1) ⋅ … ⋅ p_k^(n_k+1). $
-    Zum Beispiel ist $ψ(0,2) = 2^1 ⋅ 3^3 = 54$ und $ψ(0,2,0) = 2^1 ⋅ 3^3 ⋅ 5^1 = 270$. Die leere Folge wird auf das leere Produkt $1$ abgebildet.
-
-    Die Injektivität folgt aus dem *Fundamentalsatz der Arithmetik* (den wir hier nicht beweisen). Nach diesem ist die Zerlegung einer Zahl in Primfaktoren bis auf die Reihenfolge eindeutig. An $ψ(n_1,…,n_k)$ kann man also ablesen, wie oft jede Primzahl als Faktor vorkommt. Daraus erhält man die Folge zurück: Die Länge $k$ ist die Anzahl der verschiedenen Primfaktoren, und $n_i$ ist die Vielfachheit von $p_i$ minus $1$. Also ist $ψ$ injektiv. #footnote[Ohne das „$+1$“ im Exponenten ginge das nicht: Dann hätten $(0,2)$ und $(0,2,0)$ beide den Wert $2^0 ⋅ 3^2 = 9$.]
+    Überraschend ist die Hinrichtung. Eine Möglichkeit verwendet den *Fundamentalsatz der Arithmetik*, das heißt, dass jede Zahl eine _eindeutige_ Primfaktorzerlegung hat. Seien dafür $p_1 < p_2 < p_3 < …$ die Primzahlen. Wir setzen
+    $ f : ℕ^* → ℕ, quad (n_1,…,n_k) ↦ p_1^(n_1+1) ⋅ … ⋅ p_k^(n_k+1). $
+    Zum Beispiel ist $f((0,2)) = 2^1 ⋅ 3^3 = 54$ und $f((0,2,0)) = 2^1 ⋅ 3^3 ⋅ 5^1 = 270$. Die leere Folge wird auf das leere Produkt $1$ abgebildet. Der Fundamentalsatz der Arithmetik garantiert, dass man aus der Zahl $p_1^(n_1+1) ⋅ … ⋅ p_k^(n_k+1)$ die Folge $(n_1+1,…,n_k+1)$ rekonstruieren kann, also ist $f$ injektiv. Das "$+1$" in jeder Komponente ist nötig, sonst hätten die verschiedenen Folgen $(0,2)$ und $(0,2,0)$ denselbe Funktionswert $2^0 ⋅ 3^2 = 2^0 ⋅ 3^2 ⋅ 5^0$.
 ]
 
 #bemerkung[Hilberts Hotel][
