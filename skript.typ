@@ -4,7 +4,7 @@
 // Nur ein Kapitel setzen, z.B. 5 (im Editor deutlich schneller); none = alles.
 // Lange Kapitel sind in Teile gespalten: 5.2 setzt nur Teil 2 von Kapitel 5.
 // Auf der Kommandozeile hat „--input kapitel=5“ (oder 5.2) bzw. „--input kapitel=alle“ Vorrang.
-#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { sys.inputs.kapitel } } else { 6 }
+#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { sys.inputs.kapitel } } else { 7 }
 
 // imports
   #import "@preview/ctheorems:2.0.0": *
@@ -3267,6 +3267,42 @@
 #slidebreak()
 = Zählen
 <sec:zaehlen>
+
+#skript[
+  In diesem Kapitel geht es darum, die Größe endlicher Mengen zu bestimmen. Einiges davon können wir schon. Wir tragen es zusammen und ergänzen es um ein paar einfache Ergebnisse. Dafür brauchen wir zunächst eine Schreibweise für Produkte absteigender Zahlen.
+]
+
+#notation[Fakultät und fallende Faktorielle][
+  Für $n, k ∈ ℕ$ ist die *fallende Faktorielle* („$n$ fallend $k$“) das Produkt der $k$ Zahlen von $n$ abwärts:
+  $ n^(underline(k)) := n ⋅ (n-1) ⋅ … ⋅ (n-k+1) = product_(i=0)^(k-1) (n-i). $
+  Die *Fakultät* von $n$ („$n$ Fakultät“) ist $n! := n^(underline(n)) = n ⋅ (n-1) ⋅ … ⋅ 1$.
+]
+
+#beispiel[
+  Es gilt $5^(underline(2)) = 5 ⋅ 4 = 20$ und $4! = 4 ⋅ 3 ⋅ 2 ⋅ 1 = 24$. Als leeres Produkt (@leeresProdukt) gilt $n^(underline(0)) = 1$, insbesondere $0! = 1$. Für $k > n$ ist $0$ einer der Faktoren, also $n^(underline(k)) = 0$, zum Beispiel $2^(underline(3)) = 2 ⋅ 1 ⋅ 0 = 0$.
+]
+
+#satz[Was wir schon zählen können][
+  #set enum(numbering: "(1)")
+  Seien $A$ und $B$ endliche Mengen mit $a := |A|$ und $b := |B|$, und sei $n ∈ ℕ$. Dann gilt:
+  + $|A × B| = a ⋅ b$ und $|A^n| = a^n$.
+  + $|B^A| = b^a$, d.h. es gibt $b^a$ Funktionen von $A$ nach $B$.
+  + $|2^A| = 2^a$.
+  + $|A ∪ B| = a + b - |A ∩ B|$, insbesondere $|A ∪ B| = a + b$, falls $A$ und $B$ disjunkt sind.
+  + Es gibt genau $b^(underline(a))$ Injektionen von $A$ nach $B$.
+  + Es gibt genau $a!$ Bijektionen von $A$ nach $A$. Diese heißen *Permutationen* von $A$.
+]<zaehlenBisher>
+
+#begründung[
+  / (1)–(4): Siehe @produktgroesse, @tupelanzahl, @funktionenanzahl, @potenzmengengroesse und @kardinalitaeten.
+  / (5): Sei $A = {x_1,…,x_a}$. Wir legen eine Injektion $f : A → B$ fest, indem wir die Funktionswerte nacheinander wählen. Für $f(x_1)$ gibt es $b$ Möglichkeiten. Für $f(x_2)$ ist jedes Element außer $f(x_1)$ erlaubt, das sind $b - 1$ Möglichkeiten. Allgemein ist $f(x_i)$ jedes der $b - (i-1)$ Elemente von $B ∖ {f(x_1),…,f(x_(i-1))}$. Insgesamt sind das $b ⋅ (b-1) ⋅ … ⋅ (b-a+1) = b^(underline(a))$ Möglichkeiten.
+  / (6): Nach @endlichInjSurj ist eine Funktion $A → A$ genau dann bijektiv, wenn sie injektiv ist. Nach (5) gibt es davon $a^(underline(a)) = a!$.
+]
+
+#bemerkung[
+  Für $a > b$ ist $b^(underline(a)) = 0$, es gibt dann also keine Injektion von $A$ nach $B$. Das passt zum Schubfachprinzip (@schubfachFormal).
+]
+
 - Technik
     (a): Gleichmächtigkeit durch Bijektion zeigen
     (b): „Bijektiver Beweis“ Gleichheit von Zahlen durch Kombinatorische Interpretation
@@ -3284,10 +3320,6 @@
   $g ∘ f = id_X$ genügt nicht. Zum Beispiel ist $f : ℕ → ℕ$, $n ↦ 2n$ sicher nicht bijektiv, aber für $g : ℕ → ℕ, n ↦ ⌊n/2⌋$ gilt $g ∘ f = id_ℕ$.
 ]
 
-  - Beispiel: Anzahl Injektionen
-    - Korollar: Keine Injektionen wenn Bildbereich kleiner als Definitionsbereich
-    - Korollar: Anzahl der Permutationen
-- passt zu @schubfachFormal, denn ein Faktor ist $0$
 
 == Binomialkoeffizienten
 
@@ -3317,29 +3349,11 @@
 
 == Catalanzahlen und Binärbäume
 
-/*
-Wollen wir hier Binärbäume haben?
-=== Gewurzelte Bäume
-
-#definition("Gewurzelter Baum")[
-  Ein *gewurzelter Baum* ist ein Baum $T = (V,E)$ zusammen mit einem ausgezeichneten Knoten $r ∈ V$, der *Wurzel*.
-]
-
-- Def: Für $v ≠ r$ ist der *Vorgänger* (oder *Elternknoten*) $p(v)$ der erste Knoten auf dem eindeutigen einfachen Weg von $v$ zur Wurzel. Das ergibt eine Funktion $p: V ∖ {r} → V$.
-- Def: *Kinder* von $v$ sind die Knoten in $p^(-1)({v})$, also das Urbild von $v$ unter $p$.
-- Def: *Tiefe* eines Knotens: Länge des Weges zur Wurzel; *Höhe* des Baumes: maximale Tiefe.
-- Bemerkung: Blätter sind hier die Knoten ohne Kinder. Achtung: Die Wurzel kann Grad 1 haben und ist trotzdem kein Blatt in diesem Sinne.
-- Bemerkung: Dass der Weg zur Wurzel eindeutig ist, haben wir bei den Beweistechniken gezeigt.
-- Beispiel: Dateisystem, Syntaxbaum eines arithmetischen Ausdrucks, Suchbaum.
-
-#definition("Geordneter Baum, Binärbaum")[
-  In einem *geordneten Baum* ist zusätzlich für jeden Knoten eine Reihenfolge seiner Kinder festgelegt. Ein *Binärbaum* ist rekursiv definiert: Ein Binärbaum ist entweder leer oder besteht aus einer Wurzel mit einem linken und einem rechten Binärbaum als Teilbäumen.
-]
-
+- Def: Ein *Binärbaum* ist rekursiv definiert: Ein Binärbaum ist entweder leer oder besteht aus einer Wurzel mit einem linken und einem rechten Binärbaum als Teilbäumen. (als rekursive Def schreiben)
+- (über die Anzahl Blätter oder Anzahl Knoten etwas sagen für später)
+- Illustratation.
 - Bemerkung: Hier kommt es auf die Reihenfolge an: Die beiden Binärbäume mit Wurzel und einem Kind (links bzw. rechts) sind verschieden, obwohl sie als Graphen isomorph sind.
 - Bemerkung: Die rekursive Definition passt zur strukturellen Induktion und zu rekursiven Datentypen in der Programmierung.
-- Ausblick: Die Anzahl der Binärbäume mit $n$ Knoten sind die Catalanzahlen (Kapitel „Zählen“).
-*/
 
 - Def: $C_n :=$ Anzahl der Binärbäume mit $n$ Knoten.
   - Kleine Werte von Hand: $C_0 = 1$, $C_1 = 1$, $C_2 = 2$, $C_3 = 5$.
