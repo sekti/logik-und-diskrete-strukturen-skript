@@ -3265,10 +3265,11 @@
 #if zeige(7) [
 #kapitelstart(7)
 #slidebreak()
-= Zählen und Abschätzen
+= Zählen
 <sec:zaehlen>
-- Bemerkung: Summen- und Produktzeichen haben wir im Kapitel über Mengen eingeführt.
-- Technik: Gleichmächtigkeit durch Bijektion zeigen
+- Technik
+    (a): Gleichmächtigkeit durch Bijektion zeigen
+    (b): „Bijektiver Beweis“ Gleichheit von Zahlen durch Kombinatorische Interpretation
 - Technik: Zeigen, dass eine Funktion bijektiv ist, indem man eine Funktion angibt und prüft, dass es sich um die Umkehrfunktion handelt.
 #satz[
   Seien $f: X → Y$ und $g: Y → X$ Funktionen.
@@ -3279,16 +3280,14 @@
     $ g(y) = g(f(f^(-1)(y))) = (g ∘ f)(f^(-1)(y)) = f^(-1)(y). $
 ]
 
+#bemerkung[
+  $g ∘ f = id_X$ genügt nicht. Zum Beispiel ist $f : ℕ → ℕ$, $n ↦ 2n$ sicher nicht bijektiv, aber für $g : ℕ → ℕ, n ↦ ⌊n/2⌋$ gilt $g ∘ f = id_ℕ$.
+]
 
-  - Beispiel: Kardinalität der Potenzmenge.
-  /* War vorher bei Funktionen
-  #bemerkung[
-    Damit erklärt sich die Schreibweise $2^A$ für die Potenzmenge. Fasst man die Zahl $2$ als die Menge ${0,1}$ auf, so ist $2^A$ die Menge aller Funktionen von $A$ nach ${0,1}$. Eine solche Funktion hält für jedes Element fest, ob es dazugehört oder nicht — und beschreibt damit genau eine Teilmenge von $A$. Nach @funktionenanzahl gibt es davon $2^(|A|)$ Stück.
-  ]*/
   - Beispiel: Anzahl Injektionen
     - Korollar: Keine Injektionen wenn Bildbereich kleiner als Definitionsbereich
     - Korollar: Anzahl der Permutationen
-- Schubfachprinzip als Satz: kein eigener Beweis, Verweis auf den Satz $|∅| < |{1}| < … < |ℕ|$ in @sec:cardinality
+- passt zu @schubfachFormal, denn ein Faktor ist $0$
 
 == Binomialkoeffizienten
 
@@ -3307,8 +3306,7 @@
   - Kombinatorische Interpretation
   - *nicht* die Polynommethode
 - Binomialsatz
-  - Zählen
-  - Bijektivität
+  - durch ausmultiplizieren
   - *nicht* die Polynommethode
   - Korollar $sum_(k = 0)^n binom(n, k) = 2^n$
 - Stars-and-Bars
@@ -3317,7 +3315,7 @@
     - Beweis 1: Rechnen
     - Beweis 2: Bijektion
 
-== Catalanzahlen
+== Catalanzahlen und Binärbäume
 
 /*
 Wollen wir hier Binärbäume haben?
@@ -3347,19 +3345,15 @@ Wollen wir hier Binärbäume haben?
   - Kleine Werte von Hand: $C_0 = 1$, $C_1 = 1$, $C_2 = 2$, $C_3 = 5$.
 - Satz (Rekursion): $C_(n+1) = sum_(i=0)^n C_i ⋅ C_(n-i)$.
   - Beweis: Fallunterscheidung nach der Größe $i$ des linken Teilbaums. Die rekursive Definition der Binärbäume liefert direkt eine Bijektion.
-- Satz (Bijektion): Es gibt genauso viele korrekte Klammerausdrücke mit $n$ Klammerpaaren wie Binärbäume mit $n$ Knoten.
+- Satz (Bijektion): Es gibt genauso viele wohlgeformte Klammerausdrücke mit $n$ Klammerpaaren wie Binärbäume mit $n$ Knoten.
   - Beweis: Bijektion angeben; Rückrichtung über die rekursive Struktur.
   - Bemerkung: Beide Objekte kennen wir schon: Klammerausdrücke aus der strukturellen Induktion, Binärbäume aus dem Kapitel über Funktionen.
 - Weitere Beispiele (jeweils Bijektion zu einem der obigen Objekte):
   - Gitterwege von $(0,0)$ nach $(n,n)$, die nie oberhalb der Diagonale verlaufen (Dyck-Pfade)
   - Triangulierungen eines konvexen Polygons
 - Satz (geschlossene Formel): $C_n = 1/(n+1) binom(2n, n)$.
-  - Bemerkung: Der Beweis (etwa mit dem Spiegelungsprinzip) ist optional; die Formel lässt sich per Induktion aus der Rekursion bestätigen.
+  - Beweis mit dem Spiegelungsprinzip
 - Bemerkung: $C_n$ zählt *geordnete* Bäume, nicht Isomorphieklassen von Bäumen. Bei Binärbäumen sind linkes und rechtes Kind unterscheidbar; als Graphen wären viele dieser Bäume isomorph.
-//- Satz: In jedem korrekten Klammerausdruck ist die Anzahl der öffnenden gleich der Anzahl der schließenden Klammern.
-//- Beweis: Strukturelle Induktion über den Aufbau; ein Fall pro Regel.
-//- Übung: Zeigen Sie per struktureller Induktion, dass in jedem Präfix eines korrekten Klammerausdrucks mindestens so viele öffnende wie schließende Klammern vorkommen.
-- Anzahl Klammerausdrücke mit Catalanzahlen.
 ]
 
 #if zeige(8) [
