@@ -3135,7 +3135,7 @@
 ]<abzaehlbarFaelle>
 
 #beweis[
-  / $⇐$: Gilt $|A| = |ℕ|$ so folgt $|A| ≤ |ℕ|$ direkt. Andernfalls gilt $|A| = n$ für ein $n ∈ ℕ$ also $|A| = |{1,…,n}|$. Wegen ${1,…,n} ⊆ ℕ$ folgt $|A| ≤ |ℕ|$ mit @uebInklusion.
+  / $⇐$: Gilt $|A| = |ℕ|$, so folgt $|A| ≤ |ℕ|$ direkt. Andernfalls gilt $|A| = n$ für ein $n ∈ ℕ$, also $|A| = |{1,…,n}|$. Wegen ${1,…,n} ⊆ ℕ$ folgt $|A| ≤ |ℕ|$ mit @uebInklusion.
   / $⇒$: Wir wählen nacheinander verschiedene Elemente $a₁, a₂, …$, mit anderen Worten $a_(i+1)$ wird beliebig aus $A ∖ {a₁,…,a_i}$ gewählt.
     / Fall 1\: Der Prozess endet.: Für ein $n ∈ ℕ$ gilt $A ∖ {a₁,…,a_n} = ∅$, also $A = {a₁,…,a_n}$. Dann ist $i ↦ a_i$ eine Bijektion von ${1,…,n}$ nach $A$, also gilt $|A| = n$.
     / Fall 2\: Der Prozess endet nicht.: Wir erhalten eine unendliche Folge verschiedener Elemente $a₁, a₂, …$. Dann ist $ℕ → A$, $n ↦ a_(n+1)$ eine Injektion, also gilt $|ℕ| ≤ |A|$. Mit $|A| ≤ |ℕ|$ und @csb folgt $|A| = |ℕ|$.#qedhere
@@ -3204,16 +3204,16 @@
 ]
 
 #bemerkung(slides: "titel")[Der Name „Diagonalargument“][
-  Wendet man den Beweis auf $M = ℕ$ an, so lässt eine Funktion $f : ℕ → 2^ℕ$ tabellarisch darstellen.
+  Wendet man den Beweis auf $M = ℕ$ an, so lässt sich eine Funktion $f : ℕ → 2^ℕ$ tabellarisch darstellen, siehe @diagonalbild.
 
-  Die Menge $D = {n ∈ ℕ | n ∉ f(n)}$ ist das Komplement der Diagonalen. Somit unterscheidet sich $D$ von jeder Zeile. Also kann $D$ nicht im Bild von $f$ liegen, und $f$ ist nicht surjektiv.
+  Die Menge $D = {n ∈ ℕ | n ∉ f(n)}$ ist das Komplement der Diagonalen. Somit unterscheidet sich $D$ von jeder Zeile an der Stelle $n$. Also kann $D$ nicht im Bild von $f$ liegen, und $f$ ist nicht surjektiv.
 ]
 
-#abbildung(slides: 1, caption: [Die Menge $D$ für eine Funktion von $f : ℕ → 2^ℕ$.])[#diagonalbild()]
+#abbildung(slides: 1, caption: [Die Menge $D$ für eine Funktion $f : ℕ → 2^ℕ$.])[#diagonalbild()]<diagonalbild>
 
 #bemerkung[Verwandtschaft mit Russells Antinomie][
-  Die Menge $D$ ist nach demselben Muster gebaut wie die Menge $R = {m ∈ ℳ | m ∉ m}$ aus @mengeAllerMengen. Tatsächlich stammt die Inspiration für Russells Barbierparadoxon vom Satz von Cantor.
-  Die direkte Verbindung sieht man folgendermaßen. Angenommen $M$ wäre die Menge aller Mengen. Die Identität $id_M : M → M$ nimmt die Rolle von $f$ im Beweis von @cantor ein. Statt der Surjektivität benutzen wir, dass die Diagonalmenge $D ∈ 2^M$ eine Menge ist und damit selbst in $M$ liegt.
+  Die Menge $D$ ist nach demselben Muster gebaut wie die Menge $R = {m ∈ ℳ | m ∉ m}$ aus @mengeAllerMengen. Tatsächlich ist Russell auf seine Antinomie gestoßen, als er den Beweis von @cantor auf die Menge aller Mengen anwandte.
+  Die direkte Verbindung sieht man folgendermaßen. Angenommen, $ℳ$ wäre die Menge aller Mengen. Die Identität $id_ℳ : ℳ → ℳ$ nimmt die Rolle von $f$ im Beweis von @cantor ein. Die Diagonalmenge ist dann $D = {x ∈ ℳ | x ∉ x} = R$. Statt der Surjektivität benutzen wir, dass $D$ eine Menge ist und damit selbst in $ℳ$ liegt. Für $y := D$ gilt also $id_ℳ (y) = D$, und wie im Beweis folgt der Widerspruch $D ∈ D ⇔ D ∉ D$.
 ]
 
 #beobachtung[Teilmengen und Binärfolgen][
@@ -3225,7 +3225,7 @@
 
 #beweis[
   #set enum(numbering: "(1)")
-  + Um eine Teilmenge $Y$ von $A$ festzulegen, muss man für jedes $a ∈ A$ festlegen ob es in $Y$ liegt oder nicht. Genau das leistet die *charakteristische Funktion* $χ_Y$ von $Y$:
+  + Um eine Teilmenge $Y$ von $A$ festzulegen, muss man für jedes $a ∈ A$ festlegen, ob es in $Y$ liegt oder nicht. Genau das leistet die *charakteristische Funktion* $χ_Y$ von $Y$:
     $ χ_Y : A → {0,1}, quad a ↦ cases(1 & "falls" a ∈ Y, 0 & "falls" a ∉ Y.) $
     Man sieht leicht, dass $Y ↦ χ_Y$ eine Bijektion von $2^A$ nach ${0,1}^A$ ist.
   + Das ist der Spezialfall $A = ℕ$ von (1). Eine Funktion $g : ℕ → {0,1}$ fassen wir dabei als unendliche Folge $(g(0), g(1), g(2), …)$ auf (siehe @folgenAlsFunktionen). Zum Beispiel entspricht ${1,3,7}$ der Folge $(0,1,0,1,0,0,0,1,0,0,…)$.#qedhere
@@ -3237,8 +3237,8 @@
 
 #beweis[
   Weil ${0,1}^*$ unendlich ist und ${0,1}^* ⊆ ℕ^*$ gilt, folgt:
- $ |ℕ| ≤ |{0,1}^*| ≤ |ℕ^*| = |ℕ| quad "also" quad |{0,1}^*| = |ℕ|. $
- Nach @cantor und @teilmengenFunktionen gilt $ |ℕ| < |2^ℕ| = |{0,1}^ℕ|. qedhere $
+  $ |ℕ| ≤ |{0,1}^*| ≤ |ℕ^*| = |ℕ| quad "also" quad |{0,1}^*| = |ℕ|. $
+  Nach @cantor und @teilmengenFunktionen gilt $ |ℕ| < |2^ℕ| = |{0,1}^ℕ|. qedhere $
 ]
 
 #bemerkung[Knoten und Äste im unendlichen Binärbaum][
@@ -3254,10 +3254,10 @@
 ]
 
 #bemerkung(slides: "titel")[Ausblick: Mehr Probleme als Programme][
-  Ein Programm ist eine endliche Folge von Bits, in diesem Sinne also ein Element von ${0,1}^*$. Nach @binaerfolgen gibt es also nur abzählbar viele Programme.
+  Ein Programm ist eine endliche Folge von Bits, in diesem Sinne also ein Element von ${0,1}^*$. Nach @binaerfolgen gibt es daher nur abzählbar viele Programme.
 
   Ein Programm _entscheidet_ eine Menge $L ⊆ ℕ$, wenn es bei jeder Eingabe $n ∈ ℕ$ anhält und genau dann „ja“ ausgibt, wenn $n ∈ L$ gilt. Jedes Programm entscheidet höchstens eine Menge.
-  Weil es überabzählbar viele Teilmengen von $ℕ$ gibt, muss es eine Menge $L ⊆ ℕ$ geben, die kein Programm entscheidet, d.h. _unentscheidbare Mengen_.#footnote[Dieses Argument liefert keine konkrete unentscheidbare Menge. Dass es auch _interessante_ unentscheidbare Probleme gibt, etwa das Halteproblem, ist Inhalt einer späteren Vorlesung über Formale Sprachen und Berechenbarkeit. Auch dort ist ein Diagonalargument der Kern des Beweises.]
+  Weil es überabzählbar viele Teilmengen von $ℕ$ gibt, muss es eine Menge $L ⊆ ℕ$ geben, die kein Programm entscheidet, d.h. es gibt _unentscheidbare Mengen_.#footnote[Dieses Argument liefert keine konkrete unentscheidbare Menge. Dass es auch _interessante_ unentscheidbare Probleme gibt, etwa das Halteproblem, ist Inhalt einer späteren Vorlesung über Formale Sprachen und Berechenbarkeit. Auch dort ist ein Diagonalargument der Kern des Beweises.]
 ]
 #stichpunktgrenze
 ]
