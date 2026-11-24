@@ -2287,7 +2287,7 @@
     #align(center, binaerbaum(markiert: none, ast: (), gerichtet: true, beschriftet: false, s: 1.4, h: 1.7))
   Der erste Graph ist ein Baum im Sinne von azyklisch und zusammenhängend. Der zweite Graph ist ein Baum in dem Sinne, dass der zugehörige ungerichtete Graph (siehe @zusammenhangGerichtet) azyklisch und zusammenhängend ist.
   Manche Ergebnisse gelten für unendliche Bäume aber nicht mehr. Zum Beispiel haben beide Bäume keine Blätter, anders als es @blattlemma für endliche Bäume garantiert.
-]
+]<unendlicherGraph>
 
 #beobachtung[Gerichtete Graphen sind Relationen][
   Ist $E$ eine Relation auf einer Menge $V ≠ ∅$, so ist $G = (V,E)$ ein gerichteter Graph (potentiell unendlich, potentiell mit Schlingen) und umgekehrt (in beiden Fällen ist nur $E ⊆ V × V$ gefordert). Man nennt die Kantenmenge daher auch die _Kantenrelation_ des gerichteten Graphen.
@@ -3203,53 +3203,61 @@
   Das ist ein Widerspruch. Also ist $f$ nicht surjektiv, insbesondere also nicht bijektiv.
 ]
 
-#bemerkung(slides: 1)[Der Name „Diagonalargument“][
-  Wendet man den Beweis auf $M = ℕ$ an, so lässt sich eine hypothetische Bijektion $f : ℕ → 2^ℕ$ tabellarisch darstellen.
+#bemerkung(slides: "titel")[Der Name „Diagonalargument“][
+  Wendet man den Beweis auf $M = ℕ$ an, so lässt eine Funktion $f : ℕ → 2^ℕ$ tabellarisch darstellen.
 
-  $ #diagonalbild() $
-
-  Die Menge $D = {n ∈ ℕ | n ∉ f(n)}$ ist das Komplement der Diagonalen. Somit unterscheidet sich $D$ von jeder Zeile. Also kann $D$ nicht im Bild von $f$ liegen, im Widerspruch zur Surjektivität von $f$.
+  Die Menge $D = {n ∈ ℕ | n ∉ f(n)}$ ist das Komplement der Diagonalen. Somit unterscheidet sich $D$ von jeder Zeile. Also kann $D$ nicht im Bild von $f$ liegen, und $f$ ist nicht surjektiv.
 ]
+
+#abbildung(slides: 1, caption: [Die Menge $D$ für eine Funktion von $f : ℕ → 2^ℕ$.])[#diagonalbild()]
 
 #bemerkung[Verwandtschaft mit Russells Antinomie][
   Die Menge $D$ ist nach demselben Muster gebaut wie die Menge $R = {m ∈ ℳ | m ∉ m}$ aus @mengeAllerMengen. Tatsächlich stammt die Inspiration für Russells Barbierparadoxon vom Satz von Cantor.
+  Die direkte Verbindung sieht man folgendermaßen. Angenommen $M$ wäre die Menge aller Mengen. Die Identität $id_M : M → M$ nimmt die Rolle von $f$ im Beweis von @cantor ein. Statt der Surjektivität benutzen wir, dass die Diagonalmenge $D ∈ 2^M$ eine Menge ist und damit selbst in $M$ liegt.
 ]
 
-#satz[
-  Für jede Menge $A$ gilt $|2^A| = |{0,1}^A|$.
+#beobachtung[Teilmengen und Binärfolgen][
+  #set enum(numbering: "(1)")
+  + Für jede Menge $A$ entspricht $2^A$ den Funktionen von $A$ nach ${0,1}$:
+    $ |2^A| = |{0,1}^A|. $
+  + Die Menge $2^ℕ$ entspricht den unendlichen Binärfolgen: $ |2^ℕ| = |{0,1}^ℕ|. $
 ]<teilmengenFunktionen>
 
 #beweis[
-  Wir konstruieren eine Bijektion $f: 2^A → {0,1}^A$ (also von der Potenzmenge von $A$ zur Menge der Funktionen von $A$ nach ${0,1}$). Für $Y ⊆ A$ ist $f(Y)$ die *charakteristische Funktion* $χ_Y$ von $Y$:
-  $ χ_Y : A → {0,1}, quad a ↦ cases(1 & "falls" a ∈ Y, 0 & "falls" a ∉ Y.) $
-  Zur Injektivität: Sind $Y, Y' ⊆ A$ verschieden, so gibt es ein $a ∈ A$, das in genau einer der beiden Mengen liegt, und dann gilt $χ_Y (a) ≠ χ_(Y') (a)$, also $χ_Y ≠ χ_(Y')$.\
-  Zur Surjektivität: Zu $g : A → {0,1}$ setzen wir $Y := {a ∈ A | g(a) = 1}$, dann gilt $f(Y) = χ_Y = g$.
+  #set enum(numbering: "(1)")
+  + Um eine Teilmenge $Y$ von $A$ festzulegen, muss man für jedes $a ∈ A$ festlegen ob es in $Y$ liegt oder nicht. Genau das leistet die *charakteristische Funktion* $χ_Y$ von $Y$:
+    $ χ_Y : A → {0,1}, quad a ↦ cases(1 & "falls" a ∈ Y, 0 & "falls" a ∉ Y.) $
+    Man sieht leicht, dass $Y ↦ χ_Y$ eine Bijektion von $2^A$ nach ${0,1}^A$ ist.
+  + Das ist der Spezialfall $A = ℕ$ von (1). Eine Funktion $g : ℕ → {0,1}$ fassen wir dabei als unendliche Folge $(g(0), g(1), g(2), …)$ auf (siehe @folgenAlsFunktionen). Zum Beispiel entspricht ${1,3,7}$ der Folge $(0,1,0,1,0,0,0,1,0,0,…)$.#qedhere
 ]
 
-#bemerkung[Unendliche Binärfolgen][
-  Eine Funktion $g : ℕ → {0,1}$ lässt sich als unendliche Folge $(g(0), g(1), g(2), …)$ auffassen (siehe @folgenAlsFunktionen). Somit ist ${0,1}^ℕ$ die Menge der unendlichen Binärfolgen.
+#korollar[
+  Die Menge ${0,1}^*$ der endlichen Binärfolgen ist abzählbar, die Menge ${0,1}^ℕ$ der unendlichen Binärfolgen ist überabzählbar.
+]<binaerfolgen>
+
+#beweis[
+  Weil ${0,1}^*$ unendlich ist und ${0,1}^* ⊆ ℕ^*$ gilt, folgt:
+ $ |ℕ| ≤ |{0,1}^*| ≤ |ℕ^*| = |ℕ| quad "also" quad |{0,1}^*| = |ℕ|. $
+ Nach @cantor und @teilmengenFunktionen gilt $ |ℕ| < |2^ℕ| = |{0,1}^ℕ|. qedhere $
 ]
 
-TODO: Wir haben den unendlichen Binärbaum schonmal gesehen. Wir können darauf aufbauen und hoffentlich hier ein bisschen kürzen.
+#bemerkung[Knoten und Äste im unendlichen Binärbaum][
+  Im unendlichen Binärbaum aus @unendlicherGraph sind die Knoten die endlichen Binärfolgen. Ein _Ast_ ist ein unendlicher Weg, der an der Wurzel beginnt. Er entspricht einer unendlichen Binärfolge. Nach @binaerfolgen hat der Baum also abzählbar viele Knoten, aber überabzählbar viele Äste.
 
-#beispiel[Unendliche und endliche Folgen][
-  Die Menge ${0,1}^*$ der endlichen Binärfolgen ist abzählbar, denn sie ist eine Teilmenge von $ℕ^*$ (siehe @abzaehlbarBeispiele). Die Menge ${0,1}^ℕ$ der unendlichen Binärfolgen ist dagegen überabzählbar, denn nach @cantor und @teilmengenFunktionen gilt $|ℕ| < |2^ℕ| = |{0,1}^ℕ|$. Es gibt also mehr unendliche als endliche Binärfolgen. Wir formulieren diese Einsicht nochmal mithilfe eines unendlichen Graphen $G = (V,E)$ mit $ V = {0,1}^* "und" E := {{w, w b} | w ∈ V, b ∈ {0,1}}. $
-  In der Visualisierung in @baumBild entspricht jeder Knoten der endlichen Folge der Kantenbeschriftungen auf dem Weg von der Wurzel (dem obersten Knoten) zu ihm. Ein _Ast_ ist ein Weg, der an der Wurzel beginnt und unendlich nach unten weiterläuft. Er entspricht der unendlichen Folge seiner Kantenbeschriftungen, die Menge der Äste entspricht also ${0,1}^ℕ$. Der Baum hat damit abzählbar viele Knoten, aber überabzählbar viele Äste.
+]
+#abbildung(slides: 1, caption: [
+  Die ersten Ebenen des unendlichen Binärbaums. Eine Kante nach links steht für $0$, eine nach rechts für $1$. Der rote Knoten entspricht der Folge $(1,0)$, die Wurzel der leeren Folge $()$. Fett ist der Anfang des Astes zur Folge $(0,1,1,0,…)$.
+])[#binaerbaum(gerichtet: true, beschriftet: false, s: 1.4, h: 1.7)]<baumBild>
 
-  #abbildung(slides: 1, caption: [
-    Die ersten Ebenen des Baumes der Binärfolgen. Der rote Knoten entspricht der Folge $(1,0)$, die Wurzel der leeren Folge $()$. Fett ist der Anfang des Astes zur Folge $(0,1,1,0,…)$.
-  ])[#binaerbaum()]<baumBild>
+#bemerkung(slides: "titel")[Es gibt überabzählbar viele reelle Zahlen][
+  Wir ordnen jeder unendlichen Binärfolge $(b_0, b_1, b_2, …)$ die Dezimalzahl $0","b_0 b_1 b_2 … ∈ [0,1]$ zu, die nur die Ziffern $0$ und $1$ verwendet. Diese Abbildung ist injektiv: Verschiedene Folgen führen zu verschiedenen Zahlen.#footnote[Mit Ziffernfolgen aus ${0,…,9}$ wäre das falsch, denn die Ziffernfolgen 0,09999… und 0,10000… sind verschieden, bedeuten aber dieselbe Zahl.] Also gilt $|{0,1}^ℕ| ≤ |[0,1]|$, und wegen $[0,1] ⊆ ℝ$ auch $|{0,1}^ℕ| ≤ |ℝ|$. Da ${0,1}^ℕ$ nach @binaerfolgen überabzählbar ist, ist es auch $ℝ$. Tatsächlich gilt $|2^ℕ| = |ℝ|$.
 ]
 
-#bemerkung[Es gibt überabzählbar viele reelle Zahlen][
-  Reelle Zahlen haben wir nicht formal eingeführt. Mit Schulwissen können wir trotzdem folgern, dass $ℝ$ überabzählbar ist. Wir ordnen jeder unendlichen Binärfolge $(b_0, b_1, b_2, …)$ die Dezimalzahl $0","b_0 b_1 b_2 … ∈ [0,1]$ zu, die nur die Ziffern $0$ und $1$ verwendet. Diese Abbildung ist injektiv: Verschiedene Folgen führen zu verschiedenen Zahlen.#footnote[Mit Ziffernfolgen aus ${0,…,9}$ wäre das falsch, denn die Ziffernfolgen 0,09999… und 0,10000… sind verschieden, bedeuten aber dieselbe Zahl.] Also gilt $|{0,1}^ℕ| ≤ |[0,1]|$, und wegen $[0,1] ⊆ ℝ$ auch $|{0,1}^ℕ| ≤ |ℝ|$. Da ${0,1}^ℕ$ überabzählbar ist, ist es auch $ℝ$. Tatsächlich gilt $|2^ℕ| = |ℝ|$.
-]
-
-#bemerkung[Ausblick: Mehr Probleme als Programme][
-  Ein Programm ist eine endliche Folge von Bits in diesem Sinne ein Element von ${0,1}^*$. Nach @abzaehlbarBeispiele gibt es also nur abzählbar viele Programme.
+#bemerkung(slides: "titel")[Ausblick: Mehr Probleme als Programme][
+  Ein Programm ist eine endliche Folge von Bits, in diesem Sinne also ein Element von ${0,1}^*$. Nach @binaerfolgen gibt es also nur abzählbar viele Programme.
 
   Ein Programm _entscheidet_ eine Menge $L ⊆ ℕ$, wenn es bei jeder Eingabe $n ∈ ℕ$ anhält und genau dann „ja“ ausgibt, wenn $n ∈ L$ gilt. Jedes Programm entscheidet höchstens eine Menge.
-  Weil es überabzählbar viele Teilmengen von $ℕ$ gibt, muss es eine Menge $L ⊆ ℕ$ geben, die kein Programm entscheidet, d.h. _unentscheidbare Probleme_.#footnote[Dieses Argument liefert kein konkretes unentscheidbares Problem. Dass es auch _interessante_ unentscheidbare Probleme gibt, etwa das Halteproblem, ist Inhalt einer späteren Vorlesung über Formale Sprachen und Berechenbarkeit. Auch dort ist ein Diagonalargument der Kern des Beweises.]
+  Weil es überabzählbar viele Teilmengen von $ℕ$ gibt, muss es eine Menge $L ⊆ ℕ$ geben, die kein Programm entscheidet, d.h. _unentscheidbare Mengen_.#footnote[Dieses Argument liefert keine konkrete unentscheidbare Menge. Dass es auch _interessante_ unentscheidbare Probleme gibt, etwa das Halteproblem, ist Inhalt einer späteren Vorlesung über Formale Sprachen und Berechenbarkeit. Auch dort ist ein Diagonalargument der Kern des Beweises.]
 ]
 #stichpunktgrenze
 ]
