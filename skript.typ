@@ -3181,7 +3181,7 @@
     Zum Beispiel ist $f((0,2)) = 2^1 ⋅ 3^3 = 54$ und $f((0,2,0)) = 2^1 ⋅ 3^3 ⋅ 5^1 = 270$. Die leere Folge wird auf das leere Produkt $1$ abgebildet. Der Fundamentalsatz der Arithmetik garantiert, dass man aus der Zahl $p_1^(n_1+1) ⋅ … ⋅ p_k^(n_k+1)$ die Folge $(n_1+1,…,n_k+1)$ rekonstruieren kann, also ist $f$ injektiv. Das "$+1$" in jeder Komponente ist nötig, sonst hätten die verschiedenen Folgen $(0,2)$ und $(0,2,0)$ denselben Funktionswert $2^0 ⋅ 3^2 = 2^0 ⋅ 3^2 ⋅ 5^0$.
 ]
 
-#bemerkung[Hilberts Hotel][
+#bemerkung(slides: "titel")[Hilberts Hotel][
   Varianten der letzten Übung sind Gegenstand eines von David Hilbert erdachten Gedankenexperiments. In einem Hotel mit abzählbar unendlich vielen Zimmern, die allesamt belegt sind, kann man dadurch, dass man die Gäste anders auf die Zimmer verteilt, Platz für neue Gäste schaffen. Für Hotels mit endlich vielen Zimmern wäre das absurd. Siehe z.B. #link("https://de.wikipedia.org/wiki/Hilberts_Hotel", "Wikipedia").
 ]
 
@@ -3201,7 +3201,7 @@
   Sei also $f : M → 2^M$ eine beliebige Funktion. Jedem $x ∈ M$ ist eine Teilmenge $f(x) ⊆ M$ zugeordnet. Wir betrachten
   $ D := {x ∈ M | x ∉ f(x)} ∈ 2^M. $
   Wäre $f$ surjektiv, gäbe es $y ∈ M$ mit $f(y) = D$. Dann gilt:
-  $ y ∈ D ⇔^("Def" D) y ∉ f(y) ⇔^("Wahl von" y) y ∉ D. $
+  $ y ∈ D ⇔^("Def" D) y ∉ f(y) ⇔^(f(y) = D) y ∉ D. $
   Das ist ein Widerspruch. Also ist $f$ nicht surjektiv, insbesondere also nicht bijektiv.
 ]
 
@@ -3213,7 +3213,7 @@
 
 #abbildung(slides: 1, caption: [Die Menge $D$ für eine Funktion $f : ℕ → 2^ℕ$.])[#diagonalbild()]<diagonalbild>
 
-#bemerkung[Verwandtschaft mit Russells Antinomie][
+#bemerkung(slides: "titel")[Verwandtschaft mit Russells Antinomie][
   Die Menge $D$ ist nach demselben Muster gebaut wie die Menge $R = {m ∈ ℳ | m ∉ m}$ aus @mengeAllerMengen. Tatsächlich ist Russell auf seine Antinomie gestoßen, als er den Beweis von @cantor auf die Menge aller Mengen anwandte.
   Die direkte Verbindung sieht man folgendermaßen. Angenommen, $ℳ$ wäre die Menge aller Mengen. Die Identität $id_ℳ : ℳ → ℳ$ nimmt die Rolle von $f$ im Beweis von @cantor ein. Die Diagonalmenge ist dann $D = {x ∈ ℳ | x ∉ x} = R$. Statt der Surjektivität benutzen wir, dass $D$ eine Menge ist und damit selbst in $ℳ$ liegt. Für $y := D$ gilt also $id_ℳ (y) = D$, und wie im Beweis folgt der Widerspruch $D ∈ D ⇔ D ∉ D$.
 ]
