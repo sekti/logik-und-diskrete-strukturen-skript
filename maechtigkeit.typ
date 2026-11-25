@@ -117,7 +117,7 @@
   line((rechts, oben - 0.7), (rechts, unten + 0.7), mark: doppelpfeil)
 
   content(((links + rechts) / 2, oben + 0.6), $f$)
-  content(((links + rechts) / 2, unten + 0.6), $ι$)
+  content(((links + rechts) / 2, unten + 0.6), $g$)
   content((links - 0.5, (oben + unten) / 2), $α$)
   content((rechts + 0.5, (oben + unten) / 2), $β$)
 })

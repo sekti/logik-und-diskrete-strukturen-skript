@@ -4,7 +4,7 @@
 // Nur ein Kapitel setzen, z.B. 5 (im Editor deutlich schneller); none = alles.
 // Lange Kapitel sind in Teile gespalten: 5.2 setzt nur Teil 2 von Kapitel 5.
 // Auf der Kommandozeile hat „--input kapitel=5“ (oder 5.2) bzw. „--input kapitel=alle“ Vorrang.
-#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { sys.inputs.kapitel } } else { 7 }
+#let nurKapitel = if "kapitel" in sys.inputs { if sys.inputs.kapitel == "alle" { none } else { sys.inputs.kapitel } } else { 6 }
 
 // imports
   #import "@preview/ctheorems:2.0.0": *
@@ -3038,7 +3038,7 @@
 ]
 
 #bemerkung(slides: "titel")[Rechnen mit Mächtigkeiten][
-  @maechtigkeitOrdnung zeigt, dass sich die Relationen $=$, $≤$ und $<$ zwischen Mächtigkeiten (und $≥$, $>$ in umgekehrter Richtung gelesen) so miteinander vertragen, wie wir das von Zahlen gewohnt sind. Zum Beispiel folgt aus $|A| < |B| ≤ |C| = |D|$, dass $|A| < |D|$ gilt. Die Beweise solcher Regeln überlassen wir Ihnen.#footnote[Auch je zwei Mengen sind vergleichbar, d.h. es gilt $|A| ≤ |B|$ oder $|B| ≤ |A|$. Der Beweis benötigt allerdings das sogenannte Auswahlaxiom und geht über diese Vorlesung hinaus.]
+  @maechtigkeitOrdnung zeigt, dass sich die Relationen $=$, $≤$ und $<$ zwischen Mächtigkeiten (und $≥$, $>$ in umgekehrter Richtung gelesen) so miteinander vertragen, wie wir das von Zahlen gewohnt sind. Zum Beispiel folgt aus $|A| < |B| ≤ |C| = |D|$, dass $|A| < |D|$ gilt was widerum $|A| gt.eq.not |D|$ impliziert. Die Beweise solcher Regeln überlassen wir Ihnen.#footnote[Auch je zwei Mengen sind vergleichbar, d.h. es gilt $|A| ≤ |B|$ oder $|B| ≤ |A|$. Der Beweis benötigt allerdings das sogenannte Auswahlaxiom und geht über diese Vorlesung hinaus.]
 
   Vorsicht ist dagegen beim Übergang von $⊆$ zu $≤$ geboten: Aus $A ⊊ B$ folgt $|A| ≤ |B|$, aber nicht $|A| < |B|$ (siehe @abzaehlbarBeispiele).
 ]<rechnenMaechtigkeit>
@@ -3066,7 +3066,9 @@
 ]<endlichKette>
 
 #beweis[
-  Aus $∅ ⊆ {1} ⊆ {1,2} ⊆ … ⊆ ℕ$ erhält man an jeder Stelle „$≤$“ mit @uebInklusion. Aus @verschiedenGross erhält man alle „$≠$“ zwischen endlichen Mengen. Wir müssen noch für beliebiges $n ∈ ℕ$ zeigen, dass $|{1,…,n}| ≠ |ℕ|$. Wäre $|{1,…,n}| = |ℕ|$, so würde gelten $ |{1,…,n+1}| ≤ |ℕ| = |{1,…,n}| < |{1,…,n+1}|. $ Daraus folgt#footnote[In @rechnenMaechtigkeit wurde das „versprochen“. Können Sie es auch beweisen?] $|{1,…,n+1}| < |{1,…,n+1}|$, was absurd ist.
+  Die Kette bedeutet: Für alle $n ∈ ℕ$ gilt
+  $ |{1,…,n}| < |{1,…,n+1}| quad "und" quad |{1,…,n}| < |ℕ|. $
+  Wegen ${1,…,n} ⊆ {1,…,n+1} ⊆ ℕ$ gilt nach @uebInklusion jeweils „$≤$“. Nach @verschiedenGross gilt außerdem $|{1,…,n}| ≠ |{1,…,n+1}|$. Dann folgt auch $|{1,…,n}| < |{1,…,n+1}| ≤ |ℕ|$ und damit $|{1,…,n}| < |ℕ|$.#footnote[Hier verwenden wir die Rechenregeln aus @rechnenMaechtigkeit. Können Sie sie beweisen?]
 ]
 
 #korollar[Schubfachprinzip, formal][
@@ -3074,7 +3076,7 @@
 ]<schubfachFormal>
 
 #beweis[
-  Angenommen, es gäbe eine solche Injektion. Die Inklusion liefert die Injektion in die Gegenrichtung. Mit Cantor-Schröder-Bernstein folgt $|{1,…,n}| = |{1,…,m}|$, im Widerspruch zu @endlichKette.
+  Nach @endlichKette gilt $|{1,…,m}| < |{1,…,n}|$. Daraus folgt $|{1,…,n}| lt.eq.not |{1,…,m}|$, also gibt es keine Injektion wie behauptet.
 ]
 
 #definition[Endliche Mengen][
@@ -3096,9 +3098,9 @@
 #beweis[
   Seien $α : A → {1,…,n}$ und $β : B → {1,…,m}$ Bijektionen.
   #abbildung(slides: 1, caption: [
-    Die Bijektionen $α$ und $β$ übersetzen zwischen $f$ und $ι$.
+    Die Bijektionen $α$ und $β$ übersetzen zwischen $f$ und $g$.
   ])[#schreibweisenbild()]
-  Eine Injektion $ι: {1,…,n} → {1,…,m}$ existiert genau dann, wenn $n ≤ m$ gilt („⇐“ per Inklusion, „⇒“ nach @schubfachFormal). In diesem Fall erhält man eine Injektion $β^(-1) ∘ ι ∘ α : A → B$ durch Verkettung. Umgekehrt liefert eine Injektion $f : A → B$ auch eine Injektion $β ∘ f ∘ α^(-1) : {1,…,n} → {1,…,m}$.
+  Eine Injektion $g: {1,…,n} → {1,…,m}$ existiert genau dann, wenn $n ≤ m$ gilt („⇐“ per Inklusion, „⇒“ nach @schubfachFormal). In diesem Fall erhält man eine Injektion $β^(-1) ∘ g ∘ α : A → B$ durch Verkettung. Umgekehrt liefert eine Injektion $f : A → B$ auch eine Injektion $β ∘ f ∘ α^(-1) : {1,…,n} → {1,…,m}$.
 
   Die Argumente für $|A| < |B|$ und $|A| = |B|$ lassen wir weg.
 ]
@@ -3125,7 +3127,7 @@
   Eine Menge $A$ heißt *abzählbar*, wenn $|A| ≤ |ℕ|$ gilt, andernfalls *überabzählbar*. Gilt $|A| = |ℕ|$, so heißt $A$ *abzählbar unendlich*.#footnote[Manche Autoren zählen die endlichen Mengen nicht zu den abzählbaren Mengen, machen also die Unterscheidung zwischen endlich ($|A| < |ℕ|$), abzählbar ($|A| = |ℕ|$) und überabzählbar ($|A| > |ℕ|$).]
 ]<abzaehlbar>
 
-#bemerkung(slides: "titel")[$ℕ$ ist die kleinste unendliche Menge.][
+#bemerkung(slides: "titel")[$ℕ$ ist die kleinste unendliche Menge][
   Es gibt unendlich viele Primzahlen, aber "gefühlt" gibt es viel mehr natürliche Zahlen als Primzahlen. Man könnte daher vermuten, dass es unendliche Mengen gibt, die weniger mächtig sind als $ℕ$. Das ist falsch, wie folgender Satz zeigt.
 ]
 
