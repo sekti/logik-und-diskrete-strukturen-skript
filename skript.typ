@@ -3043,8 +3043,6 @@
   Vorsicht ist dagegen beim Übergang von $⊆$ zu $≤$ geboten: Aus $A ⊊ B$ folgt $|A| ≤ |B|$, aber nicht $|A| < |B|$ (siehe @abzaehlbarBeispiele).
 ]<rechnenMaechtigkeit>
 
-#stand[nach Donnerstag 19.11.2026]
-
 == Endliche Mengen
 
 #skript[
@@ -3217,6 +3215,8 @@
   Die Menge $D$ ist nach demselben Muster gebaut wie die Menge $R = {m ∈ ℳ | m ∉ m}$ aus @mengeAllerMengen. Tatsächlich ist Russell auf seine Antinomie gestoßen, als er den Beweis von @cantor auf die Menge aller Mengen anwandte.
   Die direkte Verbindung sieht man folgendermaßen. Angenommen, $ℳ$ wäre die Menge aller Mengen. Die Identität $id_ℳ : ℳ → ℳ$ nimmt die Rolle von $f$ im Beweis von @cantor ein. Die Diagonalmenge ist dann $D = {x ∈ ℳ | x ∉ x} = R$. Statt der Surjektivität benutzen wir, dass $D$ eine Menge ist und damit selbst in $ℳ$ liegt. Für $y := D$ gilt also $id_ℳ (y) = D$, und wie im Beweis folgt der Widerspruch $D ∈ D ⇔ D ∉ D$.
 ]
+
+#stand[nach Mittwoch 25.11.2026]
 
 #beobachtung[Teilmengen und Binärfolgen][
   #set enum(numbering: "(1)")
