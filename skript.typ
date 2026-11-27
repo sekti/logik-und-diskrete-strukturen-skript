@@ -1464,7 +1464,7 @@
 
 
 #bemerkung[Beweisschema][
-  Induktionsbeweise schreibt man nach einem mehr oder minder festen Muster auf. Man benennt die Komponenten _Induktionsanfang_ (IA), _Induktionsvoraussetzung_ (IV) und _Induktionsschritt_ (IS) explizit als solche.
+  Induktionsbeweise schreibt man nach einem mehr oder minder festen Muster auf. Man benennt _Induktionsanfang_ (IA) und _Induktionsschritt_ (IS) explizit als solche. Der Induktionsschritt ist die Implikation $A(n) ⇒ A(n+1)$. Er beginnt daher mit „Sei $n ≥ n₀$ beliebig, aber fest.“ und der Annahme, dass $A(n)$ gilt. Diese Annahme markiert man als _Induktionsvoraussetzung_ (IV). Danach folgt das Argument für $A(n+1)$.
 ]
 
 #satz(kurz: [$sum_(i=1)^n (2i-1) = n²$])[
@@ -1480,8 +1480,7 @@
   Induktion über $n$ mit Startwert $n₀ = 1$.
 
   / IA: Für $n = 1$ gilt $sum_(i=1)^1 (2i-1) = 1 = 1²$. ✓
-  / IV: Für ein $n ≥ 1$ gelte $sum_(i=1)^(n) (2i-1) = n²$.
-  / IS: Zu zeigen ist $sum_(i=1)^(n+1) (2i-1) = (n+1)²$. Tatsächlich gilt:
+  / IS: Sei $n ≥ 1$ beliebig, aber fest. Es gelte $sum_(i=1)^(n) (2i-1) = n²$ (IV). Zu zeigen ist $sum_(i=1)^(n+1) (2i-1) = (n+1)²$. Tatsächlich gilt:
   $
     sum_(i=1)^(n+1) (2i-1) & = sum_(i=1)^n (2i-1) + (2(n+1)-1) \
                            & =^"(IV)" n² + 2n + 1 = (n+1)². qedhere
@@ -1504,8 +1503,7 @@
   Induktion über $n$ mit Schritten der Form "$n-1 ⇝ n$".
 
   / IA: Für $n = 1$ ist $sum_(i=1)^1 i = 1 = (1 ⋅ 2)/2$. ✓
-  / IV: Für ein $n > 1$ gelte $sum_(i=1)^(n-1) i = ((n-1) ⋅ n)/2$.
-  / IS: Zu zeigen ist $sum_(i=1)^n i = (n ⋅ (n+1))/2$. Tatsächlich gilt:
+  / IS: Sei $n > 1$ beliebig, aber fest. Es gelte $sum_(i=1)^(n-1) i = ((n-1) ⋅ n)/2$ (IV). Zu zeigen ist $sum_(i=1)^n i = (n ⋅ (n+1))/2$. Tatsächlich gilt:
   $ sum_(i=1)^n i &= sum_(i=1)^(n-1) i + n =^"(IV)" ((n-1) ⋅ n)/2 + n
                    = (n² - n + 2n)/2
                    = (n ⋅ (n+1))/2. $
@@ -1547,15 +1545,13 @@
   Induktion über die Knotenzahl $n$ mit Schritten der Form "$n-1 ⇝ n$".
 
   / IA: Kanten sind nur in Graphen mit mindestens zwei Knoten möglich. Also hat ein Baum mit $n = 1$ Knoten genau $n-1 = 0$ Kanten. ✓
-  / IV: Für ein $n ≥ 2$ gelte: Jeder Baum mit $n-1$ Knoten hat $n-2$ Kanten.
-  / IS: Wir betrachten einen beliebigen Baum $G$ mit $n$ Knoten. Zu zeigen ist, dass er $n-1$ Kanten hat. Weil $G$ zusammenhängend ist und mindestens zwei Knoten hat, hat $G$ mindestens eine Kante. Nach @blattlemma gibt es also ein Blatt $v$. Nach @blattEntfernen ist $G - v$ ein Baum mit $n-1$ Knoten. Nach Induktionsvoraussetzung hat $G-v$ genau $n-2$ Kanten. Der Baum $G$ hat genau eine Kante mehr, nämlich die an $v$, und damit $n-1$ Kanten.#qedhere
+  / IS: Sei $n ≥ 2$ beliebig, aber fest. Es gelte: Jeder Baum mit $n-1$ Knoten hat $n-2$ Kanten (IV). Wir betrachten einen beliebigen Baum $G$ mit $n$ Knoten. Zu zeigen ist, dass er $n-1$ Kanten hat. Weil $G$ zusammenhängend ist und mindestens zwei Knoten hat, hat $G$ mindestens eine Kante. Nach @blattlemma gibt es also ein Blatt $v$. Nach @blattEntfernen ist $G - v$ ein Baum mit $n-1$ Knoten. Nach Induktionsvoraussetzung hat $G-v$ genau $n-2$ Kanten. Der Baum $G$ hat genau eine Kante mehr, nämlich die an $v$, und damit $n-1$ Kanten.#qedhere
 ]
 
 #technik[Starke Induktion][
   Manchmal ist es nützlich, im Induktionsschritt nicht nur einen Schritt zurückzublicken ("$n-1 ⇝ n$"), sondern auf _alle_ vorherigen Schritte ("$(0 ∧ … ∧ n-1) ⇝ n$"). Der Beweis hat dann die Form:
   / IA: Zeige, dass $A(n₀)$ gilt.
-  / IV: Für ein $n > n₀$ gelte $A(m)$ für _alle_ $m ∈ {n₀,…,n-1}$.
-  / IS: Zeige, dass $A(n)$ gilt.
+  / IS: Sei $n > n₀$ beliebig, aber fest. Es gelte $A(m)$ für _alle_ $m ∈ {n₀,…,n-1}$ (IV). Zeige, dass $A(n)$ gilt.
   Diese Form nennt man manchmal *starke Induktion*.
 ]
 
@@ -1566,8 +1562,7 @@
 #beweis[
   Starke Induktion über $n$ mit Startwert $n₀ = 1$.
   / IA: $n = 1$ ist das _leere Produkt_ (siehe @leeresProdukt). ✓
-  / IV: Für ein $n > 1$ gelte, dass jedes $m ∈ {1,…,n-1}$ ein Produkt von Primzahlen ist.
-  / IS: Zu zeigen ist, dass $n$ ein Produkt von Primzahlen ist.
+  / IS: Sei $n > 1$ beliebig, aber fest. Es gelte, dass jedes $m ∈ {1,…,n-1}$ ein Produkt von Primzahlen ist (IV). Zu zeigen ist, dass $n$ ein Produkt von Primzahlen ist.
     / Fall 1\: $n$ ist eine Primzahl.: $n$ ist das Produkt bestehend aus einem primen Faktor (nämlich $n$).
     / Fall 2\: $n$ ist keine Primzahl.: Dann hat $n$ einen Teiler $a ∈ {2,…,n-1}$. Für $b := n/a$ gilt dann ebenfalls $b ∈ {2,…,n-1}$. Also ist $n = a ⋅ b$ das Produkt zweier kleinerer Zahlen. Nach Induktionsvoraussetzung sind $a$ und $b$ Produkte von Primzahlen, also ist es auch $n = a ⋅ b$.#qedhere
 ]
@@ -3056,7 +3051,7 @@
 #beweisansatz[
   Man kann eine Induktion führen.
   / IA: Für $n = 0$ gibt es überhaupt keine Funktion $f: {1} → ∅$. ✓
-  / IS: Eine hypothetische Bijektion $f : {1,…,n+1} → {1,…,n}$ kann man in eine Bijektion von ${1,…,n}$ nach ${1,…,n-1}$ umbauen. Diese widerspricht der IV.
+  / IS: Sei $n ≥ 1$ beliebig, aber fest. Es gebe keine Bijektion von ${1,…,n}$ nach ${1,…,n-1}$ (IV). Eine hypothetische Bijektion $f : {1,…,n+1} → {1,…,n}$ kann man in eine Bijektion von ${1,…,n}$ nach ${1,…,n-1}$ umbauen. Diese widerspricht der IV.
 ]
 
 #korollar[
